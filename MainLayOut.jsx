@@ -7,13 +7,16 @@ import MainHeader from "./src/layouts/MainHeader/MainHeader";
 function MainLayout() {
   return (
     <>
-      <MainHeader />
+      <header>
+        <MainHeader />
+      </header>
 
-      <main className="min-h-screen">
+      <main>
         <Outlet />
       </main>
-
-      <MainFooter />
+      <footer>
+        <MainFooter />
+      </footer>
 
       <ToastContainer
         position="top-right"
