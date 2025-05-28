@@ -1,0 +1,477 @@
+[
+  {
+    "id": 1,
+    "title": "Stylish Loft in Atlanta",
+    "city": "Atlanta",
+    "price": 4398,
+    "rooms": 4,
+    "surface": 146,
+    "location": "Buckhead",
+    "description": "Pet-friendly and full of natural light.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "9 hours ago"
+  },
+  {
+    "id": 2,
+    "title": "Luxury Condo in Atlanta",
+    "city": "Atlanta",
+    "price": 3054,
+    "rooms": 3,
+    "surface": 95,
+    "location": "Buckhead",
+    "description": "Elegant home in a quiet neighborhood.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "21 hours ago"
+  },
+  {
+    "id": 3,
+    "title": "Modern Apartment in San Francisco",
+    "city": "San Francisco",
+    "price": 1246,
+    "rooms": 5,
+    "surface": 136,
+    "location": "Mission District",
+    "description": "Great neighborhood for families.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "10 hours ago"
+  },
+  {
+    "id": 4,
+    "title": "Family Home in Chicago",
+    "city": "Chicago",
+    "price": 3810,
+    "rooms": 4,
+    "surface": 159,
+    "location": "Lincoln Park",
+    "description": "Walking distance to shopping and parks.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "4 hours ago"
+  },
+  {
+    "id": 5,
+    "title": "Affordable Housing in New York",
+    "city": "New York",
+    "price": 4508,
+    "rooms": 5,
+    "surface": 91,
+    "location": "Manhattan, NY",
+    "description": "Luxury living with ocean view.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "1 hours ago"
+  },
+  {
+    "id": 6,
+    "title": "Spacious Villa in San Francisco",
+    "city": "San Francisco",
+    "price": 3854,
+    "rooms": 3,
+    "surface": 133,
+    "location": "Mission District",
+    "description": "Luxury living with ocean view.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "14 hours ago"
+  },
+  {
+    "id": 7,
+    "title": "Charming Townhouse in Denver",
+    "city": "Denver",
+    "price": 2858,
+    "rooms": 4,
+    "surface": 47,
+    "location": "Highlands",
+    "description": "Walking distance to shopping and parks.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "17 hours ago"
+  },
+  {
+    "id": 8,
+    "title": "Affordable Housing in Chicago",
+    "city": "Chicago",
+    "price": 3671,
+    "rooms": 5,
+    "surface": 136,
+    "location": "Lincoln Park",
+    "description": "Great neighborhood for families.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "1 hours ago"
+  },
+  {
+    "id": 9,
+    "title": "Stylish Loft in Houston",
+    "city": "Houston",
+    "price": 3719,
+    "rooms": 2,
+    "surface": 130,
+    "location": "Midtown",
+    "description": "High-rise with amazing skyline views.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "1 hours ago"
+  },
+  {
+    "id": 10,
+    "title": "Elegant Flat in Los Angeles",
+    "city": "Los Angeles",
+    "price": 1991,
+    "rooms": 3,
+    "surface": 103,
+    "location": "Downtown LA",
+    "description": "Great neighborhood for families.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "19 hours ago"
+  },
+  {
+    "id": 11,
+    "title": "Modern Apartment in Miami",
+    "city": "Miami",
+    "price": 1616,
+    "rooms": 3,
+    "surface": 74,
+    "location": "South Beach",
+    "description": "High-rise with amazing skyline views.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "12 hours ago"
+  },
+  {
+    "id": 12,
+    "title": "Elegant Flat in Seattle",
+    "city": "Seattle",
+    "price": 4329,
+    "rooms": 4,
+    "surface": 113,
+    "location": "Capitol Hill",
+    "description": "High-rise with amazing skyline views.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "19 hours ago"
+  },
+  {
+    "id": 13,
+    "title": "Cozy Studio in Seattle",
+    "city": "Seattle",
+    "price": 1207,
+    "rooms": 2,
+    "surface": 103,
+    "location": "Capitol Hill",
+    "description": "Recently renovated with modern amenities.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "3 hours ago"
+  },
+  {
+    "id": 14,
+    "title": "Modern Apartment in Denver",
+    "city": "Denver",
+    "price": 1760,
+    "rooms": 4,
+    "surface": 52,
+    "location": "Highlands",
+    "description": "Recently renovated with modern amenities.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "12 hours ago"
+  },
+  {
+    "id": 15,
+    "title": "Charming Townhouse in Miami",
+    "city": "Miami",
+    "price": 2437,
+    "rooms": 2,
+    "surface": 139,
+    "location": "South Beach",
+    "description": "Elegant home in a quiet neighborhood.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "6 hours ago"
+  },
+  {
+    "id": 16,
+    "title": "Spacious Villa in Miami",
+    "city": "Miami",
+    "price": 2728,
+    "rooms": 5,
+    "surface": 107,
+    "location": "South Beach",
+    "description": "Pet-friendly and full of natural light.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "3 hours ago"
+  },
+  {
+    "id": 17,
+    "title": "Comfortable Suite in New York",
+    "city": "New York",
+    "price": 4255,
+    "rooms": 5,
+    "surface": 95,
+    "location": "Manhattan, NY",
+    "description": "Great neighborhood for families.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "9 hours ago"
+  },
+  {
+    "id": 18,
+    "title": "Cozy Studio in Seattle",
+    "city": "Seattle",
+    "price": 4188,
+    "rooms": 1,
+    "surface": 149,
+    "location": "Capitol Hill",
+    "description": "Perfect for singles or students.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "12 hours ago"
+  },
+  {
+    "id": 19,
+    "title": "Modern Apartment in New York",
+    "city": "New York",
+    "price": 2821,
+    "rooms": 2,
+    "surface": 53,
+    "location": "Manhattan, NY",
+    "description": "Walking distance to shopping and parks.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "7 hours ago"
+  },
+  {
+    "id": 20,
+    "title": "Cozy Studio in New York",
+    "city": "New York",
+    "price": 1655,
+    "rooms": 1,
+    "surface": 159,
+    "location": "Manhattan, NY",
+    "description": "Luxury living with ocean view.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "3 hours ago"
+  },
+  {
+    "id": 21,
+    "title": "Modern Apartment in Los Angeles",
+    "city": "Los Angeles",
+    "price": 3073,
+    "rooms": 1,
+    "surface": 112,
+    "location": "Downtown LA",
+    "description": "Luxury living with ocean view.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "15 hours ago"
+  },
+  {
+    "id": 22,
+    "title": "Charming Townhouse in San Francisco",
+    "city": "San Francisco",
+    "price": 2499,
+    "rooms": 4,
+    "surface": 120,
+    "location": "Mission District",
+    "description": "Walking distance to shopping and parks.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "23 hours ago"
+  },
+  {
+    "id": 23,
+    "title": "Spacious Villa in New York",
+    "city": "New York",
+    "price": 3884,
+    "rooms": 3,
+    "surface": 49,
+    "location": "Manhattan, NY",
+    "description": "Pet-friendly and full of natural light.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "6 hours ago"
+  },
+  {
+    "id": 24,
+    "title": "Stylish Loft in San Francisco",
+    "city": "San Francisco",
+    "price": 4840,
+    "rooms": 4,
+    "surface": 44,
+    "location": "Mission District",
+    "description": "Great neighborhood for families.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "9 hours ago"
+  },
+  {
+    "id": 25,
+    "title": "Modern Apartment in Denver",
+    "city": "Denver",
+    "price": 3415,
+    "rooms": 2,
+    "surface": 83,
+    "location": "Highlands",
+    "description": "Perfect for singles or students.",
+    "images": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a12?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded8c5d9d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585152930-73e16abdd50c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "foundTimeAgo": "6 hours ago"
+  }
+]
