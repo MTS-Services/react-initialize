@@ -7,7 +7,7 @@ export default function SingleListingPage() {
   const [recent, setRecent] = useState([]);
 
   useEffect(() => {
-    fetch("/listings.json")
+    fetch("/fakeData.json")
       .then((res) => res.json())
       .then((data) => {
         const selected = data.find((l) => l.id === parseInt(id));
