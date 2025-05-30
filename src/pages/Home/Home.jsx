@@ -1,13 +1,19 @@
+// ✅ Home.jsx (FULL CODE with enhancements)
+import { Elements } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import { FiDollarSign, FiMapPin, FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import CityCard from "../../components/CityCard/CityCard";
+import CheckoutForm from "../CheckoutForm/CheckoutForm";
+import { stripePromise } from "./stripe/stripePromise";
 
 export default function Home() {
   const [listings, setListings] = useState([]);
   const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,7 +23,27 @@ export default function Home() {
   }, []);
 
   const handleSearch = () => {
-    navigate(`/filter?city=${query}&min=${minPrice}&max=${maxPrice}`);
+    navigate(`/listings?city=${query}&min=${minPrice}&max=${maxPrice}`);
+  };
+
+  const handleLocationInput = (value) => {
+    setQuery(value);
+    setShowSuggestions(true);
+    if (value.trim() === "") {
+      setSuggestions([]);
+      return;
+    }
+    const citySet = [...new Set(listings.map((l) => l.city))];
+    const matches = citySet.filter((c) =>
+      c.toLowerCase().startsWith(value.toLowerCase())
+    );
+    setSuggestions(matches);
+  };
+
+  const handleCitySelect = (city) => {
+    setQuery(city);
+    setSuggestions([]);
+    setShowSuggestions(false);
   };
 
   const topCities = Array.from(
@@ -31,7 +57,7 @@ export default function Home() {
 
   return (
     <div className="w-full min-h-screen bg-gray-100">
-      {/* Hero Section with full-width BG and overlay */}
+      {/* Hero Section */}
       <div
         className="relative h-[550px] bg-cover bg-center"
         style={{
@@ -39,17 +65,15 @@ export default function Home() {
             "url(https://images.unsplash.com/photo-1558036117-15d82a90b9b1)",
         }}
       >
-        {/* Overlay with soft blur */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-white/5 to-black/70 z-10"></div>
-
-        {/* Centered SearchBar */}
         <div className="relative z-20 h-full flex items-center justify-center">
           <div className="max-w-[1300px] mx-auto px-4">
-            <div className=" p-6 rounded-lg shadow-xl ">
+            <div className="p-6 rounded-lg shadow-xl">
               <div className="flex flex-col md:flex-row gap-3 justify-center items-center">
-                <h1 className="text-5xl text-center font-bold text-white/90 leading-16">
+                <h1 className="text-5xl text-center font-bold text-white/90">
                   Rent Your Property Easily In
-                  <br /> <span className="text-[#F6BC09]">The Netherlands</span>
+                  <br />
+                  <span className="text-[#F6BC09]">The Netherlands</span>
                 </h1>
               </div>
             </div>
@@ -57,6 +81,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Search Bar */}
       <div className="relative -top-14 z-20 h-full flex items-center justify-center">
         <div className="max-w-[1300px] mx-auto px-4">
           <div className="bg-white/95 p-6 rounded-lg shadow-xl backdrop-blur-md">
@@ -67,10 +92,34 @@ export default function Home() {
                   type="text"
                   placeholder="Search city..."
                   value={query}
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={(e) => handleLocationInput(e.target.value)}
+                  onFocus={() => setShowSuggestions(true)}
+                  onBlur={() =>
+                    setTimeout(() => setShowSuggestions(false), 150)
+                  }
                   className="w-full h-16 pl-10 pr-4 py-2 rounded-lg shadow-md bg-white focus:outline-none"
                 />
+                {showSuggestions && query.trim() !== "" && (
+                  <ul className="absolute z-10 top-[100%] left-0 w-full mt-1 bg-white border rounded shadow max-h-40 overflow-y-auto text-sm">
+                    {suggestions.length > 0 ? (
+                      suggestions.map((s, i) => (
+                        <li
+                          key={i}
+                          className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+                          onClick={() => handleCitySelect(s)}
+                        >
+                          {s}
+                        </li>
+                      ))
+                    ) : (
+                      <li className="px-4 py-2 text-gray-500">
+                        No listings found
+                      </li>
+                    )}
+                  </ul>
+                )}
               </div>
+
               <div className="relative w-full md:w-40">
                 <FiDollarSign className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
@@ -81,6 +130,7 @@ export default function Home() {
                   className="w-full h-16 pl-10 pr-4 py-2 rounded-lg shadow-md bg-white focus:outline-none"
                 />
               </div>
+
               <div className="relative w-full md:w-40">
                 <FiDollarSign className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
@@ -91,6 +141,7 @@ export default function Home() {
                   className="w-full h-16 pl-10 pr-4 py-2 rounded-lg shadow-md bg-white focus:outline-none"
                 />
               </div>
+
               <button
                 onClick={handleSearch}
                 className="flex items-center gap-2 bg-blue-600 text-white px-6 py-4 rounded-lg shadow-md hover:bg-blue-700 transition"
@@ -104,6 +155,9 @@ export default function Home() {
 
       {/* Top Cities Section */}
       <div className="max-w-[1200px] mx-auto py-12 px-4">
+        <Elements stripe={stripePromise}>
+          <CheckoutForm />
+        </Elements>
         <h2 className="text-2xl font-bold mb-6">Top Cities</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {topCities.map(([city, count], idx) => (

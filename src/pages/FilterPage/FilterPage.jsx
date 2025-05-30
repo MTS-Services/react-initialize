@@ -1,3 +1,4 @@
+// ✅ FilterPage.jsx
 import { useEffect, useState } from "react";
 import {
   FiDollarSign,
@@ -17,6 +18,7 @@ export default function FilterPage() {
 
   const [location, setLocation] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10000);
   const [rooms, setRooms] = useState("");
@@ -27,7 +29,23 @@ export default function FilterPage() {
       .then((res) => res.json())
       .then((data) => {
         setListings(data);
-        setFiltered(data);
+
+        const city = params.get("city") || "";
+        const min = parseInt(params.get("min")) || 0;
+        const max = parseInt(params.get("max")) || 10000;
+
+        setLocation(city);
+        setMinPrice(min);
+        setMaxPrice(max);
+
+        const filteredData = data.filter((l) => {
+          const locMatch =
+            !city || l.city.toLowerCase().includes(city.toLowerCase());
+          const priceMatch = l.price >= min && l.price <= max;
+          return locMatch && priceMatch;
+        });
+
+        setFiltered(filteredData);
       });
   }, []);
 
@@ -37,6 +55,8 @@ export default function FilterPage() {
 
   const handleLocationInput = (value) => {
     setLocation(value);
+    setShowSuggestions(true);
+
     if (value.trim() === "") {
       setSuggestions([]);
       return;
@@ -51,6 +71,7 @@ export default function FilterPage() {
   const handleCitySelect = (city) => {
     setLocation(city);
     setSuggestions([]);
+    setShowSuggestions(false);
   };
 
   const applyFilters = () => {
@@ -76,7 +97,6 @@ export default function FilterPage() {
 
   return (
     <div className="w-full min-h-screen">
-      {/* Hero Section */}
       <div
         className="h-[300px] bg-cover bg-center relative"
         style={{
@@ -91,28 +111,26 @@ export default function FilterPage() {
         </div>
       </div>
 
-      {/* Main Container */}
       <div className="max-w-[1300px] mx-auto flex mt-6 px-4">
-        {/* Sidebar */}
         <div className="w-1/4 space-y-4 p-4">
           <h2 className="text-xl font-bold mb-2 flex items-center gap-2">
             <FiGrid /> Filters
           </h2>
 
-          {/* Location Filter */}
           <div className="bg-white rounded-lg shadow-sm p-3 relative">
             <div className="flex items-center gap-2 mb-2 text-sm font-medium text-gray-600">
-              <FiMapPin />
-              Location
+              <FiMapPin /> Location
             </div>
             <input
               type="text"
               placeholder="Enter city"
               value={location}
               onChange={(e) => handleLocationInput(e.target.value)}
+              onFocus={() => setShowSuggestions(true)}
+              onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
               className="w-full p-2 rounded bg-gray-50 border border-gray-200 text-sm focus:outline-none"
             />
-            {location.trim() !== "" && (
+            {showSuggestions && location.trim() !== "" && (
               <ul className="absolute z-10 top-[100%] left-0 w-full mt-1 bg-white border rounded shadow max-h-40 overflow-y-auto text-sm">
                 {suggestions.length > 0 ? (
                   suggestions.map((s, i) => (
@@ -131,11 +149,9 @@ export default function FilterPage() {
             )}
           </div>
 
-          {/* Price Range */}
           <div className="bg-white rounded-lg shadow-sm p-3">
             <div className="flex items-center gap-2 mb-2 text-sm font-medium text-gray-600">
-              <FiDollarSign />
-              Price Range
+              <FiDollarSign /> Price Range
             </div>
             <div className="flex gap-2 mb-4">
               <input
@@ -157,31 +173,27 @@ export default function FilterPage() {
                 className="w-1/2 p-2 rounded bg-gray-50 border border-gray-200 text-sm"
               />
             </div>
-            <div className="mt-2 mb-4">
-              <ReactSlider
-                className="w-full h-2 bg-gray-200 rounded"
-                thumbClassName="h-4 w-4 rounded-full bg-blue-600 cursor-pointer"
-                trackClassName="bg-blue-500 h-2 rounded"
-                min={0}
-                max={10000}
-                step={100}
-                value={[minPrice, maxPrice]}
-                onChange={([min, max]) => {
-                  setMinPrice(min);
-                  setMaxPrice(max);
-                }}
-                withTracks={true}
-                pearling
-                minDistance={100}
-              />
-            </div>
+            <ReactSlider
+              className="w-full h-2 bg-gray-200 rounded"
+              thumbClassName="h-4 w-4 rounded-full bg-blue-600 cursor-pointer"
+              trackClassName="bg-blue-500 h-2 rounded"
+              min={0}
+              max={10000}
+              step={100}
+              value={[minPrice, maxPrice]}
+              onChange={([min, max]) => {
+                setMinPrice(min);
+                setMaxPrice(max);
+              }}
+              withTracks={true}
+              pearling
+              minDistance={100}
+            />
           </div>
 
-          {/* Room Filter */}
           <div className="bg-white rounded-lg shadow-sm p-3">
             <div className="flex items-center gap-2 mb-2 text-sm font-medium text-gray-600">
-              <FiHome />
-              Rooms
+              <FiHome /> Rooms
             </div>
             <div className="flex flex-wrap gap-2">
               {uniqueRooms.map((r) => (
@@ -206,11 +218,9 @@ export default function FilterPage() {
             </div>
           </div>
 
-          {/* Surface Filter */}
           <div className="bg-white rounded-lg shadow-sm p-3">
             <div className="flex items-center gap-2 mb-2 text-sm font-medium text-gray-600">
-              <FiSliders />
-              Min Surface (m²)
+              <FiSliders /> Min Surface (m²)
             </div>
             <input
               type="number"
@@ -222,7 +232,6 @@ export default function FilterPage() {
           </div>
         </div>
 
-        {/* Listings Section */}
         <div className="w-3/4 p-4 grid gap-6">
           {filtered.map((listing) => (
             <div
