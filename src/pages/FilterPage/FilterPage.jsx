@@ -1,5 +1,5 @@
 // ✅ FilterPage.jsx
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   FiDollarSign,
   FiGrid,
@@ -7,10 +7,14 @@ import {
   FiMapPin,
   FiSliders,
 } from "react-icons/fi";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ReactSlider from "react-slider";
+import { AuthContext } from "../../context/AuthContext/AuthContext";
 
 export default function FilterPage() {
+  const { user } = useContext(AuthContext);
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const [listings, setListings] = useState([]);
@@ -47,7 +51,7 @@ export default function FilterPage() {
 
         setFiltered(filteredData);
       });
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     applyFilters();
@@ -250,8 +254,9 @@ export default function FilterPage() {
                 <div className="mt-4 text-sm text-gray-500">
                   <span>{listing.surface} m² · </span>
                   <span>{listing.rooms} rooms</span>
+
                   <div className="text-blue-600 font-bold text-lg mt-1">
-                    ${listing.price}
+                    ${user ? listing.price : <Skeleton count={1} />}
                   </div>
                 </div>
               </div>

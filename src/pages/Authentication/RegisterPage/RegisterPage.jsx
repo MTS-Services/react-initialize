@@ -1,10 +1,35 @@
-import { useContext } from "react";
+import {
+  CardCvcElement,
+  CardExpiryElement,
+  CardNumberElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
+import axios from "axios";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify"; // optional for notifications
+import { toast } from "react-toastify";
 import { AuthContext } from "../../../context/AuthContext/AuthContext";
 
-function RegisterPage() {
-  const { createUser, isLoading, setIsLoading } = useContext(AuthContext);
+const CARD_ELEMENT_OPTIONS = {
+  style: {
+    base: {
+      fontSize: "16px",
+      color: "#424770",
+      "::placeholder": { color: "#aab7c4" },
+      fontFamily: "Roboto, sans-serif",
+      padding: "10px 14px",
+    },
+    invalid: {
+      color: "#9e2146",
+    },
+  },
+};
+
+const RegisterPage = () => {
+  const { createUser, setIsLoading, isLoading } = useContext(AuthContext);
+  const stripe = useStripe();
+  const elements = useElements();
 
   const {
     register,
@@ -12,109 +37,163 @@ function RegisterPage() {
     formState: { errors },
   } = useForm();
 
+  const [processing, setProcessing] = useState(false);
+
   const onSubmit = async (data) => {
-    const { email, password } = data;
+    if (!stripe || !elements) {
+      toast.error("Stripe has not loaded yet.");
+      return;
+    }
+
+    setProcessing(true);
+    setIsLoading(true);
 
     try {
-      setIsLoading(true);
-      const userCredential = await createUser(email, password);
-      const user = userCredential.user;
+      // 1. Create Payment Intent
+      const paymentRes = await axios.post(
+        "http://localhost:3000/api/payment/create-payment",
+        {
+          amount: 2000,
+          metadata: {
+            name: data.name,
+            email: data.email,
+          },
+        }
+      );
+      const clientSecret = paymentRes.data.clientSecret;
 
-      console.log("✅ User created:", user);
-      toast.success("Account created successfully!"); // optional
+      // 2. Confirm Card Payment
+      const cardElement = elements.getElement(CardNumberElement);
+      const paymentResult = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: { card: cardElement },
+      });
 
-      // Optional: Redirect to login or dashboard
+      if (paymentResult.error) {
+        toast.error(paymentResult.error.message);
+        setProcessing(false);
+        setIsLoading(false);
+        return;
+      }
+
+      if (paymentResult.paymentIntent.status === "succeeded") {
+        // 3. Register user in your system
+        const res = await createUser(data.email, data.password);
+
+        const uid = res?.user?.uid || res?.localId;
+        const email = res?.user?.email;
+
+        if (!uid) {
+          toast.error("User creation failed: No UID returned.");
+          return;
+        }
+
+        await axios.post("http://localhost:3000/api/users/create", {
+          name: data.name,
+          email,
+          uid,
+          paymentDate: new Date().toISOString(),
+          amount: paymentResult.paymentIntent.amount,
+          transactionId: paymentResult.paymentIntent.id,
+        });
+
+        // 4. Inform user that registration will complete shortly
+        toast.info(
+          "Payment successful! Registration processing. You will receive confirmation soon."
+        );
+
+        // 5. Optionally redirect or show status page
+      }
     } catch (error) {
-      console.error("❌ Registration failed:", error.message);
-      toast.error(error.message || "Registration failed!");
+      toast.error("Error: " + (error.response?.data?.message || error.message));
     } finally {
+      setProcessing(false);
       setIsLoading(false);
     }
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-[var(--color-background)] px-4">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-md bg-[var(--color-card)] p-8 rounded-xl shadow-md space-y-6"
-      >
-        <h2 className="text-2xl font-semibold text-center text-[var(--color-accent)]">
-          Create an Account
-        </h2>
-
-        {/* Name Field */}
-        <div className="space-y-1">
-          <label htmlFor="name" className="text-sm text-[var(--color-accent)]">
-            Full Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            {...register("name", { required: "Name is required" })}
-            className="w-full px-4 py-2 rounded-md bg-transparent border border-[var(--color-border-color)] text-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-          />
-          {errors.name && (
-            <p className="text-red-500 text-sm">{errors.name.message}</p>
-          )}
-        </div>
-
-        {/* Email Field */}
-        <div className="space-y-1">
-          <label htmlFor="email" className="text-sm text-[var(--color-accent)]">
-            Email Address
-          </label>
-          <input
-            id="email"
-            type="email"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^\S+@\S+$/i,
-                message: "Invalid email address",
-              },
-            })}
-            className="w-full px-4 py-2 rounded-md bg-transparent border border-[var(--color-border-color)] text-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
-          )}
-        </div>
-
-        {/* Password Field */}
-        <div className="space-y-1">
-          <label
-            htmlFor="password"
-            className="text-sm text-[var(--color-accent)]"
-          >
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            {...register("password", {
-              required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
-              },
-            })}
-            className="w-full px-4 py-2 rounded-md bg-transparent border border-[var(--color-border-color)] text-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-          />
-          {errors.password && (
-            <p className="text-red-500 text-sm">{errors.password.message}</p>
-          )}
-        </div>
-
-        {/* Submit Button */}
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="max-w-md mx-auto bg-white p-8 rounded shadow space-y-6"
+    >
+      {/* Name */}
+      <div>
+        <label className="block mb-1 font-semibold">Full Name</label>
         <input
-          type="submit"
-          disabled={isLoading}
-          value={isLoading ? "Registering..." : "Register"}
-          className="w-full py-2 rounded-md bg-[var(--color-primary)] text-white hover:bg-[var(--color-cta-active)] cursor-pointer transition"
+          {...register("name", { required: "Name required" })}
+          className="w-full border border-gray-300 rounded px-3 py-2"
+          type="text"
         />
-      </form>
-    </section>
+        {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className="block mb-1 font-semibold">Email</label>
+        <input
+          {...register("email", { required: "Email required" })}
+          className="w-full border border-gray-300 rounded px-3 py-2"
+          type="email"
+        />
+        {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+      </div>
+
+      {/* Password */}
+      <div>
+        <label className="block mb-1 font-semibold">Password</label>
+        <input
+          {...register("password", {
+            required: "Password required",
+            minLength: {
+              value: 6,
+              message: "Minimum 6 characters",
+            },
+          })}
+          className="w-full border border-gray-300 rounded px-3 py-2"
+          type="password"
+        />
+        {errors.password && (
+          <p className="text-red-500">
+            {errors.password.message || "Minimum 6 characters"}
+          </p>
+        )}
+      </div>
+
+      {/* Card Number */}
+      <div>
+        <label className="block mb-1 font-semibold">Card Number</label>
+        <div className="border border-gray-300 rounded p-3 mb-4">
+          <CardNumberElement options={CARD_ELEMENT_OPTIONS} />
+        </div>
+      </div>
+
+      {/* Expiry & CVC Row */}
+      <div className="flex gap-4">
+        <div className="flex-1">
+          <label className="block mb-1 font-semibold">Expiry Date</label>
+          <div className="border border-gray-300 rounded p-3">
+            <CardExpiryElement options={CARD_ELEMENT_OPTIONS} />
+          </div>
+        </div>
+
+        <div className="flex-1">
+          <label className="block mb-1 font-semibold">CVC</label>
+          <div className="border border-gray-300 rounded p-3">
+            <CardCvcElement options={CARD_ELEMENT_OPTIONS} />
+          </div>
+        </div>
+      </div>
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={processing || isLoading}
+        className="w-full py-3 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition"
+      >
+        {processing || isLoading ? "Processing..." : "Register & Pay $20"}
+      </button>
+    </form>
   );
-}
+};
 
 export default RegisterPage;

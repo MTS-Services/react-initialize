@@ -1,3 +1,5 @@
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { createBrowserRouter } from "react-router-dom";
 import MainLayOut from "../../MainLayOut";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
@@ -8,6 +10,8 @@ import SingleListingPage from "../pages/FilterPage/SingleListingPage";
 import Home from "../pages/Home/Home";
 // import { lazy } from "react";
 // const Contact = lazy(() => import("../pages/Contact/Contact"));
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const AppRoutes = createBrowserRouter([
   {
@@ -33,7 +37,11 @@ const AppRoutes = createBrowserRouter([
       },
       {
         path: "/register",
-        element: <RegisterPage />,
+        element: (
+          <Elements stripe={stripePromise}>
+            <RegisterPage />
+          </Elements>
+        ),
       },
     ],
   },

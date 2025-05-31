@@ -1,11 +1,11 @@
 // ✅ Home.jsx (FULL CODE with enhancements)
-import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import { FiDollarSign, FiMapPin, FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import CityCard from "../../components/CityCard/CityCard";
-import CheckoutForm from "../CheckoutForm/CheckoutForm";
-import { stripePromise } from "./stripe/stripePromise";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 export default function Home() {
   const [listings, setListings] = useState([]);
@@ -155,9 +155,6 @@ export default function Home() {
 
       {/* Top Cities Section */}
       <div className="max-w-[1200px] mx-auto py-12 px-4">
-        <Elements stripe={stripePromise}>
-          <CheckoutForm />
-        </Elements>
         <h2 className="text-2xl font-bold mb-6">Top Cities</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {topCities.map(([city, count], idx) => (

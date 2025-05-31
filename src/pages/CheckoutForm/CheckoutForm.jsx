@@ -27,7 +27,7 @@ const CheckoutForm = () => {
           card: elements.getElement(CardElement),
         },
       });
-
+      console.log("PR ", result);
       if (result.error) {
         setMessage(result.error.message);
       } else if (result.paymentIntent.status === "succeeded") {
