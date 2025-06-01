@@ -16,6 +16,49 @@ export default function Home() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
 
+  const [dataset1, setDataset1] = useState([]);
+  const [dataset2, setDataset2] = useState([]);
+  const [error, setError] = useState(null);
+
+  const token = "apify_api_Xah9cXqA4Ur20VGLE0bcWS158nxmCh4wsciG";
+  const datasetId1 = "bWU0FKxGdZfCMQwGj";
+  const datasetId2 = "v8qUCvYK76bmshMlx";
+
+  useEffect(() => {
+    const fetchDatasets = async () => {
+      try {
+        const urls = [
+          `https://api.apify.com/v2/datasets/${datasetId1}/items?token=${token}`,
+          `https://api.apify.com/v2/datasets/${datasetId2}/items?token=${token}`,
+        ];
+
+        // Fetch both datasets in parallel
+        const responses = await Promise.all(urls.map((url) => fetch(url)));
+
+        // Check if all requests are ok
+        responses.forEach((res) => {
+          if (!res.ok) throw new Error(`API error: ${res.statusText}`);
+        });
+
+        // Parse JSON for both
+        const [data1, data2] = await Promise.all(
+          responses.map((res) => res.json())
+        );
+
+        setDataset1(data1);
+        setDataset2(data2);
+        console.log("Data1", data1);
+        console.log("Data2", data2);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+    fetchDatasets();
+  }, []);
+
+  if (error) return <div>Error: {error}</div>;
+
   useEffect(() => {
     fetch("fakeData.json")
       .then((res) => res.json())
