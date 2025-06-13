@@ -16,57 +16,17 @@ export default function Home() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
 
-  const [dataset1, setDataset1] = useState([]);
-  const [dataset2, setDataset2] = useState([]);
-  const [error, setError] = useState(null);
-
-  const token = "apify_api_Xah9cXqA4Ur20VGLE0bcWS158nxmCh4wsciG";
-  const datasetId1 = "bWU0FKxGdZfCMQwGj";
-  const datasetId2 = "v8qUCvYK76bmshMlx";
-
   useEffect(() => {
-    const fetchDatasets = async () => {
-      try {
-        const urls = [
-          `https://api.apify.com/v2/datasets/${datasetId1}/items?token=${token}`,
-          `https://api.apify.com/v2/datasets/${datasetId2}/items?token=${token}`,
-        ];
-
-        // Fetch both datasets in parallel
-        const responses = await Promise.all(urls.map((url) => fetch(url)));
-
-        // Check if all requests are ok
-        responses.forEach((res) => {
-          if (!res.ok) throw new Error(`API error: ${res.statusText}`);
-        });
-
-        // Parse JSON for both
-        const [data1, data2] = await Promise.all(
-          responses.map((res) => res.json())
-        );
-
-        setDataset1(data1);
-        setDataset2(data2);
-        console.log("Data1", data1);
-        console.log("Data2", data2);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-
-    fetchDatasets();
-  }, []);
-
-  if (error) return <div>Error: {error}</div>;
-
-  useEffect(() => {
-    fetch("fakeData.json")
+    fetch("http://localhost:3000/api/properties/properties")
       .then((res) => res.json())
-      .then((data) => setListings(data));
+      .then((data) => {
+        console.log("main data", data);
+        setListings(data.data.properties);
+      });
   }, []);
 
   const handleSearch = () => {
-    navigate(`/listings?city=${query}&min=${minPrice}&max=${maxPrice}`);
+    navigate(`/listings?address=${query}&min=${minPrice}&max=${maxPrice}`);
   };
 
   const handleLocationInput = (value) => {
@@ -76,22 +36,22 @@ export default function Home() {
       setSuggestions([]);
       return;
     }
-    const citySet = [...new Set(listings.map((l) => l.city))];
+    const citySet = [...new Set(listings.map((l) => l.location))];
     const matches = citySet.filter((c) =>
-      c.toLowerCase().startsWith(value.toLowerCase())
+      c.toLowerCase().includes(value.toLowerCase())
     );
     setSuggestions(matches);
   };
 
-  const handleCitySelect = (city) => {
-    setQuery(city);
+  const handleCitySelect = (location) => {
+    setQuery(location);
     setSuggestions([]);
     setShowSuggestions(false);
   };
 
   const topCities = Array.from(
     listings.reduce((acc, listing) => {
-      acc.set(listing.city, (acc.get(listing.city) || 0) + 1);
+      acc.set(listing.city, (acc.get(listing.location) || 0) + 1);
       return acc;
     }, new Map())
   )
@@ -133,7 +93,7 @@ export default function Home() {
                 <FiMapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Search city..."
+                  placeholder="Search Address..."
                   value={query}
                   onChange={(e) => handleLocationInput(e.target.value)}
                   onFocus={() => setShowSuggestions(true)}

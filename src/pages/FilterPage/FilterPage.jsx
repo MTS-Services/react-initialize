@@ -1,4 +1,3 @@
-// ✅ FilterPage.jsx
 import { useContext, useEffect, useState } from "react";
 import {
   FiDollarSign,
@@ -12,6 +11,14 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import ReactSlider from "react-slider";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
+
+// ✅ Clean numeric price parser
+const cleanPrice = (priceStr) => {
+  if (!priceStr) return 0;
+  const raw = priceStr.replace(/[^\d.,]/g, "").replace(",", ".");
+  const normalized = raw.replace(/\.(?=.*\.)/, "").replace(",", ".");
+  return parseFloat(normalized);
+};
 
 export default function FilterPage() {
   const { user } = useContext(AuthContext);
@@ -28,13 +35,27 @@ export default function FilterPage() {
   const [rooms, setRooms] = useState("");
   const [surface, setSurface] = useState("");
 
+  // ✅ Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 30;
+  const totalPages = Math.ceil(filtered.length / itemsPerPage);
+  const paginatedListings = filtered.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   useEffect(() => {
-    fetch("fakeData.json")
+    fetch("http://localhost:3000/api/properties/properties")
       .then((res) => res.json())
       .then((data) => {
-        setListings(data);
+        const processedListings = data.data.properties.map((l) => ({
+          ...l,
+          numericPrice: cleanPrice(l.price),
+        }));
 
-        const city = params.get("city") || "";
+        setListings(processedListings);
+
+        const city = params.get("address") || "";
         const min = parseInt(params.get("min")) || 0;
         const max = parseInt(params.get("max")) || 10000;
 
@@ -42,10 +63,10 @@ export default function FilterPage() {
         setMinPrice(min);
         setMaxPrice(max);
 
-        const filteredData = data.filter((l) => {
+        const filteredData = processedListings.filter((l) => {
           const locMatch =
-            !city || l.city.toLowerCase().includes(city.toLowerCase());
-          const priceMatch = l.price >= min && l.price <= max;
+            !city || l.location.toLowerCase().includes(city.toLowerCase());
+          const priceMatch = l.numericPrice >= min && l.numericPrice <= max;
           return locMatch && priceMatch;
         });
 
@@ -65,30 +86,32 @@ export default function FilterPage() {
       setSuggestions([]);
       return;
     }
-    const citySet = [...new Set(listings.map((l) => l.city))];
+    const citySet = [...new Set(listings.map((l) => l.location))];
     const matches = citySet.filter((c) =>
-      c.toLowerCase().startsWith(value.toLowerCase())
+      c.toLowerCase().includes(value.toLowerCase())
     );
     setSuggestions(matches);
   };
 
-  const handleCitySelect = (city) => {
-    setLocation(city);
+  const handleCitySelect = (location) => {
+    setLocation(location);
     setSuggestions([]);
     setShowSuggestions(false);
   };
 
   const applyFilters = () => {
-    setFiltered(
-      listings.filter((l) => {
-        const locMatch =
-          !location || l.city.toLowerCase().includes(location.toLowerCase());
-        const priceMatch = l.price >= minPrice && l.price <= maxPrice;
-        const roomMatch = !rooms || l.rooms === parseInt(rooms);
-        const surfaceMatch = !surface || l.surface >= parseInt(surface);
-        return locMatch && priceMatch && roomMatch && surfaceMatch;
-      })
-    );
+    const filteredData = listings.filter((l) => {
+      const locMatch =
+        !location || l.location.toLowerCase().includes(location.toLowerCase());
+      const priceMatch =
+        l.numericPrice >= minPrice && l.numericPrice <= maxPrice;
+      const roomMatch = !rooms || l.rooms === parseInt(rooms);
+      const surfaceMatch = !surface || l.surface >= parseInt(surface);
+      return locMatch && priceMatch && roomMatch && surfaceMatch;
+    });
+
+    setFiltered(filteredData);
+    setCurrentPage(1); // reset pagination
   };
 
   const handleListingClick = (id) => {
@@ -116,11 +139,13 @@ export default function FilterPage() {
       </div>
 
       <div className="max-w-[1300px] mx-auto flex mt-6 px-4">
+        {/* Sidebar Filters */}
         <div className="w-1/4 space-y-4 p-4">
           <h2 className="text-xl font-bold mb-2 flex items-center gap-2">
             <FiGrid /> Filters
           </h2>
 
+          {/* Location Filter */}
           <div className="bg-white rounded-lg shadow-sm p-3 relative">
             <div className="flex items-center gap-2 mb-2 text-sm font-medium text-gray-600">
               <FiMapPin /> Location
@@ -132,7 +157,7 @@ export default function FilterPage() {
               onChange={(e) => handleLocationInput(e.target.value)}
               onFocus={() => setShowSuggestions(true)}
               onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
-              className="w-full p-2 rounded bg-gray-50 border border-gray-200 text-sm focus:outline-none"
+              className="w-full p-2 rounded bg-gray-50 border border-gray-200 text-sm"
             />
             {showSuggestions && location.trim() !== "" && (
               <ul className="absolute z-10 top-[100%] left-0 w-full mt-1 bg-white border rounded shadow max-h-40 overflow-y-auto text-sm">
@@ -153,6 +178,7 @@ export default function FilterPage() {
             )}
           </div>
 
+          {/* Price Range Filter */}
           <div className="bg-white rounded-lg shadow-sm p-3">
             <div className="flex items-center gap-2 mb-2 text-sm font-medium text-gray-600">
               <FiDollarSign /> Price Range
@@ -195,6 +221,7 @@ export default function FilterPage() {
             />
           </div>
 
+          {/* Rooms Filter */}
           <div className="bg-white rounded-lg shadow-sm p-3">
             <div className="flex items-center gap-2 mb-2 text-sm font-medium text-gray-600">
               <FiHome /> Rooms
@@ -222,6 +249,7 @@ export default function FilterPage() {
             </div>
           </div>
 
+          {/* Surface Filter */}
           <div className="bg-white rounded-lg shadow-sm p-3">
             <div className="flex items-center gap-2 mb-2 text-sm font-medium text-gray-600">
               <FiSliders /> Min Surface (m²)
@@ -236,39 +264,67 @@ export default function FilterPage() {
           </div>
         </div>
 
+        {/* Listings + Pagination */}
         <div className="w-3/4 p-4 grid gap-6">
-          {filtered.map((listing) => (
+          {paginatedListings.map((listing) => (
             <div
               key={listing.id}
               onClick={() => handleListingClick(listing.id)}
               className="flex bg-white rounded-lg shadow hover:shadow-md transition overflow-hidden cursor-pointer"
             >
               <div className="w-2/3 p-4 flex flex-col justify-between">
-                <div>
+                <div className="flex flex-col gap-1 flex-grow">
                   <h3 className="text-lg font-bold text-blue-700">
                     {listing.title}
                   </h3>
                   <p className="text-gray-600 text-sm">{listing.location}</p>
-                  <p className="text-sm mt-1">{listing.description}</p>
+                  <p className="text-sm mt-1 line-clamp-5 max-h-[6.5rem] overflow-hidden">
+                    {listing.description}
+                  </p>
                 </div>
+
                 <div className="mt-4 text-sm text-gray-500">
                   <span>{listing.surface} m² · </span>
                   <span>{listing.rooms} rooms</span>
-
                   <div className="text-blue-600 font-bold text-lg mt-1">
-                    ${user ? listing.price : <Skeleton count={1} />}
+                    {user ? (
+                      `€${listing.numericPrice}`
+                    ) : (
+                      <Skeleton height={24} />
+                    )}
                   </div>
                 </div>
               </div>
-              <div className="w-1/3 h-auto">
+              <div className="w-1/3 h-[270px]">
                 <img
-                  src={listing.images[0]}
-                  alt={listing.title}
+                  src={listing?.media?.[0]?.url || ""}
+                  alt={listing?.title}
                   className="w-full h-full object-cover"
                 />
               </div>
             </div>
           ))}
+
+          {/* Pagination Buttons */}
+          {totalPages > 1 && (
+            <div className="flex justify-center mt-6 gap-2 flex-wrap">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (pageNum) => (
+                  <button
+                    key={pageNum}
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={`px-3 py-1 rounded border ${
+                      pageNum === currentPage
+                        ? "bg-blue-600 text-white"
+                        : "bg-white text-blue-600 border-blue-600"
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                )
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
