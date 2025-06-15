@@ -11,8 +11,9 @@ import {
   FiPhone,
   FiMail,
 } from 'react-icons/fi';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import { LiaBedSolid } from 'react-icons/lia';
+import { TfiRulerAlt2 } from 'react-icons/tfi';
+import { LuHeart } from 'react-icons/lu';
 
 const SingleListingPage = () => {
   const { id } = useParams();
@@ -32,13 +33,14 @@ const SingleListingPage = () => {
           `http://localhost:3000/api/properties/${id}`
         );
         const listingData = await listingRes.json();
+
         setListing(listingData.data.property);
 
         // Fetch recent listings (excluding current one)
-        const recentRes = await fetch(
-          'http://localhost:3000/api/properties/properties'
-        );
+        const recentRes = await fetch('http://localhost:3000/api/properties');
+
         const recentData = await recentRes.json();
+
         const filteredRecent = recentData.data.properties
           .filter((item) => item.id !== parseInt(id))
           .slice(0, 4);
@@ -83,7 +85,7 @@ const SingleListingPage = () => {
   }
 
   return (
-    <>
+    <section>
       <div className='relative w-full h-96'>
         {/* Background Image */}
         <img
@@ -101,7 +103,7 @@ const SingleListingPage = () => {
           onClick={() => navigate(-1)}
           className='flex items-center gap-2 text-blue-600 mb-6 hover:underline cursor-pointer'
         >
-          <FiArrowLeft /> Back to listings
+          <FiArrowLeft /> Go Back
         </button>
 
         {/* Header */}
@@ -110,30 +112,33 @@ const SingleListingPage = () => {
             <h1 className='text-2xl md:text-3xl font-bold mb-2'>
               {listing.title}
             </h1>
-            <div className='flex items-center gap-2 text-gray-600 mb-2'>
-              <FiMapPin />
-              <span>{listing.location}</span>
-            </div>
-            <div className='flex items-center gap-4'>
-              <span className='flex items-center gap-1 text-sm text-gray-600'>
-                <FiClock />
-                {new Date(listing.createdAt).toLocaleDateString()}
-              </span>
+            <div className='flex gap-4 items-center mb-4'>
+              <div className='flex items-center gap-2 text-gray-400'>
+                <FiMapPin />
+                <span>{listing.location}</span>
+              </div>
+              <div className='flex items-center gap-4'>
+                <span className='flex items-center gap-1 text-sm text-gray-400'>
+                  <FiClock />
+                  {new Date(listing.createdAt).toLocaleDateString()}
+                </span>
+              </div>
             </div>
           </div>
+
           <div className='flex gap-2'>
-            <button className='p-2 rounded-full hover:bg-gray-100'>
-              <FiHeart className='text-gray-600' />
+            <button className='p-2 rounded-full hover:bg-gray-100 cursor-pointer'>
+              <FiHeart className='text-gray-600 ' />
             </button>
-            <button className='p-2 rounded-full hover:bg-gray-100'>
-              <FiShare2 className='text-gray-600' />
+            <button className='p-2 rounded-full bg-gray-100 hover:bg-gray-200 cursor-pointer'>
+              <FiShare2 className='text-gray-600 ' />
             </button>
           </div>
         </div>
 
         {/* Price */}
         <div className='bg-blue-50 p-4 rounded-lg mb-6'>
-          <p className='text-2xl font-bold text-blue-700'>{listing.price}</p>
+          <p className='text-2xl font-bold text-blue-800'>{listing.price}</p>
         </div>
 
         {/* Image Gallery */}
@@ -158,8 +163,8 @@ const SingleListingPage = () => {
                 <img
                   src={img.url}
                   alt={`Gallery ${idx}`}
-                  className={`w-full h-44 object-cover rounded-lg ${
-                    mainImage === idx ? 'ring-2 ring-blue-500' : ''
+                  className={`w-full h-44 object-cover rounded-lg ring ring-gray-200 ${
+                    mainImage === idx ? 'ring-2 ring-gray-200' : ''
                   }`}
                 />
               </div>
@@ -240,51 +245,89 @@ const SingleListingPage = () => {
         </div>
 
         {/* Recent Listings */}
-        <div className='mt-16'>
+        <div className='py-20'>
           <h3 className='text-2xl font-bold mb-6'>Similar Properties</h3>
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 '>
             {recent.map((item) => (
               <div
                 key={item.id}
                 onClick={() => navigate(`/listings/${item.id}`)}
-                className='border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer'
+                className='rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all cursor-pointer'
               >
-                <div className='relative'>
-                  <img
-                    src={
-                      item.media?.[0]?.url ||
-                      'https://via.placeholder.com/400x300?text=No+Image'
-                    }
-                    alt={item.title}
-                    className='w-full h-48 object-cover'
-                  />
-                  <div className='absolute top-2 right-2 p-2 bg-white rounded-full shadow'>
-                    <FiHeart className='text-gray-600' />
-                  </div>
-                </div>
-                <div className='p-4'>
-                  <h4 className='font-bold mb-1 line-clamp-1'>{item.title}</h4>
-                  <p className='text-sm text-gray-600 mb-2 flex items-center gap-1'>
-                    <FiMapPin size={14} />
-                    <span className='line-clamp-1'>{item.location}</span>
-                  </p>
-                  <div className='flex justify-between items-center'>
-                    <p className='text-blue-600 font-bold'>
-                      {formatPrice(item.price)}
+                <img
+                  src={
+                    item.media?.[0]?.url ||
+                    'https://via.placeholder.com/400x300?text=No+Image'
+                  }
+                  alt={item.title}
+                  className='w-full h-48 object-cover'
+                />
+                {/* Details */}
+                <div className='bg-white p-6'>
+                  <div className='mb-4'>
+                    <h3 className='text-sm font-semibold text-cyan-950 font-dm-sans mb-1'>
+                      {item.title.slice(0, 30)}...
+                    </h3>
+                    <p className='text-sm text-neutral-400 font-dm-sans'>
+                      {item.address}
                     </p>
-                    <div className='flex items-center gap-2 text-sm text-gray-600'>
-                      <span>{item.surface} m²</span>
-                      <span>•</span>
-                      <span>{item.rooms} rooms</span>
+                  </div>
+
+                  {/* Features */}
+                  <div className='flex justify-between mb-6'>
+                    <div className='text-center'>
+                      <div className='flex justify-center mb-1'>
+                        {/* Bed Icon */}
+                        <LiaBedSolid />
+                      </div>
+                      <span className='text-sm text-neutral-400 font-dm-sans'>
+                        {item.beds} Beds
+                      </span>
+                    </div>
+
+                    <div className='text-center'>
+                      <div className='flex justify-center mb-1'>
+                        {/* Area Icon */}
+                        <TfiRulerAlt2 />
+                      </div>
+                      <span className='text-sm text-neutral-400 font-dm-sans'>
+                        {item.size} Area
+                      </span>
                     </div>
                   </div>
+
+                  {/* Price & Action */}
+                  <div className='border-t border-neutral-400 border-opacity-40 pt-4 flex justify-between items-center'>
+                    <div className='text-right'>
+                      <div className='text-sm text-cyan-950 font-semibold font-dm-sans'>
+                        {item.price}
+                      </div>
+                    </div>
+
+                    <button
+                      type='button'
+                      aria-label='Add to favorites'
+                      className='w-7 h-7 bg-gray-50 hover:bg-red-100 cursor-pointer rounded-full flex items-center justify-center'
+                    >
+                      <LuHeart />
+                    </button>
+                  </div>
+
+                  {/* CTA */}
+                  <a
+                    href='#'
+                    className='block mt-4 text-sm text-blue-700 hover:underline font-medium'
+                  >
+                    View Details
+                  </a>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

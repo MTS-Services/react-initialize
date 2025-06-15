@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import {
+  FiAlertOctagon,
   FiArrowDown,
   FiClock,
   FiDollarSign,
@@ -16,6 +17,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import ReactSlider from 'react-slider';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import ReantCard from '../../common/ReantCard';
+import { FaHotel } from 'react-icons/fa';
 
 // ✅ Clean numeric price parser
 const cleanPrice = (priceStr) => {
@@ -181,7 +183,7 @@ export default function FilterPage() {
 
       <div className='max-w-[1300px] mx-auto flex mt-6 px-4'>
         {/* Sidebar Filters */}
-        <aside className='w-1/4 space-y-4 p-4'>
+        <aside className='w-1/4 space-y-4 p-4  h-fit sticky top-20'>
           <h2 className='text-xl font-bold mb-2 flex items-center gap-2'>
             <FiGrid /> Filters
           </h2>
@@ -200,16 +202,18 @@ export default function FilterPage() {
               onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
               className='w-full p-2 rounded bg-gray-50 border border-gray-200 text-sm'
             />
+
             {showSuggestions && location.trim() !== '' && (
-              <ul className='absolute z-10 top-[100%] left-0 w-full mt-1 bg-white border rounded shadow max-h-40 overflow-y-auto text-sm'>
+              <ul className='absolute z-10 top-[100%] left-0 w-full mt-1 bg-white border border-gray-300 rounded shadow max-h-60 overflow-y-auto text-sm'>
                 {suggestions.length > 0 ? (
                   suggestions.map((s, i) => (
                     <li
                       key={i}
-                      className='px-4 py-2 hover:bg-blue-100 cursor-pointer'
+                      className='px-4 py-2 hover:bg-blue-100 cursor-pointer flex items-center gap-1'
                       onClick={() => handleCitySelect(s)}
                     >
-                      {s}
+                      <FiMapPin />
+                      <span>{s}</span>
                     </li>
                   ))
                 ) : (
@@ -379,7 +383,7 @@ export default function FilterPage() {
                             </span>
                           </div>
                           <div className='px-2 py-1.5 bg-gray-100 rounded-full inline-flex items-center gap-1.5'>
-                            <FiArrowDown className='text-gray-700' />
+                            <FaHotel className='text-gray-700' />
                             <span className='text-xs text-gray-700'>
                               {listing.rooms}{' '}
                               {listing.rooms > 1 ? 'rooms' : 'room'}
@@ -390,7 +394,7 @@ export default function FilterPage() {
                         {/* Location and price */}
                         <div className='flex justify-between items-center'>
                           <div className='px-2 py-1.5 bg-gray-100 rounded-full inline-flex items-center gap-1.5'>
-                            <FiMap className='text-gray-700' />
+                            <FiMapPin className='text-gray-700' />
                             <span className='text-xs text-gray-700'>
                               {listing.location || 'Location not specified'}
                             </span>
@@ -413,6 +417,7 @@ export default function FilterPage() {
               ))}
 
               {/* Pagination Buttons */}
+              {/* Pagination Buttons */}
               {totalPages > 1 && (
                 <div className='flex justify-center mt-6 gap-2 flex-wrap'>
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map(
@@ -420,10 +425,10 @@ export default function FilterPage() {
                       <button
                         key={pageNum}
                         onClick={() => setCurrentPage(pageNum)}
-                        className={`px-3 py-1 rounded border ${
+                        className={`px-4 py-2 rounded-md font-medium ${
                           pageNum === currentPage
-                            ? 'bg-blue-600 text-white'
-                            : 'bg-white text-blue-600 border-blue-600'
+                            ? 'bg-blue-500 text-white shadow-md'
+                            : 'bg-gray-100 text-blue-500 hover:bg-gray-200'
                         }`}
                       >
                         {pageNum}

@@ -101,7 +101,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/properties/properties')
+    fetch('http://localhost:3000/api/properties')
       .then((res) => res.json())
       .then((data) => {
         console.log('main data', data);
@@ -167,10 +167,10 @@ export default function Home() {
       </section>
 
       {/* Search Bar */}
-      <section className='relative -top-14 z-20 h-full flex items-center justify-center w-full'>
-        <div className='bg-white p-6 rounded-lg shadow-lg'>
+      <section className='relative -top-14 z-20'>
+        <div className='bg-white p-6 rounded-lg shadow-lg w-full max-w-7xl mx-auto'>
           <div className='flex flex-col md:flex-row gap-3 justify-center items-center '>
-            <div className='relative w-full md:w-1/3 '>
+            <div className='relative w-full '>
               <FiMapPin className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
               <input
                 type='text'
@@ -179,18 +179,19 @@ export default function Home() {
                 onChange={(e) => handleLocationInput(e.target.value)}
                 onFocus={() => setShowSuggestions(true)}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
-                className='w-full h-16 pl-10 pr-4 py-2 rounded-lg shadow-md bg-white focus:outline-none'
+                className='w-full h-16 pl-10 pr-4 py-2 rounded-lg shadow bg-white focus:outline-none'
               />
               {showSuggestions && query.trim() !== '' && (
-                <ul className='absolute z-10 top-[100%] left-0 w-full mt-1 bg-white border rounded shadow max-h-40 overflow-y-auto text-sm'>
+                <ul className='absolute z-10 top-[100%] left-0 w-full mt-1 bg-white border border-gray-200 rounded shadow max-h-80 overflow-y-auto text-sm'>
                   {suggestions.length > 0 ? (
                     suggestions.map((s, i) => (
                       <li
                         key={i}
-                        className='px-4 py-2 hover:bg-blue-100 cursor-pointer'
+                        className='px-4 py-2 hover:bg-blue-100 cursor-pointer flex items-center gap-1'
                         onClick={() => handleCitySelect(s)}
                       >
-                        {s}
+                        <FiMapPin />
+                        <span>{s}</span>
                       </li>
                     ))
                   ) : (
@@ -202,31 +203,31 @@ export default function Home() {
               )}
             </div>
 
-            <div className='relative w-full md:w-40'>
+            <div className='relative w-full md:w-60'>
               <FiDollarSign className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
               <input
                 type='number'
                 placeholder='Min Price'
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
-                className='w-full h-16 pl-10 pr-4 py-2 rounded-lg shadow-md bg-white focus:outline-none'
+                className='w-full h-16 pl-10 pr-4 py-2 rounded-lg shadow bg-white focus:outline-none'
               />
             </div>
 
-            <div className='relative w-full md:w-40'>
+            <div className='relative w-full md:w-60'>
               <FiDollarSign className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400' />
               <input
                 type='number'
                 placeholder='Max Price'
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
-                className='w-full h-16 pl-10 pr-4 py-2 rounded-lg shadow-md bg-white focus:outline-none'
+                className='w-full h-16 pl-10 pr-4 py-2 rounded-lg shadow bg-white focus:outline-none'
               />
             </div>
 
             <button
               onClick={handleSearch}
-              className='flex items-center gap-2 bg-blue-600 text-white px-6 py-4 rounded-lg shadow-md hover:bg-blue-700 transition cursor-pointer'
+              className='flex items-center gap-2 bg-blue-600 text-white px-6 py-5 rounded-lg shadow-md hover:bg-blue-700 transition cursor-pointer'
             >
               <FiSearch /> Search
             </button>
