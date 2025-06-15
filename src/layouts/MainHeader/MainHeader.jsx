@@ -52,7 +52,9 @@ function MainHeader() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'shadow-md  backdrop-blur-2xl ' : 'bg-black/10 '
+
+        scrolled ? 'bg-black shadow-md' : 'bg-black/10'
+
       }`}
     >
       <div className='max-w-[1300px] mx-auto px-4 py-3 flex items-center justify-between'>
@@ -63,10 +65,13 @@ function MainHeader() {
         </Link>
 
         {/* Desktop Menu */}
-        <nav className='hidden md:flex items-center gap-6 text-white font-medium text-shadow-2xs'>
+
+        <nav className='hidden md:flex items-center gap-6 text-white font-medium'>
           <MenuLink to='/'>Home</MenuLink>
           <MenuLink to='/about'>About</MenuLink>
           <MenuLink to='/contact'>Contact</MenuLink>
+          <MenuLink to='/how-it-works'>How It Works</MenuLink>
+
         </nav>
 
         {/* Right Side */}

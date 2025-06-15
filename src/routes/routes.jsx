@@ -8,6 +8,10 @@ import RegisterPage from '../pages/Authentication/RegisterPage/RegisterPage';
 import FilterPage from '../pages/FilterPage/FilterPage';
 import SingleListingPage from '../pages/FilterPage/SingleListingPage';
 import Home from '../pages/Home/Home';
+
+import Contact from '../pages/Contact/Contact';
+import HowWorks from '../pages/HowWorks/HowWorks';
+
 // import { lazy } from "react";
 // const Contact = lazy(() => import("../pages/Contact/Contact"));
 
@@ -25,6 +29,16 @@ const AppRoutes = createBrowserRouter([
       },
 
       {
+
+        path: '/contact',
+        element: <Contact />,
+      },
+      {
+        path: '/how-it-works',
+        element: <HowWorks />,
+      },
+      {
+
         path: '/login',
         element: <LoginPage />,
       },
