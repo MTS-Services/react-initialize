@@ -1,5 +1,4 @@
-import React from 'react';
-import FAQSection from '../../components/FAQComponent/FAQComponent';
+import FAQComponent from '../../components/FAQComponent/FAQComponent';
 
 const HowWorks = () => {
   return (
@@ -88,7 +87,7 @@ const HowWorks = () => {
       </div>
 
       {/* === FAQ Section === */}
-      <FAQSection />
+      <FAQComponent />
     </div>
   );
 };
