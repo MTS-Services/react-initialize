@@ -1,13 +1,15 @@
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-import { createBrowserRouter } from "react-router-dom";
-import MainLayOut from "../../MainLayOut";
-import ErrorPage from "../components/ErrorPage/ErrorPage";
-import LoginPage from "../pages/Authentication/LoginPage/LoginPage";
-import RegisterPage from "../pages/Authentication/RegisterPage/RegisterPage";
-import FilterPage from "../pages/FilterPage/FilterPage";
-import SingleListingPage from "../pages/FilterPage/SingleListingPage";
-import Home from "../pages/Home/Home";
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { createBrowserRouter } from 'react-router-dom';
+import MainLayOut from '../../MainLayOut';
+import ErrorPage from '../components/ErrorPage/ErrorPage';
+import LoginPage from '../pages/Authentication/LoginPage/LoginPage';
+import RegisterPage from '../pages/Authentication/RegisterPage/RegisterPage';
+import FilterPage from '../pages/FilterPage/FilterPage';
+import SingleListingPage from '../pages/FilterPage/SingleListingPage';
+import Home from '../pages/Home/Home';
+import Contact from '../pages/Contact/Contact';
+import HowWorks from '../pages/HowWorks/HowWorks';
 // import { lazy } from "react";
 // const Contact = lazy(() => import("../pages/Contact/Contact"));
 
@@ -15,7 +17,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const AppRoutes = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <MainLayOut />,
     errorElement: <ErrorPage />,
     children: [
@@ -24,19 +26,27 @@ const AppRoutes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/login",
+        path: '/contact',
+        element: <Contact />,
+      },
+      {
+        path: '/how-it-works',
+        element: <HowWorks />,
+      },
+      {
+        path: '/login',
         element: <LoginPage />,
       },
       {
-        path: "/listings",
+        path: '/listings',
         element: <FilterPage />,
       },
       {
-        path: "/listings/:id",
+        path: '/listings/:id',
         element: <SingleListingPage />,
       },
       {
-        path: "/register",
+        path: '/register',
         element: (
           <Elements stripe={stripePromise}>
             <RegisterPage />
