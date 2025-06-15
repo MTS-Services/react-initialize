@@ -226,7 +226,7 @@ const RegisterPage = () => {
             <button
               type='submit'
               disabled={processing || isLoading}
-              className='w-full max-h-12 px-6 py-3 bg-gradient-to-l from-yellow-600 to-yellow-500 rounded-[100px] inline-flex justify-center items-center gap-2.5 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed transition'
+              className='text-white text-base w-full max-h-12 px-6 py-3 bg-gradient-to-l from-yellow-600 to-yellow-500 rounded-[100px] inline-flex justify-center items-center gap-2.5 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed transition'
             >
               {processing || isLoading ? 'Processing...' : 'Register & Pay $20'}
             </button>
