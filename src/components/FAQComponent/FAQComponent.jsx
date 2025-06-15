@@ -46,7 +46,7 @@ const FAQComponent = () => {
           <div key={index} className='py-4'>
             <button
               onClick={() => toggle(index)}
-              className='w-full flex justify-between items-center text-left'
+              className='cursor-pointer w-full flex justify-between items-center text-left'
             >
               <span className='text-lg font-bold text-black font-inter'>
                 {item.question}
