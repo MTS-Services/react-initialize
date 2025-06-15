@@ -14,7 +14,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import LanguageSwitcher from '../../components/LanguageSwitcher/LanguageSwitcher';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
-import logo from '/flags.png';
 
 function MainHeader() {
   const { user, logOutUser } = useContext(AuthContext);
@@ -52,16 +51,17 @@ function MainHeader() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-
         scrolled ? 'bg-black shadow-md' : 'bg-black/10'
-
       }`}
     >
       <div className='max-w-[1300px] mx-auto px-4 py-3 flex items-center justify-between'>
         {/* Logo */}
         <Link to='/' className='flex items-center gap-2'>
-          <img src={logo} alt='Logo' className='w-10 h-10 object-contain' />
-          <span className='text-xl font-bold text-white'>MyApp</span>
+          <img
+            src='/public/Logo.png'
+            alt='Logo'
+            className='w-100 h-10 object-contain'
+          />
         </Link>
 
         {/* Desktop Menu */}
@@ -71,7 +71,6 @@ function MainHeader() {
           <MenuLink to='/about'>About</MenuLink>
           <MenuLink to='/contact'>Contact</MenuLink>
           <MenuLink to='/how-it-works'>How It Works</MenuLink>
-
         </nav>
 
         {/* Right Side */}
@@ -85,19 +84,22 @@ function MainHeader() {
             onMouseLeave={handleMouseLeave}
           >
             <button className='flex items-center justify-center w-9 h-9 rounded-full bg-white text-black border border-gray-300 hover:shadow-md transition'>
-              <FiUser className='text-xl' />
+              <Link to='/profile'>
+                <FiUser className='text-xl' />
+              </Link>
             </button>
 
             {isDropdownOpen && (
               <div className='absolute right-0 top-12 w-44 bg-white text-black border border-gray-200 rounded-md shadow-md z-50'>
                 {user ? (
                   <>
-                    <DropdownItem to='/profile' icon={<FiUser />}>
-                      Profile
-                    </DropdownItem>
+                    <DropdownItem
+                      to='/profile'
+                      icon={<FiUser />}
+                    ></DropdownItem>
                     <button
                       onClick={logOutHandler}
-                      className='w-full flex items-center gap-2 px-4 py-2 text-left hover:bg-blue-600 hover:text-white transition'
+                      className='w-full flex items-center gap-2 px-4 py-2 text-left hover:bg-blue-950 hover:text-white transition'
                     >
                       <FiLogOut />
                       Logout
@@ -207,7 +209,7 @@ const MenuLink = ({ to, icon, children, onClick }) => (
 const DropdownItem = ({ to, icon, children }) => (
   <Link
     to={to}
-    className='flex items-center gap-2 px-4 py-2 hover:bg-blue-600 hover:text-white transition'
+    className='flex items-center gap-2 px-4 py-2 hover:bg-blue-950 hover:text-white transition'
   >
     {icon}
     {children}
