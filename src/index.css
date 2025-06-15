@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik&family=Poppins&display=swap");
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Rubik&family=Poppins&display=swap');
+@import 'tailwindcss';
 
 :root {
-  --font-primary: "Rubik", sans-serif;
-  --font-secondary: "Poppins", sans-serif;
+  --font-primary: 'Rubik', sans-serif;
+  --font-secondary: 'Poppins', sans-serif;
   --color-primary: rgb(25, 179, 231);
   --color-secondary: rgb(17, 40, 74);
   --color-accent: rgb(255, 255, 255);
