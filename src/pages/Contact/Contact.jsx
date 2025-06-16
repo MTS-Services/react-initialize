@@ -86,7 +86,7 @@ const Contact = () => {
             {/* Submit Button */}
             <button
               type='submit'
-              className='w-full bg-gradient-to-l from-blue-800 to-blue-600 text-white px-8 py-3 rounded font-medium font-poppins'
+              className='cursor-pointer text-white text-base w-full max-h-12 px-6 py-3 bg-gradient-to-l from-yellow-600 to-yellow-500 rounded-[100px] inline-flex justify-center items-center gap-2.5 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed transition'
             >
               Submit
             </button>

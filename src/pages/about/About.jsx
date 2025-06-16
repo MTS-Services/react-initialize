@@ -79,7 +79,7 @@ const About = () => {
             we make the rental experience smooth, secure, and tailored to your
             needs.
           </p>
-          <button className='bg-gradient-to-l from-yellow-600 to-yellow-500 text-white text-base font-medium font-poppins px-6 py-3 rounded'>
+          <button className='cursor-pointer bg-gradient-to-l from-yellow-600 to-yellow-500 text-white text-base font-medium font-poppins px-6 py-3 rounded'>
             Explore your home
           </button>
         </div>
