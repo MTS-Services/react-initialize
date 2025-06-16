@@ -1,16 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import 'tailwindcss';
 
 :root {
-  --font-primary: 'Rubik', sans-serif;
-  --font-secondary: 'Poppins', sans-serif;
-  --color-primary: rgb(25, 179, 231);
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Lato', sans-serif;
+  --color-primary: #f6bc09;
   --color-secondary: rgb(17, 40, 74);
   --color-accent: rgb(255, 255, 255);
   --color-background: rgb(16, 24, 40);
   --color-border-color: rgb(255, 255, 255);
   --shadow-box-style: 1px 1px 1px 2px rgb(0 0 0 / 0.1);
   --shadow-btn-style: 2px 2px 0px 2px rgb(0 0 0 / 0.1);
+  --text-color-heading: #1f1f1f;
+  --text-color-title: #0d263c;
+  --text-color-pargraph: #4b4b4b;
   --color-card: rgb(25, 25, 25);
   --color-cta: rgb(0, 122, 255);
   --color-cta-active: rgb(0, 102, 215);
@@ -70,4 +74,23 @@
   );
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
+}
+
+p {
+  color: var(--text-color-pargraph);
+  font-family: var(--font-primary);
+}
+
+h1 {
+  color: var(--text-color-heading);
+  font-family: var(--font-secondary);
+}
+
+h2 {
+  color: var(--text-color-title);
+  font-family: var(--font-secondary);
+}
+
+button {
+  cursor: pointer;
 }
