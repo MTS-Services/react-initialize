@@ -1,32 +1,32 @@
-import React from 'react';
+import React from "react";
 
 const Contact = () => {
   return (
-    <div className='w-full flex flex-col'>
+    <div className="flex w-full flex-col">
       {/* === Contact Section === */}
-      <div className='flex flex-col lg:flex-row w-full min-h-screen'>
+      <div className="mt-16 flex min-h-screen w-full flex-col lg:flex-row">
         {/* Left Image */}
-        <div className='w-full lg:w-1/2 h-[250px] lg:h-[1000px]'>
+        <div className="h-[250px] w-full lg:h-full lg:w-1/2">
           <img
-            src='/contact-image.jpg'
-            alt='contact'
-            className='w-full h-full object-cover'
+            src="/contact-image.jpg"
+            alt="contact"
+            className="h-screen w-full object-cover"
           />
         </div>
 
         {/* Right Form */}
-        <div className='w-full lg:w-1/2 flex justify-center items-center px-6 lg:px-16 py-12 bg-white'>
-          <form className='w-full max-w-xl space-y-6'>
+        <div className="flex w-full items-center justify-center bg-white px-6 py-12 lg:w-1/2 lg:px-16">
+          <form className="w-full max-w-xl space-y-6">
             {/* Heading */}
             <div>
-              <h2 className='text-4xl md:text-5xl font-semibold font-lato capitalize text-black mb-2'>
+              <h2 className="font-lato mb-2 text-4xl font-semibold text-black capitalize md:text-5xl">
                 Let’s Get In Touch
               </h2>
-              <p className='text-base font-inter text-black'>
-                Or just reach out manually to{' '}
+              <p className="font-inter text-base text-black">
+                Or just reach out manually to{" "}
                 <a
-                  href='mailto:hellonlproperty.com'
-                  className='text-blue-700 underline'
+                  href="mailto:hellonlproperty.com"
+                  className="text-blue-700 underline"
                 >
                   hellonlproperty.com
                 </a>
@@ -34,59 +34,59 @@ const Contact = () => {
             </div>
 
             {/* Name Inputs */}
-            <div className='flex flex-col md:flex-row gap-4'>
-              <div className='flex flex-col w-full'>
-                <label className='text-sm text-black mb-1'>First Name</label>
+            <div className="flex flex-col gap-4 md:flex-row">
+              <div className="flex w-full flex-col">
+                <label className="mb-1 text-sm text-black">First Name</label>
                 <input
-                  type='text'
-                  placeholder='Mirable'
-                  className='bg-blue-50 px-4 py-3 rounded w-full'
+                  type="text"
+                  placeholder="Mirable"
+                  className="w-full rounded bg-blue-50 px-4 py-3"
                 />
               </div>
-              <div className='flex flex-col w-full'>
-                <label className='text-sm text-black mb-1'>Last Name</label>
+              <div className="flex w-full flex-col">
+                <label className="mb-1 text-sm text-black">Last Name</label>
                 <input
-                  type='text'
-                  placeholder='Lily'
-                  className='bg-blue-50 px-4 py-3 rounded w-full'
+                  type="text"
+                  placeholder="Lily"
+                  className="w-full rounded bg-blue-50 px-4 py-3"
                 />
               </div>
             </div>
 
             {/* Email */}
-            <div className='flex flex-col'>
-              <label className='text-sm text-black mb-1'>Email Address</label>
+            <div className="flex flex-col">
+              <label className="mb-1 text-sm text-black">Email Address</label>
               <input
-                type='email'
-                placeholder='mirablelily@gmail.com'
-                className='bg-blue-50 px-4 py-3 rounded w-full'
+                type="email"
+                placeholder="mirablelily@gmail.com"
+                className="w-full rounded bg-blue-50 px-4 py-3"
               />
             </div>
 
             {/* Phone */}
-            <div className='flex flex-col'>
-              <label className='text-sm text-black mb-1'>Phone Number</label>
+            <div className="flex flex-col">
+              <label className="mb-1 text-sm text-black">Phone Number</label>
               <input
-                type='tel'
-                placeholder='(208) 555-0112'
-                className='bg-blue-50 px-4 py-3 rounded w-full'
+                type="tel"
+                placeholder="(208) 555-0112"
+                className="w-full rounded bg-blue-50 px-4 py-3"
               />
             </div>
 
             {/* Message */}
-            <div className='flex flex-col'>
-              <label className='text-sm text-black mb-1'>Message</label>
+            <div className="flex flex-col">
+              <label className="mb-1 text-sm text-black">Message</label>
               <textarea
-                rows='4'
-                placeholder='Your message here...'
-                className='bg-blue-50 px-4 py-3 rounded resize-none w-full'
+                rows="4"
+                placeholder="Your message here..."
+                className="w-full resize-none rounded bg-blue-50 px-4 py-3"
               />
             </div>
 
             {/* Submit Button */}
             <button
-              type='submit'
-              className='cursor-pointer text-white text-base w-full max-h-12 px-6 py-3 bg-gradient-to-l from-yellow-600 to-yellow-500 rounded-[100px] inline-flex justify-center items-center gap-2.5 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed transition'
+              type="submit"
+              className="inline-flex max-h-12 w-full transform cursor-pointer items-center justify-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-yellow-600 to-yellow-500 px-6 py-3 text-base font-semibold text-white shadow-lg transition duration-700 ease-in-out hover:scale-105 hover:from-yellow-500 hover:to-yellow-600 disabled:cursor-not-allowed disabled:opacity-60 sm:px-8 sm:py-4 sm:text-sm md:px-10 md:py-5 md:text-base lg:px-8 lg:py-4 lg:text-lg"
             >
               Submit
             </button>

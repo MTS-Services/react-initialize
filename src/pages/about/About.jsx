@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
-import { FiPlus, FiX } from 'react-icons/fi';
+import React, { useState } from "react";
+import { FiPlus, FiX } from "react-icons/fi";
 
 const faqData = [
   {
-    question: 'How often do you search rental websites?',
+    question: "How often do you search rental websites?",
     answer:
-      'Every 2 minutes our search bots scour the internet to find your ideal rental.',
+      "Every 2 minutes our search bots scour the internet to find your ideal rental.",
   },
   {
-    question: 'How many websites do you search?',
+    question: "How many websites do you search?",
     answer:
-      'We search over 100 trusted rental platforms across multiple countries.',
+      "We search over 100 trusted rental platforms across multiple countries.",
   },
   {
-    question: 'In which cities do you search?',
+    question: "In which cities do you search?",
     answer:
-      'We currently cover 50+ major cities including New York, Amsterdam, Berlin, and London.',
+      "We currently cover 50+ major cities including New York, Amsterdam, Berlin, and London.",
   },
   {
-    question: 'Will there be extra costs if I have found a home?',
+    question: "Will there be extra costs if I have found a home?",
     answer:
-      'No. Once you’ve found a home, you won’t be charged any additional fees.',
+      "No. Once you’ve found a home, you won’t be charged any additional fees.",
   },
   {
-    question: 'What if I have found a home?',
+    question: "What if I have found a home?",
     answer:
-      'You can pause or cancel your search anytime through your dashboard.',
+      "You can pause or cancel your search anytime through your dashboard.",
   },
 ];
 
@@ -37,25 +37,25 @@ const About = () => {
   };
 
   return (
-    <div className='w-full flex flex-col'>
+    <div className="flex w-full flex-col">
       {/* === Background Section === */}
-      <div className='relative w-full h-[611px]'>
+      <div className="relative h-[611px] w-full">
         {/* Background Image */}
         <img
-          src='/howworks.jpg'
-          alt='House'
-          className='absolute inset-0 w-full h-full object-cover'
+          src="/howworks.jpg"
+          alt="House"
+          className="absolute inset-0 h-full w-full object-cover"
         />
 
         {/* Gradient Overlay */}
-        <div className='absolute inset-0 bg-gradient-to-b from-black/60 to-black/60' />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/60" />
 
         {/* Centered Content */}
-        <div className='relative z-10 flex flex-col items-center justify-center h-full px-4 text-center text-white'>
-          <h1 className='max-w-[676px] text-4xl md:text-6xl font-semibold font-lato capitalize mb-6'>
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
+          <h1 className="font-lato mb-6 max-w-[676px] text-4xl font-semibold capitalize md:text-6xl">
             How Renting Works On Our Platform
           </h1>
-          <p className='max-w-[676px] text-base font-normal font-inter leading-normal'>
+          <p className="font-inter max-w-[676px] text-base leading-normal font-normal">
             Discover and compare rental options from trusted companies all in
             one place. Browse listings, choose what suits you best, and book
             directly. We make it simple, secure, and seamless. A small service
@@ -65,68 +65,68 @@ const About = () => {
       </div>
 
       {/* How to Works Section */}
-      <section className='relative w-full overflow-hidden py-16  bg-[linear-gradient(90deg,_#FFFEEB,_#E9F6FF)] '>
+      <section className="relative w-full overflow-hidden bg-[linear-gradient(90deg,_#FFFEEB,_#E9F6FF)] px-6 py-16">
         {/* Decorative Rotated Images */}
         <img
-          className='w-[928px] h-64 absolute -left-[464px] top-0 rotate-90'
-          src='/png-wing-2.png'
-          alt='decor-top'
+          className="absolute top-0 -left-[464px] h-64 w-[928px] rotate-90"
+          src="/png-wing-2.png"
+          alt="decor-top"
         />
         <img
-          className='w-[928px] h-64 absolute -right-[404px] bottom-0 -rotate-90'
-          src='/png-wing-2.png'
-          alt='decor-bottom'
+          className="absolute -right-[404px] bottom-0 h-64 w-[928px] -rotate-90"
+          src="/png-wing-2.png"
+          alt="decor-bottom"
         />
         <img
-          className='absolute left-1/2 top-0 -translate-x-1/2 w-[875px] h-[654px] object-contain'
-          src='/png-wing-2.png'
-          alt='main-illustration'
+          className="absolute top-0 left-1/2 h-[654px] w-[875px] -translate-x-1/2 object-contain"
+          src="/png-wing-2.png"
+          alt="main-illustration"
         />
 
         {/* Content */}
-        <div className='relative z-10 max-w-7xl mx-auto flex flex-col items-center gap-12'>
+        <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-12">
           {/* Header */}
-          <div className='text-center space-y-2'>
-            <h2 className='text-4xl font-semibold font-lato capitalize text-black'>
+          <div className="space-y-2 text-center">
+            <h2 className="font-lato text-4xl font-semibold text-black capitalize">
               Hoe werkt het?
             </h2>
-            <p className='text-base font-normal font-inter text-black'>
+            <p className="font-inter text-base font-normal text-black">
               Homes that we have just discovered
             </p>
           </div>
 
           {/* Steps */}
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full'>
+          <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                title: 'Aanmelden',
-                desc: 'Maak in een paar minuten jouw account aan en start direct met zoeken.',
+                title: "Aanmelden",
+                desc: "Maak in een paar minuten jouw account aan en start direct met zoeken.",
               },
               {
-                title: 'Woning zoeken',
-                desc: 'Vind jouw droomwoning in je favoriete stad met onze handige zoekfilters.',
+                title: "Woning zoeken",
+                desc: "Vind jouw droomwoning in je favoriete stad met onze handige zoekfilters.",
               },
               {
-                title: 'Blijf op de hoogte',
-                desc: 'Nog niet gevonden wat je zocht? Je ontvangt dagelijks of wekelijks nieuwe huurwoningen in je inbox.',
+                title: "Blijf op de hoogte",
+                desc: "Nog niet gevonden wat je zocht? Je ontvangt dagelijks of wekelijks nieuwe huurwoningen in je inbox.",
               },
               {
-                title: 'Verhuizen maar',
-                desc: 'Reageer, plan een bezichtiging en begin vast met inpakken. Jouw nieuwe woning wacht op je!',
+                title: "Verhuizen maar",
+                desc: "Reageer, plan een bezichtiging en begin vast met inpakken. Jouw nieuwe woning wacht op je!",
               },
             ].map((step, idx) => (
               <div
                 key={idx}
-                className='bg-white rounded-lg px-6 py-16 flex flex-col items-center gap-4 shadow-sm '
+                className="flex flex-col items-center gap-4 rounded-lg bg-white px-6 py-16 shadow-sm"
               >
-                <div className='w-14 h-14 bg-yellow-500 rounded flex items-center justify-center text-white text-2xl font-medium font-lato'>
+                <div className="font-lato flex h-14 w-14 items-center justify-center rounded bg-yellow-500 text-2xl font-medium text-white">
                   {idx + 1}
                 </div>
-                <div className='text-center space-y-2'>
-                  <h3 className='text-xl font-semibold font-lato text-black capitalize'>
+                <div className="space-y-2 text-center">
+                  <h3 className="font-lato text-xl font-semibold text-black capitalize">
                     {step.title}
                   </h3>
-                  <p className=' font-normal font-inter text-black'>
+                  <p className="font-inter font-normal text-black">
                     {step.desc}
                   </p>
                 </div>
@@ -137,12 +137,12 @@ const About = () => {
       </section>
 
       {/* === Why Choose Us Section === */}
-      <div className='w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 py-16 gap-12'>
-        <div className='w-full lg:w-1/2 space-y-6'>
-          <h2 className='text-gray-900 text-4xl font-semibold font-lato capitalize'>
+      <div className="mx-auto mb-0 flex w-full max-w-7xl flex-col items-center justify-between gap-12 px-6 py-16 lg:flex-row">
+        <div className="w-full space-y-6 lg:w-1/2">
+          <h2 className="font-lato text-4xl font-semibold text-gray-900 capitalize">
             Why Choose US
           </h2>
-          <p className='text-gray-700 text-base font-normal font-inter leading-relaxed'>
+          <p className="font-inter text-base leading-relaxed font-normal text-gray-700">
             Finding the right rental shouldn’t be stressful. That’s why we bring
             together listings from multiple trusted companies in one simple
             platform — so you can compare, choose, and book with confidence.
@@ -150,43 +150,54 @@ const About = () => {
             we make the rental experience smooth, secure, and tailored to your
             needs.
           </p>
-          <button className='cursor-pointer bg-gradient-to-l from-yellow-600 to-yellow-500 text-white text-base font-medium font-poppins px-6 py-3 rounded'>
+          <button class="transform rounded-full bg-gradient-to-r from-yellow-600 to-yellow-500 px-6 py-3 font-semibold text-white shadow-lg transition-transform duration-700 ease-in-out hover:scale-105 hover:from-yellow-500 hover:to-yellow-600 sm:px-8 sm:py-4 sm:text-sm md:px-10 md:py-5 md:text-base lg:px-8 lg:py-4 lg:text-lg">
             Explore your home
           </button>
         </div>
 
         {/* Right Image with Custom Clip Path */}
-        <div className='w-full max-w-[589px] h-[491px]'>
-          <img src='/public/works.png' width='589' height='491' />
+        <div className="w-full max-w-[589px]">
+          <img
+            src="/works.png"
+            alt="Why Choose Us"
+            className="h-auto w-full object-contain"
+          />
         </div>
       </div>
 
       {/* === FAQ Section === */}
-      <div className='w-full py-16 md:px-12 lg:px-24 bg-white'>
-        <h2 className='text-center text-4xl font-semibold font-lato text-black mb-8'>
+      <div className="w-full bg-white px-6 pb-8 md:px-12 lg:px-24">
+        <h2 className="font-lato mb-8 text-center text-4xl font-semibold text-black">
           FAQ
         </h2>
-        <div className='max-w-4xl mx-auto divide-y divide-gray-200'>
-          {faqData.map((item, index) => (
-            <div key={index} className='py-4'>
-              <button
-                onClick={() => toggle(index)}
-                className='w-full flex justify-between items-center text-left'
-              >
-                <span className='text-lg font-bold text-black font-inter'>
-                  {item.question}
-                </span>
-                <span className='text-xl text-black'>
-                  {openIndex === index ? <FiX /> : <FiPlus />}
-                </span>
-              </button>
-              {openIndex === index && (
-                <p className='mt-4 text-gray-600 text-base font-inter leading-relaxed'>
-                  {item.answer}
-                </p>
-              )}
-            </div>
-          ))}
+
+        <div className="mx-auto max-w-4xl divide-y divide-gray-200">
+          {faqData.map((item, index) => {
+            const isOpen = openIndex === index;
+
+            return (
+              <div key={index} className="py-4">
+                <button
+                  onClick={() => toggle(index)}
+                  className="flex w-full cursor-pointer items-center justify-between text-left"
+                  aria-expanded={isOpen}
+                >
+                  <span className="font-inter text-lg font-bold text-black">
+                    {item.question}
+                  </span>
+                  <span className="text-xl text-black">
+                    {isOpen ? <FiX /> : <FiPlus />}
+                  </span>
+                </button>
+
+                {isOpen && (
+                  <p className="font-inter mt-4 text-base leading-relaxed text-gray-600">
+                    {item.answer}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

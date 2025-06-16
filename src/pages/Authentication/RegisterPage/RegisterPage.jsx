@@ -4,24 +4,24 @@ import {
   CardNumberElement,
   useElements,
   useStripe,
-} from '@stripe/react-stripe-js';
-import axios from 'axios';
-import { useContext, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { AuthContext } from '../../../context/AuthContext/AuthContext';
+} from "@stripe/react-stripe-js";
+import axios from "axios";
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../../context/AuthContext/AuthContext";
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
     base: {
-      fontSize: '16px',
-      color: '#424770',
-      '::placeholder': { color: '#aab7c4' },
-      fontFamily: 'Roboto, sans-serif',
-      padding: '10px 14px',
+      fontSize: "16px",
+      color: "#424770",
+      "::placeholder": { color: "#aab7c4" },
+      fontFamily: "Roboto, sans-serif",
+      padding: "10px 14px",
     },
     invalid: {
-      color: '#9e2146',
+      color: "#9e2146",
     },
   },
 };
@@ -41,7 +41,7 @@ const RegisterPage = () => {
 
   const onSubmit = async (data) => {
     if (!stripe || !elements) {
-      toast.error('Stripe has not loaded yet.');
+      toast.error("Stripe has not loaded yet.");
       return;
     }
 
@@ -50,14 +50,14 @@ const RegisterPage = () => {
 
     try {
       const paymentRes = await axios.post(
-        'http://localhost:3000/api/payment/create-payment',
+        "http://localhost:3000/api/payment/create-payment",
         {
           amount: 2000,
           metadata: {
             name: data.name,
             email: data.email,
           },
-        }
+        },
       );
 
       const clientSecret = paymentRes.data.clientSecret;
@@ -72,17 +72,17 @@ const RegisterPage = () => {
         return;
       }
 
-      if (paymentResult.paymentIntent.status === 'succeeded') {
+      if (paymentResult.paymentIntent.status === "succeeded") {
         const res = await createUser(data.email, data.password);
         const uid = res?.user?.uid || res?.localId;
         const email = res?.user?.email;
 
         if (!uid) {
-          toast.error('User creation failed: No UID returned.');
+          toast.error("User creation failed: No UID returned.");
           return;
         }
 
-        await axios.post('http://localhost:3000/api/users/create', {
+        await axios.post("http://localhost:3000/api/users/create", {
           name: data.name,
           email,
           uid,
@@ -92,11 +92,11 @@ const RegisterPage = () => {
         });
 
         toast.info(
-          'Payment successful! Registration processing. You will receive confirmation soon.'
+          "Payment successful! Registration processing. You will receive confirmation soon.",
         );
       }
     } catch (error) {
-      toast.error('Error: ' + (error.response?.data?.message || error.message));
+      toast.error("Error: " + (error.response?.data?.message || error.message));
     } finally {
       setProcessing(false);
       setIsLoading(false);
@@ -105,44 +105,44 @@ const RegisterPage = () => {
 
   return (
     <section
-      className='min-h-screen bg-gradient-to-tr from-white via-blue-50 to-blue-100 flex items-center justify-center px-6 py-12'
-      style={{ fontFamily: 'var(--font-secondary)' }}
+      className="flex min-h-screen items-center justify-center bg-gradient-to-tr from-white via-blue-50 to-blue-100 px-6 py-12"
+      style={{ fontFamily: "var(--font-secondary)" }}
     >
-      <div className='container max-w-6xl bg-white rounded-3xl shadow-lg flex flex-col md:flex-row overflow-hidden'>
+      <div className="container flex max-w-6xl flex-col overflow-hidden rounded-3xl bg-white shadow-lg md:flex-row">
         {/* Left Image Section */}
-        <div className='md:w-1/2 hidden md:flex items-center justify-center p-8'>
+        <div className="hidden items-center justify-center p-8 md:flex md:w-1/2">
           <img
-            src='/register-image.png'
-            alt='Register Visual'
-            className='max-w-full h-auto object-contain'
+            src="/register-image.png"
+            alt="Register Visual"
+            className="h-auto max-w-full object-contain"
           />
         </div>
 
         {/* Right Form Section */}
-        <div className='w-full md:w-1/2 p-10 flex flex-col justify-center'>
-          <h2 className='text-3xl font-extrabold text-[#19398A] text-center mb-10'>
+        <div className="flex w-full flex-col justify-center p-10 md:w-1/2">
+          <h2 className="mb-10 text-center text-3xl font-extrabold text-[#19398A]">
             Register & Pay $20
           </h2>
 
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate
-            className='space-y-6'
+            className="space-y-6"
           >
             {/* Full Name */}
             <div>
-              <label className='block mb-2 text-sm font-semibold text-gray-700'>
+              <label className="mb-2 block text-sm font-semibold text-gray-700">
                 Full Name
               </label>
               <input
-                type='text'
-                {...register('name', { required: 'Name required' })}
-                className={`w-full px-5 py-3 rounded-xl border text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#19398A] transition ${
-                  errors.name ? 'border-red-500' : 'border-gray-300'
+                type="text"
+                {...register("name", { required: "Name required" })}
+                className={`w-full rounded-xl border px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none ${
+                  errors.name ? "border-red-500" : "border-gray-300"
                 }`}
               />
               {errors.name && (
-                <p className='mt-1 text-sm text-red-600'>
+                <p className="mt-1 text-sm text-red-600">
                   {errors.name.message}
                 </p>
               )}
@@ -150,18 +150,18 @@ const RegisterPage = () => {
 
             {/* Email */}
             <div>
-              <label className='block mb-2 text-sm font-semibold text-gray-700'>
+              <label className="mb-2 block text-sm font-semibold text-gray-700">
                 Email
               </label>
               <input
-                type='email'
-                {...register('email', { required: 'Email required' })}
-                className={`w-full px-5 py-3 rounded-xl border text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#19398A] transition ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
+                type="email"
+                {...register("email", { required: "Email required" })}
+                className={`w-full rounded-xl border px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none ${
+                  errors.email ? "border-red-500" : "border-gray-300"
                 }`}
               />
               {errors.email && (
-                <p className='mt-1 text-sm text-red-600'>
+                <p className="mt-1 text-sm text-red-600">
                   {errors.email.message}
                 </p>
               )}
@@ -169,24 +169,24 @@ const RegisterPage = () => {
 
             {/* Password */}
             <div>
-              <label className='block mb-2 text-sm font-semibold text-gray-700'>
+              <label className="mb-2 block text-sm font-semibold text-gray-700">
                 Password
               </label>
               <input
-                type='password'
-                {...register('password', {
-                  required: 'Password required',
+                type="password"
+                {...register("password", {
+                  required: "Password required",
                   minLength: {
                     value: 6,
-                    message: 'Minimum 6 characters',
+                    message: "Minimum 6 characters",
                   },
                 })}
-                className={`w-full px-5 py-3 rounded-xl border text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#19398A] transition ${
-                  errors.password ? 'border-red-500' : 'border-gray-300'
+                className={`w-full rounded-xl border px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none ${
+                  errors.password ? "border-red-500" : "border-gray-300"
                 }`}
               />
               {errors.password && (
-                <p className='mt-1 text-sm text-red-600'>
+                <p className="mt-1 text-sm text-red-600">
                   {errors.password.message}
                 </p>
               )}
@@ -194,29 +194,29 @@ const RegisterPage = () => {
 
             {/* Card Number */}
             <div>
-              <label className='block mb-2 text-sm font-semibold text-gray-700'>
+              <label className="mb-2 block text-sm font-semibold text-gray-700">
                 Card Number
               </label>
-              <div className='border border-gray-300 rounded-xl p-3'>
+              <div className="rounded-xl border border-gray-300 p-3">
                 <CardNumberElement options={CARD_ELEMENT_OPTIONS} />
               </div>
             </div>
 
             {/* Expiry and CVC */}
-            <div className='flex flex-col md:flex-row gap-4'>
-              <div className='flex-1'>
-                <label className='block mb-2 text-sm font-semibold text-gray-700'>
+            <div className="flex flex-col gap-4 md:flex-row">
+              <div className="flex-1">
+                <label className="mb-2 block text-sm font-semibold text-gray-700">
                   Expiry Date
                 </label>
-                <div className='border border-gray-300 rounded-xl p-3'>
+                <div className="rounded-xl border border-gray-300 p-3">
                   <CardExpiryElement options={CARD_ELEMENT_OPTIONS} />
                 </div>
               </div>
-              <div className='flex-1'>
-                <label className='block mb-2 text-sm font-semibold text-gray-700'>
+              <div className="flex-1">
+                <label className="mb-2 block text-sm font-semibold text-gray-700">
                   CVC
                 </label>
-                <div className='border border-gray-300 rounded-xl p-3'>
+                <div className="rounded-xl border border-gray-300 p-3">
                   <CardCvcElement options={CARD_ELEMENT_OPTIONS} />
                 </div>
               </div>
@@ -224,11 +224,11 @@ const RegisterPage = () => {
 
             {/* Submit Button */}
             <button
-              type='submit'
+              type="submit"
               disabled={processing || isLoading}
-              className='cursor-pointer text-white text-base w-full max-h-12 px-6 py-3 bg-gradient-to-l from-yellow-600 to-yellow-500 rounded-[100px] inline-flex justify-center items-center gap-2.5 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed transition'
+              className="inline-flex max-h-12 w-full transform cursor-pointer items-center justify-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-yellow-600 to-yellow-500 px-6 py-3 text-base font-semibold text-white shadow-lg transition duration-700 ease-in-out hover:scale-105 hover:from-yellow-500 hover:to-yellow-600 disabled:cursor-not-allowed disabled:opacity-60 sm:px-8 sm:py-4 sm:text-sm md:px-10 md:py-5 md:text-base lg:px-8 lg:py-4 lg:text-lg"
             >
-              {processing || isLoading ? 'Processing...' : 'Register & Pay $20'}
+              {processing || isLoading ? "Processing..." : "Register & Pay $20"}
             </button>
           </form>
         </div>
