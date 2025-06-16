@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { AuthContext } from '../../../context/AuthContext/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { AuthContext } from "../../../context/AuthContext/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const { signInUser, isLoading, setIsLoading } = useContext(AuthContext);
@@ -18,10 +18,10 @@ function LoginPage() {
     try {
       setIsLoading(true);
       await signInUser(email, password);
-      toast.success('User login successfully!');
-      navigate('/flowchart');
+      toast.success("User login successfully!");
+      navigate("/flowchart");
     } catch (error) {
-      toast.error(error.message || 'Login failed!');
+      toast.error(error.message || "Login failed!");
     } finally {
       setIsLoading(false);
     }
@@ -29,56 +29,56 @@ function LoginPage() {
 
   return (
     <section
-      className='min-h-screen flex items-center justify-center px-6 py-12 bg-gradient-to-tr from-white via-blue-50 to-blue-100'
-      style={{ fontFamily: 'var(--font-secondary)' }}
+      className="flex min-h-screen items-center justify-center bg-gradient-to-tr from-white via-blue-50 to-blue-100 px-6 py-12"
+      style={{ fontFamily: "var(--font-secondary)" }}
     >
-      <div className='container max-w-6xl bg-white rounded-3xl shadow-lg flex flex-col md:flex-row overflow-hidden'>
+      <div className="container flex max-w-6xl flex-col overflow-hidden rounded-3xl bg-white shadow-lg md:flex-row">
         {/* Left: Image */}
-        <div className='hidden md:block md:w-1/2 p-12'>
+        <div className="hidden p-12 md:block md:w-1/2">
           <img
-            src='/login-image.png'
-            alt='Login Visual'
-            className='w-full h-full object-cover'
+            src="/login-image.png"
+            alt="Login Visual"
+            className="h-full w-full object-cover"
           />
         </div>
 
         {/* Right: Form */}
-        <div className='w-full md:w-1/2 p-10 flex flex-col justify-center'>
-          <h2 className='text-3xl font-extrabold text-[#19398A] text-center mb-10'>
+        <div className="flex w-full flex-col justify-center p-10 md:w-1/2">
+          <h2 className="mb-10 text-center text-3xl font-extrabold text-[#19398A]">
             Login to your account
           </h2>
 
           <form
             onSubmit={handleSubmit(onSubmit)}
             noValidate
-            className='space-y-6'
+            className="space-y-6"
           >
             {/* Email Field */}
             <div>
               <label
-                htmlFor='email'
-                className='block mb-2 text-sm font-semibold text-gray-700'
+                htmlFor="email"
+                className="mb-2 block text-sm font-semibold text-gray-700"
               >
                 Email Address
               </label>
               <input
-                id='email'
-                type='email'
-                placeholder='you@example.com'
-                autoComplete='email'
-                {...register('email', {
-                  required: 'Email is required',
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                autoComplete="email"
+                {...register("email", {
+                  required: "Email is required",
                   pattern: {
                     value: /^\S+@\S+$/i,
-                    message: 'Invalid email address',
+                    message: "Invalid email address",
                   },
                 })}
-                className={`w-full px-5 py-3 rounded-xl border text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#19398A] transition ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
+                className={`w-full rounded-xl border px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none ${
+                  errors.email ? "border-red-500" : "border-gray-300"
                 }`}
               />
               {errors.email && (
-                <p className='mt-1 text-sm text-red-600'>
+                <p className="mt-1 text-sm text-red-600">
                   {errors.email.message}
                 </p>
               )}
@@ -87,29 +87,29 @@ function LoginPage() {
             {/* Password Field */}
             <div>
               <label
-                htmlFor='password'
-                className='block mb-2 text-sm font-semibold text-gray-700'
+                htmlFor="password"
+                className="mb-2 block text-sm font-semibold text-gray-700"
               >
                 Password
               </label>
               <input
-                id='password'
-                type='password'
-                placeholder='********'
-                autoComplete='current-password'
-                {...register('password', {
-                  required: 'Password is required',
+                id="password"
+                type="password"
+                placeholder="********"
+                autoComplete="current-password"
+                {...register("password", {
+                  required: "Password is required",
                   minLength: {
                     value: 6,
-                    message: 'Password must be at least 6 characters',
+                    message: "Password must be at least 6 characters",
                   },
                 })}
-                className={`w-full px-5 py-3 rounded-xl border text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#19398A] transition ${
-                  errors.password ? 'border-red-500' : 'border-gray-300'
+                className={`w-full rounded-xl border px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none ${
+                  errors.password ? "border-red-500" : "border-gray-300"
                 }`}
               />
               {errors.password && (
-                <p className='mt-1 text-sm text-red-600'>
+                <p className="mt-1 text-sm text-red-600">
                   {errors.password.message}
                 </p>
               )}
@@ -117,22 +117,22 @@ function LoginPage() {
 
             {/* Submit Button */}
             <button
-              type='submit'
+              type="submit"
               disabled={isLoading}
-              className='cursor-pointer w-full max-h-12 px-6 py-3 bg-gradient-to-l from-yellow-600 to-yellow-500 rounded-[100px] inline-flex justify-center items-center gap-2.5 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed transition'
+              className="inline-flex max-h-12 w-full transform cursor-pointer items-center justify-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-yellow-600 to-yellow-500 px-6 py-3 text-base font-semibold text-white shadow-lg transition duration-700 ease-in-out hover:scale-105 hover:from-yellow-500 hover:to-yellow-600 disabled:cursor-not-allowed disabled:opacity-60 sm:px-8 sm:py-4 sm:text-sm md:px-10 md:py-5 md:text-base lg:px-8 lg:py-4 lg:text-lg"
             >
-              <span className="text-white text-base font-medium font-['Poppins'] leading-loose">
-                {isLoading ? 'Logging in...' : 'Start Searching'}
+              <span className="text-base leading-loose font-semibold text-white">
+                {isLoading ? "Logging in..." : "Start Searching"}
               </span>
             </button>
           </form>
 
           {/* Register Link */}
-          <p className='mt-6 text-center text-gray-600'>
-            Don't have an account?{' '}
+          <p className="mt-6 text-center text-gray-600">
+            Don't have an account?{" "}
             <a
-              href='/register'
-              className='text-[#19398A] font-semibold hover:underline'
+              href="/register"
+              className="font-semibold text-[#19398A] hover:underline"
             >
               Register
             </a>

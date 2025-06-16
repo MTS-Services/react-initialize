@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   FiHome,
   FiInfo,
@@ -9,11 +9,11 @@ import {
   FiUser,
   FiUserPlus,
   FiX,
-} from 'react-icons/fi';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import LanguageSwitcher from '../../components/LanguageSwitcher/LanguageSwitcher';
-import { AuthContext } from '../../context/AuthContext/AuthContext';
+} from "react-icons/fi";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher";
+import { AuthContext } from "../../context/AuthContext/AuthContext";
 
 function MainHeader() {
   const { user, logOutUser } = useContext(AuthContext);
@@ -36,65 +36,64 @@ function MainHeader() {
 
   const logOutHandler = () => {
     logOutUser();
-    toast.success('Logged out successfully');
-    navigate('/');
+    toast.success("Logged out successfully");
+    navigate("/");
   };
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/10 shadow-md backdrop-blur-xl' : 'bg-black/10'
+      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
+        scrolled ? "bg-black/10 shadow-md backdrop-blur-xl" : "bg-black/10"
       }`}
     >
-      <div className='max-w-7xl mx-auto px-4 py-3 flex items-center justify-between'>
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         {/* Logo */}
-        <Link to='/' className='flex items-center'>
-          <img src='/Logo.png' alt='Logo' className='w-44' />
+        <Link to="/" className="flex items-center">
+          <img src="/Logo.png" alt="Logo" className="w-44" />
         </Link>
 
         {/* Desktop Menu */}
 
-        <nav className='hidden text-shadow-2xs md:flex items-center gap-6 text-white font-medium'>
-          <MenuLink to='/'>Home</MenuLink>
-          <MenuLink to='/about'>About</MenuLink>
-          <MenuLink to='/contact'>Contact</MenuLink>
+        <nav className="hidden items-center gap-6 font-medium text-white text-shadow-2xs md:flex">
+          <MenuLink to="/">Home</MenuLink>
+          <MenuLink to="/about">About</MenuLink>
+          <MenuLink to="/contact">Contact</MenuLink>
         </nav>
 
         {/* Right Side */}
-        <div className='flex items-center gap-4'>
+        <div className="flex items-center gap-4">
           <LanguageSwitcher />
 
           {/* Desktop Profile Dropdown */}
           <div
-            className='relative hidden md:block'
+            className="relative hidden md:block"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <button className='flex items-center justify-center w-9 h-9 rounded-full bg-white text-black border border-gray-300 hover:shadow-md transition'>
-              <Link to='/profile'>
-                <FiUser className='text-xl' />
+            <button className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 bg-white text-black transition hover:shadow-md">
+              <Link to="/profile">
+                <FiUser className="text-xl" />
               </Link>
             </button>
 
             {isDropdownOpen && (
-              <div className='absolute right-0 top-12 w-44 bg-white text-black border border-gray-200 rounded-md shadow-md z-50'>
+              <div className="absolute top-12 right-0 z-50 w-44 rounded-md border border-gray-200 bg-white text-black shadow-md">
                 {user ? (
                   <>
-                    <DropdownItem
-                      to='/profile'
-                      icon={<FiUser />}
-                    ></DropdownItem>
+                    <DropdownItem to="/profile" icon={<FiUser />}>
+                      Profile
+                    </DropdownItem>
                     <button
                       onClick={logOutHandler}
-                      className='w-full flex items-center gap-2 px-4 py-2 text-left hover:bg-blue-950 hover:text-white transition'
+                      className="flex w-full items-center gap-2 px-4 py-2 text-left transition hover:bg-blue-950 hover:text-white"
                     >
                       <FiLogOut />
                       Logout
@@ -102,10 +101,10 @@ function MainHeader() {
                   </>
                 ) : (
                   <>
-                    <DropdownItem to='/login' icon={<FiLogIn />}>
+                    <DropdownItem to="/login" icon={<FiLogIn />}>
                       Login
                     </DropdownItem>
-                    <DropdownItem to='/register' icon={<FiUserPlus />}>
+                    <DropdownItem to="/register" icon={<FiUserPlus />}>
                       Sign Up
                     </DropdownItem>
                   </>
@@ -116,7 +115,7 @@ function MainHeader() {
 
           {/* Mobile Hamburger Icon */}
           <button
-            className='md:hidden text-white text-2xl'
+            className="text-2xl text-white md:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <FiX /> : <FiMenu />}
@@ -126,19 +125,19 @@ function MainHeader() {
 
       {/* Mobile Slide Menu */}
       {menuOpen && (
-        <div className='md:hidden bg-black/90 text-white px-6 py-4 space-y-4 absolute top-[72px] w-full z-40 transition-all duration-300'>
-          <MenuLink to='/' icon={<FiHome />} onClick={() => setMenuOpen(false)}>
+        <div className="absolute top-[72px] z-40 w-full space-y-4 bg-black/90 px-6 py-4 text-white transition-all duration-300 md:hidden">
+          <MenuLink to="/" icon={<FiHome />} onClick={() => setMenuOpen(false)}>
             Home
           </MenuLink>
           <MenuLink
-            to='/about'
+            to="/about"
             icon={<FiInfo />}
             onClick={() => setMenuOpen(false)}
           >
             About
           </MenuLink>
           <MenuLink
-            to='/contact'
+            to="/contact"
             icon={<FiMail />}
             onClick={() => setMenuOpen(false)}
           >
@@ -147,7 +146,7 @@ function MainHeader() {
           {user ? (
             <>
               <MenuLink
-                to='/profile'
+                to="/profile"
                 icon={<FiUser />}
                 onClick={() => setMenuOpen(false)}
               >
@@ -158,7 +157,7 @@ function MainHeader() {
                   logOutHandler();
                   setMenuOpen(false);
                 }}
-                className='flex items-center gap-2 w-full hover:text-[var(--color-primary)]'
+                className="flex w-full items-center gap-2 hover:text-[var(--color-primary)]"
               >
                 <FiLogOut />
                 Logout
@@ -167,14 +166,14 @@ function MainHeader() {
           ) : (
             <>
               <MenuLink
-                to='/login'
+                to="/login"
                 icon={<FiLogIn />}
                 onClick={() => setMenuOpen(false)}
               >
                 Login
               </MenuLink>
               <MenuLink
-                to='/register'
+                to="/register"
                 icon={<FiUserPlus />}
                 onClick={() => setMenuOpen(false)}
               >
@@ -193,7 +192,7 @@ const MenuLink = ({ to, icon, children, onClick }) => (
   <Link
     to={to}
     onClick={onClick}
-    className='flex text-lg font-secondary items-center gap-2 hover:text-[var(--color-primary)] transition'
+    className="font-secondary flex items-center gap-2 text-lg transition hover:text-[var(--color-primary)]"
   >
     {icon}
     {children}
@@ -204,7 +203,7 @@ const MenuLink = ({ to, icon, children, onClick }) => (
 const DropdownItem = ({ to, icon, children }) => (
   <Link
     to={to}
-    className='flex items-center gap-2 px-4 py-2 hover:bg-blue-950 hover:text-white transition'
+    className="flex items-center gap-2 px-4 py-2 transition hover:bg-blue-950 hover:text-white"
   >
     {icon}
     {children}
