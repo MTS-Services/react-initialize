@@ -64,9 +64,80 @@ const About = () => {
         </div>
       </div>
 
+      {/* How to Works Section */}
+      <section className='relative w-full overflow-hidden py-16  bg-[linear-gradient(90deg,_#FFFEEB,_#E9F6FF)] '>
+        {/* Decorative Rotated Images */}
+        <img
+          className='w-[928px] h-64 absolute -left-[464px] top-0 rotate-90'
+          src='/png-wing-2.png'
+          alt='decor-top'
+        />
+        <img
+          className='w-[928px] h-64 absolute -right-[404px] bottom-0 -rotate-90'
+          src='/png-wing-2.png'
+          alt='decor-bottom'
+        />
+        <img
+          className='absolute left-1/2 top-0 -translate-x-1/2 w-[875px] h-[654px] object-contain'
+          src='/png-wing-2.png'
+          alt='main-illustration'
+        />
+
+        {/* Content */}
+        <div className='relative z-10 max-w-7xl mx-auto flex flex-col items-center gap-12'>
+          {/* Header */}
+          <div className='text-center space-y-2'>
+            <h2 className='text-4xl font-semibold font-lato capitalize text-black'>
+              Hoe werkt het?
+            </h2>
+            <p className='text-base font-normal font-inter text-black'>
+              Homes that we have just discovered
+            </p>
+          </div>
+
+          {/* Steps */}
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full'>
+            {[
+              {
+                title: 'Aanmelden',
+                desc: 'Maak in een paar minuten jouw account aan en start direct met zoeken.',
+              },
+              {
+                title: 'Woning zoeken',
+                desc: 'Vind jouw droomwoning in je favoriete stad met onze handige zoekfilters.',
+              },
+              {
+                title: 'Blijf op de hoogte',
+                desc: 'Nog niet gevonden wat je zocht? Je ontvangt dagelijks of wekelijks nieuwe huurwoningen in je inbox.',
+              },
+              {
+                title: 'Verhuizen maar',
+                desc: 'Reageer, plan een bezichtiging en begin vast met inpakken. Jouw nieuwe woning wacht op je!',
+              },
+            ].map((step, idx) => (
+              <div
+                key={idx}
+                className='bg-white rounded-lg px-6 py-16 flex flex-col items-center gap-4 shadow-sm '
+              >
+                <div className='w-14 h-14 bg-yellow-500 rounded flex items-center justify-center text-white text-2xl font-medium font-lato'>
+                  {idx + 1}
+                </div>
+                <div className='text-center space-y-2'>
+                  <h3 className='text-xl font-semibold font-lato text-black capitalize'>
+                    {step.title}
+                  </h3>
+                  <p className=' font-normal font-inter text-black'>
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* === Why Choose Us Section === */}
       <div className='w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 py-16 gap-12'>
-        {/* Left Text Block */}
         <div className='w-full lg:w-1/2 space-y-6'>
           <h2 className='text-gray-900 text-4xl font-semibold font-lato capitalize'>
             Why Choose US
@@ -86,44 +157,13 @@ const About = () => {
 
         {/* Right Image with Custom Clip Path */}
         <div className='w-full max-w-[589px] h-[491px]'>
-          <svg
-            viewBox='0 0 589 491'
-            className='w-full h-full'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <defs>
-              <clipPath id='customShape' clipPathUnits='userSpaceOnUse'>
-                <path
-                  d='
-                M20,0 
-                H589 
-                V471 
-                A20,20 0 0 1 569,491 
-                H20 
-                A20,20 0 0 1 0,471 
-                V140 
-                Q0,90 50,90 
-                Q120,90 120,20 
-                Q120,0 170,0 
-                Z
-              '
-                />
-              </clipPath>
-            </defs>
-            <image
-              href='/works.jpg'
-              width='589'
-              height='491'
-              clipPath='url(#customShape)'
-              preserveAspectRatio='xMidYMid slice'
-            />
-          </svg>
+          <img src='/public/works.png' width='589' height='491' />
         </div>
       </div>
 
       {/* === FAQ Section === */}
-      <div className='w-full px-4 md:px-12 lg:px-24 py-16 bg-white'>
-        <h2 className='text-center text-4xl font-semibold font-lato text-black mb-10'>
+      <div className='w-full py-16 md:px-12 lg:px-24 bg-white'>
+        <h2 className='text-center text-4xl font-semibold font-lato text-black mb-8'>
           FAQ
         </h2>
         <div className='max-w-4xl mx-auto divide-y divide-gray-200'>
