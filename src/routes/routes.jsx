@@ -10,7 +10,7 @@ import SingleListingPage from '../pages/FilterPage/SingleListingPage';
 import Home from '../pages/Home/Home';
 
 import Contact from '../pages/Contact/Contact';
-
+import About from '../pages/about/About';
 import ProfilePage from '../components/ProfilePage/ProfilePage';
 
 // import { lazy } from "react";
@@ -39,12 +39,12 @@ const AppRoutes = createBrowserRouter([
         element: <About />,
       },
       {
-        path: '/login',
-        element: <LoginPage />,
-      },
-      {
         path: '/listings',
         element: <FilterPage />,
+      },
+      {
+        path: '/login',
+        element: <LoginPage />,
       },
       {
         path: '/listings/:id',

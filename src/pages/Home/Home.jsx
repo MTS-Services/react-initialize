@@ -150,7 +150,7 @@ export default function Home() {
             'url(https://images.unsplash.com/photo-1558036117-15d82a90b9b1)',
         }}
       >
-        <div className='absolute inset-0 bg-gradient-to-r from-black/70 via-white/5 to-black/70 z-10'></div>
+        <div className='absolute inset-0 bg-gradient-to-r from-black/40 via-white/40 to-black/70 z-10'></div>
         <div className='relative z-20 h-full flex items-center justify-center'>
           <div className='max-w-[1300px] mx-auto px-4'>
             <div className='p-6 rounded-lg shadow-xl'>
