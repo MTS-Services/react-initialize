@@ -17,6 +17,7 @@ import ProfilePage from '../components/ProfilePage/ProfilePage';
 // const Contact = lazy(() => import("../pages/Contact/Contact"));
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+import About from './../pages/about/About';
 
 const AppRoutes = createBrowserRouter([
   {
