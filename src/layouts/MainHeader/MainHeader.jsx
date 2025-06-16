@@ -51,26 +51,21 @@ function MainHeader() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black shadow-md' : 'bg-black/10'
+        scrolled ? 'bg-black/10 shadow-md backdrop-blur-xl' : 'bg-black/10'
       }`}
     >
-      <div className='max-w-[1300px] mx-auto px-4 py-3 flex items-center justify-between'>
+      <div className='max-w-7xl mx-auto px-4 py-3 flex items-center justify-between'>
         {/* Logo */}
-        <Link to='/' className='flex items-center gap-2'>
-          <img
-            src='/public/Logo.png'
-            alt='Logo'
-            className='w-100 h-10 object-contain'
-          />
+        <Link to='/' className='flex items-center'>
+          <img src='/Logo.png' alt='Logo' className='w-44' />
         </Link>
 
         {/* Desktop Menu */}
 
-        <nav className='hidden md:flex items-center gap-6 text-white font-medium'>
+        <nav className='hidden text-shadow-2xs md:flex items-center gap-6 text-white font-medium'>
           <MenuLink to='/'>Home</MenuLink>
           <MenuLink to='/about'>About</MenuLink>
           <MenuLink to='/contact'>Contact</MenuLink>
-          <MenuLink to='/how-it-works'>How It Works</MenuLink>
         </nav>
 
         {/* Right Side */}
