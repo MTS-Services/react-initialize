@@ -52,10 +52,10 @@ const About = () => {
 
         {/* Centered Content */}
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
-          <h1 className="font-lato mb-6 max-w-[676px] text-4xl font-semibold capitalize md:text-6xl">
+          <h1 className="mb-6 max-w-[676px] text-4xl font-semibold text-white capitalize md:text-6xl">
             How Renting Works On Our Platform
           </h1>
-          <p className="font-inter max-w-[676px] text-base leading-normal font-normal">
+          <p className="font-inter max-w-[676px] text-base leading-normal font-normal text-white">
             Discover and compare rental options from trusted companies all in
             one place. Browse listings, choose what suits you best, and book
             directly. We make it simple, secure, and seamless. A small service
