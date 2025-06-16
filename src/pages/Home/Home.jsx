@@ -141,10 +141,10 @@ export default function Home() {
   const rightCities = cities.slice(5);
 
   return (
-    <div>
+    <>
       {/* Hero Section */}
       <section
-        className="relative inset-0 h-[550px] bg-cover bg-center"
+        className="relative inset-0 h-96 bg-cover bg-center md:h-[550px]"
         style={{
           backgroundImage: "url(/home/nl-property-hero.jpg)",
         }}
@@ -153,11 +153,11 @@ export default function Home() {
         <div className="relative z-20 flex h-full items-center justify-center">
           <div className="mx-auto max-w-7xl px-4">
             <div className="rounded-lg p-6 shadow-xl">
-              <h2 className="text-center text-xl text-white">
+              <h3 className="md:text-md text-center text-sm text-white lg:text-2xl">
                 IT’S GREAT TO BE HOME!
-              </h2>
+              </h3>
               <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
-                <h1 className="text-center text-5xl font-semibold text-white/90">
+                <h1 className="text-center text-2xl text-white/90 md:text-4xl lg:text-6xl">
                   Rent Your Property Easily In
                   <br />
                   <span className="text-[#F6BC09]">The Netherlands</span>
@@ -170,8 +170,8 @@ export default function Home() {
 
       {/* Search Bar */}
       <section className="relative -top-14 z-20">
-        <div className="mx-auto w-full max-w-7xl rounded-lg bg-white p-6 shadow-lg">
-          <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-col items-center justify-center gap-3 bg-white p-6 md:mx-4 md:flex-row md:rounded-lg md:p-6 md:shadow-lg lg:p-8">
             <div className="relative w-full">
               <FiMapPin className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
               <input
@@ -198,14 +198,14 @@ export default function Home() {
                     ))
                   ) : (
                     <li className="px-4 py-2 text-gray-500">
-                      No listings found
+                      No listings found!
                     </li>
                   )}
                 </ul>
               )}
             </div>
 
-            <div className="relative w-full md:w-60">
+            <div className="relative w-full">
               <FiDollarSign className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
               <input
                 type="number"
@@ -216,7 +216,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="relative w-full md:w-60">
+            <div className="relative w-full">
               <FiDollarSign className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
               <input
                 type="number"
@@ -227,28 +227,28 @@ export default function Home() {
               />
             </div>
 
-            <button
-              onClick={handleSearch}
-              className="flex cursor-pointer items-center gap-2 rounded-lg bg-blue-600 px-6 py-5 text-white shadow-md transition hover:bg-blue-700"
-            >
-              <FiSearch /> Search
-            </button>
+            <div className="relative w-full">
+              <button
+                onClick={handleSearch}
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#F6BC09] px-6 py-5 text-center text-white shadow-md transition hover:bg-[#f6bb09c0]"
+              >
+                <FiSearch /> Search
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="w-full bg-white px-4 py-16 md:px-10 lg:px-20">
-        <h2 className="font-lato mb-3 text-center text-4xl font-semibold text-cyan-950 capitalize">
-          Popular Cities
-        </h2>
-        <p className="font-inter text-center text-base leading-normal text-black">
+      <div className="mb-10 w-full bg-white px-6 md:mb-10 lg:mb-10 lg:pt-6">
+        <h2 className="text-center">Popular Cities</h2>
+        <p className="text-center">
           Discover the perfect place to live in the most popular cities of the
           Netherlands
         </p>
       </div>
 
-      {/* Popular Cities */}
-      <section className="mx-auto flex w-full max-w-7xl gap-6">
+      {/* POPOLER SECTION */}
+      <section className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 md:flex-wrap md:p-4 lg:flex-row lg:p-0">
         {/* Left: 2x2 Grid */}
         <div className="grid flex-1 grid-cols-2 gap-4">
           {leftCities.map((city, i) => (
@@ -262,9 +262,7 @@ export default function Home() {
                 alt={city.name}
               />
               <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-3">
-                <h3 className="text-lg font-semibold text-white">
-                  {city.name}
-                </h3>
+                <h3 className="text-white">{city.name}</h3>
                 <p className="text-sm text-white">{city.props}</p>
               </div>
             </div>
@@ -272,11 +270,11 @@ export default function Home() {
         </div>
 
         {/* Center: Eindhoven */}
-        <div className="max-w-[400px] flex-1">
-          <div className="group relative h-full min-h-[370px] overflow-hidden rounded">
+        <div className="max-w-full flex-1 md:max-w-7xl">
+          <div className="group relative h-full overflow-hidden rounded">
             <img
               src={eindhoven.img}
-              className="h-full w-full object-cover"
+              className="md:h-96 md:w-full md:object-cover lg:h-full lg:w-full"
               alt={eindhoven.name}
             />
             <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-4">
@@ -288,12 +286,12 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Right: 2 stacked boxes */}
-        <div className="flex max-w-[400px] flex-1 flex-col gap-4">
+        {/* Right: 2 boxes side-by-side, never stacked */}
+        <div className="grid max-w-full flex-1 grid-cols-2 gap-4 md:max-w-7xl md:grid-cols-2 lg:grid-cols-1">
           {rightCities.map((city, i) => (
             <div
               key={i}
-              className="group relative h-64 overflow-hidden rounded"
+              className="group relative h-64 w-full overflow-hidden rounded"
             >
               <img
                 src={city.img}
@@ -311,16 +309,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About US Section */}
-      <section className="w-full bg-white px-4 py-32 md:px-10 lg:px-20">
+      {/* ABOUT-US SECTION */}
+      <section className="w-full bg-white px-4 py-10 md:px-10 md:py-12 lg:px-20 lg:py-26">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
           {/* Text Section */}
           <div>
-            <p className="font-inter mb-2 text-sm text-blue-700">About us</p>
-            <h2 className="font-lato mb-6 text-3xl font-semibold text-neutral-900 capitalize md:text-4xl">
-              Driven by Trust, Defined by Results
-            </h2>
-            <p className="font-inter mb-6 text-base leading-relaxed text-neutral-600">
+            <h3 className="mb-2 text-amber-500">About us</h3>
+            <h2 className="mb-6">Driven by Trust, Defined by Results</h2>
+            <p className="mb-6">
               At NL Property, we believe that finding a rental home in the
               Netherlands should be simple, honest, and stress-free. That’s why
               we’ve created a platform that’s fully focused on renters—no
@@ -364,8 +360,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Recent property Section */}
-      <section className="relative w-full overflow-hidden bg-slate-50 py-32">
+      {/* RECENT SECTION */}
+      <section className="relative w-full overflow-hidden bg-slate-50 py-10 md:py-12 lg:py-26">
         {/* Decorative background images */}
         <div className="hidden lg:block">
           <img
@@ -386,16 +382,14 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           {/* Header */}
           <div className="mx-auto mb-12 max-w-2xl text-center">
-            <h2 className="font-lato mb-3 text-4xl font-semibold text-cyan-950 capitalize">
-              Recent gevonden
-            </h2>
-            <p className="font-inter text-base leading-normal text-black">
+            <h2 className="mb-3">Recent gevonden</h2>
+            <p className="leading-normal">
               Betaalbare woningen die we recent hebben gevonden
             </p>
           </div>
 
           {/* Property Grid */}
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 p-5 md:grid-cols-2 lg:grid-cols-4">
             {properties.map((property) => (
               <div
                 key={property.id}
@@ -487,7 +481,7 @@ export default function Home() {
       </section>
 
       {/* How to Works Section */}
-      <section className="relative my-32 w-full overflow-hidden bg-[linear-gradient(90deg,_#FFFEEB,_#E9F6FF)] py-20">
+      <section className="relative w-full overflow-hidden bg-[linear-gradient(90deg,_#FFFEEB,_#E9F6FF)] py-10 md:py-10 lg:py-26">
         {/* Decorative Rotated Images */}
         <img
           className="absolute top-0 -left-[464px] h-64 w-[928px] rotate-90"
@@ -506,12 +500,10 @@ export default function Home() {
         />
 
         {/* Content */}
-        <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-12">
+        <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-12 p-4 lg:p-0">
           {/* Header */}
           <div className="space-y-2 text-center">
-            <h2 className="font-lato text-4xl font-semibold text-black capitalize">
-              Hoe werkt het?
-            </h2>
+            <h2 className="capitalize">Hoe werkt het?</h2>
             <p className="font-inter text-base font-normal text-black">
               Homes that we have just discovered
             </p>
@@ -541,22 +533,20 @@ export default function Home() {
                 key={idx}
                 className="flex flex-col items-center gap-4 rounded-lg bg-white px-6 py-8 shadow-sm"
               >
-                <div className="font-lato flex h-14 w-14 items-center justify-center rounded bg-yellow-500 text-2xl font-medium text-white">
+                <h3 className="rounded bg-yellow-500 px-4 py-2 text-2xl text-white">
                   {idx + 1}
-                </div>
+                </h3>
                 <div className="space-y-2 text-center">
                   <h3 className="font-lato text-xl font-semibold text-black capitalize">
                     {step.title}
                   </h3>
-                  <p className="font-inter font-normal text-black">
-                    {step.desc}
-                  </p>
+                  <p className="">{step.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }
