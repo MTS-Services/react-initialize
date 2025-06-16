@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik&family=Poppins&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-@import 'tailwindcss';
+@import url("https://fonts.googleapis.com/css2?family=Rubik&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import "tailwindcss";
 
 :root {
-  --font-primary: 'Inter', sans-serif;
-  --font-secondary: 'Lato', sans-serif;
+  --font-primary: "Inter", sans-serif;
+  --font-secondary: "Lato", sans-serif;
   --color-primary: #f6bc09;
   --color-secondary: rgb(17, 40, 74);
   --color-accent: rgb(255, 255, 255);
@@ -49,7 +49,9 @@
 
 /* Smooth transition */
 * {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* Gradient Animation Example */
@@ -74,23 +76,4 @@
   );
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
-}
-
-p {
-  color: var(--text-color-pargraph);
-  font-family: var(--font-primary);
-}
-
-h1 {
-  color: var(--text-color-heading);
-  font-family: var(--font-secondary);
-}
-
-h2 {
-  color: var(--text-color-title);
-  font-family: var(--font-secondary);
-}
-
-button {
-  cursor: pointer;
 }
