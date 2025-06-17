@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from "react";
 import {
   FiAlertOctagon,
   FiArrowDown,
@@ -10,20 +10,20 @@ import {
   FiMap,
   FiMapPin,
   FiSliders,
-} from 'react-icons/fi';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import ReactSlider from 'react-slider';
-import { AuthContext } from '../../context/AuthContext/AuthContext';
-import ReantCard from '../../common/ReantCard';
-import { FaHotel } from 'react-icons/fa';
+} from "react-icons/fi";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import ReactSlider from "react-slider";
+import { AuthContext } from "../../context/AuthContext/AuthContext";
+import ReantCard from "../../components/common/ReantCard";
+import { FaHotel } from "react-icons/fa";
 
 // ✅ Clean numeric price parser
 const cleanPrice = (priceStr) => {
   if (!priceStr) return 0;
-  const raw = priceStr.replace(/[^\d.,]/g, '').replace(',', '.');
-  const normalized = raw.replace(/\.(?=.*\.)/, '').replace(',', '.');
+  const raw = priceStr.replace(/[^\d.,]/g, "").replace(",", ".");
+  const normalized = raw.replace(/\.(?=.*\.)/, "").replace(",", ".");
   return parseFloat(normalized);
 };
 
@@ -35,13 +35,13 @@ export default function FilterPage() {
   const [filtered, setFiltered] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Loading state
 
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10000);
-  const [rooms, setRooms] = useState('');
-  const [surface, setSurface] = useState('');
+  const [rooms, setRooms] = useState("");
+  const [surface, setSurface] = useState("");
 
   // ✅ Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,12 +49,12 @@ export default function FilterPage() {
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
   const paginatedListings = filtered.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('http://localhost:3000/api/properties')
+    fetch("http://localhost:3000/api/properties")
       .then((res) => res.json())
       .then((data) => {
         const processedListings = data.data.properties.map((l) => ({
@@ -64,9 +64,9 @@ export default function FilterPage() {
 
         setListings(processedListings);
 
-        const city = params.get('address') || '';
-        const min = parseInt(params.get('min')) || 0;
-        const max = parseInt(params.get('max')) || 10000;
+        const city = params.get("address") || "";
+        const min = parseInt(params.get("min")) || 0;
+        const max = parseInt(params.get("max")) || 10000;
 
         setLocation(city);
         setMinPrice(min);
@@ -94,13 +94,13 @@ export default function FilterPage() {
     setLocation(value);
     setShowSuggestions(true);
 
-    if (value.trim() === '') {
+    if (value.trim() === "") {
       setSuggestions([]);
       return;
     }
     const citySet = [...new Set(listings.map((l) => l.location))];
     const matches = citySet.filter((c) =>
-      c.toLowerCase().includes(value.toLowerCase())
+      c.toLowerCase().includes(value.toLowerCase()),
     );
     setSuggestions(matches);
   };
@@ -131,7 +131,7 @@ export default function FilterPage() {
   };
 
   const uniqueRooms = [...new Set(listings.map((l) => l.rooms))].sort(
-    (a, b) => a - b
+    (a, b) => a - b,
   );
 
   // Skeleton loader for listings
@@ -141,24 +141,24 @@ export default function FilterPage() {
       .map((_, index) => (
         <div
           key={index}
-          className='flex bg-white rounded-lg shadow overflow-hidden'
+          className="flex overflow-hidden rounded-lg bg-white shadow"
         >
-          <div className='w-2/3 h-[270px]'>
-            <Skeleton height='100%' />
+          <div className="h-[270px] w-2/3">
+            <Skeleton height="100%" />
           </div>
-          <div className='w-2/2 p-4 flex flex-col justify-between'>
-            <div className='flex flex-col gap-1 flex-grow'>
-              <Skeleton height={24} width='70%' />
+          <div className="flex w-2/2 flex-col justify-between p-4">
+            <div className="flex flex-grow flex-col gap-1">
+              <Skeleton height={24} width="70%" />
 
               <Skeleton count={3} height={14} />
-              <Skeleton height={16} width='40%' />
-              <div className='flex gap-4 mt-4'>
+              <Skeleton height={16} width="40%" />
+              <div className="mt-4 flex gap-4">
                 <Skeleton width={100} height={30} />
                 <Skeleton width={100} height={30} />
               </div>
             </div>
-            <div className='mt-4'>
-              <Skeleton height={24} width='100%' className='mt-1' />
+            <div className="mt-4">
+              <Skeleton height={24} width="100%" className="mt-1" />
             </div>
           </div>
         </div>
@@ -166,50 +166,50 @@ export default function FilterPage() {
   };
 
   return (
-    <div className='w-full min-h-screen'>
+    <div className="min-h-screen w-full">
       <header
-        className='h-[300px] bg-cover bg-center relative'
+        className="relative h-[300px] bg-cover bg-center"
         style={{
           backgroundImage:
-            'url(https://images.unsplash.com/photo-1599423300746-b62533397364)',
+            "url(https://images.unsplash.com/photo-1599423300746-b62533397364)",
         }}
       >
-        <div className='absolute inset-0 bg-black/60 flex items-center justify-center'>
-          <h1 className='text-white text-4xl font-bold drop-shadow-md'>
+        <div className="absolute inset-0 flex items-center justify-center bg-black/60">
+          <h1 className="text-4xl font-bold text-white drop-shadow-md">
             Explore Rental Listings in Netherlands
           </h1>
         </div>
       </header>
 
-      <div className='max-w-[1300px] mx-auto flex mt-6 px-4'>
+      <div className="mx-auto mt-6 max-w-[1300px] px-4 md:flex">
         {/* Sidebar Filters */}
-        <aside className='w-1/4 space-y-4 p-4  h-fit sticky top-20'>
-          <h2 className='text-xl font-bold mb-2 flex items-center gap-2'>
+        <aside className="top-20 h-fit space-y-4 p-4 md:sticky md:w-1/4">
+          <h2 className="mb-2 flex items-center gap-2 text-xl font-bold">
             <FiGrid /> Filters
           </h2>
 
           {/* Location Filter */}
-          <div className='bg-white rounded-lg shadow-sm p-3 relative'>
-            <div className='flex items-center gap-2 mb-2 text-sm font-medium text-gray-600'>
+          <div className="relative rounded-lg bg-white p-3 shadow-sm">
+            <div className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-600">
               <FiMapPin /> Location
             </div>
             <input
-              type='text'
-              placeholder='Enter city'
+              type="text"
+              placeholder="Enter city"
               value={location}
               onChange={(e) => handleLocationInput(e.target.value)}
               onFocus={() => setShowSuggestions(true)}
               onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
-              className='w-full p-2 rounded bg-gray-50 border border-gray-200 text-sm'
+              className="w-full rounded border border-gray-200 bg-gray-50 p-2 text-sm"
             />
 
-            {showSuggestions && location.trim() !== '' && (
-              <ul className='absolute z-10 top-[100%] left-0 w-full mt-1 bg-white border border-gray-300 rounded shadow max-h-60 overflow-y-auto text-sm'>
+            {showSuggestions && location.trim() !== "" && (
+              <ul className="absolute top-[100%] left-0 z-10 mt-1 max-h-60 w-full overflow-y-auto rounded border border-gray-300 bg-white text-sm shadow">
                 {suggestions.length > 0 ? (
                   suggestions.map((s, i) => (
                     <li
                       key={i}
-                      className='px-4 py-2 hover:bg-blue-100 cursor-pointer flex items-center gap-1'
+                      className="flex cursor-pointer items-center gap-1 px-4 py-2 hover:bg-blue-100"
                       onClick={() => handleCitySelect(s)}
                     >
                       <FiMapPin />
@@ -217,41 +217,41 @@ export default function FilterPage() {
                     </li>
                   ))
                 ) : (
-                  <li className='px-4 py-2 text-gray-500'>No listings found</li>
+                  <li className="px-4 py-2 text-gray-500">No listings found</li>
                 )}
               </ul>
             )}
           </div>
 
           {/* Price Range Filter */}
-          <div className='bg-white rounded-lg shadow-sm p-3'>
-            <div className='flex items-center gap-2 mb-2 text-sm font-medium text-gray-600'>
+          <div className="rounded-lg bg-white p-3 shadow-sm">
+            <div className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-600">
               <FiDollarSign /> Price Range
             </div>
-            <div className='flex gap-2 mb-4'>
+            <div className="mb-4 flex gap-2">
               <input
-                type='number'
-                placeholder='Min'
+                type="number"
+                placeholder="Min"
                 value={minPrice}
                 onChange={(e) =>
                   setMinPrice(Math.min(Number(e.target.value), maxPrice - 100))
                 }
-                className='w-1/2 p-2 rounded bg-gray-50 border border-gray-200 text-sm'
+                className="w-1/2 rounded border border-gray-200 bg-gray-50 p-2 text-sm"
               />
               <input
-                type='number'
-                placeholder='Max'
+                type="number"
+                placeholder="Max"
                 value={maxPrice}
                 onChange={(e) =>
                   setMaxPrice(Math.max(Number(e.target.value), minPrice + 100))
                 }
-                className='w-1/2 p-2 rounded bg-gray-50 border border-gray-200 text-sm'
+                className="w-1/2 rounded border border-gray-200 bg-gray-50 p-2 text-sm"
               />
             </div>
             <ReactSlider
-              className='w-full h-2 bg-gray-200 rounded'
-              thumbClassName='h-4 w-4 rounded-full bg-blue-600 cursor-pointer'
-              trackClassName='bg-blue-500 h-2 rounded'
+              className="h-2 w-full rounded bg-gray-200"
+              thumbClassName="h-4 w-4 rounded-full bg-blue-600 cursor-pointer"
+              trackClassName="bg-blue-500 h-2 rounded"
               min={0}
               max={10000}
               step={100}
@@ -267,37 +267,37 @@ export default function FilterPage() {
           </div>
 
           {/* Rooms Filter */}
-          <div className='bg-white rounded-lg shadow-sm p-3'>
-            <div className='flex items-center gap-2 mb-2 text-sm font-medium text-gray-600'>
+          <div className="rounded-lg bg-white p-3 shadow-sm">
+            <div className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-600">
               <FiHome /> Rooms
             </div>
-            <div className='flex flex-wrap gap-2'>
+            <div className="flex flex-wrap gap-2">
               {isLoading ? (
                 <Skeleton
                   count={3}
                   height={30}
                   width={70}
                   inline
-                  containerClassName='flex gap-2'
+                  containerClassName="flex gap-2"
                 />
               ) : (
                 uniqueRooms.map((r) => (
                   <label
                     key={r}
-                    className={`cursor-pointer text-sm px-3 py-1 rounded-full border ${
+                    className={`cursor-pointer rounded-full border px-3 py-1 text-sm ${
                       rooms == r
-                        ? 'bg-blue-600 text-white border-blue-600'
-                        : 'bg-gray-100 text-gray-700'
+                        ? "border-blue-600 bg-blue-600 text-white"
+                        : "bg-gray-100 text-gray-700"
                     }`}
                   >
                     <input
-                      type='radio'
+                      type="radio"
                       value={r}
                       checked={rooms == r}
                       onChange={(e) => setRooms(e.target.value)}
-                      className='hidden'
+                      className="hidden"
                     />
-                    {r} Room{r > 1 && 's'}
+                    {r} Room{r > 1 && "s"}
                   </label>
                 ))
               )}
@@ -305,22 +305,22 @@ export default function FilterPage() {
           </div>
 
           {/* Surface Filter */}
-          <div className='bg-white rounded-lg shadow-sm p-3'>
-            <div className='flex items-center gap-2 mb-2 text-sm font-medium text-gray-600'>
+          <div className="rounded-lg bg-white p-3 shadow-sm">
+            <div className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-600">
               <FiSliders /> Min Surface (m²)
             </div>
             <input
-              type='number'
-              placeholder='e.g. 50'
+              type="number"
+              placeholder="e.g. 50"
               value={surface}
               onChange={(e) => setSurface(e.target.value)}
-              className='w-full p-2 rounded bg-gray-50 border border-gray-200 text-sm'
+              className="w-full rounded border border-gray-200 bg-gray-50 p-2 text-sm"
             />
           </div>
         </aside>
 
         {/* Listings + Pagination */}
-        <div className='w-3/4 p-4 grid gap-6'>
+        <div className="grid w-3/4 gap-6 p-4">
           {isLoading ? (
             renderSkeletonListings()
           ) : (
@@ -328,86 +328,88 @@ export default function FilterPage() {
               {paginatedListings.map((listing) => (
                 <div
                   key={listing.id}
-                  className='w-full h-72 p-4 bg-white rounded-xl shadow-[0px_2px_6px_0px_rgba(0,0,0,0.12)] hover:shadow-md transition cursor-pointer'
+                  className="w-full cursor-pointer rounded-xl bg-white p-4 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.12)] transition hover:shadow-md sm:h-72"
                   onClick={() => handleListingClick(listing.id)}
                 >
-                  <div className='w-full flex gap-6'>
+                  <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
                     {/* Image */}
-                    <div className='w-96 h-64 rounded-lg overflow-hidden relative'>
+                    <div className="relative h-48 w-full overflow-hidden rounded-lg sm:h-64 sm:w-96">
                       <img
                         src={
                           listing?.media?.[0]?.url ||
-                          'https://via.placeholder.com/384x256?text=No+Image'
+                          "https://via.placeholder.com/384x256?text=No+Image"
                         }
                         alt={listing.title}
-                        className='w-full h-full object-cover'
+                        className="h-full w-full object-cover"
                         onError={(e) => {
                           e.target.src =
-                            'https://via.placeholder.com/384x256?text=No+Image';
+                            "https://via.placeholder.com/384x256?text=No+Image";
                         }}
                       />
-                      <div className='absolute top-4 right-4 w-9 h-9 p-2 bg-white rounded-full shadow border-t border-zinc-900/5 flex justify-center items-center'>
-                        <div className='w-4 h-4 text-blue-700'>
-                          <svg viewBox='0 0 24 24' fill='currentColor'>
-                            <path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' />
+                      <div className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border-t border-zinc-900/5 bg-white p-2 shadow">
+                        <div className="h-4 w-4 text-blue-700">
+                          <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                           </svg>
                         </div>
                       </div>
                     </div>
 
                     {/* Content */}
-                    <div className='flex-1 flex flex-col justify-between'>
-                      <div className='space-y-2'>
+                    <div className="flex flex-1 flex-col justify-between">
+                      <div className="space-y-2">
                         {/* Title and time */}
-                        <div className='flex justify-between items-center'>
-                          <h3 className='text-xl font-semibold text-black capitalize'>
-                            {listing.title.slice(8, 40)}...
+                        <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center sm:gap-0">
+                          <h3 className="text-lg font-semibold text-black capitalize sm:text-xl">
+                            {listing.title.length > 40
+                              ? `${listing.title.slice(0, 40)}...`
+                              : listing.title}
                           </h3>
-                          <div className='flex items-center gap-1.5 text-blue-700 text-xs'>
+                          <div className="flex items-center gap-1.5 text-xs text-blue-700">
                             <FiClock />
                             4:50PM
                           </div>
                         </div>
 
                         {/* Description */}
-                        <p className='text-sm text-gray-600 line-clamp-3'>
-                          {listing.description || 'No description available'}
+                        <p className="line-clamp-2 text-sm text-gray-600 sm:line-clamp-3">
+                          {listing.description || "No description available"}
                         </p>
 
                         {/* Features */}
-                        <div className='flex gap-4'>
-                          <div className='px-2 py-1.5 bg-gray-100 rounded-full inline-flex items-center gap-1.5'>
-                            <FiLayers className='text-gray-700' />
-                            <span className='text-xs text-gray-700'>
+                        <div className="flex flex-wrap gap-2 sm:gap-4">
+                          <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
+                            <FiLayers className="text-gray-700" />
+                            <span className="text-xs text-gray-700">
                               {listing.surface}m<sup>2</sup>
                             </span>
                           </div>
-                          <div className='px-2 py-1.5 bg-gray-100 rounded-full inline-flex items-center gap-1.5'>
-                            <FaHotel className='text-gray-700' />
-                            <span className='text-xs text-gray-700'>
-                              {listing.rooms}{' '}
-                              {listing.rooms > 1 ? 'rooms' : 'room'}
+                          <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
+                            <FaHotel className="text-gray-700" />
+                            <span className="text-xs text-gray-700">
+                              {listing.rooms}{" "}
+                              {listing.rooms > 1 ? "rooms" : "room"}
                             </span>
                           </div>
                         </div>
 
                         {/* Location and price */}
-                        <div className='flex justify-between items-center'>
-                          <div className='px-2 py-1.5 bg-gray-100 rounded-full inline-flex items-center gap-1.5'>
-                            <FiMapPin className='text-gray-700' />
-                            <span className='text-xs text-gray-700'>
-                              {listing.location || 'Location not specified'}
+                        <div className="flex flex-col gap-2 pt-2 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:pt-0">
+                          <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
+                            <FiMapPin className="text-gray-700" />
+                            <span className="text-xs text-gray-700">
+                              {listing.location || "Location not specified"}
                             </span>
                           </div>
-                          <div className='text-xl font-semibold text-blue-700 capitalize'>
+                          <div className="text-lg font-semibold text-blue-700 capitalize sm:text-xl">
                             € {listing.numericPrice.toLocaleString()}
                           </div>
                         </div>
                       </div>
 
                       {/* Button */}
-                      <div className='w-full max-h-12 px-6 py-3 bg-gradient-to-l from-yellow-600 to-yellow-500 rounded flex justify-center items-center'>
-                        <span className='text-white text-base font-medium'>
+                      <div className="mt-4 flex max-h-12 w-full items-center justify-center rounded bg-gradient-to-l from-yellow-600 to-yellow-500 px-6 py-3 sm:mt-0">
+                        <span className="text-base font-medium text-white">
                           Bekijk de woning
                         </span>
                       </div>
@@ -417,23 +419,22 @@ export default function FilterPage() {
               ))}
 
               {/* Pagination Buttons */}
-              {/* Pagination Buttons */}
               {totalPages > 1 && (
-                <div className='flex justify-center mt-6 gap-2 flex-wrap'>
+                <div className="mt-6 flex flex-wrap justify-center gap-2">
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                     (pageNum) => (
                       <button
                         key={pageNum}
                         onClick={() => setCurrentPage(pageNum)}
-                        className={`px-4 py-2 rounded-md font-medium ${
+                        className={`rounded-md px-3 py-1 text-sm font-medium sm:px-4 sm:py-2 sm:text-base ${
                           pageNum === currentPage
-                            ? 'bg-blue-500 text-white shadow-md'
-                            : 'bg-gray-100 text-blue-500 hover:bg-gray-200'
+                            ? "bg-blue-500 text-white shadow-md"
+                            : "bg-gray-100 text-blue-500 hover:bg-gray-200"
                         }`}
                       >
                         {pageNum}
                       </button>
-                    )
+                    ),
                   )}
                 </div>
               )}

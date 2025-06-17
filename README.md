@@ -31,6 +31,31 @@ A full-featured rental application built with **React**. Users can browse, searc
 
 ## 📁 Folder Structure
 
+---
+
+- src/
+  - /components
+    - common
+    - error-page
+    - profile-page
+  - /context
+  - /firebase
+  - /hooks
+  - /layouts
+  - /pages
+    - /about
+    - /home
+    - /contact
+    - /filter
+    - /auth
+      - /loging
+      - /register
+  - /routes
+- app.jsx
+- main.jsx
+
+---
+
 ## 🔧 Installation
 
 1. **Clone the repo:**
