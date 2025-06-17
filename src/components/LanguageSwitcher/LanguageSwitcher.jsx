@@ -60,7 +60,7 @@ const LanguageSwitcher = () => {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <ul className="absolute mt-3.5 w-full rounded-md border border-[var(--color-border-color)] bg-[var(--color-card)] shadow-md">
+        <ul className="absolute mt-3 w-full rounded-md border border-[var(--color-border-color)] bg-[var(--color-card)] shadow-md">
           {languages.map((lang) => (
             <li
               key={lang.code}

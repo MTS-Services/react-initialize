@@ -85,7 +85,7 @@ function MainHeader() {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute top-12 right-0 z-50 mt-0.5 w-44 rounded-md bg-white text-black shadow-md">
+              <div className="absolute top-12 right-0 z-50 w-44 rounded-md bg-white text-black shadow-md">
                 {user ? (
                   <>
                     <DropdownItem to="/profile" icon={<FiUser />}>
