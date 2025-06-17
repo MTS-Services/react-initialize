@@ -203,7 +203,7 @@ const MenuLink = ({ to, icon, children, onClick }) => (
 const DropdownItem = ({ to, icon, children }) => (
   <Link
     to={to}
-    className="flex items-center gap-2 px-4 py-2 transition hover:rounded-sm hover:bg-blue-950 hover:text-white"
+    className="flex items-center gap-2 px-4 py-2 transition hover:rounded-sm hover:bg-[var(--color-primary)] hover:text-white"
   >
     {icon}
     {children}
