@@ -127,7 +127,7 @@ export default function FilterPage() {
   };
 
   const handleListingClick = (id) => {
-    navigate(`/listings/${id}`);
+    navigate(`/property-list/${id}`);
   };
 
   const uniqueRooms = [...new Set(listings.map((l) => l.rooms))].sort(

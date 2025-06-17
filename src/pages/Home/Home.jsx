@@ -6,6 +6,7 @@ import { FiDollarSign, FiMapPin, FiSearch } from "react-icons/fi";
 import { TfiRulerAlt2 } from "react-icons/tfi";
 import { LiaBedSolid } from "react-icons/lia";
 import { LuHeart } from "react-icons/lu";
+import Button from "../../components/ui/Button";
 // import CityCard from '../../components/CityCard/CityCard';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
@@ -111,7 +112,7 @@ export default function Home() {
 
   // HANDLE SEARCH
   const handleSearch = () => {
-    navigate(`/listings?address=${query}&min=${minPrice}&max=${maxPrice}`);
+    navigate(`/property-list?address=${query}&min=${minPrice}&max=${maxPrice}`);
   };
 
   // HANDLE LOCATION
@@ -240,7 +241,7 @@ export default function Home() {
       </section>
 
       <div className="mb-10 w-full bg-white px-6 md:mb-10 lg:mb-10 lg:pt-6">
-        <h2 className="text-center">Popular Cities</h2>
+        <h2 className="text-center text-2xl md:text-4xl">Popular Cities</h2>
         <p className="text-center">
           Discover the perfect place to live in the most popular cities of the
           Netherlands
@@ -315,7 +316,9 @@ export default function Home() {
           {/* Text Section */}
           <div>
             <h3 className="mb-2 text-amber-500">About us</h3>
-            <h2 className="mb-6">Driven by Trust, Defined by Results</h2>
+            <h2 className="mb-6 text-2xl md:text-4xl">
+              Driven by Trust, Defined by Results
+            </h2>
             <p className="mb-6">
               At NL Property, we believe that finding a rental home in the
               Netherlands should be simple, honest, and stress-free. That’s why
@@ -329,9 +332,10 @@ export default function Home() {
               details, fair pricing, and no surprises. You won’t find fake ads
               or outdated listings—only real homes that are truly available.
             </p>
-            <button className="font-poppins rounded bg-gradient-to-l from-yellow-600 to-yellow-500 px-6 py-3 text-base font-medium text-white shadow transition-transform hover:scale-105">
-              Learn More
-            </button>
+
+            <Button variant="yellowGradient" size="lg" className="">
+              Learn more
+            </Button>
           </div>
 
           {/* Image Grid */}
@@ -367,8 +371,8 @@ export default function Home() {
         {/* Main content */}
         <div className="mx-auto max-w-7xl">
           {/* Header */}
-          <div className="mx-auto mb-12 max-w-2xl text-center">
-            <h2 className="mb-3">Recent gevonden</h2>
+          <div className="mx-auto mb-6 max-w-2xl text-center md:mb-12">
+            <h2 className="mb-3 text-2xl md:text-4xl">Recent gevonden</h2>
             <p className="leading-normal">
               Betaalbare woningen die we recent hebben gevonden
             </p>
