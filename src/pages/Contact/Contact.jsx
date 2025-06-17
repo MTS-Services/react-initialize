@@ -2,7 +2,7 @@ const Contact = () => {
   return (
     <div className="flex w-full flex-col">
       {/* === Contact Section === */}
-      <div className="mt-16 flex min-h-screen w-full flex-col lg:flex-row">
+      <div className="mt-16.5 flex min-h-screen w-full flex-col lg:flex-row">
         <div className="h-[250px] w-full lg:h-full lg:w-1/2">
           <img
             src="/contact-image.jpg"

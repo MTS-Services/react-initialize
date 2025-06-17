@@ -57,7 +57,7 @@ function MainHeader() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-4 lg:px-0">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <img src="/Logo.png" alt="Logo" className="w-32 md:w-32 lg:w-44" />
+          <img src="/Logo.png" alt="Logo" className="w-32 md:w-32 lg:w-48" />
         </Link>
 
         {/* Desktop Menu */}
@@ -125,7 +125,7 @@ function MainHeader() {
 
       {/* Mobile Slide Menu */}
       {menuOpen && (
-        <div className="absolute top-[72px] z-40 w-full space-y-4 bg-black/90 px-6 py-4 text-white transition-all duration-300 md:hidden">
+        <div className="absolute top-[72px] z-40 -mt-3 w-full space-y-4 bg-black/90 px-6 py-4 text-white transition-all duration-300 md:hidden">
           <MenuLink to="/" icon={<FiHome />} onClick={() => setMenuOpen(false)}>
             Home
           </MenuLink>
