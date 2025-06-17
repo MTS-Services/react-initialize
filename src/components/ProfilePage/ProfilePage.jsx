@@ -13,12 +13,12 @@ const userData = {
 const ProfilePage = () => {
   return (
     <section
-      className="min-h-screen bg-gradient-to-tr from-white via-blue-50 to-blue-100 px-4 py-16"
+      className="min-h-screen bg-gradient-to-tr from-white via-blue-50 to-blue-100 px-2 py-16.5"
       style={{ fontFamily: "var(--font-secondary)" }}
     >
       {/* Background Cover */}
       <div
-        className="relative mb-[-4rem] h-60 rounded-3xl bg-cover bg-center shadow-md"
+        className="relative mb-[-4rem] h-64 rounded-3xl bg-cover bg-center shadow-md"
         style={{ backgroundImage: `url('/city-Denver.jpg')` }}
       ></div>
 
