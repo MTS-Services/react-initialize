@@ -74,15 +74,15 @@ const MainFooter = () => {
             <div className="flex gap-3">
               <FaFacebookF
                 size={35}
-                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-gray-400"
+                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-[var(--color-primary)]"
               />
               <FaTwitter
                 size={35}
-                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-gray-400"
+                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-[var(--color-primary)]"
               />
               <FaInstagram
                 size={35}
-                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-gray-400"
+                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-[var(--color-primary)]"
               />
             </div>
           </div>
@@ -91,9 +91,15 @@ const MainFooter = () => {
           <div className="px-0 md:px-10">
             <h3 className="mb-4 text-white">Quick</h3>
             <ul className="space-y-2 text-white/90">
-              <li className="cursor-pointer hover:text-gray-600">Home</li>
-              <li className="cursor-pointer hover:text-gray-600">About</li>
-              <li className="cursor-pointer hover:text-gray-600">Contact</li>
+              <li className="cursor-pointer hover:text-[var(--color-primary)]">
+                Home
+              </li>
+              <li className="cursor-pointer hover:text-[var(--color-primary)]">
+                About
+              </li>
+              <li className="cursor-pointer hover:text-[var(--color-primary)]">
+                Contact
+              </li>
             </ul>
           </div>
 
@@ -101,11 +107,13 @@ const MainFooter = () => {
           <div className="">
             <h3 className="mb-4 text-white">Company</h3>
             <ul className="space-y-2 text-white/90">
-              <li className="cursor-pointer hover:text-gray-600">
+              <li className="cursor-pointer hover:text-[var(--color-primary)]">
                 Terms & Conditions
               </li>
-              <li className="cursor-pointer hover:text-gray-600">Privacy</li>
-              <li className="cursor-pointer hover:text-gray-600">
+              <li className="cursor-pointer hover:text-[var(--color-primary)]">
+                Privacy
+              </li>
+              <li className="cursor-pointer hover:text-[var(--color-primary)]">
                 Cookie Policy
               </li>
             </ul>
@@ -132,7 +140,10 @@ const MainFooter = () => {
           <h3 className="mb-4 text-center text-white">Popular cities</h3>
           <div className="flex flex-wrap justify-center gap-4 text-white/80">
             {linkItem.map((city) => (
-              <span key={city} className="cursor-pointer hover:text-gray-600">
+              <span
+                key={city}
+                className="cursor-pointer hover:text-[var(--color-primary)]"
+              >
                 {city}
               </span>
             ))}

@@ -51,13 +51,13 @@ function MainHeader() {
   return (
     <header
       className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? "bg-black/10 shadow-md backdrop-blur-xl" : "bg-black/10"
+        scrolled ? "bg-blue-950" : "bg-black/10 shadow-md"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-4 lg:px-0">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <img src="/Logo.png" alt="Logo" className="w-32 md:w-32 lg:w-44" />
+          <img src="/Logo.png" alt="Logo" className="w-32 md:w-32 lg:w-48" />
         </Link>
 
         {/* Desktop Menu */}
@@ -85,7 +85,7 @@ function MainHeader() {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute top-12 right-0 z-50 w-44 rounded-md border border-gray-200 bg-white text-black shadow-md">
+              <div className="absolute top-12 right-0 z-50 w-44 rounded-md bg-white text-black shadow-md">
                 {user ? (
                   <>
                     <DropdownItem to="/profile" icon={<FiUser />}>
@@ -125,7 +125,7 @@ function MainHeader() {
 
       {/* Mobile Slide Menu */}
       {menuOpen && (
-        <div className="absolute top-[72px] z-40 w-full space-y-4 bg-black/90 px-6 py-4 text-white transition-all duration-300 md:hidden">
+        <div className="absolute top-[72px] z-40 -mt-3 w-full space-y-4 bg-black/90 px-6 py-4 text-white transition-all duration-300 md:hidden">
           <MenuLink to="/" icon={<FiHome />} onClick={() => setMenuOpen(false)}>
             Home
           </MenuLink>
@@ -203,7 +203,7 @@ const MenuLink = ({ to, icon, children, onClick }) => (
 const DropdownItem = ({ to, icon, children }) => (
   <Link
     to={to}
-    className="flex items-center gap-2 px-4 py-2 transition hover:bg-blue-950 hover:text-white"
+    className="flex items-center gap-2 px-4 py-2 transition hover:rounded-sm hover:bg-[var(--color-primary)] hover:text-white"
   >
     {icon}
     {children}

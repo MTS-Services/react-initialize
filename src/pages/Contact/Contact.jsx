@@ -1,11 +1,10 @@
-import React from "react";
+import Button from "../../components/ui/Button";
 
 const Contact = () => {
   return (
     <div className="flex w-full flex-col">
       {/* === Contact Section === */}
-      <div className="mt-16 flex min-h-screen w-full flex-col lg:flex-row">
-        {/* Left Image */}
+      <div className="mt-16.5 flex min-h-screen w-full flex-col lg:flex-row">
         <div className="h-[250px] w-full lg:h-full lg:w-1/2">
           <img
             src="/contact-image.jpg"
@@ -17,7 +16,6 @@ const Contact = () => {
         {/* Right Form */}
         <div className="flex w-full items-center justify-center bg-white px-6 py-12 lg:w-1/2 lg:px-16">
           <form className="w-full max-w-xl space-y-6">
-            {/* Heading */}
             <div>
               <h2 className="font-lato mb-2 text-4xl font-semibold text-black capitalize md:text-5xl">
                 Let’s Get In Touch
@@ -33,7 +31,6 @@ const Contact = () => {
               </p>
             </div>
 
-            {/* Name Inputs */}
             <div className="flex flex-col gap-4 md:flex-row">
               <div className="flex w-full flex-col">
                 <label className="mb-1 text-sm text-black">First Name</label>
@@ -53,7 +50,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Email */}
             <div className="flex flex-col">
               <label className="mb-1 text-sm text-black">Email Address</label>
               <input
@@ -63,7 +59,6 @@ const Contact = () => {
               />
             </div>
 
-            {/* Phone */}
             <div className="flex flex-col">
               <label className="mb-1 text-sm text-black">Phone Number</label>
               <input
@@ -73,7 +68,6 @@ const Contact = () => {
               />
             </div>
 
-            {/* Message */}
             <div className="flex flex-col">
               <label className="mb-1 text-sm text-black">Message</label>
               <textarea
@@ -83,13 +77,9 @@ const Contact = () => {
               />
             </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="inline-flex max-h-12 w-full transform cursor-pointer items-center justify-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-yellow-600 to-yellow-500 px-6 py-3 text-base font-semibold text-white shadow-lg transition duration-700 ease-in-out hover:scale-105 hover:from-yellow-500 hover:to-yellow-600 disabled:cursor-not-allowed disabled:opacity-60 sm:px-8 sm:py-4 sm:text-sm md:px-10 md:py-5 md:text-base lg:px-8 lg:py-4 lg:text-lg"
-            >
+            <Button variant="yellowGradient" size="lg" className="w-full">
               Submit
-            </button>
+            </Button>
           </form>
         </div>
       </div>

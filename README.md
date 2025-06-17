@@ -1,4 +1,4 @@
-![alt text](image-1.png)
+![alt text](/public/image-1.png)
 
 # 🏠 Rental Application (React)
 
