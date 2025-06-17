@@ -54,10 +54,10 @@ function MainHeader() {
         scrolled ? "bg-black/10 shadow-md backdrop-blur-xl" : "bg-black/10"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-4 lg:px-0">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <img src="/Logo.png" alt="Logo" className="w-44" />
+          <img src="/Logo.png" alt="Logo" className="w-32 md:w-32 lg:w-44" />
         </Link>
 
         {/* Desktop Menu */}

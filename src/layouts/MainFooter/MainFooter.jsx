@@ -61,11 +61,11 @@ const MainFooter = () => {
         </div>
       </div>
 
-      <footer className="w-full bg-blue-950 px-6 py-16 text-white md:px-20">
-        <div className="mx-auto grid max-w-screen-xl grid-cols-1 gap-12 md:grid-cols-4">
+      <footer className="w-full bg-blue-950 lg:py-20">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-4">
           {/* Logo & Description */}
           <div className="flex flex-col gap-6">
-            <img src="/Logo2.png" alt="logo" className="w-54" />
+            <img src="/Logo.png" alt="logo" className="w-32" />
             <p className="text-white/80">
               Receive emails with rentals that meet your requirements.
             </p>
@@ -87,7 +87,7 @@ const MainFooter = () => {
 
           {/* Quick Links */}
           <div>
-            <h2 className="mb-4 text-lg font-semibold">Quick</h2>
+            <h3 className="mb-4 text-white">Quick</h3>
             <ul className="space-y-2 text-white/90">
               <li className="cursor-pointer hover:text-gray-600">Home</li>
               <li className="cursor-pointer hover:text-gray-600">About</li>
@@ -101,7 +101,7 @@ const MainFooter = () => {
 
           {/* Company Links */}
           <div>
-            <h2 className="mb-4 text-lg font-semibold">Company</h2>
+            <h3 className="mb-4 text-white">Company</h3>
             <ul className="space-y-2 text-white/90">
               <li className="cursor-pointer hover:text-gray-600">
                 Terms & Conditions
@@ -131,9 +131,7 @@ const MainFooter = () => {
 
         {/* Cities */}
         <div className="mx-auto mt-16 max-w-screen-xl">
-          <h3 className="mb-4 text-center text-xl font-semibold">
-            Popular cities
-          </h3>
+          <h3 className="mb-4 text-center text-white">Popular cities</h3>
           <div className="flex flex-wrap justify-center gap-4 text-white/80">
             {linkItem.map((city) => (
               <span key={city} className="cursor-pointer hover:text-gray-600">
@@ -145,7 +143,7 @@ const MainFooter = () => {
 
         {/* Footer Bottom */}
         <div className="mx-auto mt-12 flex max-w-screen-xl flex-col items-center justify-between border-t border-white/10 pt-6 text-white/60 md:flex-row">
-          <p>© 2025 NL Property. All rights reserved.</p>
+          <p className="">© 2025 NL Property. All rights reserved.</p>
           <div className="mt-4 flex gap-6 md:mt-0">
             <span>Privacy Policy</span>
             <span>Terms & Conditions</span>

@@ -361,22 +361,8 @@ export default function Home() {
       </section>
 
       {/* RECENT SECTION */}
-      <section className="relative w-full overflow-hidden bg-slate-50 py-10 md:py-12 lg:py-26">
+      <section className="w-full overflow-hidden bg-slate-50 py-10 md:py-12 lg:py-26">
         {/* Decorative background images */}
-        <div className="hidden lg:block">
-          <img
-            className="absolute top-0 right-0 origin-top-right rotate-90 transform"
-            src="/png-wing.png"
-            alt=""
-            style={{ width: "928px", height: "257px" }}
-          />
-          <img
-            className="absolute bottom-0 left-0 origin-bottom-left -rotate-90 transform"
-            src="/png-wing.png"
-            alt=""
-            style={{ width: "928px", height: "257px" }}
-          />
-        </div>
 
         {/* Main content */}
         <div className="mx-auto max-w-7xl">
@@ -389,7 +375,7 @@ export default function Home() {
           </div>
 
           {/* Property Grid */}
-          <div className="grid grid-cols-1 gap-8 p-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 p-5 md:grid-cols-2 lg:grid-cols-4 lg:p-0">
             {properties.map((property) => (
               <div
                 key={property.id}
