@@ -51,7 +51,7 @@ function MainHeader() {
   return (
     <header
       className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? "bg-black/10 shadow-md backdrop-blur-xl" : "bg-black/10"
+        scrolled ? "bg-blue-950" : "bg-black/10 shadow-md"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-4 lg:px-0">
