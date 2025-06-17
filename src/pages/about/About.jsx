@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FiPlus, FiX } from "react-icons/fi";
 
+import Button from "../../components/ui/Button";
+
 const faqData = [
   {
     question: "How often do you search rental websites?",
@@ -150,9 +152,10 @@ const About = () => {
             we make the rental experience smooth, secure, and tailored to your
             needs.
           </p>
-          <button class="transform rounded-full bg-gradient-to-r from-yellow-600 to-yellow-500 px-6 py-3 font-semibold text-white shadow-lg transition-transform duration-700 ease-in-out hover:scale-105 hover:from-yellow-500 hover:to-yellow-600 sm:px-8 sm:py-4 sm:text-sm md:px-10 md:py-5 md:text-base lg:px-8 lg:py-4 lg:text-lg">
+
+          <Button size="lg" variant="yellowGradient" className="">
             Explore your home
-          </button>
+          </Button>
         </div>
 
         {/* Right Image with Custom Clip Path */}

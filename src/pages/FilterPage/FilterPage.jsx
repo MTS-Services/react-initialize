@@ -18,6 +18,7 @@ import ReactSlider from "react-slider";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 import ReantCard from "../../components/common/ReantCard";
 import { FaHotel } from "react-icons/fa";
+import CardSkeleton from "../../components/common/Card-Skeleton";
 
 // ✅ Clean numeric price parser
 const cleanPrice = (priceStr) => {
@@ -127,7 +128,7 @@ export default function FilterPage() {
   };
 
   const handleListingClick = (id) => {
-    navigate(`/listings/${id}`);
+    navigate(`/property-list/${id}`);
   };
 
   const uniqueRooms = [...new Set(listings.map((l) => l.rooms))].sort(
@@ -138,31 +139,7 @@ export default function FilterPage() {
   const renderSkeletonListings = () => {
     return Array(itemsPerPage)
       .fill(0)
-      .map((_, index) => (
-        <div
-          key={index}
-          className="flex overflow-hidden rounded-lg bg-white shadow"
-        >
-          <div className="h-[270px] w-2/3">
-            <Skeleton height="100%" />
-          </div>
-          <div className="flex w-2/2 flex-col justify-between p-4">
-            <div className="flex flex-grow flex-col gap-1">
-              <Skeleton height={24} width="70%" />
-
-              <Skeleton count={3} height={14} />
-              <Skeleton height={16} width="40%" />
-              <div className="mt-4 flex gap-4">
-                <Skeleton width={100} height={30} />
-                <Skeleton width={100} height={30} />
-              </div>
-            </div>
-            <div className="mt-4">
-              <Skeleton height={24} width="100%" className="mt-1" />
-            </div>
-          </div>
-        </div>
-      ));
+      .map((_, index) => <CardSkeleton key={index} />);
   };
 
   return (
@@ -325,98 +302,104 @@ export default function FilterPage() {
             renderSkeletonListings()
           ) : (
             <>
-              {paginatedListings.map((listing) => (
-                <div
-                  key={listing.id}
-                  className="w-full cursor-pointer rounded-xl bg-white p-4 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.12)] transition hover:shadow-md sm:h-72"
-                  onClick={() => handleListingClick(listing.id)}
-                >
-                  <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
-                    {/* Image */}
-                    <div className="relative h-48 w-full overflow-hidden rounded-lg sm:h-64 sm:w-96">
-                      <img
-                        src={
-                          listing?.media?.[0]?.url ||
-                          "https://via.placeholder.com/384x256?text=No+Image"
-                        }
-                        alt={listing.title}
-                        className="h-full w-full object-cover"
-                        onError={(e) => {
-                          e.target.src =
-                            "https://via.placeholder.com/384x256?text=No+Image";
-                        }}
-                      />
-                      <div className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border-t border-zinc-900/5 bg-white p-2 shadow">
-                        <div className="h-4 w-4 text-blue-700">
-                          <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex flex-1 flex-col justify-between">
-                      <div className="space-y-2">
-                        {/* Title and time */}
-                        <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center sm:gap-0">
-                          <h3 className="text-lg font-semibold text-black capitalize sm:text-xl">
-                            {listing.title.length > 40
-                              ? `${listing.title.slice(0, 40)}...`
-                              : listing.title}
-                          </h3>
-                          <div className="flex items-center gap-1.5 text-xs text-blue-700">
-                            <FiClock />
-                            4:50PM
-                          </div>
-                        </div>
-
-                        {/* Description */}
-                        <p className="line-clamp-2 text-sm text-gray-600 sm:line-clamp-3">
-                          {listing.description || "No description available"}
-                        </p>
-
-                        {/* Features */}
-                        <div className="flex flex-wrap gap-2 sm:gap-4">
-                          <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
-                            <FiLayers className="text-gray-700" />
-                            <span className="text-xs text-gray-700">
-                              {listing.surface}m<sup>2</sup>
-                            </span>
-                          </div>
-                          <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
-                            <FaHotel className="text-gray-700" />
-                            <span className="text-xs text-gray-700">
-                              {listing.rooms}{" "}
-                              {listing.rooms > 1 ? "rooms" : "room"}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Location and price */}
-                        <div className="flex flex-col gap-2 pt-2 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:pt-0">
-                          <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
-                            <FiMapPin className="text-gray-700" />
-                            <span className="text-xs text-gray-700">
-                              {listing.location || "Location not specified"}
-                            </span>
-                          </div>
-                          <div className="text-lg font-semibold text-blue-700 capitalize sm:text-xl">
-                            € {listing.numericPrice.toLocaleString()}
+              {paginatedListings.length === 0 ? (
+                <div className="py-10 text-center text-lg text-gray-600">
+                  No listings found!
+                </div>
+              ) : (
+                paginatedListings.map((listing) => (
+                  <div
+                    key={listing.id}
+                    className="w-full cursor-pointer rounded-xl bg-white p-4 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.12)] transition hover:shadow-md sm:h-72"
+                    onClick={() => handleListingClick(listing.id)}
+                  >
+                    <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+                      {/* Image */}
+                      <div className="relative h-48 w-full overflow-hidden rounded-lg sm:h-64 sm:w-96">
+                        <img
+                          src={
+                            listing?.media?.[0]?.url ||
+                            "https://via.placeholder.com/384x256?text=No+Image"
+                          }
+                          alt={listing.title}
+                          className="h-full w-full object-cover"
+                          onError={(e) => {
+                            e.target.src =
+                              "https://via.placeholder.com/384x256?text=No+Image";
+                          }}
+                        />
+                        <div className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border-t border-zinc-900/5 bg-white p-2 shadow">
+                          <div className="h-4 w-4 text-blue-700">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
                           </div>
                         </div>
                       </div>
 
-                      {/* Button */}
-                      <div className="mt-4 flex max-h-12 w-full items-center justify-center rounded bg-gradient-to-l from-yellow-600 to-yellow-500 px-6 py-3 sm:mt-0">
-                        <span className="text-base font-medium text-white">
-                          Bekijk de woning
-                        </span>
+                      {/* Content */}
+                      <div className="flex flex-1 flex-col justify-between">
+                        <div className="space-y-2">
+                          {/* Title and time */}
+                          <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center sm:gap-0">
+                            <h3 className="text-lg font-semibold text-black capitalize sm:text-xl">
+                              {listing.title.length > 40
+                                ? `${listing.title.slice(0, 40)}...`
+                                : listing.title}
+                            </h3>
+                            <div className="flex items-center gap-1.5 text-xs text-blue-700">
+                              <FiClock />
+                              4:50PM
+                            </div>
+                          </div>
+
+                          {/* Description */}
+                          <p className="line-clamp-2 text-sm text-gray-600 sm:line-clamp-3">
+                            {listing.description || "No description available"}
+                          </p>
+
+                          {/* Features */}
+                          <div className="flex flex-wrap gap-2 sm:gap-4">
+                            <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
+                              <FiLayers className="text-gray-700" />
+                              <span className="text-xs text-gray-700">
+                                {listing.surface}m<sup>2</sup>
+                              </span>
+                            </div>
+                            <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
+                              <FaHotel className="text-gray-700" />
+                              <span className="text-xs text-gray-700">
+                                {listing.rooms}{" "}
+                                {listing.rooms > 1 ? "rooms" : "room"}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Location and price */}
+                          <div className="flex flex-col gap-2 pt-2 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:pt-0">
+                            <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
+                              <FiMapPin className="text-gray-700" />
+                              <span className="text-xs text-gray-700">
+                                {listing.location || "Location not specified"}
+                              </span>
+                            </div>
+                            <div className="text-lg font-semibold text-blue-700 capitalize sm:text-xl">
+                              € {listing.numericPrice.toLocaleString()}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Button */}
+                        <div className="mt-4 flex max-h-12 w-full items-center justify-center rounded bg-gradient-to-l from-yellow-600 to-yellow-500 px-6 py-3 sm:mt-0">
+                          <span className="text-base font-medium text-white">
+                            Bekijk de woning
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
 
               {/* Pagination Buttons */}
               {totalPages > 1 && (
