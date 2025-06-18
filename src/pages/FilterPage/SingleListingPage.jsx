@@ -14,6 +14,7 @@ import {
 import { LiaBedSolid } from "react-icons/lia";
 import { TfiRulerAlt2 } from "react-icons/tfi";
 import { LuHeart } from "react-icons/lu";
+import Button from "../../components/ui/Button";
 
 const SingleListingPage = () => {
   const { id } = useParams();
@@ -55,11 +56,6 @@ const SingleListingPage = () => {
     fetchData();
   }, [id]);
 
-  const formatPrice = (price) => {
-    if (!price) return "€ -";
-    return `€ ${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
-  };
-
   if (isLoading) {
     return (
       <div className="inset-0 flex h-screen items-center justify-center bg-white">
@@ -73,12 +69,10 @@ const SingleListingPage = () => {
       <div className="mx-auto flex h-screen max-w-7xl items-center justify-center p-10 text-center">
         <div>
           <h2 className="mb-4 text-2xl font-bold">Listing not found</h2>
-          <button
-            onClick={() => navigate(-1)}
-            className="cursor-pointer rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-          >
+
+          <Button variant="yellowGradient" onClick={() => navigate(-1)}>
             Go Back
-          </button>
+          </Button>
         </div>
       </div>
     );

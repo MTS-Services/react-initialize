@@ -85,7 +85,7 @@ function MainHeader() {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute top-12 right-0 z-50 w-44 rounded-md border border-gray-200 bg-white text-black shadow-md">
+              <div className="absolute top-12 right-0 z-50 w-44 rounded-md bg-white text-black shadow-md">
                 {user ? (
                   <>
                     <DropdownItem to="/profile" icon={<FiUser />}>
@@ -203,7 +203,7 @@ const MenuLink = ({ to, icon, children, onClick }) => (
 const DropdownItem = ({ to, icon, children }) => (
   <Link
     to={to}
-    className="flex items-center gap-2 px-4 py-2 transition hover:bg-blue-950 hover:text-white"
+    className="flex items-center gap-2 px-4 py-2 transition hover:rounded-sm hover:bg-[var(--color-primary)] hover:text-white"
   >
     {icon}
     {children}

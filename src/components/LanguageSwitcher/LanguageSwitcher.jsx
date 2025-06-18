@@ -12,7 +12,7 @@ const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(
-    languages.find((lang) => lang.code === i18n.language) || languages[0]
+    languages.find((lang) => lang.code === i18n.language) || languages[0],
   );
 
   const menuRef = useRef();
@@ -37,16 +37,16 @@ const LanguageSwitcher = () => {
   }, []);
 
   return (
-    <div className="relative inline-block text-left z-50" ref={menuRef}>
+    <div className="relative z-50 inline-block text-left" ref={menuRef}>
       {/* Selected Button */}
       <button
         onClick={toggleDropdown}
-        className="flex items-center gap-2 px-4 py-2 bg-transparent text-[var(--color-accent)] rounded-lg  transition"
+        className="flex items-center gap-2 rounded-lg bg-transparent px-4 py-2 text-[var(--color-accent)] transition"
       >
-        <img src={selected.flag} alt={selected.name} className="w-5 h-5" />
+        <img src={selected.flag} alt={selected.name} className="h-5 w-5" />
         <span className="text-sm">{selected.name}</span>
         <svg
-          className={`w-4 h-4 transition-transform ${
+          className={`h-4 w-4 transition-transform ${
             isOpen ? "rotate-180" : ""
           }`}
           fill="none"
@@ -60,14 +60,14 @@ const LanguageSwitcher = () => {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <ul className="absolute mt-2 w-full bg-[var(--color-card)] border border-[var(--color-border-color)] rounded-md shadow-md">
+        <ul className="absolute mt-3 w-full rounded-md border border-[var(--color-border-color)] bg-[var(--color-card)] shadow-md">
           {languages.map((lang) => (
             <li
               key={lang.code}
               onClick={() => handleSelect(lang)}
-              className="flex items-center gap-3 px-4 py-2 hover:bg-[var(--color-primary)] hover:text-white cursor-pointer transition"
+              className="flex cursor-pointer items-center gap-3 px-4 py-2 transition hover:rounded-sm hover:bg-[var(--color-primary)] hover:text-white"
             >
-              <img src={lang.flag} alt={lang.name} className="w-6 h-6" />
+              <img src={lang.flag} alt={lang.name} className="h-6 w-6" />
               <span className="text-sm text-white">{lang.name}</span>
             </li>
           ))}
