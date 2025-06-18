@@ -1,24 +1,19 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { FaHotel } from "react-icons/fa";
+import ReactSlider from "react-slider";
+import Skeleton from "react-loading-skeleton";
+import CardSkeleton from "../../components/common/Card-Skeleton";
+import { AuthContext } from "../../context/AuthContext/AuthContext";
 import {
-  FiAlertOctagon,
-  FiArrowDown,
   FiClock,
   FiDollarSign,
   FiGrid,
   FiHome,
   FiLayers,
-  FiMap,
   FiMapPin,
   FiSliders,
 } from "react-icons/fi";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import ReactSlider from "react-slider";
-import { AuthContext } from "../../context/AuthContext/AuthContext";
-import ReantCard from "../../components/common/ReantCard";
-import { FaHotel } from "react-icons/fa";
-import CardSkeleton from "../../components/common/Card-Skeleton";
 
 // ✅ Clean numeric price parser
 const cleanPrice = (priceStr) => {
@@ -29,25 +24,32 @@ const cleanPrice = (priceStr) => {
 };
 
 export default function FilterPage() {
-  const { user } = useContext(AuthContext);
-  const [params] = useSearchParams();
-  const navigate = useNavigate();
   const [listings, setListings] = useState([]);
   const [filtered, setFiltered] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const [location, setLocation] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10000);
+
   const [rooms, setRooms] = useState("");
   const [surface, setSurface] = useState("");
 
+  const { user } = useContext(AuthContext);
+  const [params] = useSearchParams();
+  const navigate = useNavigate();
+
   // ✅ Pagination state
   const [currentPage, setCurrentPage] = useState(1);
+
   const itemsPerPage = 30;
+
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
+
   const paginatedListings = filtered.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
@@ -297,7 +299,7 @@ export default function FilterPage() {
         </aside>
 
         {/* Listings + Pagination */}
-        <div className="grid w-3/4 gap-6 p-4">
+        <article className="grid w-3/4 gap-6 p-4">
           {isLoading ? (
             renderSkeletonListings()
           ) : (
@@ -423,7 +425,7 @@ export default function FilterPage() {
               )}
             </>
           )}
-        </div>
+        </article>
       </div>
     </div>
   );

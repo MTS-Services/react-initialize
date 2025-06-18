@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   FiArrowLeft,
   FiHeart,
@@ -10,10 +10,10 @@ import {
   FiClock,
   FiPhone,
   FiMail,
-} from 'react-icons/fi';
-import { LiaBedSolid } from 'react-icons/lia';
-import { TfiRulerAlt2 } from 'react-icons/tfi';
-import { LuHeart } from 'react-icons/lu';
+} from "react-icons/fi";
+import { LiaBedSolid } from "react-icons/lia";
+import { TfiRulerAlt2 } from "react-icons/tfi";
+import { LuHeart } from "react-icons/lu";
 
 const SingleListingPage = () => {
   const { id } = useParams();
@@ -30,14 +30,14 @@ const SingleListingPage = () => {
 
         // Fetch single listing
         const listingRes = await fetch(
-          `http://localhost:3000/api/properties/${id}`
+          `http://localhost:3000/api/properties/${id}`,
         );
         const listingData = await listingRes.json();
 
         setListing(listingData.data.property);
 
         // Fetch recent listings (excluding current one)
-        const recentRes = await fetch('http://localhost:3000/api/properties');
+        const recentRes = await fetch("http://localhost:3000/api/properties");
 
         const recentData = await recentRes.json();
 
@@ -46,7 +46,7 @@ const SingleListingPage = () => {
           .slice(0, 4);
         setRecent(filteredRecent);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -56,26 +56,26 @@ const SingleListingPage = () => {
   }, [id]);
 
   const formatPrice = (price) => {
-    if (!price) return '€ -';
-    return `€ ${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+    if (!price) return "€ -";
+    return `€ ${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
   };
 
   if (isLoading) {
     return (
-      <div className=' inset-0 flex justify-center items-center bg-white h-screen'>
-        <div className='animate-spin rounded-full h-16 w-16 border-4 border-blue-900 border-t-transparent'></div>
+      <div className="inset-0 flex h-screen items-center justify-center bg-white">
+        <div className="h-16 w-16 animate-spin rounded-full border-4 border-blue-900 border-t-transparent"></div>
       </div>
     );
   }
 
   if (!listing) {
     return (
-      <div className='max-w-7xl mx-auto p-10 text-center h-screen flex justify-center items-center'>
+      <div className="mx-auto flex h-screen max-w-7xl items-center justify-center p-10 text-center">
         <div>
-          <h2 className='text-2xl font-bold mb-4'>Listing not found</h2>
+          <h2 className="mb-4 text-2xl font-bold">Listing not found</h2>
           <button
             onClick={() => navigate(-1)}
-            className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer'
+            className="cursor-pointer rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
           >
             Go Back
           </button>
@@ -86,39 +86,39 @@ const SingleListingPage = () => {
 
   return (
     <section>
-      <div className='relative w-full h-96'>
+      <div className="relative h-96 w-full">
         {/* Background Image */}
         <img
-          src='/howworks.jpg'
-          alt='House'
-          className='absolute inset-0 w-full h-full object-cover'
+          src="/howworks.jpg"
+          alt="House"
+          className="absolute inset-0 h-full w-full object-cover"
         />
 
         {/* Gradient Overlay */}
-        <div className='absolute inset-0 bg-gradient-to-b from-black/60 to-black/60' />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/60" />
       </div>
-      <div className='max-w-7xl mx-auto py-10'>
+      <div className="mx-auto max-w-7xl py-10">
         {/* Back button */}
         <button
           onClick={() => navigate(-1)}
-          className='flex items-center gap-2 text-blue-600 mb-6 hover:underline cursor-pointer'
+          className="mb-6 flex cursor-pointer items-center gap-2 text-blue-600 hover:underline"
         >
           <FiArrowLeft /> Go Back
         </button>
 
         {/* Header */}
-        <div className='flex justify-between items-start mb-4'>
+        <div className="mb-4 flex items-start justify-between">
           <div>
-            <h1 className='text-2xl md:text-3xl font-bold mb-2'>
+            <h1 className="mb-2 text-2xl font-bold md:text-3xl">
               {listing.title}
             </h1>
-            <div className='flex gap-4 items-center mb-4'>
-              <div className='flex items-center gap-2 text-gray-400'>
+            <div className="mb-4 flex items-center gap-4">
+              <div className="flex items-center gap-2 text-gray-400">
                 <FiMapPin />
                 <span>{listing.location}</span>
               </div>
-              <div className='flex items-center gap-4'>
-                <span className='flex items-center gap-1 text-sm text-gray-400'>
+              <div className="flex items-center gap-4">
+                <span className="flex items-center gap-1 text-sm text-gray-400">
                   <FiClock />
                   {new Date(listing.createdAt).toLocaleDateString()}
                 </span>
@@ -126,45 +126,45 @@ const SingleListingPage = () => {
             </div>
           </div>
 
-          <div className='flex gap-2'>
-            <button className='p-2 rounded-full hover:bg-gray-100 cursor-pointer'>
-              <FiHeart className='text-gray-600 ' />
+          <div className="flex gap-2">
+            <button className="cursor-pointer rounded-full p-2 hover:bg-gray-100">
+              <FiHeart className="text-gray-600" />
             </button>
-            <button className='p-2 rounded-full bg-gray-100 hover:bg-gray-200 cursor-pointer'>
-              <FiShare2 className='text-gray-600 ' />
+            <button className="cursor-pointer rounded-full bg-gray-100 p-2 hover:bg-gray-200">
+              <FiShare2 className="text-gray-600" />
             </button>
           </div>
         </div>
 
         {/* Price */}
-        <div className='bg-blue-50 p-4 rounded-lg mb-6'>
-          <p className='text-2xl font-bold text-blue-800'>{listing.price}</p>
+        <div className="mb-6 rounded-lg bg-blue-50 p-4">
+          <p className="text-2xl font-bold text-blue-800">{listing.price}</p>
         </div>
 
         {/* Image Gallery */}
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mb-8'>
-          <div className='md:col-span-2'>
+        <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="md:col-span-2">
             <img
               src={
                 listing.media?.[mainImage]?.url ||
-                'https://via.placeholder.com/800x500?text=No+Image'
+                "https://via.placeholder.com/800x500?text=No+Image"
               }
               alt={listing.title}
-              className='w-full h-96 object-cover rounded-lg'
+              className="h-96 w-full rounded-lg object-cover"
             />
           </div>
-          <div className='grid grid-cols-2 gap-4'>
+          <div className="grid grid-cols-2 gap-4">
             {listing.media?.slice(0, 4).map((img, idx) => (
               <div
                 key={idx}
                 onClick={() => setMainImage(idx)}
-                className='cursor-pointer'
+                className="cursor-pointer"
               >
                 <img
                   src={img.url}
                   alt={`Gallery ${idx}`}
-                  className={`w-full h-44 object-cover rounded-lg ring ring-gray-200 ${
-                    mainImage === idx ? 'ring-2 ring-gray-200' : ''
+                  className={`h-44 w-full rounded-lg object-cover ring ring-gray-200 ${
+                    mainImage === idx ? "ring-2 ring-gray-200" : ""
                   }`}
                 />
               </div>
@@ -173,71 +173,71 @@ const SingleListingPage = () => {
         </div>
 
         {/* Main Content */}
-        <div className='grid md:grid-cols-3 gap-8'>
+        <div className="grid gap-8 md:grid-cols-3">
           {/* Details */}
-          <div className='md:col-span-2'>
-            <h2 className='text-xl font-bold mb-4'>Description</h2>
-            <p className='text-gray-700 mb-6 whitespace-pre-line'>
-              {listing.description || 'No description available.'}
+          <div className="md:col-span-2">
+            <h2 className="mb-4 text-xl font-bold">Description</h2>
+            <p className="mb-6 whitespace-pre-line text-gray-700">
+              {listing.description || "No description available."}
             </p>
 
-            <h2 className='text-xl font-bold mb-4'>Features</h2>
-            <div className='grid grid-cols-2 gap-4 mb-6'>
-              <div className='flex items-center gap-2 p-3 bg-gray-50 rounded-lg'>
-                <FiLayers className='text-blue-600' />
+            <h2 className="mb-4 text-xl font-bold">Features</h2>
+            <div className="mb-6 grid grid-cols-2 gap-4">
+              <div className="flex items-center gap-2 rounded-lg bg-gray-50 p-3">
+                <FiLayers className="text-blue-600" />
                 <div>
-                  <p className='text-sm text-gray-500'>Surface</p>
-                  <p className='font-medium'>{listing.surface} m²</p>
+                  <p className="text-sm text-gray-500">Surface</p>
+                  <p className="font-medium">{listing.surface} m²</p>
                 </div>
               </div>
-              <div className='flex items-center gap-2 p-3 bg-gray-50 rounded-lg'>
-                <FiHome className='text-blue-600' />
+              <div className="flex items-center gap-2 rounded-lg bg-gray-50 p-3">
+                <FiHome className="text-blue-600" />
                 <div>
-                  <p className='text-sm text-gray-500'>Rooms</p>
-                  <p className='font-medium'>{listing.rooms}</p>
+                  <p className="text-sm text-gray-500">Rooms</p>
+                  <p className="font-medium">{listing.rooms}</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Contact Card */}
-          <div className='bg-gray-50 p-6 rounded-lg h-fit sticky top-20'>
-            <h3 className='text-xl font-bold mb-4'>Contact Agent</h3>
-            <div className='space-y-4'>
-              <div className='flex items-center gap-3'>
-                <div className='w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center'>
-                  <span className='text-blue-600 font-bold'>
-                    {listing.agent?.name?.charAt(0) || 'A'}
+          <div className="sticky top-20 h-fit rounded-lg bg-gray-50 p-6">
+            <h3 className="mb-4 text-xl font-bold">Contact Agent</h3>
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+                  <span className="font-bold text-blue-600">
+                    {listing.agent?.name?.charAt(0) || "A"}
                   </span>
                 </div>
                 <div>
-                  <p className='font-medium'>
-                    {listing.agent?.name || 'Agent Name'}
+                  <p className="font-medium">
+                    {listing.agent?.name || "Agent Name"}
                   </p>
-                  <p className='text-sm text-gray-600'>Real Estate Agent</p>
+                  <p className="text-sm text-gray-600">Real Estate Agent</p>
                 </div>
               </div>
 
-              <div className='space-y-2'>
+              <div className="space-y-2">
                 <a
-                  href={`tel:${listing.agent?.phone || ''}`}
-                  className='flex items-center gap-2 p-3 bg-white rounded-lg hover:bg-gray-100'
+                  href={`tel:${listing.agent?.phone || ""}`}
+                  className="flex items-center gap-2 rounded-lg bg-white p-3 hover:bg-gray-100"
                 >
-                  <FiPhone className='text-blue-600' />
+                  <FiPhone className="text-blue-600" />
                   <span>
-                    {listing.agent?.phone || 'Phone number not available'}
+                    {listing.agent?.phone || "Phone number not available"}
                   </span>
                 </a>
                 <a
-                  href={`mailto:${listing.agent?.email || ''}`}
-                  className='flex items-center gap-2 p-3 bg-white rounded-lg hover:bg-gray-100'
+                  href={`mailto:${listing.agent?.email || ""}`}
+                  className="flex items-center gap-2 rounded-lg bg-white p-3 hover:bg-gray-100"
                 >
-                  <FiMail className='text-blue-600' />
-                  <span>{listing.agent?.email || 'Email not available'}</span>
+                  <FiMail className="text-blue-600" />
+                  <span>{listing.agent?.email || "Email not available"}</span>
                 </a>
               </div>
 
-              <button className='w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium'>
+              <button className="w-full rounded-lg bg-blue-600 py-3 font-medium text-white hover:bg-blue-700">
                 Schedule a Visit
               </button>
             </div>
@@ -245,70 +245,70 @@ const SingleListingPage = () => {
         </div>
 
         {/* Recent Listings */}
-        <div className='py-20'>
-          <h3 className='text-2xl font-bold mb-6'>Similar Properties</h3>
+        <div className="py-20">
+          <h3 className="mb-6 text-2xl font-bold">Similar Properties</h3>
 
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 '>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {recent.map((item) => (
               <div
                 key={item.id}
                 onClick={() => navigate(`/listings/${item.id}`)}
-                className='rounded-lg shadow-lg overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all cursor-pointer'
+                className="cursor-pointer overflow-hidden rounded-lg shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl"
               >
                 <img
                   src={
                     item.media?.[0]?.url ||
-                    'https://via.placeholder.com/400x300?text=No+Image'
+                    "https://via.placeholder.com/400x300?text=No+Image"
                   }
                   alt={item.title}
-                  className='w-full h-48 object-cover'
+                  className="h-48 w-full object-cover"
                 />
                 {/* Details */}
-                <div className='bg-white p-6'>
-                  <div className='mb-4'>
-                    <h3 className='text-sm font-semibold text-cyan-950 font-dm-sans mb-1'>
+                <div className="bg-white p-6">
+                  <div className="mb-4">
+                    <h3 className="font-dm-sans mb-1 text-sm font-semibold text-cyan-950">
                       {item.title.slice(0, 30)}...
                     </h3>
-                    <p className='text-sm text-neutral-400 font-dm-sans'>
+                    <p className="font-dm-sans text-sm text-neutral-400">
                       {item.address}
                     </p>
                   </div>
 
                   {/* Features */}
-                  <div className='flex justify-between mb-6'>
-                    <div className='text-center'>
-                      <div className='flex justify-center mb-1'>
+                  <div className="mb-6 flex justify-between">
+                    <div className="text-center">
+                      <div className="mb-1 flex justify-center">
                         {/* Bed Icon */}
                         <LiaBedSolid />
                       </div>
-                      <span className='text-sm text-neutral-400 font-dm-sans'>
+                      <span className="font-dm-sans text-sm text-neutral-400">
                         {item.beds} Beds
                       </span>
                     </div>
 
-                    <div className='text-center'>
-                      <div className='flex justify-center mb-1'>
+                    <div className="text-center">
+                      <div className="mb-1 flex justify-center">
                         {/* Area Icon */}
                         <TfiRulerAlt2 />
                       </div>
-                      <span className='text-sm text-neutral-400 font-dm-sans'>
+                      <span className="font-dm-sans text-sm text-neutral-400">
                         {item.size} Area
                       </span>
                     </div>
                   </div>
 
                   {/* Price & Action */}
-                  <div className='border-t border-neutral-400 border-opacity-40 pt-4 flex justify-between items-center'>
-                    <div className='text-right'>
-                      <div className='text-sm text-cyan-950 font-semibold font-dm-sans'>
+                  <div className="border-opacity-40 flex items-center justify-between border-t border-neutral-400 pt-4">
+                    <div className="text-right">
+                      <div className="font-dm-sans text-sm font-semibold text-cyan-950">
                         {item.price}
                       </div>
                     </div>
 
                     <button
-                      type='button'
-                      aria-label='Add to favorites'
-                      className='w-7 h-7 bg-gray-50 hover:bg-red-100 cursor-pointer rounded-full flex items-center justify-center'
+                      type="button"
+                      aria-label="Add to favorites"
+                      className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-50 hover:bg-red-100"
                     >
                       <LuHeart />
                     </button>
@@ -316,8 +316,8 @@ const SingleListingPage = () => {
 
                   {/* CTA */}
                   <a
-                    href='#'
-                    className='block mt-4 text-sm text-blue-700 hover:underline font-medium'
+                    href="#"
+                    className="mt-4 block text-sm font-medium text-blue-700 hover:underline"
                   >
                     View Details
                   </a>
