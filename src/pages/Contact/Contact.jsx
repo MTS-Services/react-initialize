@@ -2,7 +2,7 @@ import Button from "../../components/ui/Button";
 
 const Contact = () => {
   return (
-    <div className="flex w-full flex-col">
+    <section className="flex w-full flex-col bg-blue-950">
       {/* === Contact Section === */}
       <div className="mt-16.5 flex min-h-screen w-full flex-col lg:flex-row">
         <div className="h-[250px] w-full lg:h-full lg:w-1/2">
@@ -83,7 +83,7 @@ const Contact = () => {
           </form>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

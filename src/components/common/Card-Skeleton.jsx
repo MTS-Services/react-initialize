@@ -11,7 +11,7 @@ const CardSkeleton = () => {
         <div className="flex flex-grow flex-col gap-1">
           <Skeleton height={24} width="70%" />
 
-          <Skeleton count={3} height={14} />
+          <Skeleton count={4} height={14} />
           <Skeleton height={16} width="40%" />
           <div className="mt-4 flex gap-4">
             <Skeleton width={100} height={30} />

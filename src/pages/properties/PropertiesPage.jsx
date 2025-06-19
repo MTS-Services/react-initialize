@@ -5,6 +5,7 @@ import PropertiesCard from "../../components/common/PropertiesCard";
 import Pagination from "../../components/common/Pagination"; // New component
 
 import CardSkeleton from "../../components/common/Card-Skeleton";
+import { FaListUl } from "react-icons/fa";
 
 const URL = "http://localhost:3000/api";
 
@@ -36,8 +37,9 @@ const PropertyListPage = () => {
         page: page,
         ...filters,
       });
-
+      console.log(params);
       const res = await axios.get(`${URL}/properties?${params.toString()}`);
+      console.log(res.data);
       setProperties(res.data.properties);
       setPagination(res.data.pagination);
     } catch (error) {
@@ -64,17 +66,17 @@ const PropertyListPage = () => {
       ...prev,
       [name]: value,
     }));
-    setPagination((prev) => ({ ...prev, currentPage: 1 })); // Reset to first page when filters change
+    setPagination((prev) => ({ ...prev, currentPage: 1 }));
   };
 
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-    fetchData(1); // Always go to first page when applying new filters
+    fetchData(1);
   };
 
-  // Skeleton loader for listings
+  // Skeleton loader for properties
   const renderSkeletonListings = () => {
-    return Array(properties.length)
+    return Array(pagination.itemsPerPage)
       .fill(0)
       .map((_, index) => <CardSkeleton key={index} />);
   };
@@ -97,9 +99,9 @@ const PropertyListPage = () => {
         </div>
       </header>
 
-      <main className="mx-auto mt-6 max-w-7xl gap-12 md:flex lg:mb-26">
+      <main className="mx-auto mt-6 max-w-7xl gap-12 md:flex lg:mb-10">
         {/* SIDEBAR */}
-        <aside className="h-fit space-y-4 md:w-1/4">
+        <aside className="sticky top-20 h-fit space-y-4 md:w-1/4">
           <h2 className="mb-2 flex items-center gap-2 text-xl font-bold">
             <FiGrid /> Filters
           </h2>
@@ -174,11 +176,11 @@ const PropertyListPage = () => {
         </aside>
 
         {/* MAIN */}
-        <article className="flex-1 space-y-4">
+        <article className="flex-1">
           {/* Controls: Sort + View Toggle */}
-          <div className="flex flex-wrap items-center justify-between gap-4 rounded-md py-3">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-4 rounded-md">
             {/* Sort options */}
-            <div className="flex items-center gap-2 px-4 text-sm font-medium text-gray-700">
+            <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
               <label htmlFor="sort" className="whitespace-nowrap">
                 Sort by:
               </label>
@@ -186,6 +188,7 @@ const PropertyListPage = () => {
                 id="sort"
                 className="cursor-pointer rounded-md border border-gray-300 bg-white px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
               >
+                <option value="">Default</option>
                 <option value="asc">Price: Low to High</option>
                 <option value="desc">Price: High to Low</option>
               </select>
@@ -193,21 +196,35 @@ const PropertyListPage = () => {
 
             {/* View toggle buttons */}
             <div className="flex items-center gap-2">
-              <button className="rounded-md p-2 text-gray-600 hover:bg-gray-200">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+              <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
+                <label htmlFor="sort" className="whitespace-nowrap">
+                  Per-page:
+                </label>
+                <select
+                  id="sort"
+                  className="cursor-pointer rounded-md border border-gray-200 bg-white px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
                 >
-                  <path d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
-              <button className="rounded-md p-2 text-gray-400 hover:bg-gray-200">
-                <FiGrid />
-              </button>
+                  <option value="asc">10</option>
+                  <option value="desc">20</option>
+                  <option value="desc">50</option>
+                </select>
+              </div>
+
+              <div>
+                <button className="rounded-md p-2 text-gray-600 hover:bg-gray-200">
+                  <FaListUl />
+                </button>
+                <button className="rounded-md p-2 text-gray-400 hover:bg-gray-200">
+                  <FiGrid />
+                </button>
+              </div>
             </div>
+          </div>
+
+          <hr className="text-gray-200" />
+
+          <div className="py-4">
+            <p>Rental Show ({pagination.totalItems}) </p>
           </div>
 
           {isLoading ? (

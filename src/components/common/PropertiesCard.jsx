@@ -1,6 +1,7 @@
 import React from "react";
 import { FaHotel, FaRegHeart } from "react-icons/fa";
 import { FiClock, FiLayers, FiMapPin } from "react-icons/fi";
+import { Link } from "react-router-dom";
 // "https://via.placeholder.com/384x256?text=No+Image";
 
 const PeropertiesCard = ({ item }) => {
@@ -10,7 +11,7 @@ const PeropertiesCard = ({ item }) => {
   return (
     <div
       key={id}
-      className="mb-6 w-full cursor-pointer rounded-xl bg-white p-4 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.12)] transition hover:shadow-md sm:h-72"
+      className="mb-6 w-full rounded-xl bg-white p-4 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.12)] transition hover:shadow-md sm:h-72"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
         {/* Image */}
@@ -18,8 +19,9 @@ const PeropertiesCard = ({ item }) => {
           <img
             src={primaryImage}
             alt={title}
-            className="h-full w-full object-cover"
+            className="h-full w-full cursor-pointer object-cover"
           />
+
           <div className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border-t border-zinc-900/5 bg-white p-2 shadow">
             <div className="h-4 w-4 text-blue-800">
               <FaRegHeart />
@@ -33,7 +35,7 @@ const PeropertiesCard = ({ item }) => {
             {/* Title and time */}
             <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center sm:gap-0">
               <h3 className="text-lg font-semibold text-black capitalize sm:text-xl">
-                {title.slice(0, 40)}...
+                {title.slice(9, 40)}...
               </h3>
               <div className="flex items-center gap-1.5 text-xs text-gray-500">
                 <FiClock />
@@ -76,11 +78,14 @@ const PeropertiesCard = ({ item }) => {
           </div>
 
           {/* Button */}
-          <div className="mt-4 flex max-h-12 w-full items-center justify-center rounded bg-gradient-to-l from-yellow-600 to-yellow-500 px-6 py-3 sm:mt-0">
-            <span className="text-base font-medium text-white">
-              Bekijk de woning
-            </span>
-          </div>
+          <Link
+            to={`/properties/${id}`}
+            className="text-base font-medium text-white"
+          >
+            <button className="mt-4 flex max-h-12 w-full items-center justify-center rounded bg-gradient-to-l from-yellow-600 to-yellow-500 px-6 py-3 sm:mt-0">
+              <span>Bekijk de woning</span>
+            </button>
+          </Link>
         </div>
       </div>
     </div>
