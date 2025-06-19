@@ -190,6 +190,24 @@ const SinglePropertyPage = () => {
                 </div>
               </div>
             </div>
+
+            <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {Object.entries(listing.transferDetails || {}).map(
+                ([key, value]) => (
+                  <div
+                    key={key}
+                    className="flex flex-col rounded-lg bg-gray-50 p-3 shadow-sm"
+                  >
+                    <span className="text-sm text-gray-500 capitalize">
+                      {key.replace(/_/g, " ")}
+                    </span>
+                    <span className="font-medium whitespace-pre-line text-gray-800">
+                      {value}
+                    </span>
+                  </div>
+                ),
+              )}
+            </div>
           </div>
 
           {/* Contact Card */}
