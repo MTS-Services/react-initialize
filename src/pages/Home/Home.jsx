@@ -106,7 +106,7 @@ export default function Home() {
       .then((res) => res.json())
       .then((data) => {
         console.log("main data", data);
-        setListings(data.data.properties);
+        setListings(data.properties);
       });
   }, []);
 

@@ -1,9 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { FiGrid } from "react-icons/fi";
+import React, { useEffect, useState, useRef } from "react";
+import { FiGrid, FiMapPin } from "react-icons/fi";
 import PropertiesCard from "../../components/common/PropertiesCard";
-import Pagination from "../../components/common/Pagination"; // New component
-
+import Pagination from "../../components/common/Pagination";
 import CardSkeleton from "../../components/common/Card-Skeleton";
 import { FaListUl } from "react-icons/fa";
 
@@ -26,20 +25,26 @@ const PropertyListPage = () => {
     bedrooms: "",
   });
 
+  const [locationInput, setLocationInput] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isFetchingSuggestions, setIsFetchingSuggestions] = useState(false);
+  const suggestionsRef = useRef(null);
+
+  // Fetch property data
   const fetchData = async (page = 1) => {
     setIsLoading(true);
     setIsError(false);
 
     try {
-      // Build query parameters
       const params = new URLSearchParams({
         limit: pagination.itemsPerPage,
         page: page,
         ...filters,
       });
-      console.log(params);
+
       const res = await axios.get(`${URL}/properties?${params.toString()}`);
-      console.log(res.data);
+
       setProperties(res.data.properties);
       setPagination(res.data.pagination);
     } catch (error) {
@@ -50,16 +55,70 @@ const PropertyListPage = () => {
     }
   };
 
+  // Fetch location suggestions with debounce
+  const fetchSuggestions = async (query) => {
+    if (query.trim().length < 2) {
+      setSuggestions([]);
+      return;
+    }
+
+    setIsFetchingSuggestions(true);
+    try {
+      const res = await axios.get(
+        `${URL}/properties?location=${query}&limit=5`,
+      );
+      const uniqueLocations = [
+        ...new Set(res.data.properties.map((p) => p.location)),
+      ].filter(Boolean); // Remove empty/null locations
+      setSuggestions(uniqueLocations);
+    } catch (error) {
+      console.error("Failed to fetch suggestions:", error);
+      setSuggestions([]);
+    } finally {
+      setIsFetchingSuggestions(false);
+    }
+  };
+
+  // Debounce function
+  const debounce = (func, delay) => {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => func.apply(this, args), delay);
+    };
+  };
+
+  const debouncedFetchSuggestions = debounce(fetchSuggestions, 300);
+
   useEffect(() => {
     fetchData();
-  }, [filters]); // Refetch when filters change
+  }, [filters]);
 
+  // Handle click outside suggestions
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        suggestionsRef.current &&
+        !suggestionsRef.current.contains(event.target)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Handle page input change
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= pagination.totalPages) {
       fetchData(newPage);
     }
   };
 
+  // handle filter input change
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({
@@ -69,12 +128,31 @@ const PropertyListPage = () => {
     setPagination((prev) => ({ ...prev, currentPage: 1 }));
   };
 
+  // handle filter submit
   const handleFilterSubmit = (e) => {
     e.preventDefault();
     fetchData(1);
   };
 
-  // Skeleton loader for properties
+  // handle location input change
+  const handleLocationChange = (e) => {
+    const value = e.target.value;
+    setLocationInput(value);
+    debouncedFetchSuggestions(value);
+  };
+
+  // handle suggetion select input change
+  const handleSuggestionSelect = (suggestion) => {
+    setFilters((prev) => ({
+      ...prev,
+      location: suggestion,
+    }));
+    setLocationInput(suggestion);
+    setShowSuggestions(false);
+    fetchData(1); // Immediately fetch results with selected location
+  };
+
+  // Loading animation
   const renderSkeletonListings = () => {
     return Array(pagination.itemsPerPage)
       .fill(0)
@@ -107,28 +185,52 @@ const PropertyListPage = () => {
           </h2>
           <hr className="text-gray-200" />
           <form onSubmit={handleFilterSubmit} className="space-y-4">
-            <div>
+            <div className="relative" ref={suggestionsRef}>
               <label className="block text-sm font-medium text-gray-700">
-                Location
+                <div className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-600">
+                  <FiMapPin /> Location
+                </div>
               </label>
               <input
                 type="text"
                 name="location"
-                value={filters.location}
-                onChange={handleFilterChange}
-                placeholder="e.g. 1079 GE (Rijnbuurt)"
+                value={locationInput}
+                onChange={handleLocationChange}
+                onFocus={() => setShowSuggestions(true)}
+                placeholder="e.g. Amsterdam, Rotterdam"
                 className="mt-1 w-full rounded-md border border-gray-200 p-2"
+                autoComplete="off"
               />
+              {isFetchingSuggestions && (
+                <div className="absolute top-full left-0 z-10 mt-1 w-full rounded-md border border-gray-200 bg-white p-2 text-center text-sm text-gray-500">
+                  Loading suggestions...
+                </div>
+              )}
+
+              {showSuggestions && suggestions.length > 0 && (
+                <ul className="absolute top-full left-0 z-10 mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-gray-200 bg-white p-2 shadow">
+                  {suggestions.map((suggestion, index) => (
+                    <li
+                      key={index}
+                      className="flex cursor-pointer items-center gap-2 rounded-2xl p-1.5 text-sm hover:bg-gray-100"
+                      onClick={() => handleSuggestionSelect(suggestion)}
+                    >
+                      <FiMapPin /> {suggestion}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Min Price
+                  $ Min Price
                 </label>
                 <input
                   type="number"
                   name="minPrice"
+                  placeholder="$"
                   value={filters.minPrice}
                   onChange={handleFilterChange}
                   className="mt-1 w-full rounded-md border border-gray-200 p-2"
@@ -136,11 +238,12 @@ const PropertyListPage = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Max Price
+                  $ Max Price
                 </label>
                 <input
                   type="number"
                   name="maxPrice"
+                  placeholder="$"
                   value={filters.maxPrice}
                   onChange={handleFilterChange}
                   className="mt-1 w-full rounded-md border border-gray-200 p-2"
@@ -175,7 +278,7 @@ const PropertyListPage = () => {
           </form>
         </aside>
 
-        {/* MAIN */}
+        {/* MAIN CONTENT (remain the same as your original code) */}
         <article className="flex-1">
           {/* Controls: Sort + View Toggle */}
           <div className="mb-4 flex flex-wrap items-center justify-between gap-4 rounded-md">
@@ -204,9 +307,9 @@ const PropertyListPage = () => {
                   id="sort"
                   className="cursor-pointer rounded-md border border-gray-200 bg-white px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
                 >
-                  <option value="asc">10</option>
-                  <option value="desc">20</option>
-                  <option value="desc">50</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
                 </select>
               </div>
 

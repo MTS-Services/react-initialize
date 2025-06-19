@@ -60,7 +60,7 @@ export default function FilterPage() {
     fetch("http://localhost:3000/api/properties")
       .then((res) => res.json())
       .then((data) => {
-        const processedListings = data.data.properties.map((l) => ({
+        const processedListings = data.properties.map((l) => ({
           ...l,
           numericPrice: cleanPrice(l.price),
         }));

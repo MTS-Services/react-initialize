@@ -16,6 +16,8 @@ import { TfiRulerAlt2 } from "react-icons/tfi";
 import { LuHeart } from "react-icons/lu";
 import Button from "../../components/ui/Button";
 
+const URL = "http://localhost:3000/api";
+
 const SingleListingPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -30,19 +32,16 @@ const SingleListingPage = () => {
         setIsLoading(true);
 
         // Fetch single listing
-        const listingRes = await fetch(
-          `http://localhost:3000/api/properties/${id}`,
-        );
+        const listingRes = await fetch(`${URL}/properties/${id}`);
         const listingData = await listingRes.json();
 
         setListing(listingData.data.property);
 
         // Fetch recent listings (excluding current one)
-        const recentRes = await fetch("http://localhost:3000/api/properties");
-
+        const recentRes = await fetch(`${URL}/properties`);
         const recentData = await recentRes.json();
 
-        const filteredRecent = recentData.data.properties
+        const filteredRecent = recentData.properties
           .filter((item) => item.id !== parseInt(id))
           .slice(0, 4);
         setRecent(filteredRecent);
