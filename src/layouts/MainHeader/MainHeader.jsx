@@ -79,9 +79,7 @@ function MainHeader() {
             onMouseLeave={handleMouseLeave}
           >
             <button className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-300 bg-white text-black transition hover:shadow-md">
-              <Link to="/profile">
-                <FiUser className="text-xl" />
-              </Link>
+              <FiUser className="text-xl" />
             </button>
 
             {isDropdownOpen && (
