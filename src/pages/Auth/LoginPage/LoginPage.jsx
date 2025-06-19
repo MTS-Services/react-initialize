@@ -2,10 +2,11 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../context/AuthContext/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const { signInUser, isLoading, setIsLoading } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const {
@@ -19,7 +20,7 @@ function LoginPage() {
       setIsLoading(true);
       await signInUser(email, password);
       toast.success("User login successfully!");
-      navigate("/flowchart");
+      navigate("/");
     } catch (error) {
       toast.error(error.message || "Login failed!");
     } finally {
@@ -130,12 +131,12 @@ function LoginPage() {
           {/* Register Link */}
           <p className="mt-6 text-center text-gray-600">
             Don't have an account?{" "}
-            <a
-              href="/register"
+            <Link
+              to="/register"
               className="font-semibold text-[#19398A] hover:underline"
             >
               Register
-            </a>
+            </Link>
           </p>
         </div>
       </div>

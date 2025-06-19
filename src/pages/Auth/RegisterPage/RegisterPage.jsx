@@ -10,6 +10,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../context/AuthContext/AuthContext";
+import { Link } from "react-router-dom";
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -231,6 +232,16 @@ const RegisterPage = () => {
               {processing || isLoading ? "Processing..." : "Register & Pay $20"}
             </button>
           </form>
+
+          <p className="mt-6 text-center text-gray-600">
+            You have an account?{" "}
+            <Link
+              to="/login"
+              className="font-semibold text-[#19398A] hover:underline"
+            >
+              Login
+            </Link>
+          </p>
         </div>
       </div>
     </section>

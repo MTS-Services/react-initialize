@@ -1,14 +1,15 @@
 import { useQueryClient } from "@tanstack/react-query";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
+  getAuth,
   signOut,
 } from "firebase/auth";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import app from "../../firebase/firebase.config";
+
 import { AuthContext } from "./AuthContext";
 
 const auth = getAuth(app);
