@@ -1,3 +1,11 @@
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
+
+import { AuthContext } from "../../../context/AuthContext/AuthContext";
+
 import {
   CardCvcElement,
   CardExpiryElement,
@@ -5,12 +13,7 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import axios from "axios";
-import { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { AuthContext } from "../../../context/AuthContext/AuthContext";
-import { Link } from "react-router-dom";
+import Button from "../../../components/ui/Button";
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -198,9 +201,11 @@ const RegisterPage = () => {
               <label className="mb-2 block text-sm font-semibold text-gray-700">
                 Card Number
               </label>
-              <div className="rounded-xl border border-gray-300 p-3">
-                <CardNumberElement options={CARD_ELEMENT_OPTIONS} />
-              </div>
+              <input
+                className="w-full rounded-xl border border-gray-300 p-3"
+                type="number"
+              />
+              <CardNumberElement options={CARD_ELEMENT_OPTIONS} />
             </div>
 
             {/* Expiry and CVC */}
@@ -209,28 +214,34 @@ const RegisterPage = () => {
                 <label className="mb-2 block text-sm font-semibold text-gray-700">
                   Expiry Date
                 </label>
-                <div className="rounded-xl border border-gray-300 p-3">
-                  <CardExpiryElement options={CARD_ELEMENT_OPTIONS} />
-                </div>
+                <input
+                  className="w-full rounded-xl border border-gray-300 p-3"
+                  type="number"
+                />
+                <CardExpiryElement options={CARD_ELEMENT_OPTIONS} />
               </div>
               <div className="flex-1">
                 <label className="mb-2 block text-sm font-semibold text-gray-700">
                   CVC
                 </label>
-                <div className="rounded-xl border border-gray-300 p-3">
-                  <CardCvcElement options={CARD_ELEMENT_OPTIONS} />
-                </div>
+                <input
+                  className="w-full rounded-xl border border-gray-300 p-3"
+                  type="number"
+                />
+                <CardCvcElement options={CARD_ELEMENT_OPTIONS} />
               </div>
             </div>
 
             {/* Submit Button */}
-            <button
+            <Button
               type="submit"
+              size="lg"
+              variant="yellowGradient"
+              className="w-full"
               disabled={processing || isLoading}
-              className="inline-flex max-h-12 w-full transform cursor-pointer items-center justify-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-yellow-600 to-yellow-500 px-6 py-3 text-base font-semibold text-white shadow-lg transition duration-700 ease-in-out hover:scale-105 hover:from-yellow-500 hover:to-yellow-600 disabled:cursor-not-allowed disabled:opacity-60 sm:px-8 sm:py-4 sm:text-sm md:px-10 md:py-5 md:text-base lg:px-8 lg:py-4 lg:text-lg"
             >
               {processing || isLoading ? "Processing..." : "Register & Pay $20"}
-            </button>
+            </Button>
           </form>
 
           <p className="mt-6 text-center text-gray-600">
