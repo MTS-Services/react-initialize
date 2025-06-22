@@ -7,8 +7,10 @@ import Button from "../../../components/ui/Button";
 
 function LoginPage() {
   const { signInUser, isLoading, setIsLoading } = useContext(AuthContext);
+
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+
+  const { handleSubmit } = useForm();
 
   const onSubmit = async ({ email, password }) => {
     try {
@@ -57,8 +59,6 @@ function LoginPage() {
                 id="email"
                 type="email"
                 placeholder="you@example.com"
-                autoComplete="email"
-                {...register("email")}
                 className="w-full rounded-xl border border-gray-300 px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none"
               />
             </div>
@@ -75,8 +75,6 @@ function LoginPage() {
                 id="password"
                 type="password"
                 placeholder="********"
-                autoComplete="current-password"
-                {...register("password")}
                 className="w-full rounded-xl border border-gray-300 px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none"
               />
             </div>

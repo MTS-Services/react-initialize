@@ -121,7 +121,7 @@ const About = () => {
                 key={idx}
                 className="flex flex-col items-center gap-4 rounded-lg bg-white px-6 py-16 shadow-sm"
               >
-                <div className="font-lato flex h-14 w-14 items-center justify-center rounded bg-yellow-500 text-2xl font-medium text-white">
+                <div className="font-lato flex h-14 w-14 items-center justify-center rounded bg-[#0278d9] text-2xl font-medium text-white">
                   {idx + 1}
                 </div>
                 <div className="space-y-2 text-center">
@@ -139,7 +139,7 @@ const About = () => {
       </section>
 
       {/* === Why Choose Us Section === */}
-      <div className="mx-auto mb-0 flex w-full max-w-7xl flex-col items-center justify-between gap-12 px-6 py-16 lg:flex-row">
+      <div className="mx-auto mb-0 flex w-full max-w-7xl flex-col items-center justify-between gap-12 px-6 py-16 md:px-0 lg:flex-row">
         <div className="w-full space-y-6 lg:w-1/2">
           <h2 className="font-lato text-4xl font-semibold text-gray-900 capitalize">
             Why Choose US
@@ -169,7 +169,7 @@ const About = () => {
       </div>
 
       {/* === FAQ Section === */}
-      <div className="w-full bg-white px-6 pb-8 md:px-12 lg:px-24">
+      <div className="w-full bg-white px-6 py-26 md:px-12 lg:px-24">
         <h2 className="font-lato mb-8 text-center text-4xl font-semibold text-black">
           FAQ
         </h2>
@@ -193,11 +193,15 @@ const About = () => {
                   </span>
                 </button>
 
-                {isOpen && (
-                  <p className="font-inter mt-4 text-base leading-relaxed text-gray-600">
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    isOpen ? "mt-4 max-h-40 opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <p className="font-inter text-base leading-relaxed text-gray-600">
                     {item.answer}
                   </p>
-                )}
+                </div>
               </div>
             );
           })}

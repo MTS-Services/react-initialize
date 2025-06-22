@@ -18,7 +18,7 @@ const Button = ({
     secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300",
     outline: "border border-gray-400 text-gray-800 hover:bg-gray-100",
     yellowGradient:
-      "bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 shadow transition-transform hover:scale-95",
+      "bg-gradient-to-r from-[#3CAAFA] to-[#1198fa] hover:from-[#1a8adb] hover:to-[#0278d9] shadow transition-transform hover:scale-95 ",
     danger: "bg-red-600 text-white hover:bg-red-700",
   };
 

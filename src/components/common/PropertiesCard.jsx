@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaHotel, FaRegHeart } from "react-icons/fa";
 import { FiClock, FiLayers, FiMapPin } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext/AuthContext";
+import Button from "../ui/Button";
+
 // "https://via.placeholder.com/384x256?text=No+Image";
 
 const PeropertiesCard = ({ item }) => {
   const { id, title, description, primaryImage, surface, rooms, location } =
     item;
 
+  const { user } = useContext(AuthContext);
   return (
     <div
       key={id}
@@ -71,9 +75,13 @@ const PeropertiesCard = ({ item }) => {
                 <FiMapPin className="text-gray-400" />
                 <span className="text-xs text-gray-700">{location}</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-600 capitalize sm:text-xl">
-                € 10.05
-              </h3>
+              {user ? (
+                <h3 className="text-lg font-semibold text-gray-600 capitalize sm:text-xl">
+                  € 10.05
+                </h3>
+              ) : (
+                <p>loading...</p>
+              )}
             </div>
           </div>
 
@@ -82,9 +90,13 @@ const PeropertiesCard = ({ item }) => {
             to={`/properties/${id}`}
             className="text-base font-medium text-white"
           >
-            <button className="mt-4 flex max-h-12 w-full items-center justify-center rounded bg-gradient-to-l from-yellow-600 to-yellow-500 px-6 py-3 sm:mt-0">
+            <Button
+              size="lg"
+              variant="yellowGradient"
+              className="max-h-12 w-full"
+            >
               <span>Bekijk de woning</span>
-            </button>
+            </Button>
           </Link>
         </div>
       </div>

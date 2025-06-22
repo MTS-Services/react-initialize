@@ -18,8 +18,10 @@ import {
 // ✅ Clean numeric price parser
 const cleanPrice = (priceStr) => {
   if (!priceStr) return 0;
+
   const raw = priceStr.replace(/[^\d.,]/g, "").replace(",", ".");
   const normalized = raw.replace(/\.(?=.*\.)/, "").replace(",", ".");
+
   return parseFloat(normalized);
 };
 
@@ -101,10 +103,13 @@ export default function FilterPage() {
       setSuggestions([]);
       return;
     }
+
     const citySet = [...new Set(listings.map((l) => l.location))];
+
     const matches = citySet.filter((c) =>
       c.toLowerCase().includes(value.toLowerCase()),
     );
+
     setSuggestions(matches);
   };
 
@@ -133,6 +138,7 @@ export default function FilterPage() {
     navigate(`/property-list/${id}`);
   };
 
+  // Uniq rooms
   const uniqueRooms = [...new Set(listings.map((l) => l.rooms))].sort(
     (a, b) => a - b,
   );

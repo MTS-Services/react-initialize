@@ -47,7 +47,7 @@ const MainFooter = () => {
           <div className="flex max-w-2xl flex-col items-center gap-6 text-center md:gap-8">
             <h2 className="text-2xl text-white capitalize md:text-5xl">
               Register and view our
-              <span className="text-[#F6BC09]"> 20,000+ </span> rental
+              <span className="text-[#0278d9]"> 20,000+ </span> rental
               properties
             </h2>
             <p className="text-zinc-100 md:text-xl">
@@ -63,11 +63,15 @@ const MainFooter = () => {
         </div>
       </div>
 
-      <footer className="w-full bg-blue-950 px-4 py-10 md:py-12 lg:px-0 lg:py-20">
+      <footer className="w-full bg-[#0C205A] px-4 py-10 md:py-12 lg:px-0 lg:py-20">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-4">
           {/* Logo & Description */}
           <div className="space-y-4">
-            <img src="/Logo.png" alt="logo" className="w-54 md:w-44" />
+            <img
+              src="/new-logo-white.png"
+              alt="logo"
+              className="w-54 md:w-72"
+            />
             <p className="text-white/80">
               Receive emails with rentals that meet your requirements.
             </p>
@@ -129,9 +133,9 @@ const MainFooter = () => {
               placeholder="Enter your email"
               className="w-full rounded bg-neutral-100 p-3 text-gray-700"
             />
-            <button className="w-full cursor-pointer rounded bg-gradient-to-l from-yellow-600 to-yellow-500 py-3 font-medium text-white transition-all hover:scale-95">
+            <Button variant="yellowGradient" size="lg" className="w-full">
               Subscribe
-            </button>
+            </Button>
           </div>
         </div>
 

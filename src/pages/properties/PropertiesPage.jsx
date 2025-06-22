@@ -5,6 +5,7 @@ import PropertiesCard from "../../components/common/PropertiesCard";
 import Pagination from "../../components/common/Pagination";
 import CardSkeleton from "../../components/common/Card-Skeleton";
 import { FaListUl } from "react-icons/fa";
+import Button from "../../components/ui/Button";
 
 const URL = "http://localhost:3000/api";
 
@@ -18,6 +19,7 @@ const PropertyListPage = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+
   const [filters, setFilters] = useState({
     location: "",
     minPrice: "",
@@ -269,12 +271,14 @@ const PropertyListPage = () => {
               </select>
             </div>
 
-            <button
+            <Button
+              variant="yellowGradient"
+              size="lg"
               type="submit"
-              className="w-full rounded-md bg-yellow-600 py-2 text-white hover:bg-yellow-700"
+              className="w-full"
             >
               Apply Filters
-            </button>
+            </Button>
           </form>
         </aside>
 

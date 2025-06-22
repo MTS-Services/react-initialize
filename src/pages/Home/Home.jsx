@@ -112,7 +112,7 @@ export default function Home() {
 
   // HANDLE SEARCH
   const handleSearch = () => {
-    navigate(`/property-list?address=${query}&min=${minPrice}&max=${maxPrice}`);
+    navigate(`/properties`);
   };
 
   // HANDLE LOCATION
@@ -137,8 +137,8 @@ export default function Home() {
     setShowSuggestions(false);
   };
 
-  const leftCities = cities.slice(0, 4);
   const eindhoven = cities.find((c) => c.name === "Eindhoven");
+  const leftCities = cities.slice(0, 4);
   const rightCities = cities.slice(5);
 
   return (
@@ -154,14 +154,16 @@ export default function Home() {
         <div className="relative z-20 flex h-full items-center justify-center">
           <div className="mx-auto max-w-7xl px-4">
             <div className="rounded-lg p-6 shadow-xl">
-              <h3 className="md:text-md text-center text-sm text-white lg:text-2xl">
+              <h3 className="md:text-md text-center text-sm text-white lg:text-xl">
                 IT’S GREAT TO BE HOME!
               </h3>
               <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
                 <h1 className="text-center text-2xl text-white/90 md:text-4xl lg:text-6xl">
                   Rent Your Property Easily In
                   <br />
-                  <span className="text-[#F6BC09]">The Netherlands</span>
+                  <span className="mt-6 block text-[#0278d9]">
+                    The Netherlands
+                  </span>
                 </h1>
               </div>
             </div>
@@ -229,12 +231,14 @@ export default function Home() {
             </div>
 
             <div className="relative w-full">
-              <button
+              <Button
+                variant="yellowGradient"
+                size="lg"
                 onClick={handleSearch}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#F6BC09] px-6 py-5 text-center text-white shadow-md transition hover:bg-[#f6bb09c0]"
+                className="flex w-full items-center justify-center gap-2 py-4.5"
               >
                 <FiSearch /> Search
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -315,7 +319,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
           {/* Text Section */}
           <div>
-            <h3 className="mb-2 text-amber-500">About us</h3>
+            <h3 className="mb-2 text-[#0278d9]">About us</h3>
             <h2 className="mb-6 text-2xl md:text-4xl">
               Driven by Trust, Defined by Results
             </h2>
@@ -523,7 +527,7 @@ export default function Home() {
                 key={idx}
                 className="flex flex-col items-center gap-4 rounded-lg bg-white px-6 py-8 shadow-sm"
               >
-                <h3 className="rounded bg-yellow-500 px-4 py-2 text-2xl text-white">
+                <h3 className="rounded bg-[#0278d9] px-4 py-2 text-2xl text-white">
                   {idx + 1}
                 </h3>
                 <div className="space-y-2 text-center">
