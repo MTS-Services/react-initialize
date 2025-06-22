@@ -1,6 +1,6 @@
 // ✅ Home.jsx (FULL CODE with enhancements)
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { FiDollarSign, FiMapPin, FiSearch } from "react-icons/fi";
 import { TfiRulerAlt2 } from "react-icons/tfi";
@@ -161,7 +161,7 @@ export default function Home() {
                 <h1 className="text-center text-2xl text-white/90 md:text-4xl lg:text-6xl">
                   Rent Your Property Easily In
                   <br />
-                  <span className="mt-6 block text-[#0278d9]">
+                  <span className="mt-2 block text-[#0278d9]">
                     The Netherlands
                   </span>
                 </h1>
@@ -336,10 +336,11 @@ export default function Home() {
               details, fair pricing, and no surprises. You won’t find fake ads
               or outdated listings—only real homes that are truly available.
             </p>
-
-            <Button variant="yellowGradient" size="lg" className="">
-              Learn more
-            </Button>
+            <Link to="/about">
+              <Button variant="yellowGradient" size="lg" className="">
+                Learn more
+              </Button>
+            </Link>
           </div>
 
           {/* Image Grid */}

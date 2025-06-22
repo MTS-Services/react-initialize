@@ -60,7 +60,7 @@ function MainHeader() {
           <img
             src="/new-logo-white.png"
             alt="Logo"
-            className="w-32 md:w-32 lg:w-82"
+            className="w-48 md:w-64 lg:w-80"
           />
         </Link>
 
@@ -95,7 +95,7 @@ function MainHeader() {
                     </DropdownItem>
                     <button
                       onClick={logOutHandler}
-                      className="flex w-full items-center gap-2 px-4 py-2 text-left transition hover:bg-blue-950 hover:text-white"
+                      className="flex w-full items-center gap-2 px-4 py-2 text-left transition hover:bg-[#3CAAFA] hover:text-white"
                     >
                       <FiLogOut />
                       Logout
@@ -159,7 +159,7 @@ function MainHeader() {
                   logOutHandler();
                   setMenuOpen(false);
                 }}
-                className="flex w-full items-center gap-2 hover:text-[var(--color-primary)]"
+                className="flex w-full items-center gap-2 hover:text-[#3CAAFA]"
               >
                 <FiLogOut />
                 Logout
@@ -194,7 +194,7 @@ const MenuLink = ({ to, icon, children, onClick }) => (
   <Link
     to={to}
     onClick={onClick}
-    className="font-secondary flex items-center gap-2 text-lg transition hover:text-[var(--color-primary)]"
+    className="font-secondary flex items-center gap-2 text-lg transition hover:text-[#3CAAFA]"
   >
     {icon}
     {children}
@@ -205,7 +205,7 @@ const MenuLink = ({ to, icon, children, onClick }) => (
 const DropdownItem = ({ to, icon, children }) => (
   <Link
     to={to}
-    className="flex items-center gap-2 px-4 py-2 transition hover:rounded-sm hover:bg-[var(--color-primary)] hover:text-white"
+    className="flex items-center gap-2 px-4 py-2 transition hover:rounded-sm hover:bg-[#3CAAFA] hover:text-white"
   >
     {icon}
     {children}
