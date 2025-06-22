@@ -5,6 +5,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import Button from "../../components/ui/Button";
+import { Link } from "react-router-dom";
 
 const linkItem = [
   "Alkmaar",
@@ -55,10 +56,15 @@ const MainFooter = () => {
               which new properties are added every day. Don't wait any longer
               and start searching.
             </p>
-
-            <Button size="lg" variant="yellowGradient" className="rounded-full">
-              Start searching
-            </Button>
+            <Link to="/properties">
+              <Button
+                size="lg"
+                variant="yellowGradient"
+                className="rounded-full"
+              >
+                Start searching
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -78,15 +84,15 @@ const MainFooter = () => {
             <div className="flex gap-3">
               <FaFacebookF
                 size={35}
-                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-[var(--color-primary)]"
+                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-[#3CAAFA]"
               />
               <FaTwitter
                 size={35}
-                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-[var(--color-primary)]"
+                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-[#3CAAFA]"
               />
               <FaInstagram
                 size={35}
-                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-[var(--color-primary)]"
+                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-[#3CAAFA]"
               />
             </div>
           </div>
@@ -95,14 +101,14 @@ const MainFooter = () => {
           <div className="px-0 md:px-10">
             <h3 className="mb-4 text-white">Quick</h3>
             <ul className="space-y-2 text-white/90">
-              <li className="cursor-pointer hover:text-[var(--color-primary)]">
-                Home
+              <li className="cursor-pointer hover:text-[#3CAAFA]">
+                <Link to="/">Home</Link>
               </li>
-              <li className="cursor-pointer hover:text-[var(--color-primary)]">
-                About
+              <li className="cursor-pointer hover:text-[#3CAAFA]">
+                <Link to="about">About</Link>
               </li>
-              <li className="cursor-pointer hover:text-[var(--color-primary)]">
-                Contact
+              <li className="cursor-pointer hover:text-[#3CAAFA]">
+                <Link to="/contact">Contact</Link>
               </li>
             </ul>
           </div>
@@ -111,13 +117,11 @@ const MainFooter = () => {
           <div className="">
             <h3 className="mb-4 text-white">Company</h3>
             <ul className="space-y-2 text-white/90">
-              <li className="cursor-pointer hover:text-[var(--color-primary)]">
+              <li className="cursor-pointer hover:text-[#3CAAFA]">
                 Terms & Conditions
               </li>
-              <li className="cursor-pointer hover:text-[var(--color-primary)]">
-                Privacy
-              </li>
-              <li className="cursor-pointer hover:text-[var(--color-primary)]">
+              <li className="cursor-pointer hover:text-[#3CAAFA]">Privacy</li>
+              <li className="cursor-pointer hover:text-[#3CAAFA]">
                 Cookie Policy
               </li>
             </ul>
@@ -140,30 +144,22 @@ const MainFooter = () => {
         </div>
 
         {/* Cities */}
-        <div className="mx-auto mt-10 max-w-screen-xl md:mt-16">
+        {/* <div className="mx-auto mt-10 max-w-screen-xl md:mt-16">
           <h3 className="mb-4 text-center text-white">Popular cities</h3>
           <div className="flex flex-wrap justify-center gap-4 text-white/80">
             {linkItem.map((city) => (
-              <span
-                key={city}
-                className="cursor-pointer hover:text-[var(--color-primary)]"
-              >
+              <span key={city} className="cursor-pointer hover:text-[#3CAAFA]">
                 {city}
               </span>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Footer Bottom */}
-        <div className="mx-auto mt-12 flex max-w-screen-xl flex-col items-center justify-between border-t border-white/10 pt-6 text-white/60 md:flex-row">
+        <div className="mx-auto mt-12 flex max-w-screen-xl items-center justify-center border-t border-white/10 pt-6 text-white/60 md:flex-row">
           <p className="text-white/60">
             © 2025 NL Property. All rights reserved.
           </p>
-          <div className="mt-4 flex gap-6 md:mt-0">
-            <span>Privacy Policy</span>
-            <span>Terms & Conditions</span>
-            <span>Cookie Policy</span>
-          </div>
         </div>
       </footer>
     </>

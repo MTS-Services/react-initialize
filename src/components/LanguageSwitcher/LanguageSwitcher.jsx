@@ -65,7 +65,7 @@ const LanguageSwitcher = () => {
             <li
               key={lang.code}
               onClick={() => handleSelect(lang)}
-              className="flex cursor-pointer items-center gap-3 px-4 py-2 transition hover:rounded-sm hover:bg-[var(--color-primary)] hover:text-white"
+              className="flex cursor-pointer items-center gap-3 px-4 py-2 transition hover:rounded-sm hover:bg-[#3CAAFA] hover:text-white"
             >
               <img src={lang.flag} alt={lang.name} className="h-6 w-6" />
               <span className="text-sm text-white">{lang.name}</span>
