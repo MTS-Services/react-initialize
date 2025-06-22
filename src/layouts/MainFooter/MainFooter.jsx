@@ -37,7 +37,7 @@ const MainFooter = () => {
   return (
     <>
       <div
-        className="relative w-full bg-cover bg-center bg-no-repeat py-10 md:py-24"
+        className="relative w-full bg-cover bg-center bg-no-repeat py-10 md:py-20"
         style={{ backgroundImage: "url('/footer-up.jpg')" }}
       >
         {/* Overlay */}
@@ -46,12 +46,12 @@ const MainFooter = () => {
         {/* Content */}
         <div className="relative z-10 flex h-full items-center justify-center px-6 md:px-2">
           <div className="flex max-w-2xl flex-col items-center gap-6 text-center md:gap-8">
-            <h2 className="text-2xl text-white capitalize md:text-5xl">
+            <h2 className="text-2xl leading-tight font-bold text-white capitalize md:text-5xl">
               Register and view our
-              <span className="text-[#0278d9]"> 20,000+ </span> rental
+              <span className="text-[#3CAAFA]"> 20,000+ </span> rental
               properties
             </h2>
-            <p className="text-zinc-100 md:text-xl">
+            <p className="text-zinc-100 md:text-lg">
               We have a large collection of affordable rental properties to
               which new properties are added every day. Don't wait any longer
               and start searching.
@@ -62,14 +62,14 @@ const MainFooter = () => {
                 variant="yellowGradient"
                 className="rounded-full"
               >
-                Start searching
+                Start Searching
               </Button>
             </Link>
           </div>
         </div>
       </div>
 
-      <footer className="w-full bg-[#0C205A] px-4 py-10 md:py-12 lg:px-0 lg:py-20">
+      <footer className="w-full bg-[#0C205A] px-4 py-10 md:py-12 lg:px-0 lg:py-10">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-4">
           {/* Logo & Description */}
           <div className="space-y-4">
@@ -84,15 +84,15 @@ const MainFooter = () => {
             <div className="flex gap-3">
               <FaFacebookF
                 size={35}
-                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-[#3CAAFA]"
+                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-[#0278d9] shadow transition-all hover:bg-[#3CAAFA] hover:text-blue-100"
               />
               <FaTwitter
                 size={35}
-                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-[#3CAAFA]"
+                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-[#0278d9] shadow transition-all hover:bg-[#3CAAFA] hover:text-blue-100"
               />
               <FaInstagram
                 size={35}
-                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-gray-800 shadow transition-all hover:bg-[#3CAAFA]"
+                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-[#0278d9] shadow transition-all hover:bg-[#3CAAFA] hover:text-blue-100"
               />
             </div>
           </div>

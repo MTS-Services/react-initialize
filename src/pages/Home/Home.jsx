@@ -7,9 +7,11 @@ import { TfiRulerAlt2 } from "react-icons/tfi";
 import { LiaBedSolid } from "react-icons/lia";
 import { LuHeart } from "react-icons/lu";
 import Button from "../../components/ui/Button";
+import axios from "axios";
 // import CityCard from '../../components/CityCard/CityCard';
-
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
+const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 
 const properties = [
   {
@@ -102,12 +104,13 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/properties")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("main data", data);
-        setListings(data.properties);
-      });
+    const fetchProperty = async () => {
+      const res = await axios.get(`${URL}/properties`);
+
+      setListings(res.data.properties);
+    };
+
+    fetchProperty();
   }, []);
 
   // HANDLE SEARCH
@@ -124,6 +127,7 @@ export default function Home() {
       return;
     }
     const citySet = [...new Set(listings.map((l) => l.location))];
+
     const matches = citySet.filter((c) =>
       c.toLowerCase().includes(value.toLowerCase()),
     );
@@ -158,12 +162,10 @@ export default function Home() {
                 IT’S GREAT TO BE HOME!
               </h3>
               <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
-                <h1 className="text-center text-2xl text-white/90 md:text-4xl lg:text-6xl">
+                <h1 className="text-center text-2xl leading-tight text-white/90 md:text-4xl lg:text-6xl">
                   Rent Your Property Easily In
                   <br />
-                  <span className="mt-2 block text-[#0278d9]">
-                    The Netherlands
-                  </span>
+                  <span className="block text-[#3CAAFA]">The Netherlands</span>
                 </h1>
               </div>
             </div>
@@ -386,7 +388,8 @@ export default function Home() {
           {/* Property Grid */}
           <div className="grid grid-cols-1 gap-8 p-5 md:grid-cols-2 lg:grid-cols-4 lg:p-0">
             {properties.map((property) => (
-              <div
+              <Link
+                to="/properties"
                 key={property.id}
                 className="cursor-pointer overflow-hidden rounded-lg shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl"
               >
@@ -469,7 +472,7 @@ export default function Home() {
                     View Details
                   </a>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

@@ -130,7 +130,7 @@ const SinglePropertyPage = () => {
 
         {/* Price */}
         <div className="mb-6 rounded-lg bg-yellow-50 p-4">
-          <p className="text-2xl font-bold text-blue-800">{listing.price}</p>
+          <h2 className="text-2xl font-bold text-blue-800">{listing.price}</h2>
         </div>
 
         {/* Image Gallery */}
@@ -169,20 +169,20 @@ const SinglePropertyPage = () => {
           {/* Details */}
           <div className="md:col-span-2">
             <h2 className="mb-4 text-xl font-bold">Description</h2>
-            <p className="mb-6 whitespace-pre-line text-gray-700">
+            <p className="mb-6 text-base/8 whitespace-pre-line text-gray-700">
               {listing.description || "No description available."}
             </p>
 
             <h2 className="mb-4 text-xl font-bold">Features</h2>
             <div className="mb-6 grid grid-cols-2 gap-4">
-              <div className="flex items-center gap-2 rounded-lg bg-gray-50 p-3">
+              <div className="flex items-center gap-2 rounded-lg bg-blue-50 p-3 shadow-sm">
                 <FiLayers className="text-gray-600" />
                 <div>
                   <p className="text-sm text-gray-500">Surface</p>
                   <p className="font-medium">{listing.surface} m²</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 rounded-lg bg-gray-50 p-3">
+              <div className="flex items-center gap-2 rounded-lg bg-blue-50 p-3 shadow-sm">
                 <FiHome className="text-gray-600" />
                 <div>
                   <p className="text-sm text-gray-500">Rooms</p>
@@ -192,17 +192,17 @@ const SinglePropertyPage = () => {
             </div>
 
             <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {Object.entries(listing.transferDetails || {}).map(
+              {Object.entries(listing.otherDetails || {}).map(
                 ([key, value]) => (
                   <div
                     key={key}
-                    className="flex flex-col rounded-lg bg-gray-50 p-3 shadow-sm"
+                    className="flex flex-col rounded-lg bg-blue-50 p-4 shadow-sm"
                   >
-                    <span className="text-sm text-gray-500 capitalize">
-                      {key.replace(/_/g, " ")}
+                    <span className="text-lg text-gray-600 capitalize">
+                      - {key.replace(/_/g, " ")}
                     </span>
-                    <span className="font-medium whitespace-pre-line text-gray-800">
-                      {value}
+                    <span className="font-medium whitespace-pre-line text-gray-500">
+                      - {value}
                     </span>
                   </div>
                 ),
