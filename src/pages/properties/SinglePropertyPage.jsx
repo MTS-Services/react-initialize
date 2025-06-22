@@ -17,7 +17,7 @@ import { LuHeart } from "react-icons/lu";
 import Button from "../../components/ui/Button";
 import axios from "axios";
 
-const url = "http://localhost:3000/api";
+const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 
 const SinglePropertyPage = () => {
   const { id } = useParams();
@@ -33,12 +33,12 @@ const SinglePropertyPage = () => {
 
       try {
         // Fetch single listing
-        const listingRes = await axios.get(`${url}/properties/${id}`);
-
-        setListing(listingRes.data.data.property);
+        const listingRes = await axios.get(`${URL}/properties/${id}`);
+        console.log(listingRes.data);
+        setListing(listingRes.data);
 
         // Fetch recent listings (excluding current one)
-        const recentRes = await axios.get(`${url}/properties`);
+        const recentRes = await axios.get(`${URL}/properties`);
 
         const filteredRecent = recentRes.data.properties
           .filter((item) => item.id !== parseInt(id))

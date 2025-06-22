@@ -7,7 +7,7 @@ import CardSkeleton from "../../components/common/Card-Skeleton";
 import { FaListUl } from "react-icons/fa";
 import Button from "../../components/ui/Button";
 
-const URL = "http://localhost:3000/api";
+const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 
 const PropertyListPage = () => {
   const [properties, setProperties] = useState([]);
