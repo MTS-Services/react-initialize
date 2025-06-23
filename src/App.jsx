@@ -5,8 +5,6 @@ import { ThemeProvider } from "./context/ThemeContext/ThemeProvider";
 
 import AuthProvider from "./context/AuthContext/AuthProvider";
 import "react-loading-skeleton/dist/skeleton.css";
-import "./app.css";
-import "./i18n";
 
 function App() {
   const queryClient = new QueryClient();
