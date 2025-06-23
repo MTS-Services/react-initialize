@@ -6,7 +6,6 @@ import Pagination from "../../components/common/Pagination";
 import CardSkeleton from "../../components/common/Card-Skeleton";
 import { FaListUl } from "react-icons/fa";
 import Button from "../../components/ui/Button";
-import ReactSlider from "react-slider";
 import RangeSlider from "../../components/common/RangeSlider";
 
 const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
