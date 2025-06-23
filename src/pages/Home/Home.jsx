@@ -165,7 +165,7 @@ export default function Home() {
                 <h1 className="text-center text-2xl leading-tight text-white/90 md:text-4xl lg:text-6xl">
                   Rent Your Property Easily In
                   <br />
-                  <span className="block text-[#3CAAFA]">The Netherlands</span>
+                  <span className="block text-[#3CAAFA]">The Netherland</span>
                 </h1>
               </div>
             </div>
