@@ -29,10 +29,10 @@ function LoginPage() {
     <section>
       <div className="border bg-[#0C205A] p-8"></div>
       <div
-        className="flex min-h-screen items-center justify-center"
+        className="flex items-center justify-center py-4 md:px-0 md:py-0 lg:py-20"
         style={{ fontFamily: "var(--font-secondary)" }}
       >
-        <div className="container flex max-w-6xl flex-col overflow-hidden rounded-3xl border-1 border-gray-100 bg-white shadow-lg md:flex-row">
+        <div className="mx-auto flex max-w-7xl flex-col overflow-hidden rounded-xl border-1 border-gray-100 bg-white shadow md:flex-row md:rounded">
           {/* Left: Image */}
           <div className="hidden p-12 md:block md:w-1/2">
             <img

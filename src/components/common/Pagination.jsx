@@ -62,7 +62,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           onClick={() => onPageChange(page)}
           className={`rounded-md px-3 py-1 ${
             currentPage === page
-              ? "bg-yellow-600 text-white"
+              ? "bg-blue-400 text-white"
               : "bg-white hover:bg-gray-100"
           }`}
         >

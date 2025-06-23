@@ -6,6 +6,8 @@ import Pagination from "../../components/common/Pagination";
 import CardSkeleton from "../../components/common/Card-Skeleton";
 import { FaListUl } from "react-icons/fa";
 import Button from "../../components/ui/Button";
+import ReactSlider from "react-slider";
+import RangeSlider from "../../components/common/RangeSlider";
 
 const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 
@@ -17,6 +19,7 @@ const PropertyListPage = () => {
     totalItems: 0,
     itemsPerPage: 20,
   });
+
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -30,6 +33,7 @@ const PropertyListPage = () => {
   const [locationInput, setLocationInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [range, setRange] = useState({ min: 20, max: 80 });
   const [isFetchingSuggestions, setIsFetchingSuggestions] = useState(false);
   const suggestionsRef = useRef(null);
 
@@ -161,8 +165,17 @@ const PropertyListPage = () => {
       .map((_, index) => <CardSkeleton key={index} />);
   };
 
+  // range value check
+  const handlePriceChange = ({ min, max }) => {
+    setFilters((prev) => ({
+      ...prev,
+      minPrice: min,
+      maxPrice: max,
+    }));
+  };
+
   return (
-    <section>
+    <section className="">
       <header
         className="relative h-[300px] bg-cover bg-center"
         style={{
@@ -179,18 +192,24 @@ const PropertyListPage = () => {
         </div>
       </header>
 
-      <main className="mx-auto mt-6 max-w-7xl gap-12 md:flex lg:mb-10">
+      <main className="mx-auto mt-10 max-w-7xl gap-12 px-5 md:px-8 lg:mb-10 lg:flex lg:px-0">
         {/* SIDEBAR */}
-        <aside className="sticky top-20 h-fit space-y-4 md:w-1/4">
+        <aside className="top-20 h-fit space-y-4 md:w-full lg:sticky lg:w-1/4">
           <h2 className="mb-2 flex items-center gap-2 text-xl font-bold">
             <FiGrid /> Filters
           </h2>
-          <hr className="text-gray-200" />
-          <form onSubmit={handleFilterSubmit} className="space-y-4">
-            <div className="relative" ref={suggestionsRef}>
+
+          <form
+            onSubmit={handleFilterSubmit}
+            className="grid grid-cols-1 space-y-4 md:grid-cols-2 md:gap-5 md:space-y-0 lg:grid-cols-1"
+          >
+            <div
+              className="relative rounded-md p-6 shadow-sm"
+              ref={suggestionsRef}
+            >
               <label className="block text-sm font-medium text-gray-700">
                 <div className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-600">
-                  <FiMapPin /> Location
+                  <FiMapPin /> Search Location
                 </div>
               </label>
               <input
@@ -199,10 +218,12 @@ const PropertyListPage = () => {
                 value={locationInput}
                 onChange={handleLocationChange}
                 onFocus={() => setShowSuggestions(true)}
-                placeholder="e.g. Amsterdam, Rotterdam"
+                placeholder="Enter city"
                 className="mt-1 w-full rounded-md border border-gray-200 p-2"
                 autoComplete="off"
               />
+
+              {/* LOACTION SEARCH SUGGESTIONS */}
               {isFetchingSuggestions && (
                 <div className="absolute top-full left-0 z-10 mt-1 w-full rounded-md border border-gray-200 bg-white p-2 text-center text-sm text-gray-500">
                   Loading suggestions...
@@ -224,115 +245,102 @@ const PropertyListPage = () => {
               )}
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  $ Min Price
-                </label>
-                <input
-                  type="number"
-                  name="minPrice"
-                  placeholder="$"
-                  value={filters.minPrice}
-                  onChange={handleFilterChange}
-                  className="mt-1 w-full rounded-md border border-gray-200 p-2"
-                />
+            <div className="rounded-md p-6 shadow-sm">
+              <h4 className="text-lg font-medium text-gray-500">
+                € Rental price range
+              </h4>
+              <hr className="my-4 text-gray-200" />
+              <div className="mb-8 grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    $ Min Price
+                  </label>
+                  <input
+                    type="number"
+                    name="minPrice"
+                    placeholder="0"
+                    value={filters.minPrice}
+                    onChange={handleFilterChange}
+                    className="mt-1 w-full rounded-md border border-gray-200 p-2"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    $ Max Price
+                  </label>
+                  <input
+                    type="number"
+                    name="maxPrice"
+                    placeholder="10000"
+                    value={filters.maxPrice}
+                    onChange={handleFilterChange}
+                    className="mt-1 w-full rounded-md border border-gray-200 p-2"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  $ Max Price
-                </label>
-                <input
-                  type="number"
-                  name="maxPrice"
-                  placeholder="$"
-                  value={filters.maxPrice}
-                  onChange={handleFilterChange}
-                  className="mt-1 w-full rounded-md border border-gray-200 p-2"
+
+              {/* RANGE SLIDER */}
+              <div className="">
+                <RangeSlider
+                  min={0}
+                  max={1000}
+                  step={10}
+                  initialMin={filters.minPrice || 0}
+                  initialMax={filters.maxPrice || 1000}
+                  onChange={handlePriceChange}
                 />
               </div>
             </div>
 
-            <div>
+            <div className="rounded-md p-5 shadow">
               <label className="block text-sm font-medium text-gray-700">
                 Bedrooms
               </label>
-              <select
-                name="bedrooms"
-                value={filters.bedrooms}
-                onChange={handleFilterChange}
-                className="mt-1 w-full rounded-md border border-gray-200 p-2"
-              >
-                <option value="">Any</option>
-                <option value="1">1+</option>
-                <option value="2">2+</option>
-                <option value="3">3+</option>
-                <option value="4">4+</option>
-              </select>
+              <ul className="grid grid-cols-3 gap-2 pt-4">
+                {["1 rooms", "2 rooms", "3 rooms", "3 rooms", "3 rooms"].map(
+                  (i, index) => {
+                    return (
+                      <li
+                        key={index}
+                        className="cursor-pointer rounded-full border border-gray-200 p-2 text-center text-sm hover:bg-gray-200"
+                      >
+                        {i}
+                      </li>
+                    );
+                  },
+                )}
+              </ul>
             </div>
 
-            <Button
+            <div className="rounded-md p-5 shadow">
+              <label className="block text-sm font-medium text-gray-700">
+                Min Surface (m2)
+              </label>
+              <input
+                type="text"
+                name="minPrice"
+                placeholder="e.g. 50"
+                value={filters.minPrice}
+                onChange={handleFilterChange}
+                className="mt-1 w-full rounded-md border border-gray-200 p-2"
+              />
+            </div>
+
+            {/* <Button
               variant="yellowGradient"
               size="lg"
               type="submit"
               className="w-full"
             >
               Apply Filters
-            </Button>
+            </Button> */}
           </form>
         </aside>
 
         {/* MAIN CONTENT (remain the same as your original code) */}
-        <article className="flex-1">
+        <article className="flex-1 pt-5 md:pt-8 lg:pt-0">
           {/* Controls: Sort + View Toggle */}
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-4 rounded-md">
-            {/* Sort options */}
-            <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
-              <label htmlFor="sort" className="whitespace-nowrap">
-                Sort by:
-              </label>
-              <select
-                id="sort"
-                className="cursor-pointer rounded-md border border-gray-300 bg-white px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
-              >
-                <option value="">Default</option>
-                <option value="asc">Price: Low to High</option>
-                <option value="desc">Price: High to Low</option>
-              </select>
-            </div>
-
-            {/* View toggle buttons */}
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                <label htmlFor="sort" className="whitespace-nowrap">
-                  Per-page:
-                </label>
-                <select
-                  id="sort"
-                  className="cursor-pointer rounded-md border border-gray-200 bg-white px-2 py-1 text-sm focus:border-blue-500 focus:outline-none"
-                >
-                  <option value="10">10</option>
-                  <option value="20">20</option>
-                  <option value="50">50</option>
-                </select>
-              </div>
-
-              <div>
-                <button className="rounded-md p-2 text-gray-600 hover:bg-gray-200">
-                  <FaListUl />
-                </button>
-                <button className="rounded-md p-2 text-gray-400 hover:bg-gray-200">
-                  <FiGrid />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <hr className="text-gray-200" />
-
-          <div className="py-4">
-            <p>Rental Show ({pagination.totalItems}) </p>
-          </div>
 
           {isLoading ? (
             renderSkeletonListings()

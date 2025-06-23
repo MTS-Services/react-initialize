@@ -16,7 +16,7 @@ import { TfiRulerAlt2 } from "react-icons/tfi";
 import { LuHeart } from "react-icons/lu";
 import Button from "../../components/ui/Button";
 
-const URL = "http://localhost:3000/api";
+const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 
 const SingleListingPage = () => {
   const { id } = useParams();

@@ -21,6 +21,8 @@ const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 
 const SinglePropertyPage = () => {
   const { id } = useParams();
+  const [expanded, setExpanded] = useState(false);
+
   const navigate = useNavigate();
   const [listing, setListing] = useState(null);
   const [recent, setRecent] = useState([]);
@@ -34,8 +36,8 @@ const SinglePropertyPage = () => {
       try {
         // Fetch single listing
         const listingRes = await axios.get(`${URL}/properties/${id}`);
-        console.log(listingRes.data);
-        setListing(listingRes.data);
+        console.log(listingRes.data.data.property);
+        setListing(listingRes.data.data.property);
 
         // Fetch recent listings (excluding current one)
         const recentRes = await axios.get(`${URL}/properties`);
@@ -76,9 +78,26 @@ const SinglePropertyPage = () => {
     );
   }
 
+  const formatDescription = (text) => {
+    return text.split("\n").map((line, i) => {
+      if (line.trim().startsWith("- ")) {
+        return (
+          <li key={i} className="ml-4 list-disc">
+            {line.substring(2)}
+          </li>
+        );
+      }
+      return (
+        <p key={i} className="mb-3">
+          {line}
+        </p>
+      );
+    });
+  };
+
   return (
     <section>
-      <div className="relative h-96 w-full">
+      <header className="relative h-96 w-full">
         {/* Background Image */}
         <img
           src="/howworks.jpg"
@@ -88,8 +107,9 @@ const SinglePropertyPage = () => {
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/60" />
-      </div>
-      <div className="mx-auto max-w-7xl py-10">
+      </header>
+
+      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-0">
         {/* Back button */}
         <button
           onClick={() => navigate(-1)}
@@ -169,9 +189,24 @@ const SinglePropertyPage = () => {
           {/* Details */}
           <div className="md:col-span-2">
             <h2 className="mb-4 text-xl font-bold">Description</h2>
-            <p className="mb-6 text-base/8 whitespace-pre-line text-gray-700">
-              {listing.description || "No description available."}
-            </p>
+            <div className="mb-6 text-base/8 whitespace-pre-line text-gray-700">
+              {/* {listing.description || "No description available."} */}
+
+              <div
+                className={`overflow-hidden transition-all duration-300 ${expanded ? "" : "max-h-32"}`}
+              >
+                {formatDescription(listing.description) ||
+                  "No description available."}
+              </div>
+              {
+                <button
+                  onClick={() => setExpanded(!expanded)}
+                  className="mt-2 text-right font-medium text-blue-600 hover:underline"
+                >
+                  {expanded ? "- Read less" : "+ Read more"}
+                </button>
+              }
+            </div>
 
             <h2 className="mb-4 text-xl font-bold">Features</h2>
             <div className="mb-6 grid grid-cols-2 gap-4">
@@ -191,7 +226,7 @@ const SinglePropertyPage = () => {
               </div>
             </div>
 
-            <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="mb-6 grid grid-cols-2 gap-4 sm:grid-cols-2">
               {Object.entries(listing.otherDetails || {}).map(
                 ([key, value]) => (
                   <div
@@ -285,19 +320,19 @@ const SinglePropertyPage = () => {
                       {item.title.slice(0, 30)}...
                     </h3>
                     <p className="font-dm-sans text-sm text-neutral-400">
-                      {item.address}
+                      {item.location}
                     </p>
                   </div>
 
                   {/* Features */}
-                  <div className="mb-6 flex justify-between">
+                  <div className="mb-4 flex justify-between">
                     <div className="text-center">
                       <div className="mb-1 flex justify-center">
                         {/* Bed Icon */}
                         <LiaBedSolid />
                       </div>
                       <span className="font-dm-sans text-sm text-neutral-400">
-                        {item.beds} Beds
+                        {item.beds || "Beds"}
                       </span>
                     </div>
 
@@ -307,7 +342,7 @@ const SinglePropertyPage = () => {
                         <TfiRulerAlt2 />
                       </div>
                       <span className="font-dm-sans text-sm text-neutral-400">
-                        {item.size} Area
+                        {item.size || "Area"}
                       </span>
                     </div>
                   </div>
@@ -341,7 +376,7 @@ const SinglePropertyPage = () => {
             ))}
           </div>
         </div>
-      </div>
+      </main>
     </section>
   );
 };

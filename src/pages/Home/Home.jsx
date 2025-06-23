@@ -388,18 +388,19 @@ export default function Home() {
           {/* Property Grid */}
           <div className="grid grid-cols-1 gap-8 p-5 md:grid-cols-2 lg:grid-cols-4 lg:p-0">
             {properties.map((property) => (
-              <Link
-                to="/properties"
+              <div
                 key={property.id}
-                className="cursor-pointer overflow-hidden rounded-lg shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl"
+                className="overflow-hidden rounded-lg shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl"
               >
                 {/* Image & Tags */}
                 <div className="relative h-44">
-                  <img
-                    className="h-full w-full object-cover"
-                    src={property.image}
-                    alt="Property"
-                  />
+                  <Link to="/properties" className="cursor-pointer">
+                    <img
+                      className="h-full w-full object-cover"
+                      src={property.image}
+                      alt="Property"
+                    />
+                  </Link>
                   <div className="absolute top-4 right-4 left-4 flex justify-between">
                     <span className="font-poppins rounded bg-blue-700/90 px-2.5 py-2 text-xs text-white shadow">
                       FEATURED
@@ -465,14 +466,14 @@ export default function Home() {
                   </div>
 
                   {/* CTA */}
-                  <a
-                    href="#"
-                    className="mt-4 block text-sm font-medium text-blue-700 hover:underline"
+                  <Link
+                    to="/properties"
+                    className="mt-4 block cursor-pointer text-sm font-medium text-blue-700 hover:underline"
                   >
                     View Details
-                  </a>
+                  </Link>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
