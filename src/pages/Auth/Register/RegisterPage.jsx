@@ -11,7 +11,7 @@ const InputStyle =
 const RegisterPage = () => {
   const [processing, setProcessing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [step, setStep] = useState(1); // 1 = user info, 2 = payment info
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     // User info
     name: "",
@@ -76,7 +76,7 @@ const RegisterPage = () => {
     // Simulate processing
     setTimeout(() => {
       setProcessing(false);
-      toast.success("Registration complete! Data logged to console.");
+      toast.success("Registration complete!");
     }, 1000);
   };
 

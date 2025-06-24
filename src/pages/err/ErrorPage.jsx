@@ -26,10 +26,10 @@ const ErrorPage = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 p-4 text-center">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-red-50 p-4 text-center">
+      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow">
         {/* Error Icon */}
-        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 text-red-500">
+        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 text-red-400">
           <FiAlertTriangle className="h-8 w-8" />
         </div>
 
@@ -57,7 +57,7 @@ const ErrorPage = () => {
           </button>
           <Link
             to="/"
-            className="flex items-center justify-center rounded-md border border-transparent bg-yellow-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-yellow-700"
+            className="flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700"
           >
             <FiHome className="mr-2 h-4 w-4" />
             Return Home

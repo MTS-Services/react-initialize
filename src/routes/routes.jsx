@@ -1,5 +1,6 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+
 import { createBrowserRouter } from "react-router-dom";
 import MainLayOut from "../../MainLayOut";
 import LoginPage from "../pages/Auth/Login/LoginPage";
@@ -14,11 +15,14 @@ import ProfilePage from "../components/ProfilePage/ProfilePage";
 import PropertiesPage from "../pages/properties/PropertiesPage";
 import SinglePropertyPage from "../pages/properties/SinglePropertyPage";
 import ErrorPage from "../pages/err/ErrorPage";
+import CheckoutForm from "../pages/CheckoutForm/CheckoutForm";
 
 // import { lazy } from "react";
 // const Contact = lazy(() => import("../pages/Contact/Contact"));
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe(
+  "pk_test_51RcJiND60jTqpzFUTyaTS0m8gzJ8dJUoCMfzokDmF8UKWIKgzdoguwKoRuB1o1QOhzHKtUiRh7Q4TWURblIAzbtS00UT4FOEQx",
+);
 
 const AppRoutes = createBrowserRouter([
   {
@@ -49,7 +53,7 @@ const AppRoutes = createBrowserRouter([
         path: "/properties/:id",
         element: <SinglePropertyPage />,
       },
-      // ----------------------------
+      // -----------------------------------------------------------
       {
         path: "/property-list",
         element: <FilterPage />,
@@ -66,10 +70,11 @@ const AppRoutes = createBrowserRouter([
         path: "/register",
         element: (
           <Elements stripe={stripePromise}>
-            <RegisterPage />
+            <CheckoutForm />
           </Elements>
         ),
       },
+
       {
         path: "/profile",
         element: <ProfilePage />,

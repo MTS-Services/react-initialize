@@ -4,8 +4,7 @@ import { FiGrid, FiMapPin } from "react-icons/fi";
 import PropertiesCard from "../../components/common/PropertiesCard";
 import Pagination from "../../components/common/Pagination";
 import CardSkeleton from "../../components/common/Card-Skeleton";
-import { FaListUl } from "react-icons/fa";
-import Button from "../../components/ui/Button";
+
 import RangeSlider from "../../components/common/RangeSlider";
 
 const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
@@ -325,15 +324,6 @@ const PropertyListPage = () => {
                 className="mt-1 w-full rounded-md border border-gray-200 p-2"
               />
             </div>
-
-            {/* <Button
-              variant="yellowGradient"
-              size="lg"
-              type="submit"
-              className="w-full"
-            >
-              Apply Filters
-            </Button> */}
           </form>
         </aside>
 
