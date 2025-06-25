@@ -3,8 +3,8 @@ import Skeleton from "react-loading-skeleton";
 
 const CardSkeleton = () => {
   return (
-    <div className="flex overflow-hidden rounded-lg bg-white shadow">
-      <div className="h-[270px] w-2/3">
+    <div className="mb-6 flex overflow-hidden rounded-lg bg-white shadow">
+      <div className="h-[270px] w-2/3 p-4">
         <Skeleton height="100%" />
       </div>
       <div className="flex w-2/2 flex-col justify-between p-4">

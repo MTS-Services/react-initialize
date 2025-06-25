@@ -1,21 +1,42 @@
-import React, { useContext } from "react";
 import { FaHotel, FaRegHeart } from "react-icons/fa";
 import { FiClock, FiLayers, FiMapPin } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext/AuthContext";
 import Button from "../ui/Button";
+import { isPaid } from "../../features/auth/authUtils";
 
 // "https://via.placeholder.com/384x256?text=No+Image";
 
 const PeropertiesCard = ({ item }) => {
-  const { id, title, description, primaryImage, surface, rooms, location } =
-    item;
-  const { user } = useContext(AuthContext);
+  const {
+    id,
+    title,
+    description,
+    primaryImage,
+    createdAt,
+    location,
+    surface,
+    price,
+    rooms,
+  } = item;
+
+  const formatRelativeTime = (dateString) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000);
+
+    if (diffInSeconds < 60) return "Just now";
+    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
+    if (diffInSeconds < 86400)
+      return `${Math.floor(diffInSeconds / 3600)}h ago`;
+    if (diffInSeconds < 604800)
+      return `${Math.floor(diffInSeconds / 86400)}d ago`;
+    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  };
 
   return (
     <div
       key={id}
-      className="mb-4 w-full rounded-xl bg-white p-4 shadow-[0px_2px_6px_0px_rgba(0,0,0,0.12)] transition hover:shadow-md sm:h-72 md:mb-6"
+      className="mb-4 w-full rounded-lg bg-white p-4 shadow-sm transition hover:shadow-lg sm:h-72 md:mb-6"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
         {/* Image */}
@@ -43,8 +64,9 @@ const PeropertiesCard = ({ item }) => {
               <h3 className="text-lg font-semibold text-black capitalize sm:text-xl">
                 {title.slice(9, 40)}...
               </h3>
-              <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                <FiClock size={15} />2 days ago
+              <div className="flex items-center gap-1.5 text-sm text-gray-500">
+                <FiClock size={15} />
+                {formatRelativeTime(createdAt)}
               </div>
             </div>
 
@@ -79,7 +101,7 @@ const PeropertiesCard = ({ item }) => {
                 </div>
 
                 <h3 className="py-2 text-lg font-bold text-gray-600 capitalize sm:text-xl">
-                  € 10.05
+                  {price.slice(0, 7)}
                 </h3>
               </div>
             </div>

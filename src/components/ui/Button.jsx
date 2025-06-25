@@ -15,7 +15,7 @@ const Button = ({
 
   const variantStyles = {
     primary: "bg-blue-600 text-white hover:bg-blue-700",
-    secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300",
+    secondary: "bg-[#0C205A] hover:bg-gray-300 text-black",
     outline: "border border-gray-400 text-gray-800 hover:bg-gray-100",
     yellowGradient:
       "bg-gradient-to-r from-[#3CAAFA] to-[#1198fa] hover:from-[#1a8adb] hover:to-[#0278d9] shadow transition-transform hover:scale-95 ",

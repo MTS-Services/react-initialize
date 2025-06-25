@@ -1,15 +1,17 @@
 // ✅ Home.jsx (FULL CODE with enhancements)
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loadStripe } from "@stripe/stripe-js";
-import { FiDollarSign, FiMapPin, FiSearch } from "react-icons/fi";
+
+import { LuHeart } from "react-icons/lu";
 import { TfiRulerAlt2 } from "react-icons/tfi";
 import { LiaBedSolid } from "react-icons/lia";
-import { LuHeart } from "react-icons/lu";
-import Button from "../../components/ui/Button";
+import { FiDollarSign, FiMapPin, FiSearch } from "react-icons/fi";
+
 import axios from "axios";
-// import CityCard from '../../components/CityCard/CityCard';
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
+import { isPaid } from "../../features/auth/authUtils";
+
+import Button from "../../components/ui/Button";
 
 const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 
@@ -75,7 +77,7 @@ const cities = [
   {
     name: "Utrecht",
     props: "801+ Properties",
-    img: "/hero/utrech.png",
+    img: "/hero/eindhoven.png",
   },
   {
     name: "Eindhoven",
@@ -102,6 +104,9 @@ export default function Home() {
   const [maxPrice, setMaxPrice] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
+
+  const userIsPaid = isPaid();
+  console.log(userIsPaid);
 
   useEffect(() => {
     const fetchProperty = async () => {

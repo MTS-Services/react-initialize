@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import {
   FiArrowLeft,
   FiHeart,
@@ -11,11 +11,14 @@ import {
   FiPhone,
   FiMail,
 } from "react-icons/fi";
-import { LiaBedSolid } from "react-icons/lia";
-import { TfiRulerAlt2 } from "react-icons/tfi";
-import { LuHeart } from "react-icons/lu";
+import { FaLock } from "react-icons/fa";
+
 import Button from "../../components/ui/Button";
 import axios from "axios";
+import clsx from "clsx";
+
+import { isPaid } from "../../features/auth/authUtils";
+import RecentProperty from "../../components/common/RecentProperty";
 
 const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 
@@ -28,6 +31,8 @@ const SinglePropertyPage = () => {
   const [recent, setRecent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [mainImage, setMainImage] = useState(0);
+
+  const isPaidUser = isPaid();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -150,7 +155,7 @@ const SinglePropertyPage = () => {
 
         {/* Price */}
         <div className="mb-6 rounded-lg bg-yellow-50 p-4">
-          <h2 className="text-2xl font-bold text-blue-800">{listing.price}</h2>
+          <h2 className="text-2xl font-bold text-green-800">{listing.price}</h2>
         </div>
 
         {/* Image Gallery */}
@@ -165,29 +170,64 @@ const SinglePropertyPage = () => {
               className="h-96 w-full rounded-lg object-cover"
             />
           </div>
+
           <div className="grid grid-cols-2 gap-4">
-            {listing.media?.slice(0, 4).map((img, idx) => (
-              <div
-                key={idx}
-                onClick={() => setMainImage(idx)}
-                className="cursor-pointer"
-              >
-                <img
-                  src={img.url}
-                  alt={`Gallery ${idx}`}
-                  className={`h-44 w-full rounded-lg object-cover ring ring-gray-200 ${
-                    mainImage === idx ? "ring-2 ring-gray-200" : ""
-                  }`}
-                />
-              </div>
-            ))}
+            {isPaid
+              ? listing.media?.slice(0, 4).map((img, idx) => (
+                  <div
+                    key={idx}
+                    className="relative flex h-[20vh] w-full items-center justify-center overflow-hidden rounded-lg shadow"
+                    style={{
+                      backgroundImage: `url(${img.url})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  >
+                    {/* Dark overlay */}
+                    <div className="absolute inset-0 backdrop-blur"></div>
+
+                    {/* Lock content */}
+                    <div className="relative z-10 flex flex-col items-center justify-center">
+                      <Link
+                        to="/register"
+                        className="cursor-pointer rounded-full border border-slate-400 p-2 hover:bg-gray-500"
+                      >
+                        <FaLock size={18} className="text-gray-200" />
+                      </Link>
+                      <p className="mt-2 text-center text-base font-medium text-gray-100">
+                        Access Required
+                      </p>
+                    </div>
+                  </div>
+                ))
+              : listing.media?.slice(0, 4).map((img, idx) => (
+                  <div
+                    key={idx}
+                    onClick={() => setMainImage(idx)}
+                    className="cursor-pointer"
+                  >
+                    <img
+                      src={img.url}
+                      alt={`Gallery ${idx}`}
+                      className={`h-44 w-full rounded-lg object-cover ring ring-gray-200 ${
+                        mainImage === idx ? "ring-2 ring-gray-200" : ""
+                      }`}
+                    />
+                  </div>
+                ))}
           </div>
         </div>
 
         {/* Main Content */}
         <div className="grid gap-8 md:grid-cols-3">
           {/* Details */}
-          <div className="md:col-span-2">
+          <div
+            className={clsx(
+              isPaidUser
+                ? "overflow-hidden md:col-span-2"
+                : "h-96 overflow-hidden blur-sm md:col-span-2",
+            )}
+          >
             <h2 className="mb-4 text-xl font-bold">Description</h2>
             <div className="mb-6 text-base/8 whitespace-pre-line text-gray-700">
               {/* {listing.description || "No description available."} */}
@@ -249,47 +289,75 @@ const SinglePropertyPage = () => {
           <div className="sticky top-20 h-fit rounded-lg bg-gray-50 p-6">
             <h3 className="mb-4 text-xl font-bold">Contact Agent</h3>
             <hr className="mb-4 border border-gray-100" />
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-                  <span className="font-bold text-yellow-800">
-                    {listing.agent?.name?.charAt(0) || "A"}
-                  </span>
+            {!isPaid ? (
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+                    <span className="font-bold text-yellow-800">
+                      {listing.agent?.name?.charAt(0) || "A"}
+                    </span>
+                  </div>
+                  <div>
+                    <h4>{listing.agent?.name || "Agent Name"}</h4>
+                    <p className="text-sm text-gray-600">Real Estate Agent</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-medium">
-                    {listing.agent?.name || "Agent Name"}
-                  </p>
-                  <p className="text-sm text-gray-600">Real Estate Agent</p>
+
+                <div className="space-y-2">
+                  <a
+                    href={`tel:${listing.agent?.phone || ""}`}
+                    className="flex items-center gap-2 rounded-lg bg-white p-3 hover:bg-gray-100"
+                  >
+                    <FiPhone className="text-gray-600" />
+                    <span>
+                      {listing.agent?.phone || "Phone number not available"}
+                    </span>
+                  </a>
+
+                  <a
+                    href={`mailto:${listing.agent?.email || ""}`}
+                    className="flex items-center gap-2 rounded-lg bg-white p-3 hover:bg-gray-100"
+                  >
+                    <FiMail className="text-gray-600" />
+                    <span>{listing.agent?.email || "Email not available"}</span>
+                  </a>
                 </div>
               </div>
-
-              <div className="space-y-2">
-                <a
-                  href={`tel:${listing.agent?.phone || ""}`}
-                  className="flex items-center gap-2 rounded-lg bg-white p-3 hover:bg-gray-100"
-                >
-                  <FiPhone className="text-gray-600" />
-                  <span>
-                    {listing.agent?.phone || "Phone number not available"}
-                  </span>
-                </a>
-                <a
-                  href={`mailto:${listing.agent?.email || ""}`}
-                  className="flex items-center gap-2 rounded-lg bg-white p-3 hover:bg-gray-100"
-                >
-                  <FiMail className="text-gray-600" />
-                  <span>{listing.agent?.email || "Email not available"}</span>
-                </a>
+            ) : (
+              <div className="relative flex h-44 w-full flex-col items-center justify-center">
+                {/* Centered lock icon */}
+                <div className="relative z-10 flex flex-col items-center justify-center">
+                  <Link
+                    to="/register"
+                    className="cursor-pointer rounded-full bg-slate-100 p-4 hover:bg-gray-200"
+                  >
+                    <FaLock size={18} className="text-gray-300" />
+                  </Link>
+                  <p className="text-gray-400">Access Required</p>
+                </div>
               </div>
+            )}
 
-              <Button
-                className="w-full rounded-lg"
-                variant="yellowGradient"
-                size="lg"
-              >
-                Schedule a Visit
-              </Button>
+            <div className="pt-4">
+              {isPaidUser ? (
+                <Button
+                  className="w-full rounded-lg"
+                  variant="yellowGradient"
+                  size="lg"
+                >
+                  Schedule a Visit
+                </Button>
+              ) : (
+                <Link to="/register">
+                  <Button
+                    className="w-full rounded-lg"
+                    variant="secondary"
+                    size="lg"
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -300,79 +368,7 @@ const SinglePropertyPage = () => {
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {recent.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => navigate(`/properties/${item.id}`)}
-                className="cursor-pointer overflow-hidden rounded-lg shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl"
-              >
-                <img
-                  src={
-                    item.media?.[0]?.url ||
-                    "https://via.placeholder.com/400x300?text=No+Image"
-                  }
-                  alt={item.title}
-                  className="h-48 w-full object-cover"
-                />
-                {/* Details */}
-                <div className="bg-white p-6">
-                  <div className="mb-4">
-                    <h3 className="font-dm-sans mb-1 text-sm font-semibold text-cyan-950">
-                      {item.title.slice(0, 30)}...
-                    </h3>
-                    <p className="font-dm-sans text-sm text-neutral-400">
-                      {item.location}
-                    </p>
-                  </div>
-
-                  {/* Features */}
-                  <div className="mb-4 flex justify-between">
-                    <div className="text-center">
-                      <div className="mb-1 flex justify-center">
-                        {/* Bed Icon */}
-                        <LiaBedSolid />
-                      </div>
-                      <span className="font-dm-sans text-sm text-neutral-400">
-                        {item.beds || "Beds"}
-                      </span>
-                    </div>
-
-                    <div className="text-center">
-                      <div className="mb-1 flex justify-center">
-                        {/* Area Icon */}
-                        <TfiRulerAlt2 />
-                      </div>
-                      <span className="font-dm-sans text-sm text-neutral-400">
-                        {item.size || "Area"}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Price & Action */}
-                  <div className="border-opacity-40 flex items-center justify-between border-t border-neutral-400 pt-4">
-                    <div className="text-right">
-                      <div className="font-dm-sans text-sm font-semibold text-cyan-950">
-                        {item.price}
-                      </div>
-                    </div>
-
-                    <button
-                      type="button"
-                      aria-label="Add to favorites"
-                      className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-50 hover:bg-red-100"
-                    >
-                      <LuHeart />
-                    </button>
-                  </div>
-
-                  {/* CTA */}
-                  <a
-                    href="#"
-                    className="mt-4 block text-sm font-medium text-blue-700 hover:underline"
-                  >
-                    View Details
-                  </a>
-                </div>
-              </div>
+              <RecentProperty item={item} key={item.id} />
             ))}
           </div>
         </div>

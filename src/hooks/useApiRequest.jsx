@@ -74,37 +74,3 @@ export const useApiRequest = ({
 
   return method === "GET" ? query : mutation;
 };
-
-// const { mutate: login, isLoading } = useApiRequest({
-//   url: "/login",
-//   method: "POST",
-//   data: { email, password },
-//   requireAuth: false,
-//   onSuccess: (data) => {
-//     Cookies.set("token", data.token);
-//     toast.success("✅ Login Successful!");
-//   },
-// });
-
-// const { mutate: deletePost, isLoading } = useApiRequest({
-//   url: `/posts/${postId}`,
-//   method: "DELETE",
-//   invalidateKey: ["posts"], // Auto refetch post list
-// });
-
-// const { data, isFetching, refetch } = useApiRequest({
-//   url: `/search?q=${searchTerm}`,
-//   method: "GET",
-//   enabled: false, // Only fetch when refetch() is called
-//   queryKey: ["search", searchTerm],
-// });
-
-// import { useQueryClient } from "@tanstack/react-query";
-
-// const queryClient = useQueryClient();
-
-// // Prefetch profile data ahead of time
-// queryClient.prefetchQuery({
-//   queryKey: ["profile"],
-//   queryFn: () => axios.get("/profile").then((res) => res.data),
-// });

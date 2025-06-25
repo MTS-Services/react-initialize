@@ -205,10 +205,9 @@ const PropertyListPage = () => {
               className="relative rounded-md p-6 shadow-sm"
               ref={suggestionsRef}
             >
-              <label className="block text-sm font-medium text-gray-700">
-                <div className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-600">
-                  <FiMapPin /> Search Location
-                </div>
+              <label className="text-md mb-2 flex items-center gap-1.5 font-medium text-gray-500">
+                <FiMapPin size={15} />
+                Search Location
               </label>
               <input
                 type="text"
@@ -221,36 +220,41 @@ const PropertyListPage = () => {
                 autoComplete="off"
               />
 
-              {/* LOACTION SEARCH SUGGESTIONS */}
+              {/* Loading State */}
               {isFetchingSuggestions && (
                 <div className="absolute top-full left-0 z-10 mt-1 w-full rounded-md border border-gray-200 bg-white p-2 text-center text-sm text-gray-500">
-                  Loading suggestions...
+                  Loading...
                 </div>
               )}
 
-              {showSuggestions && suggestions.length > 0 && (
+              {/* Suggestions Dropdown */}
+              {showSuggestions && (
                 <ul className="absolute top-full left-0 z-10 mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-gray-200 bg-white p-2 shadow">
-                  {suggestions.map((suggestion, index) => (
-                    <li
-                      key={index}
-                      className="flex cursor-pointer items-center gap-2 rounded-2xl p-1.5 text-sm hover:bg-gray-100"
-                      onClick={() => handleSuggestionSelect(suggestion)}
-                    >
-                      <FiMapPin /> {suggestion}
+                  {suggestions.length > 0 ? (
+                    suggestions.map((suggestion, index) => (
+                      <li
+                        key={index}
+                        className="flex cursor-pointer items-center gap-2 rounded-2xl p-1.5 text-sm hover:bg-gray-100"
+                        onClick={() => handleSuggestionSelect(suggestion)}
+                      >
+                        <FiMapPin /> {suggestion}
+                      </li>
+                    ))
+                  ) : (
+                    <li className="px-4 py-2 text-gray-500">
+                      No locations found
                     </li>
-                  ))}
+                  )}
                 </ul>
               )}
             </div>
 
             <div className="rounded-md p-6 shadow-sm">
-              <h4 className="text-lg font-medium text-gray-500">
-                € Rental price range
-              </h4>
-              <hr className="my-4 text-gray-200" />
+              <h4 className="text-md text-gray-500">$ Price Range</h4>
+              <hr className="my-2.5 text-gray-200" />
               <div className="mb-8 grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-500">
                     $ Min Price
                   </label>
                   <input
@@ -264,7 +268,7 @@ const PropertyListPage = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-gray-500">
                     $ Max Price
                   </label>
                   <input
@@ -292,16 +296,14 @@ const PropertyListPage = () => {
             </div>
 
             <div className="rounded-md p-5 shadow">
-              <label className="block text-sm font-medium text-gray-700">
-                Bedrooms
-              </label>
+              <label className="text-md block text-gray-500">◪ Bedrooms</label>
               <ul className="grid grid-cols-3 gap-2 pt-4">
                 {["1 rooms", "2 rooms", "3 rooms", "3 rooms", "3 rooms"].map(
                   (i, index) => {
                     return (
                       <li
                         key={index}
-                        className="cursor-pointer rounded-full border border-gray-200 p-2 text-center text-sm hover:bg-gray-200"
+                        className="cursor-pointer rounded-full border border-gray-200 p-2 text-center text-sm text-gray-500 hover:bg-gray-200"
                       >
                         {i}
                       </li>
@@ -312,7 +314,7 @@ const PropertyListPage = () => {
             </div>
 
             <div className="rounded-md p-5 shadow">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-500">
                 Min Surface (m2)
               </label>
               <input

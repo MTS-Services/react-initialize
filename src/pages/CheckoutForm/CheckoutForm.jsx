@@ -122,7 +122,7 @@ const CheckoutForm = () => {
           {/* Right Form Section */}
           <div className="flex w-full flex-col justify-center p-10 md:w-1/2">
             <h2 className="mb-10 text-center text-3xl font-extrabold text-[#19398A]">
-              Login to your account
+              Paye & Register
             </h2>
             <form onSubmit={handleSubmit} className="">
               {/* Name Field */}

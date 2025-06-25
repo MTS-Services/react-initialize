@@ -14,9 +14,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
+import { isPaid } from "../../features/auth/authUtils";
 
 function MainHeader() {
   const { user, logOutUser } = useContext(AuthContext);
+
+  const isUserPaid = isPaid();
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -88,7 +92,7 @@ function MainHeader() {
 
             {isDropdownOpen && (
               <div className="absolute top-12 right-0 z-50 w-44 rounded-md bg-white text-black shadow-md">
-                {user ? (
+                {isUserPaid ? (
                   <>
                     <DropdownItem to="/profile" icon={<FiUser />}>
                       Profile
@@ -145,7 +149,7 @@ function MainHeader() {
           >
             Contact
           </MenuLink>
-          {user ? (
+          {isUserPaid ? (
             <>
               <MenuLink
                 to="/profile"
