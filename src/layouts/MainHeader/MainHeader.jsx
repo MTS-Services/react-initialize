@@ -13,12 +13,9 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher";
-import { AuthContext } from "../../context/AuthContext/AuthContext";
-import { isPaid } from "../../features/auth/authUtils";
+import { isPaid, logout } from "../../features/auth/authUtils";
 
 function MainHeader() {
-  const { user, logOutUser } = useContext(AuthContext);
-
   const isUserPaid = isPaid();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -39,7 +36,7 @@ function MainHeader() {
   };
 
   const logOutHandler = () => {
-    logOutUser();
+    logout();
     toast.success("Logged out successfully");
     navigate("/");
   };

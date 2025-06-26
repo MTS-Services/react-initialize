@@ -11,3 +11,10 @@ export const getAuthToken = () => {
   console.log(user);
   return user?.token || null;
 };
+
+// Logout user
+export const logout = () => {
+  localStorage.removeItem("userInfo");
+  localStorage.removeItem("token");
+  // Optionally, remove more items if needed
+};

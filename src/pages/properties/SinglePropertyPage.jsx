@@ -27,6 +27,7 @@ const SinglePropertyPage = () => {
   const [expanded, setExpanded] = useState(false);
 
   const navigate = useNavigate();
+
   const [listing, setListing] = useState(null);
   const [recent, setRecent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -172,8 +173,23 @@ const SinglePropertyPage = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            {isPaid
+            {isPaidUser
               ? listing.media?.slice(0, 4).map((img, idx) => (
+                  <div
+                    key={idx}
+                    onClick={() => setMainImage(idx)}
+                    className="cursor-pointer"
+                  >
+                    <img
+                      src={img.url}
+                      alt={`Gallery ${idx}`}
+                      className={`h-44 w-full rounded-lg object-cover ring ring-gray-200 ${
+                        mainImage === idx ? "ring-2 ring-gray-200" : ""
+                      }`}
+                    />
+                  </div>
+                ))
+              : listing.media?.slice(0, 4).map((img, idx) => (
                   <div
                     key={idx}
                     className="relative flex h-[20vh] w-full items-center justify-center overflow-hidden rounded-lg shadow"
@@ -198,21 +214,6 @@ const SinglePropertyPage = () => {
                         Access Required
                       </p>
                     </div>
-                  </div>
-                ))
-              : listing.media?.slice(0, 4).map((img, idx) => (
-                  <div
-                    key={idx}
-                    onClick={() => setMainImage(idx)}
-                    className="cursor-pointer"
-                  >
-                    <img
-                      src={img.url}
-                      alt={`Gallery ${idx}`}
-                      className={`h-44 w-full rounded-lg object-cover ring ring-gray-200 ${
-                        mainImage === idx ? "ring-2 ring-gray-200" : ""
-                      }`}
-                    />
                   </div>
                 ))}
           </div>
@@ -289,7 +290,7 @@ const SinglePropertyPage = () => {
           <div className="sticky top-20 h-fit rounded-lg bg-gray-50 p-6">
             <h3 className="mb-4 text-xl font-bold">Contact Agent</h3>
             <hr className="mb-4 border border-gray-100" />
-            {!isPaid ? (
+            {isPaidUser ? (
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">

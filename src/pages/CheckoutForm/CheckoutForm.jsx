@@ -39,7 +39,7 @@ const CheckoutForm = () => {
       // 1. Create Payment Intent
       const {
         data: { clientSecret },
-      } = await axios.post("http://localhost:3001/create-payment-intent", {
+      } = await axios.post("http://localhost:3000/api/stripe/create-payment", {
         amount: 1000,
         currency: "usd",
       });
@@ -68,6 +68,7 @@ const CheckoutForm = () => {
           {
             email: formData.email,
             name: formData.name,
+            password: formData.password,
             paymentId: paymentIntent.id,
           },
         );
@@ -158,6 +159,24 @@ const CheckoutForm = () => {
                   name="email"
                   id="email"
                   value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="mb-4">
+                <label
+                  className="mb-2 block text-sm font-bold text-gray-700"
+                  htmlFor="email"
+                >
+                  Password
+                </label>
+                <input
+                  className="w-full rounded-xl border border-gray-300 px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none"
+                  type="password"
+                  name="password"
+                  id="password"
+                  value={formData.password}
                   onChange={handleChange}
                   required
                 />
