@@ -11,6 +11,7 @@ import Home from "../pages/Home/Home";
 import ProfilePage from "../components/ProfilePage/ProfilePage";
 import CheckoutForm from "../pages/CheckoutForm/CheckoutForm";
 import Contact from "../pages/Contact/Contact";
+import FavouritePage from "../pages/FavouritePage/FavouritePage";
 import About from "../pages/about/About";
 import ErrorPage from "../pages/err/ErrorPage";
 import PropertiesPage from "../pages/properties/PropertiesPage";
@@ -47,6 +48,10 @@ const AppRoutes = createBrowserRouter([
       {
         path: "/properties",
         element: <PropertiesPage />,
+      },
+      {
+        path: "/favourite",
+        element: <FavouritePage />,
       },
       {
         path: "/properties/:id",

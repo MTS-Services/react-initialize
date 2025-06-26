@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiGrid, FiMapPin } from "react-icons/fi";
-import PropertiesCard from "../../components/common/PropertiesCard";
-import Pagination from "../../components/common/Pagination";
 import CardSkeleton from "../../components/common/Card-Skeleton";
+import Pagination from "../../components/common/Pagination";
+import PropertiesCard from "../../components/common/PropertiesCard";
 
 import RangeSlider from "../../components/common/RangeSlider";
 

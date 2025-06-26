@@ -7,6 +7,7 @@ import { FavoriteContext } from "./FavouriteContext";
 // Create the FavoriteProvider to wrap the app
 export const FavoriteProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
+  console.log("user - ", user);
   const [favorites, setFavorites] = useState([]);
   const URL = "https://apify-backend.onrender.com/api";
   const [isSyncing, setIsSyncing] = useState(false); // Flag to track if we are syncing with the DB
@@ -74,7 +75,7 @@ export const FavoriteProvider = ({ children }) => {
   // Function to get token from localStorage
   const getToken = () => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    return userInfo?.data?.token;
+    return userInfo?.data?.token; // Get the token from userInfo in localStorage
   };
 
   // Function to toggle favorite (add/remove)
@@ -83,6 +84,7 @@ export const FavoriteProvider = ({ children }) => {
       // If user is not logged in, store favorites in localStorage
       const updatedFavorites = [...favorites];
       const index = updatedFavorites.indexOf(itemId);
+
       if (index !== -1) {
         updatedFavorites.splice(index, 1); // Remove from favorites
         toast.info("Removed from favorites"); // Info toast
@@ -112,6 +114,7 @@ export const FavoriteProvider = ({ children }) => {
         if (response.ok) {
           const updatedFavorites = [...favorites];
           const index = updatedFavorites.indexOf(itemId);
+
           if (index !== -1) {
             updatedFavorites.splice(index, 1); // Remove if already in the list
             toast.info("Removed from favorites"); // Info toast
@@ -123,6 +126,7 @@ export const FavoriteProvider = ({ children }) => {
             toast.success("Added to favorites"); // Success toast
             console.log(`Property ID ${itemId} added to database favorites`); // Debugging log
           }
+
           setFavorites(updatedFavorites);
         } else {
           toast.error("Failed to update favorites in the database"); // Error toast

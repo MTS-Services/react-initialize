@@ -9,7 +9,6 @@ import {
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import app from "../../firebase/firebase.config";
-
 import { AuthContext } from "./AuthContext";
 
 const auth = getAuth(app);
@@ -33,10 +32,11 @@ const AuthProvider = ({ children }) => {
 
   const logOutUser = () => {
     setIsLoading(true);
-    Cookies.remove("core");
+    Cookies.remove("userInfo");
     queryClient.clear();
     setRole(null);
     setUser(null);
+    localStorage.removeItem("userInfo");
     return signOut(auth);
   };
 
@@ -44,40 +44,15 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
+        console.log("User logged in:", currentUser); // Log user details
         setUser(currentUser);
-        const userInfo = { email: currentUser.email };
-
-        //     try {
-        //       const res = await axios.post(
-        //         "https://mtsbackend20-production.up.railway.app/api/teamMember/login",
-        //         userInfo,
-        //       );
-
-        //       const token = res.data?.token;
-        //       const teamMember = res.data?.teamMember;
-
-        //       if (token && teamMember) {
-        //         Cookies.set("core", token, { expires: 1 });
-        //         setRole(teamMember.role);
-        //         setDbUser(teamMember);
-        //       } else {
-        //         console.warn("⚠️ Login succeeded, but token or role missing.");
-        //       }
-        //     } catch (error) {
-        //       const status = error?.response?.status;
-        //       console.error("❌ Login fetch failed:", error);
-
-        //       if (status === 401 || status === 403) {
-        //         Cookies.remove("core");
-        //         setRole(null);
-        //       }
-        //     }
-        //   } else {
-        //     setUser(null);
-        //     setRole(null);
-        //     Cookies.remove("core");
-        //   }
-
+        setIsLoading(false);
+      } else {
+        console.log("No user logged in");
+        setUser(null);
+        setRole(null);
+        Cookies.remove("userInfo");
+        localStorage.removeItem("userInfo");
         setIsLoading(false);
       }
     });
