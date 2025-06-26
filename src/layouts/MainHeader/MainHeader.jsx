@@ -37,7 +37,7 @@ function MainHeader() {
 
   const logOutHandler = () => {
     logout();
-    toast.success("Logged out successfully");
+    toast.info("Logged out successfully");
     navigate("/");
   };
 

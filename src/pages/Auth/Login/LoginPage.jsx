@@ -1,27 +1,38 @@
-import React, { useContext } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { AuthContext } from "../../../context/AuthContext/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../../features/auth/authSlice"; // Import loginUser action
 import Button from "../../../components/ui/Button";
 
 function LoginPage() {
-  const { signInUser, isLoading, setIsLoading } = useContext(AuthContext);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { handleSubmit } = useForm();
+  // Get loading and error states from Redux store
+  const { loading } = useSelector((state) => state.auth);
 
-  const onSubmit = async ({ email, password }) => {
+  // Local state for email and password
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const onSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    setError(""); // Clear any previous errors
+
+    if (!email || !password) {
+      setError("Both email and password are required.");
+      return;
+    }
     try {
-      setIsLoading(true);
-      await signInUser(email, password);
+      // Dispatch loginUser action
+      await dispatch(loginUser({ email, password })).unwrap();
+
       toast.success("User login successfully!");
-      navigate("/");
+      navigate("/properties");
     } catch (error) {
       toast.error(error.message || "Login failed!");
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -48,7 +59,7 @@ function LoginPage() {
               Login to your account
             </h2>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={onSubmit} className="space-y-6">
               {/* Email Field */}
               <div>
                 <label
@@ -62,6 +73,8 @@ function LoginPage() {
                   type="email"
                   placeholder="you@example.com"
                   className="w-full rounded-xl border border-gray-300 px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)} // Update email state on change
                 />
               </div>
 
@@ -78,18 +91,23 @@ function LoginPage() {
                   type="password"
                   placeholder="********"
                   className="w-full rounded-xl border border-gray-300 px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)} // Update password state on change
                 />
               </div>
+
+              {/* Error Message */}
+              {error && <p className="text-sm text-red-500">{error}</p>}
 
               {/* Submit Button */}
               <Button
                 type="submit"
-                disabled={isLoading}
+                disabled={loading}
                 size="lg"
                 variant="yellowGradient"
                 className="w-full"
               >
-                {isLoading ? "submiting..." : "Login"}
+                {loading ? "Submitting..." : "Login"}
               </Button>
             </form>
 

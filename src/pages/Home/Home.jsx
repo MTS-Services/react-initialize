@@ -98,15 +98,12 @@ const cities = [
 
 export default function Home() {
   const [listings, setListings] = useState([]);
-  const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [query, setQuery] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
-
-  const userIsPaid = isPaid();
-  console.log(userIsPaid);
 
   useEffect(() => {
     const fetchProperty = async () => {

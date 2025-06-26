@@ -1,16 +1,21 @@
 // src/features/auth/authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { loginAPI } from "./authAPI"; // Import the loginAPI function
 
 export const loginUser = createAsyncThunk(
-  "auth/loginUser",
-  async (userData, { rejectWithValue }) => {
+  "auth/loginUser", // The name of the action
+  async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/api/login", userData); // Replace with real API
-      localStorage.setItem("authUser", JSON.stringify(response.data));
-      return response.data;
+      // Call the API to login
+      const data = await loginAPI({ email, password });
+
+      // Save user info to localStorage
+      localStorage.setItem("userInfo", JSON.stringify(data));
+
+      return data; // Return the response data to be used in the fulfilled state
     } catch (err) {
-      return rejectWithValue(err.response.data.message);
+      // If there's an error, return the error message as the rejected value
+      return rejectWithValue(err.response?.data?.message || "Login failed!");
     }
   },
 );
@@ -18,16 +23,17 @@ export const loginUser = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: JSON.parse(localStorage.getItem("authUser")) || null,
+    user: JSON.parse(localStorage.getItem("userInfo")) || null,
     loading: false,
     error: null,
   },
   reducers: {
     logout: (state) => {
       state.user = null;
-      localStorage.removeItem("authUser");
+      localStorage.removeItem("userInfo");
     },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
@@ -46,4 +52,5 @@ const authSlice = createSlice({
 });
 
 export const { logout } = authSlice.actions;
+
 export default authSlice.reducer;
