@@ -4,18 +4,17 @@ import { loadStripe } from "@stripe/stripe-js";
 import { createBrowserRouter } from "react-router-dom";
 import MainLayOut from "../../MainLayOut";
 import LoginPage from "../pages/Auth/Login/LoginPage";
-import RegisterPage from "../pages/Auth/Register/RegisterPage";
 import FilterPage from "../pages/FilterPage/FilterPage";
 import SingleListingPage from "../pages/FilterPage/SingleListingPage";
 import Home from "../pages/Home/Home";
 
+import ProfilePage from "../components/ProfilePage/ProfilePage";
+import CheckoutForm from "../pages/CheckoutForm/CheckoutForm";
 import Contact from "../pages/Contact/Contact";
 import About from "../pages/about/About";
-import ProfilePage from "../components/ProfilePage/ProfilePage";
+import ErrorPage from "../pages/err/ErrorPage";
 import PropertiesPage from "../pages/properties/PropertiesPage";
 import SinglePropertyPage from "../pages/properties/SinglePropertyPage";
-import ErrorPage from "../pages/err/ErrorPage";
-import CheckoutForm from "../pages/CheckoutForm/CheckoutForm";
 
 // import { lazy } from "react";
 // const Contact = lazy(() => import("../pages/Contact/Contact"));

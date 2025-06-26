@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { FaLock } from "react-icons/fa";
 import {
   FiArrowLeft,
-  FiHeart,
-  FiShare2,
-  FiMapPin,
-  FiLayers,
-  FiHome,
   FiClock,
-  FiPhone,
+  FiHeart,
+  FiHome,
+  FiLayers,
   FiMail,
+  FiMapPin,
+  FiPhone,
+  FiShare2,
 } from "react-icons/fi";
-import { FaLock } from "react-icons/fa";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-import Button from "../../components/ui/Button";
 import axios from "axios";
 import clsx from "clsx";
+import Button from "../../components/ui/Button";
 
-import { isPaid } from "../../features/auth/authUtils";
 import RecentProperty from "../../components/common/RecentProperty";
+import { isPaid } from "../../features/auth/authUtils";
 
 const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 

@@ -1,8 +1,8 @@
-import { FaHotel, FaRegHeart } from "react-icons/fa";
+import { FaHotel } from "react-icons/fa";
 import { FiClock, FiLayers, FiMapPin } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import FavouriteIcon from "../FavouriteIcon/FavouriteIcon";
 import Button from "../ui/Button";
-import { isPaid } from "../../features/auth/authUtils";
 
 // "https://via.placeholder.com/384x256?text=No+Image";
 
@@ -51,7 +51,7 @@ const PeropertiesCard = ({ item }) => {
 
           <div className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border-t border-zinc-900/5 bg-white p-2 shadow">
             <div className="h-4 w-4 text-blue-800">
-              <FaRegHeart />
+              <FavouriteIcon itemId={id} />
             </div>
           </div>
         </div>

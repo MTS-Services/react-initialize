@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FiHome,
   FiInfo,
@@ -12,6 +12,7 @@ import {
 } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import FavouriteCoutingIcon from "../../components/FavouriteCoutingIcon/FavouriteCoutingIcon";
 import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher";
 import { isPaid, logout } from "../../features/auth/authUtils";
 
@@ -71,6 +72,7 @@ function MainHeader() {
           <MenuLink to="/">Home</MenuLink>
           <MenuLink to="/about">About</MenuLink>
           <MenuLink to="/contact">Contact</MenuLink>
+          <FavouriteCoutingIcon itemId="unique-property-id" />
         </nav>
 
         {/* Right Side */}
