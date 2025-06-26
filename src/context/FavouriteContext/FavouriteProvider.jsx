@@ -1,4 +1,6 @@
 import { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify"; // Importing toast for notifications
+import "react-toastify/dist/ReactToastify.css"; // Importing styles for toast
 import { AuthContext } from "../AuthContext/AuthContext";
 import { FavoriteContext } from "./FavouriteContext";
 
@@ -16,13 +18,13 @@ export const FavoriteProvider = ({ children }) => {
       const savedFavorites =
         JSON.parse(localStorage.getItem("favorites")) || [];
       setFavorites(savedFavorites);
+      console.log("Loaded favorites from localStorage:", savedFavorites); // Debugging log
     }
   }, [user]);
 
   // Sync favorites with the database when the user logs in
   useEffect(() => {
     if (user && !isSyncing) {
-      // If the user is logged in, sync favorites with the database
       const syncFavorites = async () => {
         setIsSyncing(true);
         try {
@@ -31,10 +33,12 @@ export const FavoriteProvider = ({ children }) => {
 
           // Save the favorites to the database if any exist in localStorage
           if (savedFavorites.length > 0) {
-            await fetch(`${URL}/favorites/addFavorite`, {
+            console.log("Syncing favorites with the database..."); // Debugging log
+            const response = await fetch(`${URL}/favorites/addFavorite`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${getToken()}`, // Include the token in the Authorization header
               },
               body: JSON.stringify({
                 userId: user.id,
@@ -42,18 +46,22 @@ export const FavoriteProvider = ({ children }) => {
               }),
             });
 
-            // After syncing, clear localStorage and load from the database
-            localStorage.removeItem("favorites");
+            if (response.ok) {
+              localStorage.removeItem("favorites"); // After syncing, clear localStorage
+              console.log("Cleared favorites from localStorage"); // Debugging log
 
-            // Fetch the favorites from the DB after syncing
-            const response = await fetch(
-              `${URL}/favorites/getFavorites/${user.id}`,
-            );
-            const dbFavorites = await response.json();
-            setFavorites(dbFavorites);
+              const dbFavorites = await response.json();
+              setFavorites(dbFavorites);
+              toast.success("Favorites synced with the database!"); // Success toast
+              console.log("Favorites synced from DB:", dbFavorites); // Debugging log
+            } else {
+              toast.error("Failed to sync favorites with the database!"); // Error toast
+              console.error("Error syncing favorites with DB:", response); // Debugging log
+            }
           }
         } catch (error) {
           console.error("Error syncing favorites with database:", error);
+          toast.error("Error syncing favorites with the database!"); // Error toast
         } finally {
           setIsSyncing(false);
         }
@@ -63,18 +71,28 @@ export const FavoriteProvider = ({ children }) => {
     }
   }, [user, isSyncing]);
 
-  // Function to toggle favorite
+  // Function to get token from localStorage
+  const getToken = () => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    return userInfo?.data?.token;
+  };
+
+  // Function to toggle favorite (add/remove)
   const toggleFavorite = async (itemId) => {
     if (!user) {
       // If user is not logged in, store favorites in localStorage
       const updatedFavorites = [...favorites];
       const index = updatedFavorites.indexOf(itemId);
       if (index !== -1) {
-        // Remove from favorites
-        updatedFavorites.splice(index, 1);
+        updatedFavorites.splice(index, 1); // Remove from favorites
+        toast.info("Removed from favorites"); // Info toast
+        console.log(
+          `Property ID ${itemId} removed from localStorage favorites`,
+        ); // Debugging log
       } else {
-        // Add to favorites
-        updatedFavorites.push(itemId);
+        updatedFavorites.push(itemId); // Add to favorites
+        toast.success("Added to favorites"); // Success toast
+        console.log(`Property ID ${itemId} added to localStorage favorites`); // Debugging log
       }
 
       setFavorites(updatedFavorites);
@@ -82,25 +100,37 @@ export const FavoriteProvider = ({ children }) => {
     } else {
       // If user is logged in, save to database
       try {
-        await fetch(`${URL}/favorites/addFavorite`, {
+        const response = await fetch(`${URL}/favorites/addFavorite`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`, // Include the token in the Authorization header
           },
           body: JSON.stringify({ userId: user.id, propertyId: itemId }),
         });
 
-        // Add or remove from the current favorites state
-        const updatedFavorites = [...favorites];
-        const index = updatedFavorites.indexOf(itemId);
-        if (index !== -1) {
-          updatedFavorites.splice(index, 1); // Remove if already in the list
+        if (response.ok) {
+          const updatedFavorites = [...favorites];
+          const index = updatedFavorites.indexOf(itemId);
+          if (index !== -1) {
+            updatedFavorites.splice(index, 1); // Remove if already in the list
+            toast.info("Removed from favorites"); // Info toast
+            console.log(
+              `Property ID ${itemId} removed from database favorites`,
+            ); // Debugging log
+          } else {
+            updatedFavorites.push(itemId); // Add if not in the list
+            toast.success("Added to favorites"); // Success toast
+            console.log(`Property ID ${itemId} added to database favorites`); // Debugging log
+          }
+          setFavorites(updatedFavorites);
         } else {
-          updatedFavorites.push(itemId); // Add if not in the list
+          toast.error("Failed to update favorites in the database"); // Error toast
+          console.error("Failed to update favorites:", response); // Debugging log
         }
-        setFavorites(updatedFavorites);
       } catch (error) {
         console.error("Error updating favorites in the database:", error);
+        toast.error("Error updating favorites"); // Error toast
       }
     }
   };
