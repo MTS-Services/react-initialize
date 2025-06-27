@@ -8,9 +8,9 @@ export const FavoriteProvider = ({ children }) => {
   // localStorage থেকে ইউজার ইনফো লোড করা হচ্ছে
   const user = JSON.parse(localStorage.getItem("userInfo")) || null;
   console.log("ইউজার - ", user);
-
+  // "https://apify-backend.onrender.com/api"
   const [favorites, setFavorites] = useState([]);
-  const URL = "https://apify-backend.onrender.com/api"; // আপনার API বেস URL
+  const URL = "http://localhost:3000/api"; // আপনার API বেস URL
   const [isSyncing, setIsSyncing] = useState(false); // ট্র্যাক করার জন্য ফ্ল্যাগ যে আমরা DB এর সাথে সিঙ্ক করছি কিনা
   // প্রাথমিক সিঙ্ক একবার হয়েছে কিনা তা ট্র্যাক করার জন্য নতুন ফ্ল্যাগ
   const [hasAttemptedInitialSync, setHasAttemptedInitialSync] = useState(false);
@@ -46,7 +46,7 @@ export const FavoriteProvider = ({ children }) => {
                 Authorization: `Bearer ${getToken()}`, // অথরাইজেশন হেডারে টোকেন অন্তর্ভুক্ত করা হচ্ছে
               },
               body: JSON.stringify({
-                userId: user.id,
+                userId: user.data.id,
                 favorites: savedFavorites, // localStorage থেকে সব ফেভারিট একসাথে পাঠানো হচ্ছে
               }),
             });
@@ -147,7 +147,7 @@ export const FavoriteProvider = ({ children }) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${getToken()}`, // অথরাইজেশন হেডারে টোকেন অন্তর্ভুক্ত করা হচ্ছে
           },
-          body: JSON.stringify({ userId: user.id, propertyId: itemId }), // ইউজার আইডি এবং প্রপার্টি আইডি পাঠানো হচ্ছে
+          body: JSON.stringify({ userId: user.data.id, propertyId: itemId }), // ইউজার আইডি এবং প্রপার্টি আইডি পাঠানো হচ্ছে
         });
 
         if (response.ok) {
