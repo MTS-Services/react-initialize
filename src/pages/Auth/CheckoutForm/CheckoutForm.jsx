@@ -238,7 +238,7 @@ const CheckoutForm = () => {
               <p className="mt-6 text-center text-gray-600">
                 You have an account?{" "}
                 <Link
-                  to="/login"
+                  to="/auth/login"
                   className="font-semibold text-[#19398A] hover:underline"
                 >
                   Login

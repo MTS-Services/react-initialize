@@ -106,10 +106,10 @@ function MainHeader() {
                   </>
                 ) : (
                   <>
-                    <DropdownItem to="/login" icon={<FiLogIn />}>
+                    <DropdownItem to="/auth/login" icon={<FiLogIn />}>
                       Login
                     </DropdownItem>
-                    <DropdownItem to="/register" icon={<FiUserPlus />}>
+                    <DropdownItem to="/auth/register" icon={<FiUserPlus />}>
                       Sign Up
                     </DropdownItem>
                   </>

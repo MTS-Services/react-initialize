@@ -115,7 +115,7 @@ function LoginPage() {
             <p className="mt-6 text-center text-gray-600">
               Don't have an account?{" "}
               <Link
-                to="/register"
+                to="/auth/register"
                 className="font-semibold text-[#19398A] hover:underline"
               >
                 Register
