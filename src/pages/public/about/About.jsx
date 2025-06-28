@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiPlus, FiX } from "react-icons/fi";
 
-import Button from "../../components/ui/Button";
+import Button from "../../../components/ui/Button";
 
 const faqData = [
   {

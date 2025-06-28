@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FaHotel } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
-import CardSkeleton from "../../components/common/Card-Skeleton";
-import { AuthContext } from "../../context/AuthContext/AuthContext";
+import CardSkeleton from "../../../components/common/Card-Skeleton";
+import { AuthContext } from "../../../context/AuthContext/AuthContext";
 import {
   FiClock,
   FiDollarSign,

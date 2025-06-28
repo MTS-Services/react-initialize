@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { FiGrid, FiMapPin } from "react-icons/fi";
-import CardSkeleton from "../../components/common/Card-Skeleton";
-import Pagination from "../../components/common/Pagination";
-import PropertiesCard from "../../components/common/PropertiesCard";
+import CardSkeleton from "../../../components/common/Card-Skeleton";
+import Pagination from "../../../components/common/Pagination";
+import PropertiesCard from "../../../components/common/PropertiesCard";
 
-import RangeSlider from "../../components/common/RangeSlider";
+import RangeSlider from "../../../components/common/RangeSlider";
 
 const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 

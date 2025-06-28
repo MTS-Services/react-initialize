@@ -2,20 +2,22 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
 import { createBrowserRouter } from "react-router-dom";
+
 import MainLayOut from "../../MainLayOut";
 import LoginPage from "../pages/Auth/Login/LoginPage";
-import FilterPage from "../pages/FilterPage/FilterPage";
-import SingleListingPage from "../pages/FilterPage/SingleListingPage";
-import Home from "../pages/Home/Home";
+import FilterPage from "../pages/public/FilterPage/FilterPage";
+import SingleListingPage from "../pages/public/FilterPage/SingleListingPage";
+import Home from "../pages/public/Home/Home";
 
 import ProfilePage from "../components/ProfilePage/ProfilePage";
-import CheckoutForm from "../pages/CheckoutForm/CheckoutForm";
-import Contact from "../pages/Contact/Contact";
-import FavouritePage from "../pages/FavouritePage/FavouritePage";
-import About from "../pages/about/About";
+import CheckoutForm from "../pages/public/CheckoutForm/CheckoutForm";
+import Contact from "../pages/public/Contact/Contact";
+import FavouritePage from "../pages/public/FavouritePage/FavouritePage";
+import About from "../pages/public/about/About";
 import ErrorPage from "../pages/err/ErrorPage";
-import PropertiesPage from "../pages/properties/PropertiesPage";
-import SinglePropertyPage from "../pages/properties/SinglePropertyPage";
+import PropertiesPage from "../pages/public/properties/PropertiesPage";
+import SinglePropertyPage from "../pages/public/properties/SinglePropertyPage";
+import Dashboard from "../pages/admin/Dashboard";
 
 // import { lazy } from "react";
 // const Contact = lazy(() => import("../pages/Contact/Contact"));
@@ -69,6 +71,10 @@ const AppRoutes = createBrowserRouter([
       {
         path: "/login",
         element: <LoginPage />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
       },
       {
         path: "/register",

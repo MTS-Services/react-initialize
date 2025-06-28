@@ -9,9 +9,7 @@ import { FiDollarSign, FiMapPin, FiSearch } from "react-icons/fi";
 
 import axios from "axios";
 
-import { isPaid } from "../../features/auth/authUtils";
-
-import Button from "../../components/ui/Button";
+import Button from "../../../components/ui/Button";
 
 const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 

@@ -14,7 +14,7 @@ import {
 import { LiaBedSolid } from "react-icons/lia";
 import { TfiRulerAlt2 } from "react-icons/tfi";
 import { LuHeart } from "react-icons/lu";
-import Button from "../../components/ui/Button";
+import Button from "../../../components/ui/Button";
 
 const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify"; // Importing toast for notifications
 import "react-toastify/dist/ReactToastify.css"; // Importing styles for toast
-import CardSkeleton from "../../components/common/Card-Skeleton";
+import CardSkeleton from "../../../components/common/Card-Skeleton";
 import FavouriteCard from "./FavouriteCard";
 
 const URL = "https://apify-backend.onrender.com/api/favorites/getFavorites";

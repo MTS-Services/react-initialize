@@ -5,7 +5,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import PaymentSuccsess from "./PaymentSuccsess";
 import { Link } from "react-router-dom";
-import Button from "../../components/ui/Button";
+import Button from "../../../components/ui/Button";
 
 const CheckoutForm = () => {
   const stripe = useStripe();

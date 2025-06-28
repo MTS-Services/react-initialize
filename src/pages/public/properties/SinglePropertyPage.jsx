@@ -15,10 +15,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import axios from "axios";
 import clsx from "clsx";
-import Button from "../../components/ui/Button";
 
-import RecentProperty from "../../components/common/RecentProperty";
-import { isPaid } from "../../features/auth/authUtils";
+import RecentProperty from "../../../components/common/RecentProperty";
+import { isPaid } from "../../../features/auth/authUtils";
+import Button from "../../../components/ui/Button";
 
 const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 

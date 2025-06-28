@@ -1,9 +1,9 @@
 import { FaHotel } from "react-icons/fa";
 import { FiClock, FiLayers, FiMapPin } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import FavouriteIcon from "../../components/FavouriteIcon/FavouriteIcon";
+import FavouriteIcon from "../../../components/FavouriteIcon/FavouriteIcon";
 
-import Button from "../../components/ui/Button";
+import Button from "../../../components/ui/Button";
 
 // "https://via.placeholder.com/384x256?text=No+Image";
 
