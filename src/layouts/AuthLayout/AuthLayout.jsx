@@ -1,12 +1,12 @@
 import { Outlet, Navigate } from "react-router-dom";
 import MainHeader from "../MainLayout/MainHeader";
 import MainFooter from "../MainLayout/MainFooter";
-import { getCurrentUser } from "../../utils/authUtils";
+import { getCurrentUser } from "../../features/auth/authUtils";
 
 const AuthLayout = () => {
   const user = getCurrentUser();
 
-  if (user?.role === "admin") {
+  if (user?.data?.role === "ADMIN") {
     return <Navigate to="/admin/dashboard" replace />;
   }
 

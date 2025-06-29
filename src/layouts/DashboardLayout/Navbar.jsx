@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  FaBell,
-  FaChevronCircleDown,
-  FaSearch,
-  FaUserCircle,
-} from "react-icons/fa";
+import { FaBell, FaSearch, FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {

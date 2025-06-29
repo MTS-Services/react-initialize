@@ -64,7 +64,8 @@ const CheckoutForm = () => {
       if (paymentIntent.status === "succeeded") {
         // 4. Create User
         const response = await axios.post(
-          "http://cggok840co00o0wk8gcgg4gw.147.93.111.102.sslip.io/api/users/create",
+          "http://localhost:3000/api/api/users/create",
+          // "http://cggok840co00o0wk8gcgg4gw.147.93.111.102.sslip.io/api/users/create",
           {
             email: formData.email,
             name: formData.name,

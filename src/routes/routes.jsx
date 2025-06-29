@@ -10,6 +10,9 @@ import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import Users from "../pages/private/users/Users";
 import BlockAdmin from "./BlockAdmin";
 import RequireAdmin from "./RequireAdmin";
+import UserProfile from "../pages/private/profile/UserProfile";
+import AllProperty from "../pages/private/Properties/AllProperty";
+import AddProperty from "../pages/private/Properties/AddProperty";
 
 // Pages
 const Home = lazy(() => import("../pages/public/Home/Home"));
@@ -71,6 +74,10 @@ export const AppRoutes = createBrowserRouter([
         path: "favourite",
         element: <FavouritePage />,
       },
+      {
+        path: "my-profile",
+        element: <UserProfile />,
+      },
     ],
   },
   {
@@ -101,8 +108,10 @@ export const AppRoutes = createBrowserRouter([
     ),
     children: [
       { path: "dashboard", index: true, element: <Dashboard /> },
-      { path: "users", element: <Users /> },
       { path: "profile", element: <AdminProfile /> },
+      { path: "users", element: <Users /> },
+      { path: "properties/all", element: <AllProperty /> },
+      { path: "properties/add", element: <AddProperty /> },
     ],
   },
   {

@@ -4,8 +4,6 @@ import {
   FaHome,
   FaUsers,
   FaFolder,
-  FaCalendarAlt,
-  FaChartBar,
   FaCog,
   FaChevronDown,
   FaChevronRight,
@@ -84,42 +82,13 @@ const Sidebar = () => {
           name: "All Properties",
           path: "/admin/properties/all",
         },
-        {
-          label: "Add New",
-          name: "Add Property",
-          path: "/admin/properties/add",
-        },
-      ],
-    },
-    {
-      icon: FaCalendarAlt,
-      label: "Bookings",
-      name: "Bookings",
-      path: "/admin/bookings",
-    },
-    {
-      icon: FaChartBar,
-      label: "Reports",
-      name: "Reports",
-      path: "/admin/reports",
-      children: [
-        {
-          label: "Monthly",
-          name: "Monthly Reports",
-          path: "/admin/reports/monthly",
-        },
-        {
-          label: "Annual",
-          name: "Annual Reports",
-          path: "/admin/reports/annual",
-        },
       ],
     },
     {
       icon: FaCog,
       label: "Settings",
       name: "Settings",
-      path: "/admin/settings",
+      path: "/admin/profile",
     },
   ];
 

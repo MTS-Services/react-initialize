@@ -93,7 +93,7 @@ function MainHeader() {
               <div className="absolute top-12 right-0 z-50 w-44 rounded-md bg-white text-black shadow-md">
                 {isUserPaid ? (
                   <>
-                    <DropdownItem to="/profile" icon={<FiUser />}>
+                    <DropdownItem to="/my-profile" icon={<FiUser />}>
                       Profile
                     </DropdownItem>
                     <button
@@ -151,7 +151,7 @@ function MainHeader() {
           {isUserPaid ? (
             <>
               <MenuLink
-                to="/profile"
+                to="/my-profile"
                 icon={<FiUser />}
                 onClick={() => setMenuOpen(false)}
               >

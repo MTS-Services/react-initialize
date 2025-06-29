@@ -1,14 +1,14 @@
 import { Outlet, Navigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
-import { getCurrentUser } from "../../utils/authUtils";
+import { getCurrentUser } from "../../features/auth/authUtils";
 // import { useSelector } from "react-redux";
 // import { selectCurrentToken } from "../../features/auth/authSlice";
 
 const DashboardLayout = () => {
   const user = getCurrentUser();
-
-  if (user?.role !== "admin") {
+  console.log(user);
+  if (user?.data?.role !== "ADMIN") {
     return <Navigate to="/auth/login" replace />;
   }
 
