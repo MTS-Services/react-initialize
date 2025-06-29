@@ -1,13 +1,13 @@
 import { Outlet, Navigate } from "react-router-dom";
 import MainHeader from "../MainLayout/MainHeader";
 import MainFooter from "../MainLayout/MainFooter";
+import { getCurrentUser } from "../../utils/authUtils";
 
 const AuthLayout = () => {
-  const isPaid = false;
+  const user = getCurrentUser();
 
-  // If user is already authenticated, redirect to dashboard
-  if (isPaid) {
-    return <Navigate to="/dashboard" replace />;
+  if (user?.role === "admin") {
+    return <Navigate to="/admin/dashboard" replace />;
   }
 
   return (

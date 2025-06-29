@@ -1,37 +1,6 @@
-import {
-  FaFacebook,
-  FaFacebookF,
-  FaInstagram,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import Button from "../../components/ui/Button";
 import { Link } from "react-router-dom";
-
-// const linkItem = [
-//   "Alkmaar",
-//   "Almere",
-//   "Amersfoort",
-//   "Amstelveen",
-//   "Amsterdam",
-//   "Arnhem",
-//   "Breda",
-//   "Delft",
-//   "Den Haag",
-//   "Eindhoven",
-//   "Enschede",
-//   "Groningen",
-//   "Hilversume",
-//   "Haarlem",
-//   "Leeuwarden",
-//   "Leiden",
-//   "Maastricht",
-//   "Nieuwegein",
-//   "Nijmegen",
-//   "Rotterdam",
-//   "Tilburg",
-//   "Utrecht",
-//   "Zwolle",
-// ];
 
 const MainFooter = () => {
   return (

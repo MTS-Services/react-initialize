@@ -19,8 +19,6 @@ const PeropertiesCard = ({ item }) => {
     rooms,
   } = item;
 
-  console.log(item);
-
   const formatRelativeTime = (dateString) => {
     const date = new Date(dateString);
     const now = new Date();

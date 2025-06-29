@@ -10,15 +10,15 @@ const userData = {
   joined: "January 2024",
 };
 
-const ProfilePage = () => {
+const UserProfile = () => {
   return (
     <section
-      className="min-h-screen bg-gradient-to-tr from-white via-blue-50 to-blue-100 px-2 py-16.5"
+      className="min-h-screen bg-gradient-to-tr from-white via-blue-50 to-blue-100"
       style={{ fontFamily: "var(--font-secondary)" }}
     >
       {/* Background Cover */}
       <div
-        className="relative mb-[-4rem] h-64 rounded-3xl bg-cover bg-center shadow-md"
+        className="relative mb-[-4rem] h-64 bg-cover bg-center shadow-md"
         style={{ backgroundImage: `url('/city-Denver.jpg')` }}
       ></div>
 
@@ -29,7 +29,7 @@ const ProfilePage = () => {
           <img
             src="/profile.jpg"
             alt="Profile"
-            className="h-40 w-auto rounded-full border-4 border-white object-cover shadow-md"
+            className="h-32 w-auto rounded-full border-4 border-white object-cover shadow-md"
           />
         </div>
 
@@ -66,4 +66,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default UserProfile;

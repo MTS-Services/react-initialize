@@ -171,14 +171,14 @@ function MainHeader() {
           ) : (
             <>
               <MenuLink
-                to="/login"
+                to="/auth/login"
                 icon={<FiLogIn />}
                 onClick={() => setMenuOpen(false)}
               >
                 Login
               </MenuLink>
               <MenuLink
-                to="/register"
+                to="/auth/register"
                 icon={<FiUserPlus />}
                 onClick={() => setMenuOpen(false)}
               >
