@@ -3,8 +3,6 @@ import {
   FiHome,
   FiUsers,
   FiDollarSign,
-  FiMapPin,
-  FiCalendar,
   FiTrendingUp,
   FiActivity,
   FiStar,

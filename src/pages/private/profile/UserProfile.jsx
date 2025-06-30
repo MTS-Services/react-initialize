@@ -1,4 +1,5 @@
 import React from "react";
+import { getCurrentUser } from "../../../features/auth/authUtils";
 
 const userData = {
   name: "Alex Johnson",
@@ -62,6 +63,10 @@ const userData = {
 };
 
 const UserProfile = () => {
+  const user = getCurrentUser();
+
+  console.log(user?.data?.name);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header with tier-based color */}
@@ -238,7 +243,7 @@ const UserProfile = () => {
                   />
                   <div className="ml-4">
                     <h2 className="text-lg font-semibold text-gray-900">
-                      {userData.name}
+                      {user?.data?.name}
                     </h2>
                     <p className="text-sm text-gray-600">{userData.role}</p>
                   </div>
@@ -246,9 +251,7 @@ const UserProfile = () => {
                 <div className="mt-4 space-y-3">
                   <div>
                     <p className="text-sm font-medium text-gray-500">Email</p>
-                    <p className="text-sm text-gray-900">
-                      {userData.contact.email}
-                    </p>
+                    <p className="text-sm text-gray-900">{user?.data?.email}</p>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-500">Phone</p>

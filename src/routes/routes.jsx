@@ -13,6 +13,9 @@ import RequireAdmin from "./RequireAdmin";
 import UserProfile from "../pages/private/profile/UserProfile";
 import AllProperty from "../pages/private/Properties/AllProperty";
 import AddProperty from "../pages/private/Properties/AddProperty";
+import CookiePolicy from "../pages/public/CookiePolicy/CookiePolicy";
+import PrivacyPolicy from "../pages/public/PrivacyPolicy/PrivacyPolicy";
+import TermsAndConditions from "../pages/public/TermsAndConditions/TermsAndConditions";
 
 // Pages
 const Home = lazy(() => import("../pages/public/Home/Home"));
@@ -77,6 +80,18 @@ export const AppRoutes = createBrowserRouter([
       {
         path: "my-profile",
         element: <UserProfile />,
+      },
+      {
+        path: "cookie-policy",
+        element: <CookiePolicy />,
+      },
+      {
+        path: "privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "terms-and-conditions",
+        element: <TermsAndConditions />,
       },
     ],
   },
