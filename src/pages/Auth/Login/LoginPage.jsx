@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../features/auth/authSlice"; // Import loginUser action
+
 import Button from "../../../components/ui/Button";
 
 function LoginPage() {
@@ -29,7 +30,7 @@ function LoginPage() {
       // Dispatch loginUser action
       await dispatch(loginUser({ email, password })).unwrap();
 
-      toast.success("User login successfully!");
+      toast.success("Successfully Login!");
       navigate("/properties");
     } catch (error) {
       toast.error(error.message || "Login failed!");
@@ -40,12 +41,12 @@ function LoginPage() {
     <section>
       <div className="border bg-[#0C205A] p-8"></div>
       <div
-        className="flex items-center justify-center py-4 md:px-0 md:py-0 lg:py-20"
+        className="flex items-center justify-center md:px-0 md:py-0 lg:py-20"
         style={{ fontFamily: "var(--font-secondary)" }}
       >
-        <div className="mx-auto flex max-w-7xl flex-col overflow-hidden rounded-xl border-1 border-gray-100 bg-white shadow md:flex-row md:rounded">
+        <div className="container flex max-w-7xl flex-col overflow-hidden border-1 border-gray-100 bg-white shadow md:flex-row md:rounded">
           {/* Left: Image */}
-          <div className="hidden p-12 md:block md:w-1/2">
+          <div className="hidden p-8 md:block md:w-1/2">
             <img
               src="/login-image.png"
               alt="Login Visual"
@@ -54,8 +55,8 @@ function LoginPage() {
           </div>
 
           {/* Right: Form */}
-          <div className="flex w-full flex-col justify-center p-10 md:w-1/2">
-            <h2 className="mb-10 text-center text-3xl font-extrabold text-[#19398A]">
+          <div className="flex w-full flex-col justify-center p-8 md:w-1/2">
+            <h2 className="mb-4 text-center text-xl font-extrabold text-[#19398A] md:mb-10 md:text-3xl">
               Login to your account
             </h2>
 
@@ -107,7 +108,11 @@ function LoginPage() {
                 variant="yellowGradient"
                 className="w-full"
               >
-                {loading ? "Submitting..." : "Login"}
+                {loading ? (
+                  <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-blue-400" />
+                ) : (
+                  "Login"
+                )}
               </Button>
             </form>
 
@@ -115,7 +120,7 @@ function LoginPage() {
             <p className="mt-6 text-center text-gray-600">
               Don't have an account?{" "}
               <Link
-                to="/register"
+                to="/auth/register"
                 className="font-semibold text-[#19398A] hover:underline"
               >
                 Register

@@ -2,27 +2,39 @@ import { useRouteError, Link, useNavigate } from "react-router-dom";
 import { FiAlertTriangle, FiHome, FiRefreshCw } from "react-icons/fi";
 
 const ErrorPage = () => {
-  const error = useRouteError();
+  const error = useRouteError() || {};
   const navigate = useNavigate();
 
+  // Default error message
   let errorMessage = "An unknown error occurred";
   let errorTitle = "Oops! Something went wrong";
-  let errorCode = "";
+  let errorCode = null;
 
-  if (error.status === 404) {
-    errorTitle = "Page Not Found";
-    errorMessage =
-      "The page you're looking for doesn't exist or has been moved.";
-    errorCode = "404";
-  } else if (error.status === 500) {
-    errorTitle = "Server Error";
-    errorMessage =
-      "Our servers are having some trouble. Please try again later.";
-    errorCode = "500";
-  } else if (error.status === 403) {
-    errorTitle = "Access Denied";
-    errorMessage = "You don't have permission to access this page.";
-    errorCode = "403";
+  // Safely check error status
+  if (error?.status) {
+    errorCode = error.status;
+
+    switch (error.status) {
+      case 404:
+        errorTitle = "Page Not Found";
+        errorMessage =
+          "The page you're looking for doesn't exist or has been moved.";
+        break;
+      case 500:
+        errorTitle = "Server Error";
+        errorMessage =
+          "Our servers are having some trouble. Please try again later.";
+        break;
+      case 403:
+        errorTitle = "Access Denied";
+        errorMessage = "You don't have permission to access this page.";
+        break;
+      default:
+        // Use the error's message if available
+        if (error?.data?.message || error?.message) {
+          errorMessage = error.data?.message || error.message;
+        }
+    }
   }
 
   return (

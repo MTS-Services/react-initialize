@@ -31,7 +31,6 @@ const PropertyListPage = () => {
   const [locationInput, setLocationInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [range, setRange] = useState({ min: 20, max: 80 });
   const [isFetchingSuggestions, setIsFetchingSuggestions] = useState(false);
   const suggestionsRef = useRef(null);
 
