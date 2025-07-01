@@ -41,7 +41,7 @@ const CheckoutForm = lazy(
 
 const ErrorPage = lazy(() => import("../pages/err/ErrorPage"));
 const stripePromise = loadStripe(
-  "pk_test_51RQjDcQXcUxzu52Z8GJmcg5tSKqe3wwof2OfeNMiLXwTgwcqagvzwIGD1VmrNnOQIFOWeYtU7R0cQBbW6AEHANE000ArSqcMUm",
+  "pk_test_51RcJiND60jTqpzFUTyaTS0m8gzJ8dJUoCMfzokDmF8UKWIKgzdoguwKoRuB1o1QOhzHKtUiRh7Q4TWURblIAzbtS00UT4FOEQx",
 );
 
 export const AppRoutes = createBrowserRouter([

@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import FavouriteCoutingIcon from "../../components/FavouriteCoutingIcon/FavouriteCoutingIcon";
 import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher";
 import { isPaid, logout } from "../../features/auth/authUtils";
+import i18n from "../../i18n";
 
 function MainHeader() {
   const isUserPaid = isPaid();
@@ -62,7 +63,7 @@ function MainHeader() {
           <img
             src="/new-logo-white.png"
             alt="Logo"
-            className="w-48 md:w-64 lg:w-80"
+            className="w-60 md:w-64 lg:w-80"
           />
         </Link>
 
@@ -72,12 +73,29 @@ function MainHeader() {
           <MenuLink to="/">Home</MenuLink>
           <MenuLink to="/about">About</MenuLink>
           <MenuLink to="/contact">Contact</MenuLink>
-          <FavouriteCoutingIcon itemId="unique-property-id" />
         </nav>
 
         {/* Right Side */}
         <div className="flex items-center gap-4">
+          <div>
+            <button
+              className="text-accent"
+              onClick={() => i18n.changeLanguage("en")}
+            >
+              EN-
+            </button>
+            <button
+              className="text-accent"
+              onClick={() => i18n.changeLanguage("nl")}
+            >
+              NL
+            </button>
+          </div>
           <LanguageSwitcher />
+
+          <button className="flex items-center justify-center rounded-full border border-gray-300 bg-gray-200 p-1 text-black transition hover:shadow-md md:p-2">
+            <FavouriteCoutingIcon itemId="unique-property-id" />
+          </button>
 
           {/* Desktop Profile Dropdown */}
           <div

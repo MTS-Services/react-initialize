@@ -1,10 +1,8 @@
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import Button from "../../components/ui/Button";
 import { Link } from "react-router-dom";
-import { useLanguage } from "../../hook/useLanguage";
 
 const MainFooter = () => {
-  const { language, switchLanguage } = useLanguage();
   return (
     <>
       <div
@@ -15,13 +13,6 @@ const MainFooter = () => {
 
         {/* Content */}
         <div className="relative z-10 flex h-full items-center justify-center px-6 md:px-2">
-          {/* Overlay */}
-          <div className="space-x-2 border border-amber-100 text-white">
-            <span>Current: {language.toUpperCase()}</span>
-            <button onClick={() => switchLanguage("en")}>EN</button>
-            <button onClick={() => switchLanguage("bn")}>BN</button>
-            <button onClick={() => switchLanguage("fr")}>FR</button>
-          </div>
           <div className="flex max-w-2xl flex-col items-center gap-6 text-center md:gap-8">
             <h2 className="text-2xl leading-tight font-bold text-white capitalize md:text-5xl">
               Register and view our
