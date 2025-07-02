@@ -1,96 +1,136 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import MainLayOut from "../../MainLayOut";
-import LoginPage from "../pages/Auth/Login/LoginPage";
-import FilterPage from "../pages/public/FilterPage/FilterPage";
-import SingleListingPage from "../pages/public/FilterPage/SingleListingPage";
-import Home from "../pages/public/Home/Home";
+// Layouts
+import AuthLayout from "../layouts/AuthLayout/AuthLayout";
+import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
+import MainLayout from "../layouts/MainLayout/MainLayout";
+import UserProfile from "../pages/private/profile/UserProfile";
+import AddProperty from "../pages/private/Properties/AddProperty";
+import AllProperty from "../pages/private/Properties/AllProperty";
+import Users from "../pages/private/users/Users";
+import CookiePolicy from "../pages/public/CookiePolicy/CookiePolicy";
+import PrivacyPolicy from "../pages/public/PrivacyPolicy/PrivacyPolicy";
+import TermsAndConditions from "../pages/public/TermsAndConditions/TermsAndConditions";
+import BlockAdmin from "./BlockAdmin";
+import RequireAdmin from "./RequireAdmin";
 
-import ProfilePage from "../components/ProfilePage/ProfilePage";
-import Dashboard from "../pages/admin/Dashboard";
-import ErrorPage from "../pages/err/ErrorPage";
-import CheckoutForm from "../pages/public/CheckoutForm/CheckoutForm";
-import Contact from "../pages/public/Contact/Contact";
-import FavouritePage from "../pages/public/FavouritePage/FavouritePage";
-import About from "../pages/public/about/About";
-import PropertiesPage from "../pages/public/properties/PropertiesPage";
-import SinglePropertyPage from "../pages/public/properties/SinglePropertyPage";
+// Pages
+const Home = lazy(() => import("../pages/public/Home/Home"));
+const LoginPage = lazy(() => import("../pages/Auth/Login/LoginPage"));
+const PropertiesPage = lazy(
+  () => import("../pages/public/properties/PropertiesPage"),
+);
+const SinglePropertyPage = lazy(
+  () => import("../pages/public/properties/SinglePropertyPage"),
+);
+const Contact = lazy(() => import("../pages/public/Contact/Contact"));
+const About = lazy(() => import("../pages/public/about/About"));
+const FavouritePage = lazy(
+  () => import("../pages/public/FavouritePage/FavouritePage"),
+);
+const AdminProfile = lazy(
+  () => import("../pages/private/profile/AdminProfile"),
+);
+const Dashboard = lazy(() => import("../pages/private/admin/Dashboard"));
+const CheckoutForm = lazy(
+  () => import("../pages/Auth/CheckoutForm/CheckoutForm"),
+);
 
-// import { lazy } from "react";
-// const Contact = lazy(() => import("../pages/Contact/Contact"));
-
+const ErrorPage = lazy(() => import("../pages/err/ErrorPage"));
 const stripePromise = loadStripe(
   "pk_test_51RcJiND60jTqpzFUTyaTS0m8gzJ8dJUoCMfzokDmF8UKWIKgzdoguwKoRuB1o1QOhzHKtUiRh7Q4TWURblIAzbtS00UT4FOEQx",
 );
 
-const AppRoutes = createBrowserRouter([
+export const AppRoutes = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayOut />,
-    errorElement: <ErrorPage />,
+    element: (
+      <BlockAdmin>
+        <MainLayout />
+      </BlockAdmin>
+    ),
     children: [
       {
         index: true,
         element: <Home />,
       },
-
       {
-        path: "/contact",
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "contact",
         element: <Contact />,
       },
       {
-        path: "/about",
-        element: <About />,
-      },
-
-      // ----------------------------- property page ----------------
-      {
-        path: "/properties",
+        path: "properties",
         element: <PropertiesPage />,
       },
       {
-        path: "/favourite",
+        path: "properties/:id",
+        element: <SinglePropertyPage />,
+      },
+      {
+        path: "favourite",
         element: <FavouritePage />,
       },
       {
-        path: "/properties/:id",
-        element: <SinglePropertyPage />,
-      },
-      // -----------------------------------------------------------
-      {
-        path: "/property-list",
-        element: <FilterPage />,
+        path: "my-profile",
+        element: <UserProfile />,
       },
       {
-        path: "/property-list/:id",
-        element: <SingleListingPage />,
+        path: "cookie-policy",
+        element: <CookiePolicy />,
       },
       {
-        path: "/login",
-        element: <LoginPage />,
+        path: "privacy-policy",
+        element: <PrivacyPolicy />,
       },
       {
-        path: "/dashboard",
-        element: <Dashboard />,
+        path: "terms-and-conditions",
+        element: <TermsAndConditions />,
       },
+    ],
+  },
+  {
+    path: "/auth",
+    element: (
+      <BlockAdmin>
+        <AuthLayout />
+      </BlockAdmin>
+    ),
+    children: [
+      { path: "login", element: <LoginPage /> },
       {
-        path: "/register",
+        path: "register",
         element: (
           <Elements stripe={stripePromise}>
             <CheckoutForm />
           </Elements>
         ),
       },
-
-      {
-        path: "/profile",
-        element: <ProfilePage />,
-      },
     ],
   },
+  {
+    path: "/admin",
+    element: (
+      <RequireAdmin>
+        <DashboardLayout />
+      </RequireAdmin>
+    ),
+    children: [
+      { path: "dashboard", index: true, element: <Dashboard /> },
+      { path: "profile", element: <AdminProfile /> },
+      { path: "users", element: <Users /> },
+      { path: "properties/all", element: <AllProperty /> },
+      { path: "properties/add", element: <AddProperty /> },
+    ],
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
 ]);
-
-export { AppRoutes };

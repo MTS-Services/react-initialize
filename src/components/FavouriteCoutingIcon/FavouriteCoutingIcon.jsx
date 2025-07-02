@@ -12,13 +12,17 @@ const FavouriteCoutingIcon = () => {
     >
       {/* Show favorite count */}
       {favorites.length > 0 && (
-        <div className="bg-accent absolute -top-2 left-3 rounded-4xl px-1 py-0.5 text-xs text-[9px] font-bold text-blue-800">
+        <p className="absolute -top-4 left-3 rounded-full bg-blue-500 p-0.5 px-[7px] text-xs font-bold text-gray-100 shadow">
           {favorites.length}
-        </div>
+        </p>
       )}
 
       {/* Heart icon */}
-      {favorites.length > 0 ? <FaHeart color="blue" /> : <FaRegHeart />}
+      {favorites.length > 0 ? (
+        <FaHeart className="text-blue-500" size={18} />
+      ) : (
+        <FaRegHeart />
+      )}
     </div>
   );
 };

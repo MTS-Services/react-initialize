@@ -10,9 +10,9 @@ export const loginUser = createAsyncThunk(
       const data = await loginAPI({ email, password });
 
       // Save user info to localStorage
-      localStorage.setItem("userInfo", JSON.stringify(data));
-
-      return data; // Return the response data to be used in the fulfilled state
+      const userData = localStorage.setItem("userInfo", JSON.stringify(data));
+      console.log(userData);
+      return data;
     } catch (err) {
       // If there's an error, return the error message as the rejected value
       return rejectWithValue(err.response?.data?.message || "Login failed!");

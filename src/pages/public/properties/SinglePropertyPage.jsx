@@ -42,7 +42,6 @@ const SinglePropertyPage = () => {
       try {
         // Fetch single listing
         const listingRes = await axios.get(`${URL}/properties/${id}`);
-        console.log(listingRes.data.data.property);
         setListing(listingRes.data.data.property);
 
         // Fetch recent listings (excluding current one)
