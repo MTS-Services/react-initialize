@@ -1,9 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import { FaHotel } from "react-icons/fa";
-import Skeleton from "react-loading-skeleton";
-import CardSkeleton from "../../../components/common/Card-Skeleton";
-import { AuthContext } from "../../../context/AuthContext/AuthContext";
 import {
   FiClock,
   FiDollarSign,
@@ -13,6 +9,10 @@ import {
   FiMapPin,
   FiSliders,
 } from "react-icons/fi";
+import Skeleton from "react-loading-skeleton";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import CardSkeleton from "../../../components/common/Card-Skeleton";
+import { AuthContext } from "../../../context/AuthContext/AuthContext";
 
 // ✅ Clean numeric price parser
 const cleanPrice = (priceStr) => {
@@ -58,7 +58,7 @@ export default function FilterPage() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:3000/api/properties")
+    fetch("http://localhost:3011/api/properties")
       .then((res) => res.json())
       .then((data) => {
         const processedListings = data.properties.map((l) => ({

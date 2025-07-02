@@ -10,14 +10,14 @@ import SingleListingPage from "../pages/public/FilterPage/SingleListingPage";
 import Home from "../pages/public/Home/Home";
 
 import ProfilePage from "../components/ProfilePage/ProfilePage";
+import Dashboard from "../pages/admin/Dashboard";
+import ErrorPage from "../pages/err/ErrorPage";
 import CheckoutForm from "../pages/public/CheckoutForm/CheckoutForm";
 import Contact from "../pages/public/Contact/Contact";
 import FavouritePage from "../pages/public/FavouritePage/FavouritePage";
 import About from "../pages/public/about/About";
-import ErrorPage from "../pages/err/ErrorPage";
 import PropertiesPage from "../pages/public/properties/PropertiesPage";
 import SinglePropertyPage from "../pages/public/properties/SinglePropertyPage";
-import Dashboard from "../pages/admin/Dashboard";
 
 // import { lazy } from "react";
 // const Contact = lazy(() => import("../pages/Contact/Contact"));

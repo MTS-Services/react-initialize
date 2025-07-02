@@ -10,7 +10,7 @@ export const FavoriteProvider = ({ children }) => {
   // console.log("ইউজার - ", user);
   // "https://apify-backend.onrender.com/api"
   const [favorites, setFavorites] = useState([]);
-  const URL = "http://localhost:3000/api"; // আপনার API বেস URL
+  const URL = "http://localhost:3011/api"; // আপনার API বেস URL
   const [isSyncing, setIsSyncing] = useState(false); // ট্র্যাক করার জন্য ফ্ল্যাগ যে আমরা DB এর সাথে সিঙ্ক করছি কিনা
   // প্রাথমিক সিঙ্ক একবার হয়েছে কিনা তা ট্র্যাক করার জন্য নতুন ফ্ল্যাগ
   const [hasAttemptedInitialSync, setHasAttemptedInitialSync] = useState(false);
