@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+
+import nlFlag from "/flags.png"; // Your Dutch flag
+import usFlag from "/united-states.png";
+
+
 const languages = [
   { code: "en", name: "EN", flag: "/united-states.png" },
   { code: "nl", name: "NL", flag: "/flags.png" },

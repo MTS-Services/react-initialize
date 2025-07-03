@@ -7,6 +7,7 @@ import { FavoriteContext } from "./FavouriteContext.jsx"; // FavoriteContext এ
 export const FavoriteProvider = ({ children }) => {
   // localStorage থেকে ইউজার ইনফো লোড করা হচ্ছে
   const user = JSON.parse(localStorage.getItem("userInfo")) || null;
+  // console.log("ইউজার - ", user);
   // "https://apify-backend.onrender.com/api"
   const [favorites, setFavorites] = useState([]);
   const [isSyncing, setIsSyncing] = useState(false); // ট্র্যাক করার জন্য ফ্ল্যাগ যে আমরা DB এর সাথে সিঙ্ক করছি কিনা
@@ -20,6 +21,7 @@ export const FavoriteProvider = ({ children }) => {
       const savedFavorites =
         JSON.parse(localStorage.getItem("favorites")) || [];
       setFavorites(savedFavorites);
+      // console.log("localStorage থেকে লোড করা ফেভারিটস:", savedFavorites); // ডিবাগিং লগ
     }
   }, [user]); // user পরিবর্তনের সাথে সাথে useEffect রান হবে
 
