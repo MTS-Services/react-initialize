@@ -193,23 +193,23 @@ const SinglePropertyPage = () => {
                     key={idx}
                     className="relative flex h-[20vh] w-full items-center justify-center overflow-hidden rounded-lg shadow"
                     style={{
-                      backgroundImage: `url(${img.url})`,
+                      backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjm0PUsJ4d7buWMmA1CgH45LbRdXBPA0iNgw&s)`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                   >
                     {/* Dark overlay */}
-                    <div className="absolute inset-0 backdrop-blur"></div>
+                    <div className="absolute inset-0 bg-slate-50 opacity-70"></div>
 
                     {/* Lock content */}
                     <div className="relative z-10 flex flex-col items-center justify-center">
                       <Link
-                        to="/register"
+                        to="/auth/register"
                         className="cursor-pointer rounded-full border border-slate-400 p-2 hover:bg-gray-500"
                       >
-                        <FaLock size={18} className="text-gray-200" />
+                        <FaLock size={18} className="text-gray-400" />
                       </Link>
-                      <p className="mt-2 text-center text-base font-medium text-gray-100">
+                      <p className="mt-2 text-center text-base font-medium text-gray-500">
                         Access Required
                       </p>
                     </div>
@@ -286,7 +286,7 @@ const SinglePropertyPage = () => {
           </div>
 
           {/* Contact Card */}
-          <div className="sticky top-20 h-fit rounded-lg bg-gray-50 p-6">
+          <div className="sticky top-20 h-fit rounded-lg bg-slate-50 p-6">
             <h3 className="mb-4 text-xl font-bold">Contact Agent</h3>
             <hr className="mb-4 border border-gray-100" />
             {isPaidUser ? (

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FiPlus, FiX } from "react-icons/fi";
 
 import Button from "../../../components/ui/Button";
+import { useLanguage } from "../../../hook/useLanguage";
 
 const faqData = [
   {
@@ -32,6 +33,7 @@ const faqData = [
 ];
 
 const About = () => {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggle = (index) => {
@@ -55,14 +57,11 @@ const About = () => {
         {/* Centered Content */}
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
           <h1 className="font-lato mb-6 max-w-[676px] text-4xl leading-tight font-semibold text-white capitalize md:text-6xl">
-            How Renting Works On <br />
-            <span className="text-[#3CAAFA]">Our Platform</span>
+            {t("about.hero.title1")} <br />
+            <span className="text-[#3CAAFA]">{t("about.hero.title2")}</span>
           </h1>
           <p className="font-inter max-w-[676px] text-base leading-normal font-normal text-white">
-            Discover and compare rental options from trusted companies all in
-            one place. Browse listings, choose what suits you best, and book
-            directly. We make it simple, secure, and seamless. A small service
-            fee may apply.
+            {t("about.hero.desc")}
           </p>
         </div>
       </div>
@@ -90,11 +89,9 @@ const About = () => {
         <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-12">
           {/* Header */}
           <div className="space-y-2 text-center">
-            <h2 className="font-lato text-4xl font-semibold text-black capitalize">
-              Hoe werkt het?
-            </h2>
+            <h2 className="capitalize">{t("home.work.title")}</h2>
             <p className="font-inter text-base font-normal text-black">
-              Homes that we have just discovered
+              {t("home.work.desc")}
             </p>
           </div>
 
@@ -143,19 +140,14 @@ const About = () => {
       <div className="mx-auto mb-0 flex w-full max-w-7xl flex-col items-center justify-between gap-12 px-6 py-16 md:px-0 lg:flex-row">
         <div className="w-full space-y-6 lg:w-1/2">
           <h2 className="font-lato text-4xl font-semibold text-gray-900 capitalize">
-            Why Choose US
+            {t("about.whyChoose.title")}
           </h2>
           <p className="font-inter text-base leading-relaxed font-normal text-gray-700">
-            Finding the right rental shouldn’t be stressful. That’s why we bring
-            together listings from multiple trusted companies in one simple
-            platform — so you can compare, choose, and book with confidence.
-            With transparent pricing, verified partners, and dedicated support,
-            we make the rental experience smooth, secure, and tailored to your
-            needs.
+            {t("about.whyChoose.desc")}
           </p>
 
           <Button size="lg" variant="yellowGradient" className="">
-            Explore your home
+            {t("about.whyChoose.button")}
           </Button>
         </div>
 

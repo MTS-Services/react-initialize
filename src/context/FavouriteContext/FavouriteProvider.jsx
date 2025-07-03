@@ -7,10 +7,8 @@ import { FavoriteContext } from "./FavouriteContext.jsx"; // FavoriteContext এ
 export const FavoriteProvider = ({ children }) => {
   // localStorage থেকে ইউজার ইনফো লোড করা হচ্ছে
   const user = JSON.parse(localStorage.getItem("userInfo")) || null;
-  console.log("ইউজার - ", user);
   // "https://apify-backend.onrender.com/api"
   const [favorites, setFavorites] = useState([]);
-  const URL = "http://localhost:3000/api"; // আপনার API বেস URL
   const [isSyncing, setIsSyncing] = useState(false); // ট্র্যাক করার জন্য ফ্ল্যাগ যে আমরা DB এর সাথে সিঙ্ক করছি কিনা
   // প্রাথমিক সিঙ্ক একবার হয়েছে কিনা তা ট্র্যাক করার জন্য নতুন ফ্ল্যাগ
   const [hasAttemptedInitialSync, setHasAttemptedInitialSync] = useState(false);
@@ -22,7 +20,6 @@ export const FavoriteProvider = ({ children }) => {
       const savedFavorites =
         JSON.parse(localStorage.getItem("favorites")) || [];
       setFavorites(savedFavorites);
-      console.log("localStorage থেকে লোড করা ফেভারিটস:", savedFavorites); // ডিবাগিং লগ
     }
   }, [user]); // user পরিবর্তনের সাথে সাথে useEffect রান হবে
 
@@ -53,12 +50,10 @@ export const FavoriteProvider = ({ children }) => {
 
             if (response.ok) {
               localStorage.removeItem("favorites"); // সিঙ্ক করার পর localStorage পরিষ্কার করা হচ্ছে
-              console.log("localStorage থেকে ফেভারিট পরিষ্কার করা হয়েছে"); // ডিবাগিং লগ
 
               const dbFavorites = await response.json();
               setFavorites(dbFavorites); // ডেটাবেস থেকে প্রাপ্ত ফেভারিট দিয়ে স্টেট আপডেট করা হচ্ছে
               toast.success("ফেভারিটস ডেটাবেসের সাথে সিঙ্ক করা হয়েছে!"); // সাফল্যের টোস্ট
-              console.log("ডেটাবেস থেকে সিঙ্ক করা ফেভারিটস:", dbFavorites); // ডিবাগিং লগ
             } else {
               // সার্ভার ত্রুটি বা অন্যান্য ব্যর্থতার জন্য টোস্ট
               toast.error(
@@ -82,10 +77,6 @@ export const FavoriteProvider = ({ children }) => {
             if (response.ok) {
               const dbFavorites = await response.json();
               setFavorites(dbFavorites.favorites || []); // নিশ্চিত করা হচ্ছে যে favorites একটি অ্যারে
-              console.log(
-                "ডেটাবেস থেকে লোড করা ফেভারিটস:",
-                dbFavorites.favorites || [],
-              );
             } else {
               toast.error("ডেটাবেস থেকে ফেভারিট লোড করতে ব্যর্থ!"); // ত্রুটির টোস্ট (GET এর জন্য)
               console.error("ডেটাবেস থেকে ফেভারিট লোড করতে ব্যর্থ:", response);

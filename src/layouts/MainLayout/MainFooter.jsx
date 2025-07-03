@@ -1,8 +1,10 @@
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import Button from "../../components/ui/Button";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../hook/useLanguage";
 
 const MainFooter = () => {
+  const { t } = useLanguage();
   return (
     <>
       <div
@@ -13,24 +15,21 @@ const MainFooter = () => {
 
         {/* Content */}
         <div className="relative z-10 flex h-full items-center justify-center px-6 md:px-2">
-          <div className="flex max-w-2xl flex-col items-center gap-6 text-center md:gap-8">
+          <div className="flex max-w-3xl flex-col items-center gap-6 text-center md:gap-8">
             <h2 className="text-2xl leading-tight font-bold text-white capitalize md:text-5xl">
-              Register and view our
-              <span className="text-[#3CAAFA]"> 20,000+ </span> rental
-              properties
+              {t("footer.register.title")}
             </h2>
             <p className="text-zinc-100 md:text-lg">
-              We have a large collection of affordable rental properties to
-              which new properties are added every day. Don't wait any longer
-              and start searching.
+              {t("footer.register.desc")}
             </p>
+
             <Link to="/properties">
               <Button
                 size="lg"
                 variant="yellowGradient"
                 className="rounded-full"
               >
-                Start Searching
+                {t("footer.register.button")}
               </Button>
             </Link>
           </div>
@@ -46,9 +45,7 @@ const MainFooter = () => {
               alt="logo"
               className="w-54 md:w-72"
             />
-            <p className="text-white/80">
-              Receive emails with rentals that meet your requirements.
-            </p>
+            <p className="text-white/80">{t("footer.logo")}</p>
             <div className="flex gap-3">
               <FaFacebookF
                 size={35}
@@ -67,13 +64,13 @@ const MainFooter = () => {
 
           {/* Quick Links */}
           <div className="px-0 md:px-10">
-            <h3 className="mb-4 text-white">Quick</h3>
+            <h3 className="mb-4 text-white">{t("footer.quick.link")}</h3>
             <ul className="space-y-2 text-white/90">
               <li className="cursor-pointer hover:text-[#3CAAFA]">
-                <Link to="/">Home</Link>
+                <Link to="/">{t("footer.quick.home")}</Link>
               </li>
               <li className="cursor-pointer hover:text-[#3CAAFA]">
-                <Link to="about">About</Link>
+                <Link to="about">{t("footer.quick.about")}</Link>
               </li>
               <li className="cursor-pointer hover:text-[#3CAAFA]">
                 <Link to="/contact">Contact</Link>
@@ -83,32 +80,32 @@ const MainFooter = () => {
 
           {/* Company Links */}
           <div className="">
-            <h3 className="mb-4 text-white">Company</h3>
+            <h3 className="mb-4 text-white">{t("footer.company.link")}</h3>
             <ul className="space-y-2 text-white/90">
               <li className="cursor-pointer hover:text-[#3CAAFA]">
-                <Link to="/terms-and-conditions">Terms & Conditions</Link>
+                <Link to="/terms-and-conditions">
+                  {t("footer.company.terms")}
+                </Link>
               </li>
               <li className="cursor-pointer hover:text-[#3CAAFA]">
-                <Link to="/privacy-policy">Privacy Policy</Link>
+                <Link to="/privacy-policy">{t("footer.company.privacy")}</Link>
               </li>
               <li className="cursor-pointer hover:text-[#3CAAFA]">
-                <Link to="/cookie-policy">Cookie Policy</Link>
+                <Link to="/cookie-policy">{t("footer.company.cookie")}</Link>
               </li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div className="space-y-4">
-            <p className="text-white">
-              Get the latest information about properties from “NL property”.
-            </p>
+            <p className="text-white">{t("footer.subscribed")}</p>
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder={`${t("footer.inputPlaceH")}`}
               className="w-full rounded bg-neutral-100 p-3 text-gray-700"
             />
             <Button variant="yellowGradient" size="lg" className="w-full">
-              Subscribe
+              {t("footer.button")}
             </Button>
           </div>
         </div>
@@ -127,9 +124,7 @@ const MainFooter = () => {
 
         {/* Footer Bottom */}
         <div className="mx-auto mt-12 flex max-w-screen-xl items-center justify-center border-t border-white/10 pt-6 text-white/60 md:flex-row">
-          <p className="text-white/60">
-            © 2025 NL Property. All rights reserved.
-          </p>
+          <p className="text-white/60">{t("footer.copyRight")}</p>
         </div>
       </footer>
     </>
