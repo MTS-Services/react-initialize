@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import {
-  FiHome,
-  FiUsers,
-  FiDollarSign,
-  FiTrendingUp,
-  FiActivity,
-  FiStar,
-  FiClock,
-} from "react-icons/fi";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import {
+  FiActivity,
+  FiClock,
+  FiDollarSign,
+  FiHome,
+  FiStar,
+  FiTrendingUp,
+  FiUsers,
+} from "react-icons/fi";
 
 const DashboardOverview = () => {
   const [stats, setStats] = useState({
@@ -32,8 +32,8 @@ const DashboardOverview = () => {
       // In a real app, you might have a dedicated dashboard endpoint
       // For this example, we'll fetch separately
       const [propertiesRes, usersRes] = await Promise.all([
-        axios.get("http://localhost:3000/api/properties"),
-        axios.get("http://localhost:3000/api/users/all"),
+        axios.get("http://localhost:3011/api/properties"),
+        axios.get("http://localhost:3011/api/users/all"),
       ]);
       const paginate = propertiesRes.data.pagination || [];
       const properties = propertiesRes.data.properties || [];

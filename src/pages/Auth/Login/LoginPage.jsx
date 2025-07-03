@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { loginUser } from "../../../features/auth/authSlice"; // Import loginUser action
 
 import Button from "../../../components/ui/Button";
@@ -118,7 +118,7 @@ function LoginPage() {
 
             {/* Register Link */}
             <p className="mt-6 text-center text-gray-600">
-              Don't have an account?{" "}
+              Don't have an account?
               <Link
                 to="/auth/register"
                 className="font-semibold text-[#19398A] hover:underline"

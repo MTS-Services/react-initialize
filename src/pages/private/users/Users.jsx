@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import {
-  FiUsers,
-  FiSearch,
-  FiFilter,
-  FiEye,
-  FiEdit2,
-  FiTrash2,
   FiChevronLeft,
   FiChevronRight,
+  FiEdit2,
+  FiEye,
+  FiFilter,
   FiPlus,
+  FiSearch,
+  FiTrash2,
   FiUser,
+  FiUsers,
 } from "react-icons/fi";
-import axios from "axios";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -43,7 +43,7 @@ const Users = () => {
       if (filters.role !== "All") params.role = filters.role;
       if (filters.status !== "All") params.ispaid = filters.status === "Paid";
 
-      const response = await axios.get("http://localhost:3000/api/users/all", {
+      const response = await axios.get("http://localhost:3011/api/users/all", {
         params,
       });
 
