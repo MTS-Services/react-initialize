@@ -17,8 +17,8 @@ i18n
     },
 
     detection: {
-      order: ["cookie", "localStorage", "navigator", "htmlTag"],
-      caches: ["cookie"],
+      order: ["localStorage", "cookie", "navigator", "htmlTag"],
+      caches: ["localStorage", "cookie"], // ✅ store & read both
     },
 
     interpolation: {

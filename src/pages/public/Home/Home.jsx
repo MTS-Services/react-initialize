@@ -10,6 +10,7 @@ import { FiDollarSign, FiMapPin, FiSearch } from "react-icons/fi";
 import axios from "axios";
 
 import Button from "../../../components/ui/Button";
+import { useLanguage } from "../../../hook/useLanguage";
 
 const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 
@@ -94,7 +95,27 @@ const cities = [
   },
 ];
 
-export default function Home() {
+const howWorks = [
+  {
+    title: "Aanmelden",
+    desc: "Maak in een paar minuten jouw account aan en start direct met zoeken.",
+  },
+  {
+    title: "Woning zoeken",
+    desc: "Vind jouw droomwoning in je favoriete stad met onze handige zoekfilters.",
+  },
+  {
+    title: "Blijf op de hoogte",
+    desc: "Nog niet gevonden wat je zocht? Je ontvangt dagelijks of wekelijks nieuwe huurwoningen in je inbox.",
+  },
+  {
+    title: "Verhuizen maar",
+    desc: "Reageer, plan een bezichtiging en begin vast met inpakken. Jouw nieuwe woning wacht op je!",
+  },
+];
+
+function Home() {
+  const { t } = useLanguage();
   const [listings, setListings] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [query, setQuery] = useState("");
@@ -159,13 +180,15 @@ export default function Home() {
           <div className="mx-auto max-w-7xl px-4">
             <div className="rounded-lg p-6 shadow-xl">
               <h3 className="md:text-md text-center text-sm text-white lg:text-xl">
-                IT’S GREAT TO BE HOME!
+                {t("home.hero.subTitle")}
               </h3>
               <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
                 <h1 className="text-center text-2xl leading-tight text-white/90 md:text-4xl lg:text-6xl">
-                  Rent Your Property Easily In
+                  {t("home.hero.title1")}
                   <br />
-                  <span className="block text-[#3CAAFA]">The Netherland</span>
+                  <span className="block text-[#3CAAFA]">
+                    {t("home.hero.title2")}
+                  </span>
                 </h1>
               </div>
             </div>
@@ -181,13 +204,14 @@ export default function Home() {
               <FiMapPin className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search Address..."
+                placeholder={`${t("home.hero.search.place")}`}
                 value={query}
                 onChange={(e) => handleLocationInput(e.target.value)}
                 onFocus={() => setShowSuggestions(true)}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
                 className="h-16 w-full rounded-lg bg-white py-2 pr-4 pl-10 shadow focus:outline-none"
               />
+
               {showSuggestions && query.trim() !== "" && (
                 <ul className="absolute top-[100%] left-0 z-10 mt-1 max-h-80 w-full overflow-y-auto rounded border border-gray-200 bg-white text-sm shadow">
                   {suggestions.length > 0 ? (
@@ -214,7 +238,7 @@ export default function Home() {
               <FiDollarSign className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
               <input
                 type="number"
-                placeholder="Min Price"
+                placeholder={`${t("home.hero.search.min")}`}
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
                 className="h-16 w-full rounded-lg bg-white py-2 pr-4 pl-10 shadow focus:outline-none"
@@ -225,7 +249,7 @@ export default function Home() {
               <FiDollarSign className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
               <input
                 type="number"
-                placeholder="Max Price"
+                placeholder={`${t("home.hero.search.max")}`}
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
                 className="h-16 w-full rounded-lg bg-white py-2 pr-4 pl-10 shadow focus:outline-none"
@@ -239,7 +263,7 @@ export default function Home() {
                 onClick={handleSearch}
                 className="flex w-full items-center justify-center gap-2 py-4.5"
               >
-                <FiSearch /> Search
+                <FiSearch /> {t("home.hero.search.button")}
               </Button>
             </div>
           </div>
@@ -247,11 +271,10 @@ export default function Home() {
       </section>
 
       <div className="mb-10 w-full bg-white px-6 md:mb-10 lg:mb-10 lg:pt-6">
-        <h2 className="text-center text-2xl md:text-4xl">Popular Cities</h2>
-        <p className="text-center">
-          Discover the perfect place to live in the most popular cities of the
-          Netherlands
-        </p>
+        <h2 className="text-center text-2xl md:text-4xl">
+          {t("home.PopularCity.title")}
+        </h2>
+        <p className="text-center">{t("home.PopularCity.desc")}</p>
       </div>
 
       {/* POPOLER SECTION */}
@@ -321,26 +344,19 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
           {/* Text Section */}
           <div>
-            <h3 className="mb-2 text-[#0278d9]">About us</h3>
+            <h3 className="mb-2 text-[#0278d9]">{t("home.about.subTitle")}</h3>
             <h2 className="mb-6 text-2xl md:text-4xl">
-              Driven by Trust, Defined by Results
+              {t("home.about.title")}
             </h2>
             <p className="mb-6">
-              At NL Property, we believe that finding a rental home in the
-              Netherlands should be simple, honest, and stress-free. That’s why
-              we’ve created a platform that’s fully focused on renters—no
-              agents, no complicated steps, no hidden fees.
+              {t("home.about.desc1")}
               <br />
               <br />
-              Whether you're moving for work, study, or just looking for a new
-              place to call home, we’re here to make that journey easier. Our
-              goal is to help you find verified rental listings with clear
-              details, fair pricing, and no surprises. You won’t find fake ads
-              or outdated listings—only real homes that are truly available.
+              {t("home.about.desc2")}
             </p>
             <Link to="/about">
               <Button variant="yellowGradient" size="lg" className="">
-                Learn more
+                {t("home.about.button")}
               </Button>
             </Link>
           </div>
@@ -379,10 +395,10 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           {/* Header */}
           <div className="mx-auto mb-6 max-w-2xl text-center md:mb-12">
-            <h2 className="mb-3 text-2xl md:text-4xl">Recent gevonden</h2>
-            <p className="leading-normal">
-              Betaalbare woningen die we recent hebben gevonden
-            </p>
+            <h2 className="mb-3 text-2xl md:text-4xl">
+              {t("home.recent.title")}
+            </h2>
+            <p className="leading-normal">{t("home.recent.desc")}</p>
           </div>
 
           {/* Property Grid */}
@@ -502,32 +518,15 @@ export default function Home() {
         <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-12 p-4 lg:p-0">
           {/* Header */}
           <div className="space-y-2 text-center">
-            <h2 className="capitalize">Hoe werkt het?</h2>
+            <h2 className="capitalize">{t("home.work.title")}</h2>
             <p className="font-inter text-base font-normal text-black">
-              Homes that we have just discovered
+              {t("home.work.desc")}
             </p>
           </div>
 
           {/* Steps */}
           <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                title: "Aanmelden",
-                desc: "Maak in een paar minuten jouw account aan en start direct met zoeken.",
-              },
-              {
-                title: "Woning zoeken",
-                desc: "Vind jouw droomwoning in je favoriete stad met onze handige zoekfilters.",
-              },
-              {
-                title: "Blijf op de hoogte",
-                desc: "Nog niet gevonden wat je zocht? Je ontvangt dagelijks of wekelijks nieuwe huurwoningen in je inbox.",
-              },
-              {
-                title: "Verhuizen maar",
-                desc: "Reageer, plan een bezichtiging en begin vast met inpakken. Jouw nieuwe woning wacht op je!",
-              },
-            ].map((step, idx) => (
+            {howWorks.map((step, idx) => (
               <div
                 key={idx}
                 className="flex flex-col items-center gap-4 rounded-lg bg-white px-6 py-8 shadow-sm"
@@ -549,3 +548,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;
