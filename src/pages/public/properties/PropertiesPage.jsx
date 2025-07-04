@@ -1,13 +1,18 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { FiGrid, FiMapPin } from "react-icons/fi";
+import PropertiesCard from "../../../components/common/PropertiesCard";
 import CardSkeleton from "../../../components/common/Card-Skeleton";
 import Pagination from "../../../components/common/Pagination";
-import PropertiesCard from "../../../components/common/PropertiesCard";
 
 import RangeSlider from "../../../components/common/RangeSlider";
+<<<<<<< HEAD
 
 const URL = "http://localhost:3011/api";
+=======
+import BASE_URL from "../../../config/api";
+import PropertyNoFound from "../../../components/error/PropertyNoFound";
+>>>>>>> 90f98b75dc9e820b7dd6e66985577d3d68f92226
 
 const PropertyListPage = () => {
   const [properties, setProperties] = useState([]);
@@ -46,7 +51,9 @@ const PropertyListPage = () => {
         ...filters,
       });
 
-      const res = await axios.get(`${URL}/properties?${params.toString()}`);
+      const res = await axios.get(
+        `${BASE_URL}/properties?${params.toString()}`,
+      );
 
       setProperties(res.data.properties);
       setPagination(res.data.pagination);
@@ -66,13 +73,16 @@ const PropertyListPage = () => {
     }
 
     setIsFetchingSuggestions(true);
+
     try {
       const res = await axios.get(
-        `${URL}/properties?location=${query}&limit=5`,
+        `${BASE_URL}/properties?location=${query}&limit=5`,
       );
+
       const uniqueLocations = [
         ...new Set(res.data.properties.map((p) => p.location)),
       ].filter(Boolean); // Remove empty/null locations
+      console.log(uniqueLocations);
       setSuggestions(uniqueLocations);
     } catch (error) {
       console.error("Failed to fetch suggestions:", error);
@@ -142,6 +152,15 @@ const PropertyListPage = () => {
     const value = e.target.value;
     setLocationInput(value);
     debouncedFetchSuggestions(value);
+
+    if (value.trim() === "") {
+      // 👇 Clear the location filter too
+      setFilters((prev) => ({
+        ...prev,
+        location: "",
+      }));
+      fetchData(1); // ⬅️ Re-fetch without location
+    }
   };
 
   // handle suggetion select input change
@@ -204,6 +223,19 @@ const PropertyListPage = () => {
               className="relative rounded-md p-6 shadow-sm"
               ref={suggestionsRef}
             >
+              {locationInput && (
+                <button
+                  className="absolute top-[72px] right-8 rounded-full bg-gray-200 px-1 py-0.5 text-xs font-bold text-gray-600 hover:text-red-500"
+                  onClick={() => {
+                    setLocationInput("");
+                    setFilters((prev) => ({ ...prev, location: "" }));
+                    fetchData(1);
+                  }}
+                >
+                  ✕
+                </button>
+              )}
+
               <label className="text-md mb-2 flex items-center gap-1.5 font-medium text-gray-500">
                 <FiMapPin size={15} />
                 Search Location
@@ -219,31 +251,27 @@ const PropertyListPage = () => {
                 autoComplete="off"
               />
 
-              {/* Loading State */}
-              {isFetchingSuggestions && (
-                <div className="absolute top-full left-0 z-10 mt-1 w-full rounded-md border border-gray-200 bg-white p-2 text-center text-sm text-gray-500">
-                  Loading...
-                </div>
-              )}
-
-              {/* Suggestions Dropdown */}
               {showSuggestions && (
-                <ul className="absolute top-full left-0 z-10 mt-1 max-h-60 w-full overflow-y-auto rounded-md border border-gray-200 bg-white p-2 shadow">
-                  {suggestions.length > 0 ? (
+                <ul className="absolute top-full left-0 z-10 max-h-60 w-full overflow-y-auto rounded-xl bg-white shadow-lg">
+                  {isFetchingSuggestions ? (
+                    <li className="p-2 text-center text-sm text-gray-500">
+                      Loading...
+                    </li>
+                  ) : suggestions.length > 0 ? (
                     suggestions.map((suggestion, index) => (
                       <li
                         key={index}
-                        className="flex cursor-pointer items-center gap-2 rounded-2xl p-1.5 text-sm hover:bg-gray-100"
+                        className="mx-2 my-2 flex cursor-pointer items-center gap-2 rounded-xl px-2 text-sm hover:bg-gray-100"
                         onClick={() => handleSuggestionSelect(suggestion)}
                       >
                         <FiMapPin /> {suggestion}
                       </li>
                     ))
-                  ) : (
-                    <li className="px-4 py-2 text-gray-500">
-                      No locations found
+                  ) : locationInput.trim().length >= 2 ? (
+                    <li className="border border-gray-100 py-4 text-center text-sm text-gray-400">
+                      No matching locations!
                     </li>
-                  )}
+                  ) : null}
                 </ul>
               )}
             </div>
@@ -339,9 +367,7 @@ const PropertyListPage = () => {
               Error loading properties. Please try again.
             </div>
           ) : properties.length === 0 ? (
-            <div className="py-10 text-center text-lg text-gray-600">
-              Properties not found!
-            </div>
+            <PropertyNoFound />
           ) : (
             <div className="">
               {properties.map((item) => (

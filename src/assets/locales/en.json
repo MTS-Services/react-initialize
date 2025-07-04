@@ -1,4 +1,122 @@
 {
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+
+  "footer": {
+    "register": {
+      "title": "Register and view our 20,000+ rental properties",
+      "desc": "We have a large collection of affordable rental properties to which new properties are added every day. Don't wait any longer and start searching.",
+      "button": "Start Searching"
+    },
+    "logo": "Receive emails with rentals that meet your requirements.",
+    "quick": {
+      "link": "Quick",
+      "home": "Home",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "company": {
+      "link": "Company",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "cookie": "Cookie Policy"
+    },
+    "subscribed": "Receive emails with rentals that meet your requirements.",
+    "inputPlaceH": "Enter your email",
+    "button": "Subscribe",
+    "copyRight": "© 2025 NL Property. All rights reserved."
+  },
+
+  "home": {
+    "hero": {
+      "subTitle": "IT’S GREAT TO BE HOME!",
+      "title1": "Rent Your Property Easily In",
+      "title2": "The Netherland",
+      "search": {
+        "place": "Search Address...",
+        "min": "Min Price",
+        "max": "Max Price",
+        "button": "Search"
+      }
+    },
+    "PopularCity": {
+      "title": "Popular Cities",
+      "desc": "Discover the perfect place to live in the most popular cities of the Netherlands"
+    },
+    "about": {
+      "subTitle": "About us",
+      "title": "Driven by Trust, Defined by Results",
+      "desc1": "At NL Property, we believe that finding a rental home in the Netherlands should be simple, honest, and stress-free. That’s why we’ve created a platform that’s fully focused on renters—no agents, no complicated steps, no hidden fees.",
+      "desc2": "Whether you're moving for work, study, or just looking for a new place to call home, we’re here to make that journey easier. Our goal is to help you find verified rental listings with clear details, fair pricing, and no surprises. You won’t find fake ads or outdated listings—only real homes that are truly available.",
+      "button": "Learn more"
+    },
+    "recent": {
+      "title": "Recently found",
+      "desc": "Affordable homes we've recently found"
+    },
+    "work": {
+      "title": "How does it work?",
+      "desc": "Homes that we have just discovered"
+    },
+    "register": {
+      "title": "Register and view our 20,000+ rental properties",
+      "desc": "We have a large collection of affordable rental properties to which new properties are added every day. Don't wait any longer and start searching."
+    }
+  },
+
+  "about": {
+    "hero": {
+      "title1": "How Renting Works On",
+      "title2": "Our Platform",
+      "desc": "Discover and compare rental options from trusted companies all in one place. Browse listings, choose what suits you best, and book directly. We make it simple, secure, and seamless. A small service fee may apply."
+    },
+    "whyChoose": {
+      "title": "Why Choose Us",
+      "desc": "Finding the right rental shouldn’t be stressful. That’s why we bring together listings from multiple trusted companies in one simple platform — so you can compare, choose, and book with confidence. With transparent pricing, verified partners, and dedicated support, we make the rental experience smooth, secure, and tailored to your needs.",
+      "button": "Explore your home"
+    },
+    "faq": {
+      "title": "FAQ"
+    }
+  },
+
+  "contact": {
+    "title": "Let’s Get In Touch",
+    "description": "Or just reach out manually to",
+    "email": "hellonlproperty.com",
+
+    "form": {
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "Mirable"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Lily"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "mirablelily@gmail.com"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "(208) 555-0112"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Your message here..."
+      },
+      "submit": "Submit"
+    }
+  },
+
   "terms": {
     "title": "Terms and Conditions of NL Property",
     "articles": {
@@ -156,7 +274,7 @@
   },
 
   "cookie": {
-    "title": "COOKIE STATEMENT Metis International B.V.",
+    "title": "Cookie Statement Metis International B.V.",
     "intro": "Rentalerts.nl means the private company Metis International B.V., operating under the name Rentalerts.nl, located at P.O. Box 56822, 1040 AV Amsterdam, registered in the trade register of the Chamber of Commerce under number 91200725. We value the privacy of visitors to our website www.rentalerts.nl and comply with the Dutch Data Protection Act and the General Data Protection Regulation. This statement explains our cookie policy for www.rentalerts.nl.",
 
     "whatAreCookies": {

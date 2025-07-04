@@ -44,6 +44,8 @@ const CheckoutForm = () => {
         currency: "usd",
       });
 
+      console.log("Client Secret:", clientSecret);
+
       // 2. Confirm Card Payment
       const { error: stripeError, paymentIntent } =
         await stripe.confirmCardPayment(clientSecret, {
@@ -59,22 +61,30 @@ const CheckoutForm = () => {
       if (stripeError) {
         throw new Error(stripeError.message);
       }
+      console.log("Payment Intent:", paymentIntent);
 
       // 3. Verify Payment Status
       if (paymentIntent.status === "succeeded") {
         // 4. Create User
         const response = await axios.post(
+
           "http://localhost:3011/api/users/create",
+
           {
             email: formData.email,
             name: formData.name,
+<<<<<<< HEAD
             amount: 10,
+=======
+            amount: paymentIntent.amount,
+>>>>>>> 90f98b75dc9e820b7dd6e66985577d3d68f92226
             password: formData.password,
             paymentId: paymentIntent.id,
           },
         );
 
         const user = response.data.data;
+        console.log("User creation response:", user);
 
         if (!user) {
           throw new Error("Payment verification failed on server");

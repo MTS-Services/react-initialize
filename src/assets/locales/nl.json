@@ -1,4 +1,119 @@
 {
+  "header": {
+    "home": "Home",
+    "about": "Over ons",
+    "contact": "Contact",
+    "login": "Inloggen",
+    "register": "Registreren",
+    "profile": "Profiel",
+    "logout": "Uitloggen"
+  },
+
+  "footer": {
+    "register": {
+      "title": "Registreer u en bekijk onze meer dan 20,000+ huurwoningen",
+      "desc": "We hebben een grote collectie betaalbare huurwoningen, waaraan dagelijks nieuwe woningen worden toegevoegd. Wacht niet langer en begin met zoeken.",
+      "button": "Begin met zoeken"
+    },
+    "logo": "Ontvang e-mails met huurwoningen die aan jouw wensen voldoen.",
+    "quick": {
+      "link": "Snel",
+      "home": "Thuis",
+      "about": "Over ons",
+      "contact": "Contact"
+    },
+    "company": {
+      "link": "Bedrijf",
+      "terms": "Algemene voorwaarden",
+      "privacy": "Privacybeleid",
+      "cookie": "Cookiebeleid"
+    },
+    "subscribed": "Ontvang e-mails met huurwoningen die aan jouw wensen voldoen.",
+    "inputPlaceH": "Voer uw e-mailadres in",
+    "button": "Abonneren",
+    "copyRight": "© 2025 NL Property. Alle rechten voorbehouden."
+  },
+
+  "home": {
+    "hero": {
+      "subTitle": "HET IS FIJN OM THUIS TE ZIJN!",
+      "title1": "Verhuur je woning eenvoudig in",
+      "title2": "Nederland",
+      "search": {
+        "place": "Zoek adres...",
+        "min": "Minimumprijs",
+        "max": "Maximale prijs",
+        "button": "Zoekopdracht"
+      }
+    },
+    "PopularCity": {
+      "title": "Populaire steden",
+      "desc": "Ontdek de perfecte plek om te wonen in de populairste steden van Nederland"
+    },
+    "about": {
+      "subTitle": "Over ons",
+      "title": "Gedreven door vertrouwen, gedefinieerd door resultaat",
+      "desc1": "Bij NL Property geloven we dat het vinden van een huurwoning in Nederland eenvoudig, eerlijk en stressvrij moet zijn. Daarom hebben we een platform gecreëerd dat volledig gericht is op huurders—geen makelaars, geen ingewikkelde stappen, geen verborgen kosten.",
+      "desc2": "Of je nu verhuist voor werk, studie of gewoon op zoek bent naar een nieuwe plek om thuis te noemen, wij zijn er om die reis gemakkelijker te maken. Ons doel is om jou te helpen bij het vinden van geverifieerde huurwoningen met duidelijke informatie, eerlijke prijzen en zonder verrassingen. Geen nep-advertenties of verouderde listings—alleen echte woningen die echt beschikbaar zijn.",
+      "button": "Meer informatie"
+    },
+    "recent": {
+      "title": "Recent gevonden",
+      "desc": "Betaalbare woningen die we recent hebben gevonden"
+    },
+    "work": {
+      "title": "Hoe werkt het?",
+      "desc": "Woningen die we net hebben ontdekt"
+    },
+    "register": {
+      "title": "Registreer en bekijk onze 20.000+ huurwoningen",
+      "desc": "We hebben een grote verzameling betaalbare huurwoningen en voegen elke dag nieuwe toe. Wacht niet langer en begin met zoeken."
+    }
+  },
+
+  "about": {
+    "hero": {
+      "title1": "Hoe huren werkt op",
+      "title2": "Ons platform",
+      "desc": "Ontdek en vergelijk huuropties van betrouwbare bedrijven, allemaal op één plek. Bekijk het aanbod, kies wat het beste bij u past en boek direct. Wij maken het eenvoudig, veilig en soepel. Er kunnen kleine servicekosten van toepassing zijn."
+    },
+    "whyChoose": {
+      "title": "Waarom voor ons kiezen",
+      "desc": "Het vinden van de juiste huurwoning hoeft geen stress te zijn. Daarom bundelen we aanbiedingen van meerdere betrouwbare bedrijven op één eenvoudig platform, zodat u vol vertrouwen kunt vergelijken, kiezen en boeken. Met transparante prijzen, geverifieerde partners en toegewijde ondersteuning zorgen we voor een soepele, veilige en op uw behoeften afgestemde huurervaring.",
+      "button": "Ontdek je huis"
+    }
+  },
+
+  "contact": {
+    "title": "Laten we contact opnemen",
+    "description": "Of neem handmatig contact op via",
+    "email": "hellonlproperty.com",
+
+    "form": {
+      "firstName": {
+        "label": "Voornaam",
+        "placeholder": "Mirable"
+      },
+      "lastName": {
+        "label": "Achternaam",
+        "placeholder": "Lily"
+      },
+      "email": {
+        "label": "E-mailadres",
+        "placeholder": "mirablelily@gmail.com"
+      },
+      "phone": {
+        "label": "Telefoonnummer",
+        "placeholder": "(208) 555-0112"
+      },
+      "message": {
+        "label": "Bericht",
+        "placeholder": "Jouw bericht hier..."
+      },
+      "submit": "Verzenden"
+    }
+  },
+
   "terms": {
     "title": "Algemene Voorwaarden van NL Property",
     "articles": {
@@ -156,7 +271,7 @@
   },
 
   "cookie": {
-    "title": "COOKIE VERKLARING Metis International B.V.",
+    "title": "Cookieverklaring Metis International B.V.",
     "intro": "Rentalerts.nl betekent de besloten vennootschap Metis International B.V., handelend onder de naam Rentalerts.nl, gevestigd te Postbus 56822, 1040 AV Amsterdam, ingeschreven in het handelsregister van de Kamer van Koophandel onder nummer 91200725. Wij hechten veel waarde aan de privacy van bezoekers van onze website www.rentalerts.nl en houden ons aan de Wet bescherming persoonsgegevens en de Algemene Verordening Gegevensbescherming. In deze verklaring leggen wij ons cookiebeleid uit voor www.rentalerts.nl.",
 
     "whatAreCookies": {

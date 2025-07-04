@@ -1,8 +1,7 @@
-import React from "react";
-import { useTranslation } from "../../../hook/useTranslation";
+import { useLanguage } from "../../../hook/useLanguage";
 
 const CookiePolicy = () => {
-  const { t, language, setLanguage } = useTranslation();
+  const { t } = useLanguage();
 
   return (
     <section>
@@ -19,32 +18,26 @@ const CookiePolicy = () => {
       </header>
 
       <div className="flex justify-center py-8 md:py-10 lg:py-12">
-        <div className="w-[90vw] max-w-5xl sm:w-[70vw] lg:w-[80vw]">
-          <div className="mb-6 space-x-2">
-            <button
-              onClick={() => setLanguage("en")}
-              className={`rounded-md px-4 py-2 ${language === "en" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
-            >
-              English
-            </button>
-            <button
-              onClick={() => setLanguage("nl")}
-              className={`rounded-md px-4 py-2 ${language === "nl" ? "bg-blue-600 text-white" : "bg-gray-200"}`}
-            >
-              Dutch
-            </button>
-          </div>
-
+        <div className="w-[90vw] max-w-5xl space-y-4 sm:w-[70vw] lg:w-[80vw]">
           {/* Translated content */}
-          <h1 className="mb-4 text-3xl font-bold">{t("en.terms.title")}</h1>
+          <h3> {t("cookie.title")}</h3>
+          <p>{t("cookie.intro")}</p>
 
-          <button className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
-            {t("button")}
-          </button>
+          <h3>{t("cookie.whatAreCookies.title")}</h3>
+          <p>{t("cookie.whatAreCookies.description")}</p>
 
-          <p className="mt-4 text-gray-700">
-            {t("greeting", { name: "John" })}
-          </p>
+          <h3>{t("cookie.necessaryCookies.title")}</h3>
+          <p>{t("cookie.necessaryCookies.description")}</p>
+
+          <h3>{t("cookie.statsCookies.title")}</h3>
+          <p>{t("cookie.statsCookies.description")}</p>
+
+          <h3>{t("cookie.externalCookies.title")}</h3>
+          <p>{t("cookie.externalCookies.description")}</p>
+          <p>{t("cookie.externalCookies.note")}</p>
+
+          <h3>{t("cookie.cookieOverview.title")}</h3>
+          <p>{t("cookie.cookieOverview.description")}</p>
         </div>
       </div>
     </section>

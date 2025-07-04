@@ -96,12 +96,6 @@ const AllProperty = () => {
     });
   };
 
-  // Extract numeric price from string
-  const getPriceValue = (priceString) => {
-    const match = priceString.match(/€\s*([\d,.]+)/);
-    return match ? parseFloat(match[1].replace(",", "")) : 0;
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="mb-6">
