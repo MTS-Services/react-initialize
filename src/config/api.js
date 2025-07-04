@@ -1,2 +1,2 @@
-const BASE_URL = "https://mts-ecommerce-backend.onrender.com/api/v1"; // fallback
+const BASE_URL = "http://localhost:3011/api"; // fallback
 export default BASE_URL;

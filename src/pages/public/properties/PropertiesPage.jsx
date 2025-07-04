@@ -1,18 +1,13 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { FiGrid, FiMapPin } from "react-icons/fi";
-import PropertiesCard from "../../../components/common/PropertiesCard";
 import CardSkeleton from "../../../components/common/Card-Skeleton";
 import Pagination from "../../../components/common/Pagination";
+import PropertiesCard from "../../../components/common/PropertiesCard";
 
 import RangeSlider from "../../../components/common/RangeSlider";
-<<<<<<< HEAD
-
-const URL = "http://localhost:3011/api";
-=======
-import BASE_URL from "../../../config/api";
 import PropertyNoFound from "../../../components/error/PropertyNoFound";
->>>>>>> 90f98b75dc9e820b7dd6e66985577d3d68f92226
+import BASE_URL from "../../../config/api";
 
 const PropertyListPage = () => {
   const [properties, setProperties] = useState([]);
@@ -30,7 +25,10 @@ const PropertyListPage = () => {
     location: "",
     minPrice: "",
     maxPrice: "",
-    bedrooms: "",
+    minBedrooms: "", // Added minBedrooms
+    maxBedrooms: "", // Added maxBedrooms
+    minSurfaceArea: "", // Added minSurfaceArea
+    maxSurfaceArea: "", // Added maxSurfaceArea
   });
 
   const [locationInput, setLocationInput] = useState("");
@@ -48,13 +46,26 @@ const PropertyListPage = () => {
       const params = new URLSearchParams({
         limit: pagination.itemsPerPage,
         page: page,
-        ...filters,
+        location: filters.location,
+        minPrice: filters.minPrice,
+        maxPrice: filters.maxPrice,
+        minBedrooms: filters.minBedrooms, // Pass minBedrooms
+        maxBedrooms: filters.maxBedrooms, // Pass maxBedrooms
+        minSurfaceArea: filters.minSurfaceArea, // Pass minSurfaceArea
+        maxSurfaceArea: filters.maxSurfaceArea, // Pass maxSurfaceArea
       });
+
+      // Remove empty parameters
+      for (let [key, value] of params.entries()) {
+        if (!value) {
+          params.delete(key);
+        }
+      }
 
       const res = await axios.get(
         `${BASE_URL}/properties?${params.toString()}`,
       );
-
+      console.log("PR-", `${BASE_URL}/properties?${params.toString()}`);
       setProperties(res.data.properties);
       setPagination(res.data.pagination);
     } catch (error) {
@@ -82,7 +93,6 @@ const PropertyListPage = () => {
       const uniqueLocations = [
         ...new Set(res.data.properties.map((p) => p.location)),
       ].filter(Boolean); // Remove empty/null locations
-      console.log(uniqueLocations);
       setSuggestions(uniqueLocations);
     } catch (error) {
       console.error("Failed to fetch suggestions:", error);
@@ -154,12 +164,12 @@ const PropertyListPage = () => {
     debouncedFetchSuggestions(value);
 
     if (value.trim() === "") {
-      // 👇 Clear the location filter too
+      // Clear the location filter too
       setFilters((prev) => ({
         ...prev,
         location: "",
       }));
-      fetchData(1); // ⬅️ Re-fetch without location
+      fetchData(1); // Re-fetch without location
     }
   };
 
@@ -187,6 +197,24 @@ const PropertyListPage = () => {
       ...prev,
       minPrice: min,
       maxPrice: max,
+    }));
+  };
+
+  // Handle bedrooms filter change
+  const handleBedroomsChange = (value) => {
+    setFilters((prev) => ({
+      ...prev,
+      minBedrooms: value,
+      maxBedrooms: value === "5+" ? "" : value, // Set max for specific values, or empty for 5+
+    }));
+  };
+
+  // Handle surface area filter change
+  const handleSurfaceAreaChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [name]: value,
     }));
   };
 
@@ -325,41 +353,68 @@ const PropertyListPage = () => {
             <div className="rounded-md p-5 shadow">
               <label className="text-md block text-gray-500">◪ Bedrooms</label>
               <ul className="grid grid-cols-3 gap-2 pt-4">
-                {["1 rooms", "2 rooms", "3 rooms", "3 rooms", "3 rooms"].map(
-                  (i, index) => {
-                    return (
-                      <li
-                        key={index}
-                        className="cursor-pointer rounded-full border border-gray-200 p-2 text-center text-sm text-gray-500 hover:bg-gray-200"
-                      >
-                        {i}
-                      </li>
-                    );
-                  },
-                )}
+                {["1", "2", "3", "4", "5+"].map((num, index) => (
+                  <li
+                    key={index}
+                    className={`cursor-pointer rounded-full border border-gray-200 p-2 text-center text-sm text-gray-500 hover:bg-gray-200 ${
+                      (filters.minBedrooms === num && num !== "5+") ||
+                      (num === "5+" && filters.minBedrooms === "5") // Highlight '5+' if minBedrooms is 5
+                        ? "bg-gray-200 font-bold"
+                        : ""
+                    }`}
+                    onClick={() => handleBedroomsChange(num)}
+                  >
+                    {num} {num === "5+" ? "" : "rooms"}
+                  </li>
+                ))}
               </ul>
             </div>
 
             <div className="rounded-md p-5 shadow">
-              <label className="block text-sm font-medium text-gray-500">
-                Min Surface (m2)
-              </label>
-              <input
-                type="text"
-                name="minPrice"
-                placeholder="e.g. 50"
-                value={filters.minPrice}
-                onChange={handleFilterChange}
-                className="mt-1 w-full rounded-md border border-gray-200 p-2"
-              />
+              <h4 className="text-md text-gray-500">Surface Area (m²)</h4>
+              <hr className="my-2.5 text-gray-200" />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">
+                    Min Surface
+                  </label>
+                  <input
+                    type="number"
+                    name="minSurfaceArea"
+                    placeholder="e.g. 50"
+                    value={filters.minSurfaceArea}
+                    onChange={handleSurfaceAreaChange}
+                    className="mt-1 w-full rounded-md border border-gray-200 p-2"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-500">
+                    Max Surface
+                  </label>
+                  <input
+                    type="number"
+                    name="maxSurfaceArea"
+                    placeholder="e.g. 200"
+                    value={filters.maxSurfaceArea}
+                    onChange={handleSurfaceAreaChange}
+                    className="mt-1 w-full rounded-md border border-gray-200 p-2"
+                  />
+                </div>
+              </div>
             </div>
+            {/* Add a submit button for filters if you want to explicitly apply them */}
+            <button
+              type="submit"
+              className="mt-4 w-full rounded-md bg-blue-600 p-3 text-white hover:bg-blue-700"
+            >
+              Apply Filters
+            </button>
           </form>
         </aside>
 
-        {/* MAIN CONTENT (remain the same as your original code) */}
+        {/* MAIN CONTENT */}
         <article className="flex-1 pt-5 md:pt-8 lg:pt-0">
-          {/* Controls: Sort + View Toggle */}
-
           {isLoading ? (
             renderSkeletonListings()
           ) : isError ? (

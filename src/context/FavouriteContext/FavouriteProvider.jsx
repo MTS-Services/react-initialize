@@ -72,7 +72,6 @@ export const FavoriteProvider = ({ children }) => {
         if (response.ok) {
           const dbFavorites = await response.json();
           setFavorites(dbFavorites || []);
-          console.log("Loaded favorites from DB:", dbFavorites);
         } else {
           toast.error("Failed to load favorites from the database!");
           console.error("Failed to load favorites from DB:", response);
