@@ -68,6 +68,7 @@ const CheckoutForm = () => {
           {
             email: formData.email,
             name: formData.name,
+            amount: 10,
             password: formData.password,
             paymentId: paymentIntent.id,
           },

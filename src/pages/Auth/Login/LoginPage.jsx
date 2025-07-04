@@ -5,10 +5,13 @@ import { toast } from "react-toastify";
 import { loginUser } from "../../../features/auth/authSlice"; // Import loginUser action
 
 import Button from "../../../components/ui/Button";
+import { useFavorites } from "../../../context/FavouriteContext/FavouriteProvider";
 
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { setUser } = useFavorites();
 
   // Get loading and error states from Redux store
   const { loading } = useSelector((state) => state.auth);
@@ -29,7 +32,8 @@ function LoginPage() {
     try {
       // Dispatch loginUser action
       await dispatch(loginUser({ email, password })).unwrap();
-
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      setUser(userInfo?.data || null);
       toast.success("Successfully Login!");
       navigate("/properties");
     } catch (error) {

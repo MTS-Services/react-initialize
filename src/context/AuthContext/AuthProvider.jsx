@@ -36,7 +36,6 @@ const AuthProvider = ({ children }) => {
     queryClient.clear();
     setRole(null);
     setUser(null);
-    localStorage.removeItem("userInfo");
     return signOut(auth);
   };
 
@@ -52,7 +51,6 @@ const AuthProvider = ({ children }) => {
         setUser(null);
         setRole(null);
         Cookies.remove("userInfo");
-        localStorage.removeItem("userInfo");
         setIsLoading(false);
       }
     });

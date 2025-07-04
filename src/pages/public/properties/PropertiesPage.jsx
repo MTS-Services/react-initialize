@@ -7,7 +7,7 @@ import PropertiesCard from "../../../components/common/PropertiesCard";
 
 import RangeSlider from "../../../components/common/RangeSlider";
 
-const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
+const URL = "http://localhost:3011/api";
 
 const PropertyListPage = () => {
   const [properties, setProperties] = useState([]);

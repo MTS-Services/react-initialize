@@ -1,13 +1,17 @@
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useFavorites } from "../../context/FavouriteContext/FavouriteProvider";
+import { isPaid } from "../../features/auth/authUtils.js";
 
 const FavouriteCoutingIcon = () => {
+  const user = isPaid();
   const { favorites } = useFavorites(); // Access the favorites array
   const nevigate = useNavigate();
   return (
     <div
-      onClick={() => nevigate("/favourite")}
+      onClick={() => {
+        !user ? nevigate("/auth/login") : nevigate("/favourite");
+      }}
       className="relative cursor-pointer"
     >
       {/* Show favorite count */}
