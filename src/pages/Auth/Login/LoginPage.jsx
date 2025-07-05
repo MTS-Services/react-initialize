@@ -34,7 +34,7 @@ function LoginPage() {
       await dispatch(loginUser({ email, password })).unwrap();
 
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-      console.log(userInfo);
+
       setUser(userInfo?.data || null);
       toast.success("Successfully Login!");
       navigate("/properties");

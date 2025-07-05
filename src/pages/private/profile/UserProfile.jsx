@@ -184,7 +184,7 @@ const UserProfile = () => {
                           {payment.date}
                         </td>
                         <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
-                          ${user.amount || 10}
+                          $10
                         </td>
                         <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
                           {payment.method}
