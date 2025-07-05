@@ -3,14 +3,15 @@ import { useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../components/ui/Button";
 import PaymentSuccsess from "./PaymentSuccsess";
+import BASE_URL from "../../../config/api";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -39,12 +40,10 @@ const CheckoutForm = () => {
       // 1. Create Payment Intent
       const {
         data: { clientSecret },
-      } = await axios.post("http://localhost:3011/api/stripe/create-payment", {
+      } = await axios.post(`${BASE_URL}/stripe/create-payment`, {
         amount: 1000,
         currency: "usd",
       });
-
-      console.log("Client Secret:", clientSecret);
 
       // 2. Confirm Card Payment
       const { error: stripeError, paymentIntent } =
@@ -61,41 +60,35 @@ const CheckoutForm = () => {
       if (stripeError) {
         throw new Error(stripeError.message);
       }
-      console.log("Payment Intent:", paymentIntent);
 
       // 3. Verify Payment Status
       if (paymentIntent.status === "succeeded") {
         // 4. Create User
-        const response = await axios.post(
-          "http://localhost:3011/api/users/create",
+        const response = await axios.post(`${BASE_URL}/users/create`, {
+          email: formData.email,
+          name: formData.name,
+          amount: paymentIntent.amount,
+          password: formData.password,
+          paymentId: paymentIntent.id,
+        });
 
-          {
-            email: formData.email,
-            name: formData.name,
-            amount: paymentIntent.amount,
-            password: formData.password,
-            paymentId: paymentIntent.id,
-          },
-        );
-
-        const user = response.data.data;
-        console.log("User creation response:", user);
-
+        const user = response.data;
+        console.log(user.data);
         if (!user) {
           throw new Error("Payment verification failed on server");
         }
 
         // ✅ Store in localStorage
-        localStorage.setItem(
-          "userInfo",
-          JSON.stringify({
-            email: user.email,
-            ispaid: user.ispaid,
-          }),
-        );
+        localStorage.setItem("userInfo", JSON.stringify(user));
 
-        setUserData(response.data.data);
+        localStorage.setItem("authToken", user.data.token);
+
+        setUserData(response.data.data.user);
         setSuccess(true);
+
+        navigate("/auth/payment-success", {
+          state: { userData: user },
+        });
       }
     } catch (err) {
       setError(err.message);
@@ -105,13 +98,9 @@ const CheckoutForm = () => {
     }
   };
 
-  if (success) {
-    return <PaymentSuccsess userData={userData} />;
-  }
-
   return (
     <section>
-      <div className="border bg-[#0C205A] p-8"></div>
+      <div className="border bg-[#0C205A] p-8" />
       <div
         className="flex items-center justify-center lg:py-20"
         style={{ fontFamily: "var(--font-secondary)" }}
@@ -245,7 +234,7 @@ const CheckoutForm = () => {
                 You have an account?{" "}
                 <Link
                   to="/auth/login"
-                  className="font-semibold text-[#19398A] hover:underline"
+                  className="font-semibold text-blue-500 hover:underline"
                 >
                   Login
                 </Link>

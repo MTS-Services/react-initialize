@@ -8,10 +8,9 @@ export const loginUser = createAsyncThunk(
     try {
       // Call the API to login
       const data = await loginAPI({ email, password });
-
       // Save user info to localStorage
-      const userData = localStorage.setItem("userInfo", JSON.stringify(data));
-      console.log(userData);
+      localStorage.setItem("userInfo", JSON.stringify(data));
+
       return data;
     } catch (err) {
       // If there's an error, return the error message as the rejected value
@@ -31,6 +30,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       localStorage.removeItem("userInfo");
+      localStorage.removeItem("authToken");
     },
   },
 

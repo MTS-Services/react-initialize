@@ -17,6 +17,7 @@ import PrivacyPolicy from "../pages/public/PrivacyPolicy/PrivacyPolicy";
 import TermsAndConditions from "../pages/public/TermsAndConditions/TermsAndConditions";
 import BlockAdmin from "./BlockAdmin";
 import RequireAdmin from "./RequireAdmin";
+import PaymentSuccess from "../pages/Auth/CheckoutForm/PaymentSuccsess";
 
 // Pages
 const Home = lazy(() => import("../pages/public/Home/Home"));
@@ -109,6 +110,7 @@ export const AppRoutes = createBrowserRouter([
     ),
     children: [
       { path: "login", element: <LoginPage /> },
+      { path: "payment-success", element: <PaymentSuccess /> },
       {
         path: "register",
         element: (

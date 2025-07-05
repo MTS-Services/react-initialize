@@ -348,7 +348,7 @@ const SinglePropertyPage = () => {
                   Schedule a Visit
                 </Button>
               ) : (
-                <Link to="/register">
+                <Link to="/auth/register">
                   <Button
                     className="w-full rounded-lg"
                     variant="secondary"

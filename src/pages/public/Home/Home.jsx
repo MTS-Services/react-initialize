@@ -472,22 +472,16 @@ function Home() {
                       </div>
                     </div>
 
-                    <button
-                      type="button"
-                      aria-label="Add to favorites"
-                      className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-50 hover:bg-red-100"
-                    >
-                      <LuHeart />
-                    </button>
+                    {/* CTA */}
+                    <div>
+                      <Link
+                        to="/properties"
+                        className="mt-4 block cursor-pointer text-sm font-medium text-blue-700 hover:underline"
+                      >
+                        View Details
+                      </Link>
+                    </div>
                   </div>
-
-                  {/* CTA */}
-                  <Link
-                    to="/properties"
-                    className="mt-4 block cursor-pointer text-sm font-medium text-blue-700 hover:underline"
-                  >
-                    View Details
-                  </Link>
                 </div>
               </div>
             ))}

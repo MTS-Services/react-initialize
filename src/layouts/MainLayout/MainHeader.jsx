@@ -105,7 +105,7 @@ function MainHeader() {
                     </DropdownItem>
                     <button
                       onClick={logOutHandler}
-                      className="flex w-full items-center gap-2 px-4 py-2 text-left transition hover:bg-[#3CAAFA] hover:text-white"
+                      className="flex w-full items-center gap-2 rounded-b-lg px-4 py-2 text-left transition hover:bg-[#3CAAFA] hover:text-white"
                     >
                       <FiLogOut />
                       Logout
@@ -215,7 +215,7 @@ const MenuLink = ({ to, icon, children, onClick }) => (
 const DropdownItem = ({ to, icon, children }) => (
   <Link
     to={to}
-    className="flex items-center gap-2 px-4 py-2 transition hover:rounded-sm hover:bg-[#3CAAFA] hover:text-white"
+    className="flex items-center gap-2 rounded px-4 py-2 transition hover:rounded-sm hover:bg-[#3CAAFA] hover:text-white"
   >
     {icon}
     {children}
