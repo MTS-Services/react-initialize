@@ -16,11 +16,11 @@ import FavouriteCoutingIcon from "../../components/FavouriteCoutingIcon/Favourit
 import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher";
 import { useFavorites } from "../../context/FavouriteContext/FavouriteProvider";
 import { isPaid, logout } from "../../features/auth/authUtils";
-import i18n from "../../i18n";
+import { useLanguage } from "../../hook/useLanguage";
 
 function MainHeader() {
   const isUserPaid = isPaid();
-
+  const { t } = useLanguage();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -73,9 +73,9 @@ function MainHeader() {
         {/* Desktop Menu */}
 
         <nav className="hidden items-center gap-6 font-medium text-white text-shadow-2xs md:flex">
-          <MenuLink to="/">Home</MenuLink>
-          <MenuLink to="/about">About</MenuLink>
-          <MenuLink to="/contact">Contact</MenuLink>
+          <MenuLink to="/">{t("header.home")}</MenuLink>
+          <MenuLink to="/about">{t("header.about")}</MenuLink>
+          <MenuLink to="/contact">{t("header.contact")}</MenuLink>
         </nav>
 
         {/* Right Side */}

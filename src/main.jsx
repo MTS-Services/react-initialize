@@ -1,6 +1,7 @@
 import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { ScaleLoader } from "react-spinners";
+import "./i18n.js";
 
 import { Provider } from "react-redux";
 import { store } from "./features/store.js";

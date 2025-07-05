@@ -323,5 +323,17 @@
       "title": "Deleting cookies",
       "description": "Want to delete all cookies on your device? You can, but be aware that doing so may reduce your browsing convenience—some settings will no longer be remembered, and you might miss relevant offers. After every internet session, new cookies will be placed again unless you’ve blocked them. You can find the delete option in your browser’s toolbar. Visit the sites for Internet Explorer, Mozilla Firefox, Google Chrome, or Safari for more info. Safari blocks advertiser cookies by default, but you can change this in Preferences → Privacy."
     }
+  },
+
+  "filters": {
+    "search": "Search Location",
+    "placeH": "Enter city",
+    "range": {
+      "title": "Price Range",
+      "min": "Min Price",
+      "max": "Max Price"
+    },
+    "rooms": "Bedrooms",
+    "suface": "Min Surface (m2)"
   }
 }

@@ -7,7 +7,9 @@ import PropertiesCard from "../../../components/common/PropertiesCard";
 
 import RangeSlider from "../../../components/common/RangeSlider";
 import PropertyNoFound from "../../../components/error/PropertyNoFound";
+import { useLanguage } from "../../../hook/useLanguage";
 import BASE_URL from "../../../config/api";
+
 
 const PropertyListPage = () => {
   const [properties, setProperties] = useState([]);
@@ -17,6 +19,8 @@ const PropertyListPage = () => {
     totalItems: 0,
     itemsPerPage: 20,
   });
+
+  const { t } = useLanguage();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
