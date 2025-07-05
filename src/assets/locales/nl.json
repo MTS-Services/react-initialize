@@ -320,5 +320,17 @@
       "title": "Cookies verwijderen",
       "description": "Wil je alle cookies op je apparaat verwijderen? Dat kan, maar houd er rekening mee dat het gebruiksgemak van websites hierdoor vermindert. Instellingen worden niet bewaard en je kunt aanbiedingen missen. Na elk bezoek worden weer nieuwe cookies geplaatst, tenzij je het hebt geblokkeerd. Verwijder cookies via de toolbar van je browser. Lees meer op de websites van Internet Explorer, Mozilla Firefox, Google Chrome of Safari. In Safari worden advertenties standaard geblokkeerd. Je kunt dit wijzigen via Instellingen → Voorkeuren → Privacy."
     }
+  },
+
+  "filters": {
+    "search": "Zoeklocatie",
+    "placeH": "Voer de stad in",
+    "range": {
+      "title": "Prijsklasse",
+      "min": "Minimumprijs",
+      "max": "Maximale prijs"
+    },
+    "rooms": "Slaapkamers",
+    "suface": "Minimale oppervlakte (m2)"
   }
 }
