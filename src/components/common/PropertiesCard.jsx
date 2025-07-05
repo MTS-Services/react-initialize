@@ -9,14 +9,14 @@ import Button from "../ui/Button";
 const PeropertiesCard = ({ item }) => {
   const {
     id,
+    priceFloat,
+    features: { surfaceAreaFloat, numberOfRoomsFloat },
     title,
     description,
     primaryImage,
     createdAt,
     location,
-    surface,
     price,
-    rooms,
   } = item;
 
   const formatRelativeTime = (dateString) => {
@@ -81,14 +81,15 @@ const PeropertiesCard = ({ item }) => {
                 <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
                   <FiLayers className="text-gray-400" />
                   <span className="text-xs text-gray-700">
-                    {surface}m<sup>2</sup>
+                    {surfaceAreaFloat} m<sup>2</sup>
                   </span>
                 </div>
 
                 <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
                   <FaHotel className="text-gray-400" />
                   <span className="text-xs text-gray-700">
-                    {rooms} {rooms > 1 ? "rooms" : "room"}
+                    {numberOfRoomsFloat}{" "}
+                    {numberOfRoomsFloat > 1 ? "rooms" : "room"}
                   </span>
                 </div>
               </div>
@@ -101,7 +102,7 @@ const PeropertiesCard = ({ item }) => {
                 </div>
 
                 <h3 className="py-2 text-lg font-bold text-gray-600 capitalize sm:text-xl">
-                  {price.slice(0, 7)}
+                  {priceFloat} {price.split(" ").at(-1)}
                 </h3>
               </div>
             </div>

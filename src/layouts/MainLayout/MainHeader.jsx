@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import FavouriteCoutingIcon from "../../components/FavouriteCoutingIcon/FavouriteCoutingIcon";
 import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher";
+import { useFavorites } from "../../context/FavouriteContext/FavouriteProvider";
 import { isPaid, logout } from "../../features/auth/authUtils";
 import { useLanguage } from "../../hook/useLanguage";
 
@@ -25,6 +26,7 @@ function MainHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const dropdownTimer = useRef(null);
+  const { setFavorites } = useFavorites();
 
   const handleMouseEnter = () => {
     clearTimeout(dropdownTimer.current);
@@ -39,6 +41,7 @@ function MainHeader() {
 
   const logOutHandler = () => {
     logout();
+    setFavorites([]);
     toast.info("Logged out successfully");
     navigate("/");
   };
@@ -80,7 +83,7 @@ function MainHeader() {
           <LanguageSwitcher />
 
           <button className="flex items-center justify-center rounded-full border border-gray-300 bg-gray-200 p-1 text-black transition hover:shadow-md md:p-2">
-            <FavouriteCoutingIcon itemId="unique-property-id" />
+            <FavouriteCoutingIcon />
           </button>
 
           {/* Desktop Profile Dropdown */}

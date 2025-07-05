@@ -4,6 +4,7 @@ import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
 // Layouts
+import { FavoriteProvider } from "../context/FavouriteContext/FavouriteProvider";
 import AuthLayout from "../layouts/AuthLayout/AuthLayout";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import MainLayout from "../layouts/MainLayout/MainLayout";
@@ -48,9 +49,11 @@ export const AppRoutes = createBrowserRouter([
   {
     path: "/",
     element: (
-      <BlockAdmin>
-        <MainLayout />
-      </BlockAdmin>
+      <FavoriteProvider>
+        <BlockAdmin>
+          <MainLayout />
+        </BlockAdmin>
+      </FavoriteProvider>
     ),
     children: [
       {
@@ -98,9 +101,11 @@ export const AppRoutes = createBrowserRouter([
   {
     path: "/auth",
     element: (
-      <BlockAdmin>
-        <AuthLayout />
-      </BlockAdmin>
+      <FavoriteProvider>
+        <BlockAdmin>
+          <AuthLayout />
+        </BlockAdmin>
+      </FavoriteProvider>
     ),
     children: [
       { path: "login", element: <LoginPage /> },
@@ -117,9 +122,11 @@ export const AppRoutes = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <RequireAdmin>
-        <DashboardLayout />
-      </RequireAdmin>
+      <FavoriteProvider>
+        <RequireAdmin>
+          <DashboardLayout />
+        </RequireAdmin>
+      </FavoriteProvider>
     ),
     children: [
       { path: "dashboard", index: true, element: <Dashboard /> },

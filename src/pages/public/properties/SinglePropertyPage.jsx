@@ -17,10 +17,10 @@ import axios from "axios";
 import clsx from "clsx";
 
 import RecentProperty from "../../../components/common/RecentProperty";
-import { isPaid } from "../../../features/auth/authUtils";
 import Button from "../../../components/ui/Button";
+import { isPaid } from "../../../features/auth/authUtils";
 
-const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
+const URL = "http://localhost:3011/api";
 
 const SinglePropertyPage = () => {
   const { id } = useParams();

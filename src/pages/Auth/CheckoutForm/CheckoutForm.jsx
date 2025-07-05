@@ -67,7 +67,6 @@ const CheckoutForm = () => {
       if (paymentIntent.status === "succeeded") {
         // 4. Create User
         const response = await axios.post(
-
           "http://localhost:3011/api/users/create",
 
           {

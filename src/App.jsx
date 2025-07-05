@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider } from "react-router";
-import { FavoriteProvider } from "./context/FavouriteContext/FavouriteProvider";
-import { ThemeProvider } from "./context/ThemeContext/ThemeProvider";
 import AuthProvider from "./context/AuthContext/AuthProvider";
+
+import { ThemeProvider } from "./context/ThemeContext/ThemeProvider";
 import { AppRoutes } from "./routes/routes";
 
 import "react-loading-skeleton/dist/skeleton.css";
@@ -15,9 +15,7 @@ function App() {
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
-            <FavoriteProvider>
-              <RouterProvider router={AppRoutes} />
-            </FavoriteProvider>
+            <RouterProvider router={AppRoutes} />
           </AuthProvider>
         </QueryClientProvider>
       </ThemeProvider>
