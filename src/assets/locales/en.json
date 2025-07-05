@@ -334,6 +334,10 @@
       "max": "Max Price"
     },
     "rooms": "Bedrooms",
-    "suface": "Min Surface (m2)"
+    "suface": {
+      "title": "Min Surface (m2)",
+      "max": "Max Surface",
+      "min": "Min Surface"
+    }
   }
 }

@@ -331,6 +331,10 @@
       "max": "Maximale prijs"
     },
     "rooms": "Slaapkamers",
-    "suface": "Minimale oppervlakte (m2)"
+    "suface": {
+      "title": "Minimale oppervlakte (m2)",
+      "max": "Maximaal oppervlak",
+      "min": "Min. oppervlak"
+    }
   }
 }
