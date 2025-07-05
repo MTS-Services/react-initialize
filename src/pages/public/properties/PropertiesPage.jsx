@@ -10,7 +10,6 @@ import PropertyNoFound from "../../../components/error/PropertyNoFound";
 import { useLanguage } from "../../../hook/useLanguage";
 import BASE_URL from "../../../config/api";
 
-
 const PropertyListPage = () => {
   const [properties, setProperties] = useState([]);
   const [pagination, setPagination] = useState({
@@ -270,7 +269,7 @@ const PropertyListPage = () => {
 
               <label className="text-md mb-2 flex items-center gap-1.5 font-medium text-gray-500">
                 <FiMapPin size={15} />
-                Search Location
+                {t("filters.search")}
               </label>
               <input
                 type="text"
@@ -278,7 +277,7 @@ const PropertyListPage = () => {
                 value={locationInput}
                 onChange={handleLocationChange}
                 onFocus={() => setShowSuggestions(true)}
-                placeholder="Enter city"
+                placeholder={t("filters.search")}
                 className="mt-1 w-full rounded-md border border-gray-200 p-2"
                 autoComplete="off"
               />
@@ -309,12 +308,14 @@ const PropertyListPage = () => {
             </div>
 
             <div className="rounded-md p-6 shadow-sm">
-              <h4 className="text-md text-gray-500">$ Price Range</h4>
+              <h4 className="text-md text-gray-500">
+                $ {t("filters.range.title")}
+              </h4>
               <hr className="my-2.5 text-gray-200" />
               <div className="mb-8 grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-500">
-                    $ Min Price
+                    $ {t("filters.range.min")}
                   </label>
                   <input
                     type="number"
@@ -328,7 +329,7 @@ const PropertyListPage = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-500">
-                    $ Max Price
+                    $ {t("filters.range.max")}
                   </label>
                   <input
                     type="number"
@@ -355,7 +356,9 @@ const PropertyListPage = () => {
             </div>
 
             <div className="rounded-md p-5 shadow">
-              <label className="text-md block text-gray-500">◪ Bedrooms</label>
+              <label className="text-md block text-gray-500">
+                ◪ {t("filters.rooms")}
+              </label>
               <ul className="grid grid-cols-3 gap-2 pt-4">
                 {["1", "2", "3", "4", "5+"].map((num, index) => (
                   <li
@@ -375,12 +378,14 @@ const PropertyListPage = () => {
             </div>
 
             <div className="rounded-md p-5 shadow">
-              <h4 className="text-md text-gray-500">Surface Area (m²)</h4>
+              <h4 className="text-md text-gray-500">
+                {t("filters.suface.title")}
+              </h4>
               <hr className="my-2.5 text-gray-200" />
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-500">
-                    Min Surface
+                    {t("filters.suface.min")}
                   </label>
                   <input
                     type="number"
@@ -394,7 +399,7 @@ const PropertyListPage = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-500">
-                    Max Surface
+                    {t("filters.suface.max")}
                   </label>
                   <input
                     type="number"
@@ -407,13 +412,6 @@ const PropertyListPage = () => {
                 </div>
               </div>
             </div>
-            {/* Add a submit button for filters if you want to explicitly apply them */}
-            <button
-              type="submit"
-              className="mt-4 w-full rounded-md bg-blue-600 p-3 text-white hover:bg-blue-700"
-            >
-              Apply Filters
-            </button>
           </form>
         </aside>
 
