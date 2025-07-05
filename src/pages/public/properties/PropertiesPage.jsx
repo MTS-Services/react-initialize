@@ -8,6 +8,7 @@ import Pagination from "../../../components/common/Pagination";
 import RangeSlider from "../../../components/common/RangeSlider";
 import BASE_URL from "../../../config/api";
 import PropertyNoFound from "../../../components/error/PropertyNoFound";
+import { useLanguage } from "../../../hook/useLanguage";
 
 const PropertyListPage = () => {
   const [properties, setProperties] = useState([]);
@@ -17,6 +18,8 @@ const PropertyListPage = () => {
     totalItems: 0,
     itemsPerPage: 20,
   });
+
+  const { t } = useLanguage();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
