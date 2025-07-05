@@ -7,7 +7,7 @@ import { getCurrentUser } from "../../features/auth/authUtils";
 
 const DashboardLayout = () => {
   const user = getCurrentUser();
-  console.log(user);
+
   if (user?.data?.role !== "ADMIN") {
     return <Navigate to="/auth/login" replace />;
   }

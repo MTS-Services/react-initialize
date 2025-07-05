@@ -9,6 +9,8 @@ import {
   FaChevronRight,
   FaSignOutAlt,
 } from "react-icons/fa";
+import { logout } from "../../features/auth/authUtils";
+import { toast } from "react-toastify";
 
 const SidebarItem = ({
   icon: Icon,
@@ -56,6 +58,12 @@ const Sidebar = () => {
   const handleNavigation = (path, itemName) => {
     setActiveItem(itemName);
     navigate(path);
+  };
+
+  const logOutHandler = () => {
+    logout();
+    toast.info("Logged out successfully");
+    navigate("/");
   };
 
   const menuItems = [
@@ -144,13 +152,7 @@ const Sidebar = () => {
       <div className="border-t border-gray-200 p-4">
         <button className="flex w-full items-center rounded-lg px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-100">
           <FaSignOutAlt className="mr-3 h-5 w-5 text-gray-400" />
-          <span
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Logout
-          </span>
+          <span onClick={logOutHandler}>Logout</span>
         </button>
       </div>
     </div>

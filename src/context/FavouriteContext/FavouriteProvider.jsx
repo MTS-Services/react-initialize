@@ -93,7 +93,7 @@ export const FavoriteProvider = ({ children }) => {
 
     const isAlreadyFavorite = favorites.some((item) => item.id === itemId);
     const endpoint = isAlreadyFavorite ? "removeFavorite" : "addFavorite";
-    const actionText = isAlreadyFavorite ? "removed from" : "added to";
+    const actionText = isAlreadyFavorite ? "removed item" : "item added ";
 
     try {
       const response = await fetch(`${URL}/favorites/${endpoint}`, {
@@ -117,7 +117,7 @@ export const FavoriteProvider = ({ children }) => {
         if (fetchResponse.ok) {
           const dbFavorites = await fetchResponse.json();
           setFavorites(dbFavorites || []);
-          toast.success(`Successfully ${actionText} favorites!`);
+          toast.success(` ${actionText}!`);
         } else {
           toast.error("Updated, but failed to refresh favorites.");
           console.error("Failed to refresh favorite status:", fetchResponse);

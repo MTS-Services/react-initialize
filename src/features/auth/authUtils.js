@@ -22,6 +22,6 @@ export const getAuthToken = () => {
 // Logout user
 export const logout = () => {
   localStorage.removeItem("userInfo");
-  localStorage.removeItem("token");
+  localStorage.removeItem("authToken");
   // Optionally, remove more items if needed
 };

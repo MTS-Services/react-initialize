@@ -51,9 +51,7 @@ const FavouriteCard = ({ item }) => {
           </Link>
 
           <div className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border-t border-zinc-900/5 bg-white p-2 shadow">
-            <div className="h-4 w-4 text-blue-800">
-              <FavouriteIcon itemId={id} />
-            </div>
+            <FavouriteIcon itemId={id} />
           </div>
         </div>
 
@@ -63,18 +61,13 @@ const FavouriteCard = ({ item }) => {
             {/* Title and time */}
             <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center sm:gap-0">
               <h3 className="text-lg font-semibold text-black capitalize sm:text-xl">
-                {title.slice(9, 40)}...
+                {title.slice(9, 20)}...
               </h3>
               <div className="flex items-center gap-1.5 text-sm text-gray-500">
                 <FiClock size={15} />
                 {formatRelativeTime(createdAt)}
               </div>
             </div>
-
-            {/* Description */}
-            <p className="line-clamp-2 text-sm text-gray-600 sm:line-clamp-3">
-              {description.toLowerCase() || "No description available"}
-            </p>
 
             <div>
               {/* Features */}
@@ -92,15 +85,15 @@ const FavouriteCard = ({ item }) => {
                     {rooms} {rooms > 1 ? "rooms" : "room"}
                   </span>
                 </div>
-              </div>
 
-              {/* Location and price */}
-              <div className="flex flex-col gap-2 pt-2 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:pt-0">
                 <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
                   <FiMapPin className="text-gray-400" />
                   <span className="text-xs text-gray-700">{location}</span>
                 </div>
+              </div>
 
+              {/* Location and price */}
+              <div className="flex flex-col gap-2 pt-2 sm:flex-row sm:items-center sm:justify-between sm:gap-0 sm:pt-0">
                 <h3 className="py-2 text-lg font-bold text-gray-600 capitalize sm:text-xl">
                   {price.slice(0, 7)}
                 </h3>
@@ -113,11 +106,7 @@ const FavouriteCard = ({ item }) => {
             to={`/properties/${id}`}
             className="text-base font-medium text-white"
           >
-            <Button
-              size="lg"
-              variant="yellowGradient"
-              className="max-h-12 w-full"
-            >
+            <Button size="lg" variant="yellowGradient" className="w-full">
               <span>Bekijk de woning</span>
             </Button>
           </Link>

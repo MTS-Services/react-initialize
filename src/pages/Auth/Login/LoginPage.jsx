@@ -32,7 +32,9 @@ function LoginPage() {
     try {
       // Dispatch loginUser action
       await dispatch(loginUser({ email, password })).unwrap();
+
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
       setUser(userInfo?.data || null);
       toast.success("Successfully Login!");
       navigate("/properties");
@@ -122,10 +124,10 @@ function LoginPage() {
 
             {/* Register Link */}
             <p className="mt-6 text-center text-gray-600">
-              Don't have an account?
+              Don't have an account?{" "}
               <Link
                 to="/auth/register"
-                className="font-semibold text-[#19398A] hover:underline"
+                className="font-semibold text-blue-500 hover:underline"
               >
                 Register
               </Link>

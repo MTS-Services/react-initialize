@@ -102,22 +102,7 @@ const UserProfile = () => {
                       {userData.membership.status}
                     </p>
                   </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500">
-                      Member Since
-                    </p>
-                    <p className="text-sm text-gray-900">
-                      {userData.membership.since}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-500">
-                      Renewal Date
-                    </p>
-                    <p className="text-sm text-gray-900">
-                      {userData.membership.renewalDate}
-                    </p>
-                  </div>
+
                   <div>
                     <p className="text-sm font-medium text-gray-500">
                       Listed Properties
@@ -144,7 +129,7 @@ const UserProfile = () => {
                   </button>
                   <button
                     type="button"
-                    className="inline-flex items-center rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
+                    className="inline-flex items-center rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-amber-600"
                   >
                     Change Plan
                   </button>
@@ -199,7 +184,7 @@ const UserProfile = () => {
                           {payment.date}
                         </td>
                         <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
-                          {payment.amount}
+                          $10
                         </td>
                         <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
                           {payment.method}

@@ -6,7 +6,7 @@ import Pagination from "../../../components/common/Pagination";
 import PropertiesCard from "../../../components/common/PropertiesCard";
 
 import RangeSlider from "../../../components/common/RangeSlider";
-import PropertyNoFound from "../../../components/error/PropertyNoFound";
+import PropertyNoFound from "../../../components/error/NotFounds";
 import { useLanguage } from "../../../hook/useLanguage";
 import BASE_URL from "../../../config/api";
 
@@ -68,7 +68,8 @@ const PropertyListPage = () => {
       const res = await axios.get(
         `${BASE_URL}/properties?${params.toString()}`,
       );
-      console.log("PR-", `${BASE_URL}/properties?${params.toString()}`);
+      // console.log("PR-", `${BASE_URL}/properties?${params.toString()}`);
+
       setProperties(res.data.properties);
       setPagination(res.data.pagination);
     } catch (error) {
