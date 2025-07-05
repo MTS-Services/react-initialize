@@ -2,6 +2,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import MainHeader from "../MainLayout/MainHeader";
 import MainFooter from "../MainLayout/MainFooter";
 import { getCurrentUser } from "../../features/auth/authUtils";
+import { ScrollToTop } from "../../components/ScrollToTop/ScrollToTop";
 
 const AuthLayout = () => {
   const user = getCurrentUser();
@@ -13,6 +14,7 @@ const AuthLayout = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <MainHeader />
+      <ScrollToTop />
       <main className="flex-grow">
         <Outlet />
       </main>
