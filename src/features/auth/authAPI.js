@@ -1,7 +1,7 @@
 // src/features/auth/authAPI.js
 import axios from "axios";
 
-const API_BASE = "http://localhost:3000/api/users";
+const API_BASE = "http://localhost:3011/api/users";
 
 export const loginAPI = async ({ email, password }) => {
   const res = await axios.post(`${API_BASE}/login`, { email, password });

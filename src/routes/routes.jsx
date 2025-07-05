@@ -1,21 +1,21 @@
-import { lazy } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
 // Layouts
-import MainLayout from "../layouts/MainLayout/MainLayout";
 import AuthLayout from "../layouts/AuthLayout/AuthLayout";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
-import Users from "../pages/private/users/Users";
-import BlockAdmin from "./BlockAdmin";
-import RequireAdmin from "./RequireAdmin";
+import MainLayout from "../layouts/MainLayout/MainLayout";
 import UserProfile from "../pages/private/profile/UserProfile";
-import AllProperty from "../pages/private/Properties/AllProperty";
 import AddProperty from "../pages/private/Properties/AddProperty";
+import AllProperty from "../pages/private/Properties/AllProperty";
+import Users from "../pages/private/users/Users";
 import CookiePolicy from "../pages/public/CookiePolicy/CookiePolicy";
 import PrivacyPolicy from "../pages/public/PrivacyPolicy/PrivacyPolicy";
 import TermsAndConditions from "../pages/public/TermsAndConditions/TermsAndConditions";
+import BlockAdmin from "./BlockAdmin";
+import RequireAdmin from "./RequireAdmin";
 
 // Pages
 const Home = lazy(() => import("../pages/public/Home/Home"));

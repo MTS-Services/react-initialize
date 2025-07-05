@@ -3,9 +3,9 @@ import { useState } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 import axios from "axios";
-import PaymentSuccsess from "./PaymentSuccsess";
 import { Link } from "react-router-dom";
 import Button from "../../../components/ui/Button";
+import PaymentSuccsess from "./PaymentSuccsess";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -39,7 +39,7 @@ const CheckoutForm = () => {
       // 1. Create Payment Intent
       const {
         data: { clientSecret },
-      } = await axios.post("http://localhost:3000/api/stripe/create-payment", {
+      } = await axios.post("http://localhost:3011/api/stripe/create-payment", {
         amount: 1000,
         currency: "usd",
       });
@@ -67,7 +67,9 @@ const CheckoutForm = () => {
       if (paymentIntent.status === "succeeded") {
         // 4. Create User
         const response = await axios.post(
-          "http://localhost:3000/api/users/create",
+
+          "http://localhost:3011/api/users/create",
+
           {
             email: formData.email,
             name: formData.name,

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import {
-  FiSearch,
-  FiFilter,
-  FiEdit2,
-  FiTrash2,
-  FiEye,
   FiChevronLeft,
   FiChevronRight,
+  FiEdit2,
+  FiEye,
+  FiFilter,
+  FiSearch,
+  FiTrash2,
 } from "react-icons/fi";
-import axios from "axios";
 
 const AllProperty = () => {
   const [properties, setProperties] = useState([]);
@@ -42,7 +42,7 @@ const AllProperty = () => {
       if (filters.status !== "All") params.status = filters.status;
       if (filters.type !== "All") params.type = filters.type;
 
-      const response = await axios.get("http://localhost:3000/api/properties", {
+      const response = await axios.get("http://localhost:3011/api/properties", {
         params,
       });
 
