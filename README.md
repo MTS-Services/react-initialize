@@ -4,8 +4,6 @@
 
 A full-featured rental application built with **React**. Users can browse, search, and book rental properties. The platform includes property details, user authentication, reviews, and a responsive UI optimized for all devices.
 
----
-
 ## 🔧 Technologies Used
 
 ### **Frontend :**
