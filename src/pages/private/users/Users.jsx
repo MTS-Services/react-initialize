@@ -12,8 +12,10 @@ import {
   FiUser,
   FiUsers,
 } from "react-icons/fi";
+import { getCurrentUser } from "../../../features/auth/authUtils";
 
 const Users = () => {
+  const isAdmin = getCurrentUser();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -43,8 +45,13 @@ const Users = () => {
       if (filters.role !== "All") params.role = filters.role;
       if (filters.status !== "All") params.ispaid = filters.status === "Paid";
 
-      const response = await axios.get("http://localhost:3011/api/users/all", {
+      const token = isAdmin.data.token;
+
+      const response = await axios.get("http://localhost:3011/api/users", {
         params,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       setUsers(response.data.data.users);

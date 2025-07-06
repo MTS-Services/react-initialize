@@ -6,6 +6,7 @@ import AuthProvider from "./context/AuthContext/AuthProvider";
 import { ThemeProvider } from "./context/ThemeContext/ThemeProvider";
 
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "react-loading-skeleton/dist/skeleton.css";
 
 function App() {

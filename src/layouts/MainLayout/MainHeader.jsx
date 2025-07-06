@@ -6,6 +6,7 @@ import {
   FiLogOut,
   FiMail,
   FiMenu,
+  FiShoppingBag,
   FiUser,
   FiUserPlus,
   FiX,
@@ -43,7 +44,9 @@ function MainHeader() {
     logout();
     setFavorites([]);
     toast.info("Logged out successfully");
-    navigate("/");
+
+    // Go back to previous page or fallback to homepage
+    navigate(location?.pathname || "/");
   };
 
   useEffect(() => {
@@ -74,6 +77,7 @@ function MainHeader() {
 
         <nav className="hidden items-center gap-6 font-medium text-white text-shadow-2xs md:flex">
           <MenuLink to="/">{t("header.home")}</MenuLink>
+          <MenuLink to="/properties">{t("header.property")}</MenuLink>
           <MenuLink to="/about">{t("header.about")}</MenuLink>
           <MenuLink to="/contact">{t("header.contact")}</MenuLink>
         </nav>
@@ -137,9 +141,16 @@ function MainHeader() {
 
       {/* Mobile Slide Menu */}
       {menuOpen && (
-        <div className="absolute top-[72px] z-40 -mt-3 w-full space-y-4 bg-black/90 px-6 py-4 text-white transition-all duration-300 md:hidden">
+        <div className="absolute top-[64px] -mt-3 w-full space-y-4 bg-black/90 px-6 py-6 text-white backdrop-blur-sm transition-all duration-300 md:hidden">
           <MenuLink to="/" icon={<FiHome />} onClick={() => setMenuOpen(false)}>
             Home
+          </MenuLink>
+          <MenuLink
+            to="/properties"
+            icon={<FiShoppingBag />}
+            onClick={() => setMenuOpen(false)}
+          >
+            Property
           </MenuLink>
           <MenuLink
             to="/about"

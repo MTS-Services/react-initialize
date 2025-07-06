@@ -24,7 +24,7 @@ const RecentProperty = ({ item }) => {
       <div className="bg-white p-4">
         <div className="mb-4">
           <h3 className="text-md font-semibold text-gray-500">
-            {item.title.slice(0, 20)}...
+            {item.title.slice(0, 30)}...
           </h3>
           <p className="text-sm text-neutral-400">{item.location}</p>
         </div>
@@ -37,7 +37,7 @@ const RecentProperty = ({ item }) => {
               <LiaBedSolid className="text-gray-400" />
             </div>
             <span className="text-sm text-neutral-400">
-              {item.beds || "Beds"}
+              {item.features.numberOfRoomsFloat || "Beds"}
             </span>
           </div>
 
@@ -47,7 +47,7 @@ const RecentProperty = ({ item }) => {
               <TfiRulerAlt2 className="text-gray-400" />
             </div>
             <span className="font-dm-sans text-sm text-neutral-400">
-              {item.size || "Area"}
+              {item.features.surfaceArea || "Area"}
             </span>
           </div>
         </div>
@@ -56,26 +56,18 @@ const RecentProperty = ({ item }) => {
         <div className="border-opacity-40 flex items-center justify-between border-t border-neutral-200 pt-4">
           <div className="text-right">
             <h3 className="font-dm-sans text-base font-bold text-gray-600">
-              {item.price.slice(0, 8)}
+              ${item.priceFloat}
             </h3>
           </div>
-
-          <button
-            type="button"
-            aria-label="Add to favorites"
-            className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-50 hover:bg-gray-200"
+          <a
+            href="#"
+            className="text-sm font-medium text-blue-700 hover:underline"
           >
-            <LuHeart className="text-gray-400" />
-          </button>
+            View Details
+          </a>
         </div>
 
         {/* CTA */}
-        <a
-          href="#"
-          className="mt-4 block text-sm font-medium text-blue-700 hover:underline"
-        >
-          View Details
-        </a>
       </div>
     </div>
   );

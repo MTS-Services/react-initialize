@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   FiActivity,
   FiClock,
@@ -9,6 +10,7 @@ import {
   FiTrendingUp,
   FiUsers,
 } from "react-icons/fi";
+import { getCurrentUser } from "../../../features/auth/authUtils";
 
 const DashboardOverview = () => {
   const [stats, setStats] = useState({
@@ -18,6 +20,7 @@ const DashboardOverview = () => {
     averagePrice: 0,
     revenue: 0,
   });
+  const isAdmin = getCurrentUser();
   const [recentProperties, setRecentProperties] = useState([]);
   const [recentUsers, setRecentUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,12 +32,20 @@ const DashboardOverview = () => {
       setLoading(true);
       setError(null);
 
+      const token = isAdmin.data.token;
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       // In a real app, you might have a dedicated dashboard endpoint
       // For this example, we'll fetch separately
       const [propertiesRes, usersRes] = await Promise.all([
-        axios.get("http://localhost:3011/api/properties"),
-        axios.get("http://localhost:3011/api/users/all"),
+        axios.get("http://localhost:3011/api/properties", config),
+        axios.get("http://localhost:3011/api/users", config),
       ]);
+
       const paginate = propertiesRes.data.pagination || [];
       const properties = propertiesRes.data.properties || [];
       const users = usersRes.data.data.users || [];
@@ -345,12 +356,12 @@ const DashboardOverview = () => {
                   )}
                 </div>
                 <div className="bg-gray-50 px-6 py-3 text-right">
-                  <a
-                    href="/properties"
+                  <Link
+                    to="/admin/properties/all"
                     className="text-sm font-medium text-blue-600 hover:text-blue-500"
                   >
                     View all properties →
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -410,12 +421,12 @@ const DashboardOverview = () => {
                   )}
                 </div>
                 <div className="bg-gray-50 px-6 py-3 text-right">
-                  <a
-                    href="/users"
+                  <Link
+                    to="/admin/users"
                     className="text-sm font-medium text-blue-600 hover:text-blue-500"
                   >
                     View all users →
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

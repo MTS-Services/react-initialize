@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {
+  FiCalendar,
   FiChevronLeft,
   FiChevronRight,
   FiEdit2,
   FiEye,
   FiFilter,
+  FiHome,
+  FiLayers,
   FiSearch,
   FiTrash2,
 } from "react-icons/fi";
@@ -153,6 +156,7 @@ const AllProperty = () => {
       </div>
 
       {/* Properties Table */}
+      {/* Properties Table */}
       <div className="overflow-hidden rounded-lg bg-white shadow">
         {loading ? (
           <div className="p-6 text-center">
@@ -161,7 +165,7 @@ const AllProperty = () => {
           </div>
         ) : error ? (
           <div className="p-6 text-center text-red-500">
-            {error}
+            <p>{error}</p>
             <button
               onClick={fetchProperties}
               className="mt-2 inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
@@ -173,7 +177,7 @@ const AllProperty = () => {
           <>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-blue-100">
+                <thead className="bg-blue-50">
                   <tr>
                     <th
                       scope="col"
@@ -185,25 +189,7 @@ const AllProperty = () => {
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
                     >
-                      Location
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                    >
-                      Type
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase"
-                    >
-                      rooms
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                    >
-                      Size
+                      Details
                     </th>
                     <th
                       scope="col"
@@ -221,12 +207,6 @@ const AllProperty = () => {
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
                     >
-                      Created
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                    >
                       Actions
                     </th>
                   </tr>
@@ -235,11 +215,11 @@ const AllProperty = () => {
                   {properties.length > 0 ? (
                     properties.map((property) => (
                       <tr key={property.id}>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4">
                           <div className="flex items-center">
-                            <div className="h-10 w-10 flex-shrink-0">
+                            <div className="h-16 w-16 flex-shrink-0">
                               <img
-                                className="h-10 w-10 rounded-md object-cover"
+                                className="h-16 w-16 rounded-md object-cover"
                                 src={property.primaryImage}
                                 alt={property.title}
                                 onError={(e) => {
@@ -256,82 +236,86 @@ const AllProperty = () => {
                                   rel="noopener noreferrer"
                                   className="hover:text-blue-600"
                                 >
-                                  {property.title.slice(8, 35)}...
+                                  {property.title}
                                 </a>
                               </div>
-                              <div className="text-xs text-gray-500">
+                              <div className="text-sm text-gray-500">
+                                {property.location}
+                              </div>
+                              <div className="text-xs text-gray-400">
                                 ID: {property.id}
                               </div>
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
-                          {property.location}
+                        <td className="px-6 py-4">
+                          <div className="text-sm text-gray-900">
+                            {property.features?.numberOfRoomsFloat && (
+                              <div className="flex items-center gap-2">
+                                <FiHome className="text-gray-400" />
+                                <span>
+                                  {property.features.numberOfRoomsFloat} rooms
+                                </span>
+                              </div>
+                            )}
+                            {property.features?.surfaceAreaFloat && (
+                              <div className="mt-1 flex items-center gap-2">
+                                <FiLayers className="text-gray-400" />
+                                <span>
+                                  {property.features.surfaceAreaFloat} m²
+                                </span>
+                              </div>
+                            )}
+                            {property.otherDetails?.bouwjaar && (
+                              <div className="mt-1 flex items-center gap-2">
+                                <FiCalendar className="text-gray-400" />
+                                <span>
+                                  Built: {property.otherDetails.bouwjaar}
+                                </span>
+                              </div>
+                            )}
+                          </div>
                         </td>
-                        <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
-                          {property.transferDetails["Type woning"] ||
-                            property.transferDetails["Soort woning"] ||
-                            "-"}
-                        </td>
-                        <td className="px-6 py-4 text-center text-sm whitespace-nowrap text-gray-500">
-                          {property.transferDetails["Aantal slaapkamers"] ||
-                            "-"}
-                        </td>
-                        <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
-                          {property.transferDetails["Woonoppervlakte"] || "-"}
-                        </td>
-                        <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
-                          <div className="font-medium">
-                            {property.transferDetails["Huurprijs"] ||
-                              property.price ||
+                        <td className="px-6 py-4">
+                          <div className="text-sm font-semibold text-gray-900">
+                            {property.price ||
+                              property.otherDetails?.huurprijs ||
                               "-"}
                           </div>
-                          {property.transferDetails["Servicekosten"] && (
-                            <div className="text-xs text-gray-400">
-                              Service:{" "}
-                              {property.transferDetails["Servicekosten"]}
+                          {property.otherDetails?.servicekosten && (
+                            <div className="text-xs text-gray-500">
+                              + {property.otherDetails.servicekosten} service
                             </div>
                           )}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4">
                           <span
-                            className={`inline-flex rounded-full px-2 text-xs leading-5 font-semibold ${
-                              property.transferDetails.Status === "Te huur"
+                            className={`inline-flex rounded-full px-2 py-1 text-xs leading-5 font-semibold ${
+                              property.otherDetails?.status === "Beschikbaar"
                                 ? "bg-green-100 text-green-800"
-                                : property.transferDetails.Status === "Verhuurd"
-                                  ? "bg-blue-100 text-blue-800"
-                                  : "bg-gray-100 text-gray-800"
+                                : "bg-gray-100 text-gray-800"
                             }`}
                           >
-                            {property.transferDetails.Status || "-"}
+                            {property.otherDetails?.status || "Unknown"}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
-                          {formatDate(property.createdAt)}
-                        </td>
-                        <td className="px-6 py-4 text-sm font-medium whitespace-nowrap">
+                        <td className="px-6 py-4 text-sm font-medium">
                           <div className="flex space-x-2">
                             <button
                               className="text-blue-600 hover:text-blue-900"
-                              onClick={() =>
-                                alert(`View property ${property.id}`)
-                              }
+                              onClick={() => alert(`View ${property.id}`)}
                             >
                               <FiEye className="h-5 w-5" />
                             </button>
                             <button
                               className="text-indigo-600 hover:text-indigo-900"
-                              onClick={() =>
-                                alert(`Edit property ${property.id}`)
-                              }
+                              onClick={() => alert(`Edit ${property.id}`)}
                             >
                               <FiEdit2 className="h-5 w-5" />
                             </button>
                             <button
                               className="text-red-600 hover:text-red-900"
-                              onClick={() =>
-                                alert(`Delete property ${property.id}`)
-                              }
+                              onClick={() => alert(`Delete ${property.id}`)}
                             >
                               <FiTrash2 className="h-5 w-5" />
                             </button>
@@ -341,11 +325,36 @@ const AllProperty = () => {
                     ))
                   ) : (
                     <tr>
-                      <td
-                        colSpan="9"
-                        className="px-6 py-4 text-center text-sm text-gray-500"
-                      >
-                        No properties found matching your criteria
+                      <td colSpan="5" className="px-6 py-12 text-center">
+                        <div className="flex flex-col items-center justify-center">
+                          <FiSearch className="mb-4 h-12 w-12 text-gray-300" />
+                          <h3 className="text-lg font-medium text-gray-900">
+                            No properties found
+                          </h3>
+                          <p className="mt-1 text-sm text-gray-500">
+                            {filters.search ||
+                            filters.status !== "All" ||
+                            filters.type !== "All"
+                              ? "Try adjusting your search or filter criteria"
+                              : "There are currently no properties available"}
+                          </p>
+                          {(filters.search ||
+                            filters.status !== "All" ||
+                            filters.type !== "All") && (
+                            <button
+                              onClick={() =>
+                                setFilters({
+                                  search: "",
+                                  status: "All",
+                                  type: "All",
+                                })
+                              }
+                              className="mt-4 inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+                            >
+                              Clear filters
+                            </button>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   )}
@@ -353,6 +362,7 @@ const AllProperty = () => {
               </table>
             </div>
 
+            {/* Pagination - Keep your existing pagination component */}
             {/* Pagination */}
             {properties.length > 0 && (
               <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">

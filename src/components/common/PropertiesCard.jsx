@@ -1,4 +1,4 @@
-import { FaHotel } from "react-icons/fa";
+import { RiSofaLine } from "react-icons/ri";
 import { FiClock, FiLayers, FiMapPin } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import FavouriteIcon from "../FavouriteIcon/FavouriteIcon";
@@ -86,7 +86,7 @@ const PeropertiesCard = ({ item }) => {
                 </div>
 
                 <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
-                  <FaHotel className="text-gray-400" />
+                  <RiSofaLine className="text-gray-400" />
                   <span className="text-xs text-gray-700">
                     {numberOfRoomsFloat}{" "}
                     {numberOfRoomsFloat > 1 ? "rooms" : "room"}

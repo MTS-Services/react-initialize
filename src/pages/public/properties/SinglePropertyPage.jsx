@@ -1,24 +1,29 @@
 import { useEffect, useState } from "react";
-import { FaLock } from "react-icons/fa";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   FiArrowLeft,
   FiClock,
   FiHeart,
   FiHome,
+  FiInfo,
   FiLayers,
   FiMail,
   FiMapPin,
   FiPhone,
-  FiShare2,
+  FiStar,
+  FiTool,
 } from "react-icons/fi";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { FaLock } from "react-icons/fa";
+import { BiLinkAlt } from "react-icons/bi";
 
 import axios from "axios";
 import clsx from "clsx";
 
 import RecentProperty from "../../../components/common/RecentProperty";
-import Button from "../../../components/ui/Button";
+import ShareButtons from "../../../components/common/ShareButtons";
 import { isPaid } from "../../../features/auth/authUtils";
+import Button from "../../../components/ui/Button";
+import { MdFilterList } from "react-icons/md";
 
 const URL = "http://localhost:3011/api";
 
@@ -46,7 +51,7 @@ const SinglePropertyPage = () => {
 
         // Fetch recent listings (excluding current one)
         const recentRes = await axios.get(`${URL}/properties`);
-
+        console.log(recent);
         const filteredRecent = recentRes.data.properties
           .filter((item) => item.id !== parseInt(id))
           .slice(0, 4);
@@ -61,10 +66,16 @@ const SinglePropertyPage = () => {
     fetchData();
   }, [id]);
 
+  const formatLabel = (key) =>
+    key
+      .replace(/([A-Z])/g, " $1")
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+
   if (isLoading) {
     return (
       <div className="inset-0 flex h-screen items-center justify-center bg-white">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-blue-900 border-t-transparent"></div>
+        <div className="h-16 w-16 animate-spin rounded-full border-4 border-blue-900 border-t-transparent" />
       </div>
     );
   }
@@ -82,23 +93,6 @@ const SinglePropertyPage = () => {
       </div>
     );
   }
-
-  const formatDescription = (text) => {
-    return text.split("\n").map((line, i) => {
-      if (line.trim().startsWith("- ")) {
-        return (
-          <li key={i} className="ml-4 list-disc">
-            {line.substring(2)}
-          </li>
-        );
-      }
-      return (
-        <p key={i} className="mb-3">
-          {line}
-        </p>
-      );
-    });
-  };
 
   return (
     <section>
@@ -144,12 +138,11 @@ const SinglePropertyPage = () => {
           </div>
 
           <div className="flex gap-2">
-            <button className="cursor-pointer rounded-full p-2 hover:bg-gray-100">
-              <FiHeart className="text-gray-600" />
-            </button>
             <button className="cursor-pointer rounded-full bg-gray-100 p-2 hover:bg-gray-200">
-              <FiShare2 className="text-gray-600" />
+              <FiHeart className="text-gray-400" />
             </button>
+
+            <ShareButtons />
           </div>
         </div>
 
@@ -230,13 +223,10 @@ const SinglePropertyPage = () => {
           >
             <h2 className="mb-4 text-xl font-bold">Description</h2>
             <div className="mb-6 text-base/8 whitespace-pre-line text-gray-700">
-              {/* {listing.description || "No description available."} */}
-
               <div
                 className={`overflow-hidden transition-all duration-300 ${expanded ? "" : "max-h-32"}`}
               >
-                {formatDescription(listing.description) ||
-                  "No description available."}
+                {listing.description || "No description available."}
               </div>
               {
                 <button
@@ -250,37 +240,97 @@ const SinglePropertyPage = () => {
 
             <h2 className="mb-4 text-xl font-bold">Features</h2>
             <div className="mb-6 grid grid-cols-2 gap-4">
-              <div className="flex items-center gap-2 rounded-lg bg-blue-50 p-3 shadow-sm">
-                <FiLayers className="text-gray-600" />
+              {/* Surface Area */}
+              <div className="flex items-center gap-3 rounded-lg border border-gray-100 bg-white p-4 shadow transition-shadow hover:shadow-md">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                  <FiLayers className="h-5 w-5" />
+                </div>
                 <div>
-                  <p className="text-sm text-gray-500">Surface</p>
-                  <p className="font-medium">{listing.surface} m²</p>
+                  <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Surface
+                  </p>
+                  <p className="text-md font-semibold text-gray-700">
+                    {listing.features.surfaceArea || "No available"}
+                  </p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 rounded-lg bg-blue-50 p-3 shadow-sm">
-                <FiHome className="text-gray-600" />
+
+              {/* Rooms */}
+              <div className="flex items-center gap-3 rounded-lg border border-gray-100 bg-white p-4 shadow transition-shadow hover:shadow-md">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                  <FiHome className="h-5 w-5" />
+                </div>
                 <div>
-                  <p className="text-sm text-gray-500">Rooms</p>
-                  <p className="font-medium">{listing.rooms}</p>
+                  <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Rooms
+                  </p>
+                  <p className="text-md font-semibold text-gray-700">
+                    {listing.features.numberofRooms || "No available"}
+                  </p>
+                </div>
+              </div>
+
+              {/* Interior Type */}
+              <div className="flex items-center gap-3 rounded-lg border border-gray-100 bg-white p-4 shadow transition-shadow hover:shadow-md">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                  <FiTool className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Interior
+                  </p>
+                  <p className="text-md font-semibold text-gray-700">
+                    {listing.features.interiorType || "No available"}
+                  </p>
+                </div>
+              </div>
+
+              {/* Additional feature slot - customize as needed */}
+              <div className="flex items-center gap-3 rounded-lg border border-gray-100 bg-white p-4 shadow transition-shadow hover:shadow-md">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                  <FiStar className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Feature
+                  </p>
+                  <p className="text-md font-semibold text-gray-700">Value</p>
                 </div>
               </div>
             </div>
-
-            <div className="mb-6 grid grid-cols-2 gap-4 sm:grid-cols-2">
-              {Object.entries(listing.otherDetails || {}).map(
-                ([key, value]) => (
-                  <div
-                    key={key}
-                    className="flex flex-col rounded-lg bg-blue-50 p-4 shadow-sm"
-                  >
-                    <span className="text-lg text-gray-600 capitalize">
-                      - {key.replace(/_/g, " ")}
-                    </span>
-                    <span className="font-medium whitespace-pre-line text-gray-500">
-                      - {value}
-                    </span>
-                  </div>
-                ),
+            <h2 className="mb-4 text-xl font-bold">Others Details</h2>
+            <div className="mb-8 rounded-lg border border-gray-200">
+              {Object.keys(listing.transferDetails || {}).length > 0 ? (
+                <div className="divide-y divide-gray-200">
+                  {Object.entries(listing.transferDetails).map(
+                    ([key, value]) => (
+                      <div
+                        key={key}
+                        className="flex items-center justify-between px-4 py-3 transition-colors hover:bg-gray-50"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <div className="h-5 w-5 text-gray-400">
+                            <MdFilterList />
+                          </div>
+                          <span className="text-sm font-medium text-gray-600">
+                            {formatLabel(key)}
+                          </span>
+                        </div>
+                        <span className="text-right font-medium whitespace-pre-line text-gray-500">
+                          {value}
+                        </span>
+                      </div>
+                    ),
+                  )}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center p-8 text-center">
+                  <FiInfo className="mb-2 h-8 w-8 text-gray-300" />
+                  <p className="text-gray-500">No details available</p>
+                  <p className="mt-1 text-sm text-gray-400">
+                    Additional information will be shown here when available
+                  </p>
+                </div>
               )}
             </div>
           </div>
@@ -321,6 +371,16 @@ const SinglePropertyPage = () => {
                     <FiMail className="text-gray-600" />
                     <span>{listing.agent?.email || "Email not available"}</span>
                   </a>
+
+                  <a
+                    href={`${listing.url || ""}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 rounded-lg bg-white p-3 hover:bg-gray-100"
+                  >
+                    <BiLinkAlt size={20} className="text-gray-600" />
+                    <span> Visit available</span>
+                  </a>
                 </div>
               </div>
             ) : (
@@ -328,7 +388,7 @@ const SinglePropertyPage = () => {
                 {/* Centered lock icon */}
                 <div className="relative z-10 flex flex-col items-center justify-center">
                   <Link
-                    to="/register"
+                    to="/auth/register"
                     className="cursor-pointer rounded-full bg-slate-100 p-4 hover:bg-gray-200"
                   >
                     <FaLock size={18} className="text-gray-300" />
