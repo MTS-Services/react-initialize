@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   FiActivity,
   FiClock,
@@ -345,12 +346,12 @@ const DashboardOverview = () => {
                   )}
                 </div>
                 <div className="bg-gray-50 px-6 py-3 text-right">
-                  <a
-                    href="/properties"
+                  <Link
+                    to="/admin/properties/all"
                     className="text-sm font-medium text-blue-600 hover:text-blue-500"
                   >
                     View all properties →
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -410,12 +411,12 @@ const DashboardOverview = () => {
                   )}
                 </div>
                 <div className="bg-gray-50 px-6 py-3 text-right">
-                  <a
-                    href="/users"
+                  <Link
+                    to="/admin/users"
                     className="text-sm font-medium text-blue-600 hover:text-blue-500"
                   >
                     View all users →
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

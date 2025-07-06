@@ -74,6 +74,7 @@ function MainHeader() {
 
         <nav className="hidden items-center gap-6 font-medium text-white text-shadow-2xs md:flex">
           <MenuLink to="/">{t("header.home")}</MenuLink>
+          <MenuLink to="/properties">{t("header.property")}</MenuLink>
           <MenuLink to="/about">{t("header.about")}</MenuLink>
           <MenuLink to="/contact">{t("header.contact")}</MenuLink>
         </nav>

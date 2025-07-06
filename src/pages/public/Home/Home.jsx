@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { LuHeart } from "react-icons/lu";
 import { TfiRulerAlt2 } from "react-icons/tfi";
 import { LiaBedSolid } from "react-icons/lia";
 import { FiDollarSign, FiMapPin, FiSearch } from "react-icons/fi";

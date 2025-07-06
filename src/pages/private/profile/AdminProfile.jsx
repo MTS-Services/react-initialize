@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaUser, FaLock, FaSave, FaEdit } from "react-icons/fa";
+import { getCurrentUser } from "../../../features/auth/authUtils";
 
 const AdminProfile = () => {
   const [user, setUser] = useState({
@@ -8,6 +9,9 @@ const AdminProfile = () => {
     phone: "",
     role: "admin",
   });
+
+  const isAdmin = getCurrentUser();
+  const admin = isAdmin.data;
 
   const [isEditing, setIsEditing] = useState(false);
   const [password, setPassword] = useState({
@@ -20,12 +24,12 @@ const AdminProfile = () => {
 
   useEffect(() => {
     // Load user data from localStorage or API
-    const userData = JSON.parse(localStorage.getItem("userInfo")) || {};
+
     setUser({
-      name: userData.name || "Admin User",
-      email: userData.email || "admin@example.com",
-      phone: userData.phone || "+1234567890",
-      role: userData.role || "admin",
+      name: admin.name || "Admin User",
+      email: admin.email || "admin@example.com",
+      phone: admin.phone || "+1234567890",
+      role: admin.role || "admin",
     });
   }, []);
 
@@ -67,7 +71,6 @@ const AdminProfile = () => {
 
     if (password.new) {
       // Handle password change (would call API in real app)
-      console.log("Password changed");
       setPassword({ current: "", new: "", confirm: "" });
     }
 
@@ -85,7 +88,7 @@ const AdminProfile = () => {
               <FaUser className="h-10 w-10" />
             </div>
             <div className="ml-6">
-              <h2 className="text-xl font-semibold">{user.name}</h2>
+              <h2 className="text-xl font-semibold capitalize">{user.name}</h2>
               <p className="text-indigo-500 capitalize">{user.role}</p>
             </div>
           </div>
