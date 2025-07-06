@@ -10,6 +10,7 @@ import {
   FiTrendingUp,
   FiUsers,
 } from "react-icons/fi";
+import { getCurrentUser } from "../../../features/auth/authUtils";
 
 const DashboardOverview = () => {
   const [stats, setStats] = useState({
@@ -19,6 +20,7 @@ const DashboardOverview = () => {
     averagePrice: 0,
     revenue: 0,
   });
+  const isAdmin = getCurrentUser();
   const [recentProperties, setRecentProperties] = useState([]);
   const [recentUsers, setRecentUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -30,12 +32,20 @@ const DashboardOverview = () => {
       setLoading(true);
       setError(null);
 
+      const token = isAdmin.data.token;
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       // In a real app, you might have a dedicated dashboard endpoint
       // For this example, we'll fetch separately
       const [propertiesRes, usersRes] = await Promise.all([
-        axios.get("http://localhost:3011/api/properties"),
-        axios.get("http://localhost:3011/api/users/all"),
+        axios.get("http://localhost:3011/api/properties", config),
+        axios.get("http://localhost:3011/api/users", config),
       ]);
+
       const paginate = propertiesRes.data.pagination || [];
       const properties = propertiesRes.data.properties || [];
       const users = usersRes.data.data.users || [];

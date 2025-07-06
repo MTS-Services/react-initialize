@@ -23,9 +23,6 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center">
-            <button className="rounded-full p-1 text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-              <FaBell className="h-6 w-6" />
-            </button>
             {/* User Profile */}
             <div className="p-4">
               <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100">

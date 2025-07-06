@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaLock } from "react-icons/fa";
-import { BiLinkAlt } from "react-icons/bi";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   FiArrowLeft,
   FiClock,
@@ -11,20 +10,20 @@ import {
   FiMail,
   FiMapPin,
   FiPhone,
-  FiShare2,
   FiStar,
   FiTool,
 } from "react-icons/fi";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { FaLock } from "react-icons/fa";
+import { BiLinkAlt } from "react-icons/bi";
 
 import axios from "axios";
 import clsx from "clsx";
 
 import RecentProperty from "../../../components/common/RecentProperty";
-import Button from "../../../components/ui/Button";
-import { isPaid } from "../../../features/auth/authUtils";
-import { MdFilterList } from "react-icons/md";
 import ShareButtons from "../../../components/common/ShareButtons";
+import { isPaid } from "../../../features/auth/authUtils";
+import Button from "../../../components/ui/Button";
+import { MdFilterList } from "react-icons/md";
 
 const URL = "http://localhost:3011/api";
 
