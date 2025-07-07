@@ -5,7 +5,7 @@
     "about": "About",
     "contact": "Contact",
     "login": "Login",
-    "register": "Register",
+    "register": "Sgin Up",
     "profile": "Profile",
     "logout": "Logout"
   },
@@ -16,7 +16,7 @@
       "desc": "We have a large collection of affordable rental properties to which new properties are added every day. Don't wait any longer and start searching.",
       "button": "Start Searching"
     },
-    "logo": "Receive emails with rentals that meet your requirements.",
+    "logo": "Tell us what you need, and we’ll deliver the right rentals to your inbox—no stress, no clutter.",
     "quick": {
       "link": "Quick",
       "home": "Home",
@@ -60,7 +60,8 @@
     },
     "recent": {
       "title": "Recently found",
-      "desc": "Affordable homes we've recently found"
+      "desc": "Affordable homes we've recently found",
+      "button": "View Details"
     },
     "work": {
       "title": "How does it work?",

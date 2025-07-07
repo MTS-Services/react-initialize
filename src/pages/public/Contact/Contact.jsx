@@ -19,19 +19,12 @@ const Contact = () => {
         <div className="flex w-full items-center justify-center bg-white px-6 py-12 lg:w-1/2 lg:px-16">
           <form className="w-full max-w-xl space-y-6">
             <div className="">
-              <h2 className="font-lato mb-2 text-4xl font-semibold text-black md:text-4xl">
+              <h2 className="font-lato mb-4 text-center text-4xl font-semibold text-black md:text-4xl">
                 {t("contact.title")}
               </h2>
-              <p className="font-inter text-base text-black">
-                {t("contact.description")}{" "}
-                <a
-                  href="mailto:hellonlproperty.com"
-                  className="text-blue-700 underline"
-                >
-                  {t("contact.email")}
-                </a>
-              </p>
             </div>
+
+            <hr className="border-0.5 border-gray-200" />
 
             <div className="flex flex-col gap-4 md:flex-row">
               <div className="flex w-full flex-col">

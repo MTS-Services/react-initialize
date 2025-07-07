@@ -32,6 +32,25 @@ const faqData = [
   },
 ];
 
+const howworks = [
+  {
+    title: "Aanmelden",
+    desc: "Maak in een paar minuten jouw account aan en start direct met zoeken.",
+  },
+  {
+    title: "Woning zoeken",
+    desc: "Vind jouw droomwoning in je favoriete stad met onze handige zoekfilters.",
+  },
+  {
+    title: "Blijf op de hoogte",
+    desc: "Nog niet gevonden wat je zocht? Je ontvangt dagelijks of wekelijks nieuwe huurwoningen in je inbox.",
+  },
+  {
+    title: "Verhuizen maar",
+    desc: "Reageer, plan een bezichtiging en begin vast met inpakken. Jouw nieuwe woning wacht op je!",
+  },
+];
+
 const About = () => {
   const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState(null);
@@ -97,24 +116,7 @@ const About = () => {
 
           {/* Steps */}
           <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                title: "Aanmelden",
-                desc: "Maak in een paar minuten jouw account aan en start direct met zoeken.",
-              },
-              {
-                title: "Woning zoeken",
-                desc: "Vind jouw droomwoning in je favoriete stad met onze handige zoekfilters.",
-              },
-              {
-                title: "Blijf op de hoogte",
-                desc: "Nog niet gevonden wat je zocht? Je ontvangt dagelijks of wekelijks nieuwe huurwoningen in je inbox.",
-              },
-              {
-                title: "Verhuizen maar",
-                desc: "Reageer, plan een bezichtiging en begin vast met inpakken. Jouw nieuwe woning wacht op je!",
-              },
-            ].map((step, idx) => (
+            {howworks.map((step, idx) => (
               <div
                 key={idx}
                 className="flex flex-col items-center gap-4 rounded-lg bg-white px-6 py-16 shadow-sm"
@@ -137,8 +139,8 @@ const About = () => {
       </section>
 
       {/* === Why Choose Us Section === */}
-      <div className="mx-auto mb-0 flex w-full max-w-7xl flex-col items-center justify-between gap-12 px-6 py-16 md:px-0 lg:flex-row">
-        <div className="w-full space-y-6 lg:w-1/2">
+      <section className="mx-auto mb-0 flex w-full max-w-7xl flex-col items-center justify-between gap-12 py-16 md:px-0 lg:flex-row">
+        <div className="w-full space-y-6 px-4 lg:w-1/2">
           <h2 className="font-lato text-4xl font-semibold text-gray-900 capitalize">
             {t("about.whyChoose.title")}
           </h2>
@@ -152,17 +154,17 @@ const About = () => {
         </div>
 
         {/* Right Image with Custom Clip Path */}
-        <div className="w-full max-w-[589px]">
+        <div className="w-full max-w-[589px] px-4">
           <img
             src="/works.png"
             alt="Why Choose Us"
             className="h-auto w-full object-contain"
           />
         </div>
-      </div>
+      </section>
 
       {/* === FAQ Section === */}
-      <div className="w-full bg-white px-6 py-26 md:px-12 lg:px-24">
+      <div className="mb-10 w-full bg-white px-6 md:px-12 lg:px-24 lg:py-26">
         <h2 className="font-lato mb-8 text-center text-4xl font-semibold text-black">
           FAQ
         </h2>
