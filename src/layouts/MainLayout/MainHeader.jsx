@@ -63,7 +63,7 @@ function MainHeader() {
         scrolled ? "bg-[#0C205A]" : "bg-black/10 shadow-md"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-4 lg:px-0">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img
@@ -105,23 +105,23 @@ function MainHeader() {
                 {isUserPaid ? (
                   <>
                     <DropdownItem to="/my-profile" icon={<FiUser />}>
-                      Profile
+                      {t("header.profile")}
                     </DropdownItem>
                     <button
                       onClick={logOutHandler}
                       className="flex w-full items-center gap-2 rounded-b-lg px-4 py-2 text-left transition hover:bg-[#3CAAFA] hover:text-white"
                     >
                       <FiLogOut />
-                      Logout
+                      {t("header.logout")}
                     </button>
                   </>
                 ) : (
                   <>
                     <DropdownItem to="/auth/login" icon={<FiLogIn />}>
-                      Login
+                      {t("header.login")}
                     </DropdownItem>
                     <DropdownItem to="/auth/register" icon={<FiUserPlus />}>
-                      Sign Up
+                      {t("header.register")}
                     </DropdownItem>
                   </>
                 )}
@@ -143,28 +143,28 @@ function MainHeader() {
       {menuOpen && (
         <div className="absolute top-[64px] -mt-3 w-full space-y-4 bg-black/90 px-6 py-6 text-white backdrop-blur-sm transition-all duration-300 md:hidden">
           <MenuLink to="/" icon={<FiHome />} onClick={() => setMenuOpen(false)}>
-            Home
+            {t("header.home")}
           </MenuLink>
           <MenuLink
             to="/properties"
             icon={<FiShoppingBag />}
             onClick={() => setMenuOpen(false)}
           >
-            Property
+            {t("header.property")}
           </MenuLink>
           <MenuLink
             to="/about"
             icon={<FiInfo />}
             onClick={() => setMenuOpen(false)}
           >
-            About
+            {t("header.about")}
           </MenuLink>
           <MenuLink
             to="/contact"
             icon={<FiMail />}
             onClick={() => setMenuOpen(false)}
           >
-            Contact
+            {t("header.contact")}
           </MenuLink>
           {isUserPaid ? (
             <>
@@ -173,7 +173,7 @@ function MainHeader() {
                 icon={<FiUser />}
                 onClick={() => setMenuOpen(false)}
               >
-                Profile
+                {t("header.profile")}
               </MenuLink>
               <button
                 onClick={() => {
@@ -183,7 +183,7 @@ function MainHeader() {
                 className="flex w-full items-center gap-2 hover:text-[#3CAAFA]"
               >
                 <FiLogOut />
-                Logout
+                {t("header.logout")}
               </button>
             </>
           ) : (
@@ -193,14 +193,14 @@ function MainHeader() {
                 icon={<FiLogIn />}
                 onClick={() => setMenuOpen(false)}
               >
-                Login
+                {t("header.login")}
               </MenuLink>
               <MenuLink
                 to="/auth/register"
                 icon={<FiUserPlus />}
                 onClick={() => setMenuOpen(false)}
               >
-                Sign Up
+                {t("header.register")}
               </MenuLink>
             </>
           )}

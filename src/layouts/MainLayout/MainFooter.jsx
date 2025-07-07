@@ -36,30 +36,12 @@ const MainFooter = () => {
         </div>
       </div>
 
-      <footer className="w-full bg-[#0C205A] px-4 py-10 md:py-12 lg:px-0 lg:py-10">
+      <footer className="w-full bg-[#0C205A] px-4 pt-10 md:pt-20">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-4">
           {/* Logo & Description */}
           <div className="space-y-4">
-            <img
-              src="/new-logo-white.png"
-              alt="logo"
-              className="w-54 md:w-72"
-            />
+            <img src="/new-logo-white.png" alt="logo" className="w-full" />
             <p className="text-white/80">{t("footer.logo")}</p>
-            <div className="flex gap-3">
-              <FaFacebookF
-                size={35}
-                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-[#0278d9] shadow transition-all hover:bg-[#3CAAFA] hover:text-blue-100"
-              />
-              <FaTwitter
-                size={35}
-                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-[#0278d9] shadow transition-all hover:bg-[#3CAAFA] hover:text-blue-100"
-              />
-              <FaInstagram
-                size={35}
-                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-[#0278d9] shadow transition-all hover:bg-[#3CAAFA] hover:text-blue-100"
-              />
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -98,33 +80,32 @@ const MainFooter = () => {
 
           {/* Newsletter */}
           <div className="space-y-4">
-            <p className="text-white">{t("footer.subscribed")}</p>
-            <input
-              type="email"
-              placeholder={`${t("footer.inputPlaceH")}`}
-              className="w-full rounded bg-neutral-100 p-3 text-gray-700"
-            />
-            <Button variant="yellowGradient" size="lg" className="w-full">
-              {t("footer.button")}
-            </Button>
+            <h3 className="text-white">Social Link</h3>
+
+            <div className="flex gap-3">
+              <FaFacebookF
+                size={35}
+                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-[#0278d9] shadow transition-all hover:bg-[#3CAAFA] hover:text-blue-100"
+              />
+              <FaTwitter
+                size={35}
+                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-[#0278d9] shadow transition-all hover:bg-[#3CAAFA] hover:text-blue-100"
+              />
+              <FaInstagram
+                size={35}
+                className="cursor-pointer rounded-full bg-gray-100 p-1.5 text-[#0278d9] shadow transition-all hover:bg-[#3CAAFA] hover:text-blue-100"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Cities */}
-        {/* <div className="mx-auto mt-10 max-w-screen-xl md:mt-16">
-          <h3 className="mb-4 text-center text-white">Popular cities</h3>
-          <div className="flex flex-wrap justify-center gap-4 text-white/80">
-            {linkItem.map((city) => (
-              <span key={city} className="cursor-pointer hover:text-[#3CAAFA]">
-                {city}
-              </span>
-            ))}
-          </div>
-        </div> */}
-
         {/* Footer Bottom */}
-        <div className="mx-auto mt-12 flex max-w-screen-xl items-center justify-center border-t border-white/10 pt-6 text-white/60 md:flex-row">
-          <p className="text-white/60">{t("footer.copyRight")}</p>
+        <div className="">
+          <hr className="border-0.5 mt-10 mb-4 border-white/10" />
+
+          <p className="mb-4 text-center text-white/60">
+            {t("footer.copyRight")}
+          </p>
         </div>
       </footer>
     </>

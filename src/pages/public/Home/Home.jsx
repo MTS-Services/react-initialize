@@ -269,77 +269,79 @@ function Home() {
         </div>
       </section>
 
-      <div className="mb-10 w-full bg-white px-6 md:mb-10 lg:mb-10 lg:pt-6">
-        <h2 className="text-center text-2xl md:text-4xl">
-          {t("home.PopularCity.title")}
-        </h2>
-        <p className="text-center">{t("home.PopularCity.desc")}</p>
-      </div>
-
       {/* POPOLER SECTION */}
-      <section className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 md:flex-wrap md:p-4 lg:flex-row lg:p-0">
-        {/* Left: 2x2 Grid */}
-        <div className="grid flex-1 grid-cols-2 gap-4">
-          {leftCities.map((city, i) => (
-            <div
-              key={i}
-              className="group relative h-64 overflow-hidden rounded"
-            >
-              <img
-                className="h-full w-full object-cover"
-                src={city.img}
-                alt={city.name}
-              />
-              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-3">
-                <h3 className="text-white">{city.name}</h3>
-                <p className="text-sm text-white">{city.props}</p>
-              </div>
-            </div>
-          ))}
+      <section className="px-4 md:px-6 lg:pt-10">
+        <div className="mb-12">
+          <h2 className="text-center text-2xl md:text-4xl">
+            {t("home.PopularCity.title")}
+          </h2>
+          <p className="text-center">{t("home.PopularCity.desc")}</p>
         </div>
 
-        {/* Center: Eindhoven */}
-        <div className="max-w-full flex-1 md:max-w-7xl">
-          <div className="group relative h-full overflow-hidden rounded">
-            <img
-              src={eindhoven.img}
-              className="md:h-96 md:w-full md:object-cover lg:h-full lg:w-full"
-              alt={eindhoven.name}
-            />
-            <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-4">
-              <h3 className="text-xl font-semibold text-white">
-                {eindhoven.name}
-              </h3>
-              <p className="text-sm text-white">{eindhoven.props}</p>
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 md:flex-wrap lg:flex-row">
+          {/* Left: 2x2 Grid */}
+          <div className="grid flex-1 grid-cols-2 gap-4">
+            {leftCities.map((city, i) => (
+              <div
+                key={i}
+                className="group relative h-64 overflow-hidden rounded"
+              >
+                <img
+                  className="h-full w-full object-cover"
+                  src={city.img}
+                  alt={city.name}
+                />
+                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-3">
+                  <h3 className="text-white">{city.name}</h3>
+                  <p className="text-sm text-white">{city.props}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Center: Eindhoven */}
+          <div className="max-w-full flex-1 md:max-w-7xl">
+            <div className="group relative h-full overflow-hidden rounded">
+              <img
+                src={eindhoven.img}
+                className="md:h-96 md:w-full md:object-cover lg:h-full lg:w-full"
+                alt={eindhoven.name}
+              />
+              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-4">
+                <h3 className="text-xl font-semibold text-white">
+                  {eindhoven.name}
+                </h3>
+                <p className="text-sm text-white">{eindhoven.props}</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Right: 2 boxes side-by-side, never stacked */}
-        <div className="grid max-w-full flex-1 grid-cols-2 gap-4 md:max-w-7xl md:grid-cols-2 lg:grid-cols-1">
-          {rightCities.map((city, i) => (
-            <div
-              key={i}
-              className="group relative h-64 w-full overflow-hidden rounded"
-            >
-              <img
-                src={city.img}
-                className="h-full w-full object-cover"
-                alt={city.name}
-              />
-              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-3">
-                <h3 className="text-lg font-semibold text-white">
-                  {city.name}
-                </h3>
-                <p className="text-sm text-white">{city.props}</p>
+          {/* Right: 2 boxes side-by-side, never stacked */}
+          <div className="grid max-w-full flex-1 grid-cols-2 gap-4 md:max-w-7xl md:grid-cols-2 lg:grid-cols-1">
+            {rightCities.map((city, i) => (
+              <div
+                key={i}
+                className="group relative h-64 w-full overflow-hidden rounded"
+              >
+                <img
+                  src={city.img}
+                  className="h-full w-full object-cover"
+                  alt={city.name}
+                />
+                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-3">
+                  <h3 className="text-lg font-semibold text-white">
+                    {city.name}
+                  </h3>
+                  <p className="text-sm text-white">{city.props}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ABOUT-US SECTION */}
-      <section className="w-full bg-white px-4 py-10 md:px-10 md:py-12 lg:px-20 lg:py-26">
+      <section className="w-full bg-white px-4 py-10 md:px-6 md:py-12 lg:py-26">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
           {/* Text Section */}
           <div>
@@ -387,7 +389,7 @@ function Home() {
       </section>
 
       {/* RECENT SECTION */}
-      <section className="w-full overflow-hidden bg-slate-50 py-10 md:py-12 lg:py-26">
+      <section className="w-full bg-slate-50 px-4 py-10 md:px-6 md:py-12 lg:py-26">
         {/* Decorative background images */}
 
         {/* Main content */}
@@ -401,7 +403,7 @@ function Home() {
           </div>
 
           {/* Property Grid */}
-          <div className="grid grid-cols-1 gap-8 p-5 md:grid-cols-2 lg:grid-cols-4 lg:p-0">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 lg:p-0">
             {properties.map((property) => (
               <div
                 key={property.id}
@@ -409,7 +411,10 @@ function Home() {
               >
                 {/* Image & Tags */}
                 <div className="relative h-44">
-                  <Link to="/properties" className="cursor-pointer">
+                  <Link
+                    to={`/properties/${property.id}`}
+                    className="cursor-pointer"
+                  >
                     <img
                       className="h-full w-full object-cover"
                       src={property.image}
@@ -417,12 +422,12 @@ function Home() {
                     />
                   </Link>
                   <div className="absolute top-4 right-4 left-4 flex justify-between">
-                    <span className="font-poppins rounded bg-blue-700/90 px-2.5 py-2 text-xs text-white shadow">
+                    <h4 className="rounded bg-blue-500/90 px-2.5 py-2 text-xs text-white shadow">
                       FEATURED
-                    </span>
-                    <span className="font-poppins rounded bg-cyan-950/90 px-2.5 py-2 text-xs text-white shadow">
+                    </h4>
+                    <h4 className="rounded bg-cyan-950/90 px-2.5 py-2 text-xs text-white shadow">
                       FOR SALE
-                    </span>
+                    </h4>
                   </div>
                 </div>
 
@@ -462,19 +467,17 @@ function Home() {
 
                   {/* Price & Action */}
                   <div className="border-opacity-40 flex items-center justify-between border-t border-neutral-400 pt-4">
-                    <div className="text-right">
-                      <div className="font-dm-sans text-sm text-neutral-400 line-through">
+                    <div className="text-left">
+                      <div className="text-sm text-neutral-400 line-through">
                         {property.oldPrice}
                       </div>
-                      <div className="font-dm-sans text-sm font-semibold text-cyan-950">
-                        {property.newPrice}
-                      </div>
+                      <p className="text-cyan-950">{property.newPrice}</p>
                     </div>
 
                     {/* CTA */}
                     <div>
                       <Link
-                        to="/properties"
+                        to={`/properties/${property.id}`}
                         className="mt-4 block cursor-pointer text-sm font-medium text-blue-700 hover:underline"
                       >
                         View Details
@@ -489,7 +492,7 @@ function Home() {
       </section>
 
       {/* How to Works Section */}
-      <section className="relative w-full overflow-hidden bg-[linear-gradient(90deg,_#FFFEEB,_#E9F6FF)] py-10 md:py-10 lg:py-26">
+      <section className="relative w-full overflow-hidden bg-[linear-gradient(90deg,_#FFFEEB,_#E9F6FF)] px-4 py-10 md:px-6 md:py-10 lg:py-26">
         {/* Decorative Rotated Images */}
         <img
           className="absolute top-0 -left-[464px] h-64 w-[928px] rotate-90"
@@ -508,7 +511,7 @@ function Home() {
         />
 
         {/* Content */}
-        <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-12 p-4 lg:p-0">
+        <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-12 lg:p-0">
           {/* Header */}
           <div className="space-y-2 text-center">
             <h2 className="capitalize">{t("home.work.title")}</h2>

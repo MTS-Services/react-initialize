@@ -5,7 +5,7 @@
     "about": "Over ons",
     "contact": "Contact",
     "login": "Inloggen",
-    "register": "Registreren",
+    "register": "Aanmelden",
     "profile": "Profiel",
     "logout": "Uitloggen"
   },
@@ -60,7 +60,8 @@
     },
     "recent": {
       "title": "Recent gevonden",
-      "desc": "Betaalbare woningen die we recent hebben gevonden"
+      "desc": "Betaalbare woningen die we recent hebben gevonden",
+      "button": "Bekijk details"
     },
     "work": {
       "title": "Hoe werkt het?",
