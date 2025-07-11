@@ -65,7 +65,7 @@ const userData = {
 const UserProfile = () => {
   const user = getCurrentUser();
 
-  console.log(user?.data?.name);
+  const userName = user?.data?.name?.en;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -75,7 +75,7 @@ const UserProfile = () => {
       {/* Profile header */}
 
       {/* Main Content */}
-      <main className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-0">
+      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-0">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {/* Left Column */}
           <div className="space-y-6 lg:col-span-2">
@@ -228,7 +228,7 @@ const UserProfile = () => {
                   />
                   <div className="ml-4">
                     <h2 className="text-lg font-semibold text-gray-900">
-                      {user?.data?.name}
+                      {userName}
                     </h2>
                     <p className="text-sm text-gray-600">{userData.role}</p>
                   </div>

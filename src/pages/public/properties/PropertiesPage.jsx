@@ -10,6 +10,7 @@ import { useLanguage } from "../../../hook/useLanguage";
 
 import BASE_URL from "../../../config/api";
 import axios from "../../../utils/axiosInstance";
+import { RiSofaLine } from "react-icons/ri";
 
 const PropertyListPage = () => {
   const [properties, setProperties] = useState([]);
@@ -353,8 +354,11 @@ const PropertyListPage = () => {
             </div>
 
             <div className="rounded-md p-5 shadow">
-              <label className="text-md block text-gray-500">
-                ◪ {t("filters.rooms")}
+              <label className="text-md inline-flex items-center gap-2 text-gray-500">
+                <span>
+                  <RiSofaLine className="text-gray-500" />
+                </span>
+                <span>{t("filters.rooms")}</span>
               </label>
               <ul className="grid grid-cols-3 gap-2 pt-4">
                 {["1", "2", "3", "4", "5+"].map((num, index) => (
@@ -375,9 +379,12 @@ const PropertyListPage = () => {
             </div>
 
             <div className="rounded-md p-5 shadow">
-              <h4 className="text-md text-gray-500">
-                {t("filters.suface.title")}
-              </h4>
+              <div className="inline-flex items-center gap-2">
+                <RiSofaLine className="text-gray-500" />
+                <h4 className="text-md text-gray-500">
+                  {t("filters.suface.title")}
+                </h4>
+              </div>
               <hr className="my-2.5 text-gray-200" />
               <div className="grid grid-cols-2 gap-4">
                 <div>

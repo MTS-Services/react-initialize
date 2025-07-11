@@ -20,23 +20,36 @@ const CookiePolicy = () => {
       <div className="flex justify-center py-8 md:py-10 lg:py-12">
         <div className="w-[90vw] max-w-5xl space-y-4 sm:w-[70vw] lg:w-[80vw]">
           {/* Translated content */}
-          <h3> {t("cookie.title")}</h3>
+          <h1 className="mb-4 text-xl font-bold text-blue-400 sm:max-w-none md:text-4xl">
+            {" "}
+            {t("cookie.title")}
+          </h1>
           <p>{t("cookie.intro")}</p>
 
-          <h3>{t("cookie.whatAreCookies.title")}</h3>
+          <h3 className="my-4 text-lg font-bold text-blue-400 md:text-xl">
+            {t("cookie.whatAreCookies.title")}
+          </h3>
           <p>{t("cookie.whatAreCookies.description")}</p>
 
-          <h3>{t("cookie.necessaryCookies.title")}</h3>
+          <h3 className="my-4 text-lg font-bold text-blue-400 md:text-xl">
+            {t("cookie.necessaryCookies.title")}
+          </h3>
           <p>{t("cookie.necessaryCookies.description")}</p>
 
-          <h3>{t("cookie.statsCookies.title")}</h3>
+          <h3 className="my-4 text-lg font-bold text-blue-400 md:text-xl">
+            {t("cookie.statsCookies.title")}
+          </h3>
           <p>{t("cookie.statsCookies.description")}</p>
 
-          <h3>{t("cookie.externalCookies.title")}</h3>
+          <h3 className="my-4 text-lg font-bold text-blue-400 md:text-xl">
+            {t("cookie.externalCookies.title")}
+          </h3>
           <p>{t("cookie.externalCookies.description")}</p>
           <p>{t("cookie.externalCookies.note")}</p>
 
-          <h3>{t("cookie.cookieOverview.title")}</h3>
+          <h3 className="my-4 text-lg font-bold text-blue-400 md:text-xl">
+            {t("cookie.cookieOverview.title")}
+          </h3>
           <p>{t("cookie.cookieOverview.description")}</p>
         </div>
       </div>

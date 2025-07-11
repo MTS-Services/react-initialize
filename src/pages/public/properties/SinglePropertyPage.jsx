@@ -26,40 +26,39 @@ import { isPaid } from "../../../features/auth/authUtils";
 import Button from "../../../components/ui/Button";
 
 import NotFounds from "../../../components/error/NotFounds";
+import { useLanguage } from "../../../hook/useLanguage";
 
 const ifNotImg = "/image/fallback.jpg";
 
 const SinglePropertyPage = () => {
+  const { t } = useLanguage();
   const { id } = useParams();
   const [expanded, setExpanded] = useState(false);
 
   const navigate = useNavigate();
 
   const [listing, setListing] = useState(null);
+
   const [recent, setRecent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [mainImage, setMainImage] = useState(0);
 
   const isPaidUser = isPaid();
 
+  const details = { ...listing?.transferDetails, ...listing?.otherDetails };
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
 
       try {
-        // Common headers
-        const headers = {
-          headers: {
-            "Accept-Language": "en",
-          },
-        };
         // Fetch single listing
-        const listingRes = await axios.get(`/properties/search/${id}`, headers);
+        const propertyList = await axios.get(`/properties/search/${id}`);
 
-        setListing(listingRes.data.data.property);
+        setListing(propertyList.data.data.property);
 
         // Fetch recent listings (excluding current one)
-        const recentRes = await axios.get(`/properties`, headers);
+        const recentRes = await axios.get(`/properties`);
 
         const filteredRecent = recentRes.data.properties
           .filter((item) => item.id !== parseInt(id))
@@ -209,7 +208,7 @@ const SinglePropertyPage = () => {
                         <FaLock size={18} className="text-gray-400" />
                       </Link>
                       <p className="mt-2 text-center text-base font-medium text-gray-500">
-                        Access Required
+                        {t("header.access")}
                       </p>
                     </div>
                   </div>
@@ -227,7 +226,9 @@ const SinglePropertyPage = () => {
                 : "h-96 overflow-hidden blur-sm md:col-span-2",
             )}
           >
-            <h2 className="mb-4 text-xl font-bold">Description</h2>
+            <h2 className="mb-4 text-xl font-bold">
+              {t("singleProprty.desc")}
+            </h2>
             <div className="mb-6 text-base/8 whitespace-pre-line text-gray-700">
               <div
                 className={`overflow-hidden transition-all duration-300 ${expanded ? "" : "max-h-32"}`}
@@ -244,7 +245,9 @@ const SinglePropertyPage = () => {
               }
             </div>
 
-            <h2 className="mb-4 text-xl font-bold">Features</h2>
+            <h2 className="mb-4 text-xl font-bold">
+              {t("singleProprty.feature")}
+            </h2>
             <div className="mb-6 grid grid-cols-2 gap-4">
               {/* Surface Area */}
               <div className="flex items-center gap-3 rounded-lg border border-gray-100 bg-white p-4 shadow transition-shadow hover:shadow-md">
@@ -256,7 +259,7 @@ const SinglePropertyPage = () => {
                     Surface
                   </p>
                   <p className="text-md font-semibold text-gray-700">
-                    {listing.features.surfaceArea || "No available"}
+                    {listing.features.surfaceAreaFloat || "No available"}
                   </p>
                 </div>
               </div>
@@ -271,7 +274,7 @@ const SinglePropertyPage = () => {
                     Rooms
                   </p>
                   <p className="text-md font-semibold text-gray-700">
-                    {listing.features.numberofRooms || "No available"}
+                    {listing.features.numberOfRoomsFloat || "No available"}
                   </p>
                 </div>
               </div>
@@ -304,30 +307,30 @@ const SinglePropertyPage = () => {
                 </div>
               </div>
             </div>
-            <h2 className="mb-4 text-xl font-bold">Others Details</h2>
+            <h2 className="mb-4 text-xl font-bold">
+              {t("singleProprty.details")}
+            </h2>
             <div className="mb-8 rounded-lg border border-gray-200">
-              {Object.keys(listing.transferDetails || {}).length > 0 ? (
+              {Object.keys(details).length > 0 ? (
                 <div className="divide-y divide-gray-200">
-                  {Object.entries(listing.transferDetails).map(
-                    ([key, value]) => (
-                      <div
-                        key={key}
-                        className="flex items-center justify-between px-4 py-3 transition-colors hover:bg-gray-50"
-                      >
-                        <div className="flex items-center space-x-3">
-                          <div className="h-5 w-5 text-gray-400">
-                            <MdFilterList />
-                          </div>
-                          <span className="text-sm font-medium text-gray-600">
-                            {formatLabel(key)}
-                          </span>
+                  {Object.entries(details).map(([key, value]) => (
+                    <div
+                      key={key}
+                      className="flex items-center justify-between px-4 py-3 transition-colors hover:bg-gray-50"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="h-5 w-5 text-gray-400">
+                          <MdFilterList />
                         </div>
-                        <span className="text-right font-medium whitespace-pre-line text-gray-500">
-                          {value}
+                        <span className="text-sm font-medium text-gray-600">
+                          {formatLabel(key)}
                         </span>
                       </div>
-                    ),
-                  )}
+                      <span className="text-right font-medium whitespace-pre-line text-gray-500">
+                        {value}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center p-8 text-center">
@@ -343,11 +346,13 @@ const SinglePropertyPage = () => {
 
           {/* Contact Card */}
           <div className="sticky top-20 h-fit rounded-lg bg-slate-50 p-6">
-            <h3 className="mb-4 text-xl font-bold">Contact Agent</h3>
+            <h3 className="mb-4 text-xl font-bold">
+              {t("singleProprty.agent.title")}
+            </h3>
             <hr className="mb-4 border border-gray-100" />
             {isPaidUser ? (
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
+                {/* <div className="flex items-center gap-3">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
                     <span className="font-bold text-yellow-800">
                       {listing.agent?.name?.charAt(0) || "A"}
@@ -357,9 +362,9 @@ const SinglePropertyPage = () => {
                     <h4>{listing.agent?.name || "Agent Name"}</h4>
                     <p className="text-sm text-gray-600">Real Estate Agent</p>
                   </div>
-                </div>
+                </div> */}
 
-                <div className="space-y-2">
+                {/* <div className="space-y-2">
                   <a
                     href={`tel:${listing.agent?.phone || ""}`}
                     className="flex items-center gap-2 rounded-lg bg-white p-3 hover:bg-gray-100"
@@ -387,7 +392,7 @@ const SinglePropertyPage = () => {
                     <BiLinkAlt size={20} className="text-gray-600" />
                     <span> Visit available</span>
                   </a>
-                </div>
+                </div> */}
               </div>
             ) : (
               <div className="relative flex h-44 w-full flex-col items-center justify-center">
@@ -399,20 +404,24 @@ const SinglePropertyPage = () => {
                   >
                     <FaLock size={18} className="text-gray-300" />
                   </Link>
-                  <p className="text-gray-400">Access Required</p>
+                  <p className="text-gray-400">{t("header.access")}</p>
                 </div>
               </div>
             )}
 
             <div className="pt-4">
               {isPaidUser ? (
-                <Button
-                  className="w-full rounded-lg"
-                  variant="yellowGradient"
-                  size="lg"
+                <a
+                  href={`${listing.url || ""}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#3CAAFA] to-[#1198fa] px-4 py-4 shadow transition-transform hover:scale-95 hover:from-[#1a8adb] hover:to-[#0278d9]"
                 >
-                  Schedule a Visit
-                </Button>
+                  <BiLinkAlt size={20} className="text-gray-100" />
+                  <span className="text-lg font-bold text-white">
+                    {t("singleProprty.feature.contact")}
+                  </span>
+                </a>
               ) : (
                 <Link to="/auth/register">
                   <Button
@@ -420,7 +429,7 @@ const SinglePropertyPage = () => {
                     variant="secondary"
                     size="lg"
                   >
-                    Sign Up
+                    {t("header.register")}
                   </Button>
                 </Link>
               )}
@@ -430,7 +439,9 @@ const SinglePropertyPage = () => {
 
         {/* Recent Listings */}
         <div className="py-20">
-          <h3 className="mb-6 text-2xl font-bold">Similar Properties</h3>
+          <h3 className="mb-6 text-2xl font-bold">
+            {t("singleProprty.similar")}
+          </h3>
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {recent.map((item) => (

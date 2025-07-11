@@ -6,8 +6,10 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import Button from "../../../components/ui/Button";
 
 import axios from "../../../utils/axiosInstance";
+import { useLanguage } from "../../../hook/useLanguage";
 
 const CheckoutForm = () => {
+  const { t } = useLanguage();
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
@@ -117,7 +119,7 @@ const CheckoutForm = () => {
           {/* Right Form Section */}
           <div className="flex w-full flex-col justify-center p-10 md:w-1/2">
             <h2 className="mb-10 text-center text-3xl font-extrabold text-[#19398A]">
-              Paye & Register
+              {t("auth.register.title")}
             </h2>
             <form onSubmit={handleSubmit} className="">
               {/* Name Field */}
@@ -126,7 +128,7 @@ const CheckoutForm = () => {
                   className="mb-2 block text-sm font-semibold text-gray-700"
                   htmlFor="name"
                 >
-                  Name
+                  {t("auth.register.name")}
                 </label>
                 <input
                   className="w-full rounded-xl border border-gray-300 px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none"
@@ -145,7 +147,7 @@ const CheckoutForm = () => {
                   className="mb-2 block text-sm font-bold text-gray-700"
                   htmlFor="email"
                 >
-                  Email
+                  {t("auth.common.email")}
                 </label>
                 <input
                   className="w-full rounded-xl border border-gray-300 px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none"
@@ -163,7 +165,7 @@ const CheckoutForm = () => {
                   className="mb-2 block text-sm font-bold text-gray-700"
                   htmlFor="email"
                 >
-                  Password
+                  {t("auth.common.pass")}
                 </label>
                 <input
                   className="w-full rounded-xl border border-gray-300 px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none"
@@ -179,7 +181,7 @@ const CheckoutForm = () => {
               {/* Card Details */}
               <div className="mb-6">
                 <label className="mb-2 block text-sm font-bold text-gray-700">
-                  Card Details
+                  {t("auth.register.card")}
                 </label>
                 <div className="rounded-md border border-gray-300 p-3">
                   <CardElement
@@ -225,17 +227,17 @@ const CheckoutForm = () => {
                     Processing...
                   </span>
                 ) : (
-                  "Pay $10.00"
+                  <>{t("auth.register.button")}</>
                 )}
               </Button>
 
               <p className="mt-6 text-center text-gray-600">
-                You have an account?{" "}
+                {t("auth.register.footer")}{" "}
                 <Link
                   to="/auth/login"
                   className="font-semibold text-blue-500 hover:underline"
                 >
-                  Login
+                  {t("header.login")}
                 </Link>
               </p>
             </form>

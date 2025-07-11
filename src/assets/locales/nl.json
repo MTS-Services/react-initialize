@@ -7,7 +7,26 @@
     "login": "Inloggen",
     "register": "Aanmelden",
     "profile": "Profiel",
-    "logout": "Uitloggen"
+    "logout": "Uitloggen",
+    "access": "Toegang vereist"
+  },
+
+  "auth": {
+    "login": {
+      "title": "Inloggen op uw account",
+      "footer": "Heeft u nog geen account?"
+    },
+    "register": {
+      "title": "Betalen en registreren",
+      "name": "naame",
+      "card": "Kaartgegevens",
+      "footer": "Heeft u al een account?",
+      "button": "Betaal $10"
+    },
+    "common": {
+      "email": "E-mailadres",
+      "pass": "Wachtwoord"
+    }
   },
 
   "footer": {
@@ -337,6 +356,19 @@
       "title": "Minimale oppervlakte (m2)",
       "max": "Maximaal oppervlak",
       "min": "Min. oppervlak"
+    }
+  },
+
+  "singleProprty": {
+    "desc": "Beschrijving",
+    "feature": {
+      "titel": "Neem contact op met agent",
+      "contact": "Neem nu contact op"
+    },
+    "details": "Overige details",
+    "similar": "Vergelijkbare eigenschappen",
+    "agent": {
+      "title": "Neem contact op met een agent"
     }
   }
 }
