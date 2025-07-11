@@ -1,12 +1,11 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../components/ui/Button";
-import PaymentSuccsess from "./PaymentSuccsess";
-import BASE_URL from "../../../config/api";
+
+import axios from "../../../utils/axiosInstance";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -40,7 +39,7 @@ const CheckoutForm = () => {
       // 1. Create Payment Intent
       const {
         data: { clientSecret },
-      } = await axios.post(`${BASE_URL}/stripe/create-payment`, {
+      } = await axios.post(`/stripe/create-payment`, {
         amount: 1000,
         currency: "usd",
       });
@@ -64,7 +63,7 @@ const CheckoutForm = () => {
       // 3. Verify Payment Status
       if (paymentIntent.status === "succeeded") {
         // 4. Create User
-        const response = await axios.post(`${BASE_URL}/users/create`, {
+        const response = await axios.post(`/users/create`, {
           email: formData.email,
           name: formData.name,
           amount: paymentIntent.amount,
@@ -73,7 +72,7 @@ const CheckoutForm = () => {
         });
 
         const user = response.data;
-        console.log(user.data);
+
         if (!user) {
           throw new Error("Payment verification failed on server");
         }

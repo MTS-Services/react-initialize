@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { FiGrid, FiMapPin } from "react-icons/fi";
 import CardSkeleton from "../../../components/common/Card-Skeleton";
@@ -6,9 +5,11 @@ import Pagination from "../../../components/common/Pagination";
 import PropertiesCard from "../../../components/common/PropertiesCard";
 
 import RangeSlider from "../../../components/common/RangeSlider";
-import PropertyNoFound from "../../../components/error/NotFounds";
+import NotFounds from "../../../components/error/NotFounds";
 import { useLanguage } from "../../../hook/useLanguage";
+
 import BASE_URL from "../../../config/api";
+import axios from "../../../utils/axiosInstance";
 
 const PropertyListPage = () => {
   const [properties, setProperties] = useState([]);
@@ -65,10 +66,7 @@ const PropertyListPage = () => {
         }
       }
 
-      const res = await axios.get(
-        `${BASE_URL}/properties?${params.toString()}`,
-      );
-      // console.log("PR-", `${BASE_URL}/properties?${params.toString()}`);
+      const res = await axios.get(`/properties?${params.toString()}`);
 
       setProperties(res.data.properties);
       setPagination(res.data.pagination);
@@ -90,10 +88,7 @@ const PropertyListPage = () => {
     setIsFetchingSuggestions(true);
 
     try {
-      const res = await axios.get(
-        `${BASE_URL}/properties?location=${query}&limit=5`,
-        {},
-      );
+      const res = await axios.get(`/properties?location=${query}&limit=5`, {});
 
       const uniqueLocations = [
         ...new Set(res.data.properties.map((p) => p.location)),
@@ -174,7 +169,7 @@ const PropertyListPage = () => {
         ...prev,
         location: "",
       }));
-      fetchData(1); // Re-fetch without location
+      fetchData(1);
     }
   };
 
@@ -186,7 +181,7 @@ const PropertyListPage = () => {
     }));
     setLocationInput(suggestion);
     setShowSuggestions(false);
-    fetchData(1); // Immediately fetch results with selected location
+    fetchData(1);
   };
 
   // Loading animation
@@ -210,7 +205,7 @@ const PropertyListPage = () => {
     setFilters((prev) => ({
       ...prev,
       minBedrooms: value,
-      maxBedrooms: value === "5+" ? "" : value, // Set max for specific values, or empty for 5+
+      maxBedrooms: value === "5+" ? "" : value,
     }));
   };
 
@@ -422,11 +417,19 @@ const PropertyListPage = () => {
           {isLoading ? (
             renderSkeletonListings()
           ) : isError ? (
-            <div className="py-10 text-center text-lg text-red-600">
-              Error loading properties. Please try again.
-            </div>
+            <NotFounds
+              title="Something Went Wrong"
+              message="Please check your connection or try again later."
+              buttonText="Retry"
+              buttonLink="#"
+              onButtonClick={() => window.location.reload()}
+            />
           ) : properties.length === 0 ? (
-            <PropertyNoFound />
+            <NotFounds
+              title="No Results Found"
+              message="We couldn't find any properties matching your criteria. Try adjusting your filters or search in a different location."
+              buttonLink="/properties"
+            />
           ) : (
             <div className="">
               {properties.map((item) => (

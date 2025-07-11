@@ -3,20 +3,20 @@ import { FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 const NotFounds = ({
-  icon = <FiSearch className="h-12 w-12 text-gray-400" />,
+  icon = <FiSearch className="h-8 w-8 text-gray-400" />,
   title = "No Properties Found",
   message = "We couldn't find any properties matching your criteria. Try adjusting your filters or search in a different location.",
-  buttonText = "Explore Properties",
-  buttonLink = "/properties",
-  onButtonClick = null, // optional handler
-  customButton = null, // optional override
+  buttonText = "Go Back",
+  buttonLink = "",
+  onButtonClick = null,
+  customButton = null,
 }) => {
   return (
-    <div className="flex h-[50vh] flex-col items-center justify-center space-y-4 px-4 text-center">
+    <div className="flex flex-col items-center justify-center space-y-4 px-4 text-center">
       <div className="rounded-full bg-gray-100 p-4">{icon}</div>
       <div>
-        <h3 className="text-xl font-semibold text-gray-700">{title}</h3>
-        <p className="max-w-md text-gray-500">{message}</p>
+        <h3 className="mb-2 text-xl font-semibold text-gray-700">{title}</h3>
+        <p className="max-w-md text-red-400">{message}</p>
       </div>
 
       {customButton ? (

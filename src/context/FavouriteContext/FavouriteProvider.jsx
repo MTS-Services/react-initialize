@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FavoriteContext } from "./FavouriteContext.jsx";
+import BASE_URL from "../../config/api.js";
+import axios from "../../utils/axiosInstance.js";
 
 export const FavoriteProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -10,8 +12,6 @@ export const FavoriteProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const URL = "http://localhost:3011/api";
 
   // ✅ Check and set user on mount + listen to logout from other tabs
   useEffect(() => {
@@ -32,12 +32,6 @@ export const FavoriteProvider = ({ children }) => {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
-
-  // ✅ Helper: get token from localStorage
-  const getToken = () => {
-    const parsedUserInfo = JSON.parse(localStorage.getItem("userInfo"));
-    return parsedUserInfo?.data?.token;
-  };
 
   // ✅ Helper: check login before actions
   const checkLogin = () => {
@@ -61,24 +55,11 @@ export const FavoriteProvider = ({ children }) => {
       }
 
       try {
-        const response = await fetch(`${URL}/favorites/getFavorites`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getToken()}`,
-          },
-        });
-
-        if (response.ok) {
-          const dbFavorites = await response.json();
-          setFavorites(dbFavorites || []);
-        } else {
-          toast.error("Failed to load favorites from the database!");
-          console.error("Failed to load favorites from DB:", response);
-        }
+        const { data } = await axios.get(`/favorites/getFavorites`);
+        setFavorites(data || []);
       } catch (error) {
         console.error("Error fetching favorites from DB:", error);
-        toast.error("Network error while loading favorites!");
+        toast.error("Failed to load favorites from the database!");
       } finally {
         setIsLoading(false);
       }
@@ -93,43 +74,24 @@ export const FavoriteProvider = ({ children }) => {
 
     const isAlreadyFavorite = favorites.some((item) => item.id === itemId);
     const endpoint = isAlreadyFavorite ? "removeFavorite" : "addFavorite";
-    const actionText = isAlreadyFavorite ? "removed item" : "item added ";
+    const actionText = isAlreadyFavorite ? "removed item" : "item added";
 
     try {
-      const response = await fetch(`${URL}/favorites/${endpoint}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getToken()}`,
-        },
-        body: JSON.stringify({ propertyId: itemId, userId: user.id }),
+      // Step 1: Toggle favorite (add/remove)
+      await axios.post(`/favorites/${endpoint}`, {
+        propertyId: itemId,
+        userId: user.id,
       });
 
-      if (response.ok) {
-        const fetchResponse = await fetch(`${URL}/favorites/getFavorites`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getToken()}`,
-          },
-        });
-
-        if (fetchResponse.ok) {
-          const dbFavorites = await fetchResponse.json();
-          setFavorites(dbFavorites || []);
-          toast.success(` ${actionText}!`);
-        } else {
-          toast.error("Updated, but failed to refresh favorites.");
-          console.error("Failed to refresh favorite status:", fetchResponse);
-        }
-      } else {
-        const errorData = await response.json();
-        toast.error(errorData?.error || `Failed to ${actionText} favorites`);
-        console.error(`Failed to ${actionText} favorites:`, response);
-      }
+      // Step 2: Refresh favorites
+      const { data } = await axios.get(`/favorites/getFavorites`);
+      setFavorites(data || []);
+      toast.success(`${actionText}!`);
     } catch (error) {
-      console.error("Network error while toggling favorite:", error);
-      toast.error("Network error! Please try again.");
+      const errorMessage =
+        error?.response?.data?.error || `Failed to ${actionText} favorites`;
+      toast.error(errorMessage);
+      console.error(`Error toggling favorite:`, error);
     }
   };
 

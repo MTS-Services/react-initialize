@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const ifNotImg = "/image/fallback.jpg";
 
 const RecentProperty = ({ item }) => {
-  console.log(item);
   const navigate = useNavigate();
 
   return (

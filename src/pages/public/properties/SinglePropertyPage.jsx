@@ -15,17 +15,17 @@ import {
 } from "react-icons/fi";
 import { FaLock } from "react-icons/fa";
 import { BiLinkAlt } from "react-icons/bi";
+import { MdFilterList } from "react-icons/md";
 
-import axios from "axios";
+import axios from "../../../utils/axiosInstance";
 import clsx from "clsx";
 
 import RecentProperty from "../../../components/common/RecentProperty";
 import ShareButtons from "../../../components/common/ShareButtons";
 import { isPaid } from "../../../features/auth/authUtils";
 import Button from "../../../components/ui/Button";
-import { MdFilterList } from "react-icons/md";
 
-import BASE_URL from "../../../config/api";
+import NotFounds from "../../../components/error/NotFounds";
 
 const ifNotImg = "/image/fallback.jpg";
 
@@ -54,15 +54,12 @@ const SinglePropertyPage = () => {
           },
         };
         // Fetch single listing
-        const listingRes = await axios.get(
-          `${BASE_URL}/properties/search/${id}`,
-          headers,
-        );
+        const listingRes = await axios.get(`/properties/search/${id}`, headers);
 
         setListing(listingRes.data.data.property);
 
         // Fetch recent listings (excluding current one)
-        const recentRes = await axios.get(`${BASE_URL}/properties`, headers);
+        const recentRes = await axios.get(`/properties`, headers);
 
         const filteredRecent = recentRes.data.properties
           .filter((item) => item.id !== parseInt(id))
@@ -94,13 +91,13 @@ const SinglePropertyPage = () => {
 
   if (!listing) {
     return (
-      <div className="mx-auto flex h-screen max-w-7xl items-center justify-center p-10 text-center">
-        <div>
-          <h2 className="mb-4 text-2xl font-bold">Listing not found</h2>
-
-          <Button variant="yellowGradient" onClick={() => navigate(-1)}>
-            Go Back
-          </Button>
+      <div className="">
+        <div className="bg-red-400 py-7.5" />
+        <div className="h-[95vh] pt-54">
+          <NotFounds
+            message="We couldn't find any properties matching your criteria."
+            buttonLink="/properties"
+          />
         </div>
       </div>
     );
