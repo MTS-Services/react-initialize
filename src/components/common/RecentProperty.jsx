@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ifNotImg = "/image/fallback.jpg";
 
 const RecentProperty = ({ item }) => {
+  console.log(item);
   const navigate = useNavigate();
 
   return (
@@ -22,7 +23,9 @@ const RecentProperty = ({ item }) => {
       <div className="bg-white p-4">
         <div className="mb-4">
           <h3 className="text-md font-semibold text-gray-500">{item.title}</h3>
-          <p className="text-sm text-neutral-400">{item.location}</p>
+          <p className="text-sm text-neutral-400">
+            {item.location.slice(0, 30)}...
+          </p>
         </div>
 
         {/* Features */}
@@ -43,7 +46,7 @@ const RecentProperty = ({ item }) => {
               <TfiRulerAlt2 className="text-gray-400" />
             </div>
             <span className="font-dm-sans text-sm text-neutral-400">
-              {item.features.surfaceArea || "Area"}
+              {item.features.surfaceAreaFloat || "Area"}
             </span>
           </div>
         </div>

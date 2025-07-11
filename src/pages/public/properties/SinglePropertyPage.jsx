@@ -24,6 +24,7 @@ import ShareButtons from "../../../components/common/ShareButtons";
 import { isPaid } from "../../../features/auth/authUtils";
 import Button from "../../../components/ui/Button";
 import { MdFilterList } from "react-icons/md";
+
 import BASE_URL from "../../../config/api";
 
 const ifNotImg = "/image/fallback.jpg";
@@ -46,14 +47,23 @@ const SinglePropertyPage = () => {
       setIsLoading(true);
 
       try {
+        // Common headers
+        const headers = {
+          headers: {
+            "Accept-Language": "en",
+          },
+        };
         // Fetch single listing
         const listingRes = await axios.get(
           `${BASE_URL}/properties/search/${id}`,
+          headers,
         );
+
         setListing(listingRes.data.data.property);
 
         // Fetch recent listings (excluding current one)
-        const recentRes = await axios.get(`${BASE_URL}/properties`);
+        const recentRes = await axios.get(`${BASE_URL}/properties`, headers);
+
         const filteredRecent = recentRes.data.properties
           .filter((item) => item.id !== parseInt(id))
           .slice(0, 4);
@@ -185,13 +195,13 @@ const SinglePropertyPage = () => {
                     key={idx}
                     className="relative flex h-[20vh] w-full items-center justify-center overflow-hidden rounded-lg shadow"
                     style={{
-                      backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjm0PUsJ4d7buWMmA1CgH45LbRdXBPA0iNgw&s)`,
+                      backgroundImage: `url(/image/fallback1.jpg)`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                   >
                     {/* Dark overlay */}
-                    <div className="absolute inset-0 bg-slate-50 opacity-70"></div>
+                    <div className="absolute inset-0 bg-slate-50 opacity-80"></div>
 
                     {/* Lock content */}
                     <div className="relative z-10 flex flex-col items-center justify-center">
