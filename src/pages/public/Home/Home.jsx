@@ -233,29 +233,27 @@ function Home() {
               )}
             </div>
 
-            <div className="relative w-full">
-              <FiDollarSign className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
+            <div className="w-full">
               <input
                 type="number"
-                placeholder={`${t("home.hero.search.min")}`}
+                placeholder={`€ ${t("home.hero.search.min")}`}
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
                 className="h-16 w-full rounded-lg bg-white py-2 pr-4 pl-10 shadow focus:outline-none"
               />
             </div>
 
-            <div className="relative w-full">
-              <FiDollarSign className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
+            <div className="w-full">
               <input
                 type="number"
-                placeholder={`${t("home.hero.search.max")}`}
+                placeholder={`€ ${t("home.hero.search.max")}`}
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
                 className="h-16 w-full rounded-lg bg-white py-2 pr-4 pl-10 shadow focus:outline-none"
               />
             </div>
 
-            <div className="relative w-full">
+            <div className="w-full">
               <Button
                 variant="yellowGradient"
                 size="lg"
