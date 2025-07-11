@@ -92,6 +92,7 @@ const PropertyListPage = () => {
     try {
       const res = await axios.get(
         `${BASE_URL}/properties?location=${query}&limit=5`,
+        {},
       );
 
       const uniqueLocations = [
@@ -310,13 +311,13 @@ const PropertyListPage = () => {
 
             <div className="rounded-md p-6 shadow-sm">
               <h4 className="text-md text-gray-500">
-                $ {t("filters.range.title")}
+                € {t("filters.range.title")}
               </h4>
               <hr className="my-2.5 text-gray-200" />
               <div className="mb-8 grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-500">
-                    $ {t("filters.range.min")}
+                    {t("filters.range.min")}
                   </label>
                   <input
                     type="number"
@@ -330,7 +331,7 @@ const PropertyListPage = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-500">
-                    $ {t("filters.range.max")}
+                    {t("filters.range.max")}
                   </label>
                   <input
                     type="number"

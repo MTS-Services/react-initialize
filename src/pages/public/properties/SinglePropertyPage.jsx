@@ -24,8 +24,9 @@ import ShareButtons from "../../../components/common/ShareButtons";
 import { isPaid } from "../../../features/auth/authUtils";
 import Button from "../../../components/ui/Button";
 import { MdFilterList } from "react-icons/md";
+import BASE_URL from "../../../config/api";
 
-const URL = "http://localhost:3011/api";
+const ifNotImg = "/image/fallback.jpg";
 
 const SinglePropertyPage = () => {
   const { id } = useParams();
@@ -46,12 +47,13 @@ const SinglePropertyPage = () => {
 
       try {
         // Fetch single listing
-        const listingRes = await axios.get(`${URL}/properties/${id}`);
+        const listingRes = await axios.get(
+          `${BASE_URL}/properties/search/${id}`,
+        );
         setListing(listingRes.data.data.property);
 
         // Fetch recent listings (excluding current one)
-        const recentRes = await axios.get(`${URL}/properties`);
-        console.log(recent);
+        const recentRes = await axios.get(`${BASE_URL}/properties`);
         const filteredRecent = recentRes.data.properties
           .filter((item) => item.id !== parseInt(id))
           .slice(0, 4);
@@ -155,10 +157,7 @@ const SinglePropertyPage = () => {
         <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
           <div className="md:col-span-2">
             <img
-              src={
-                listing.media?.[mainImage]?.url ||
-                "https://via.placeholder.com/800x500?text=No+Image"
-              }
+              src={listing.media?.[mainImage]?.url || ifNotImg}
               alt={listing.title}
               className="h-96 w-full rounded-lg object-cover"
             />
