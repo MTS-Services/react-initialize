@@ -20,36 +20,36 @@ const PrivacyPolicy = () => {
 
       <main className="flex justify-center py-8 md:py-10 lg:py-12">
         <div className="w-[90vw] max-w-5xl sm:w-[70vw] lg:w-[80vw]">
-          <h2 className="mb-4 max-w-[16rem] text-3xl font-bold text-blue-400 sm:max-w-none">
+          <h1 className="mb-4 text-xl font-bold text-blue-400 sm:max-w-none md:text-4xl">
             {t("cookie.title")}
-          </h2>
+          </h1>
           <p>{t("cookie.intro")}</p>
 
-          <h4 className="my-4 text-xl font-bold text-blue-400">
+          <h3 className="my-4 text-lg font-bold text-blue-400 md:text-xl">
             {t("cookie.whatAreCookies.title")}
-          </h4>
+          </h3>
           <p>{t("cookie.whatAreCookies.description")}</p>
 
-          <h4 className="my-4 text-xl font-bold text-blue-400">
+          <h3 className="my-4 text-lg font-bold text-blue-400 md:text-xl">
             {t("cookie.necessaryCookies.title")}
-          </h4>
+          </h3>
           <p>{t("cookie.necessaryCookies.description")}</p>
 
-          <h4 className="my-4 text-xl font-bold text-blue-400">
+          <h3 className="my-4 text-lg font-bold text-blue-400 md:text-xl">
             {t("cookie.externalCookies.title")}
-          </h4>
+          </h3>
           <p>{t("cookie.externalCookies.description")}</p>
 
           <p>{t("cookie.externalCookies.note")}</p>
 
-          <h4 className="my-4 text-xl font-bold text-blue-400">
+          <h3 className="my-4 text-lg font-bold text-blue-400 md:text-xl">
             {t("cookie.blockCookies.title")}
-          </h4>
+          </h3>
           <p>{t("cookie.blockCookies.description")}</p>
 
-          <h4 className="my-4 text-xl font-bold text-blue-400">
+          <h3 className="my-4 text-lg font-bold text-blue-400 md:text-xl">
             {t("cookie.deleteCookies.title")}
-          </h4>
+          </h3>
           <p>{t("cookie.deleteCookies.description")}</p>
         </div>
       </main>

@@ -5,30 +5,38 @@ import { createBrowserRouter } from "react-router-dom";
 
 // Layouts
 import { FavoriteProvider } from "../context/FavouriteContext/FavouriteProvider";
-import AuthLayout from "../layouts/AuthLayout/AuthLayout";
-import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
-import MainLayout from "../layouts/MainLayout/MainLayout";
-import UserProfile from "../pages/private/profile/UserProfile";
+
+import DashboardLayout from "../layouts/Dashboard/DashboardLayout";
 import AddProperty from "../pages/private/Properties/AddProperty";
 import AllProperty from "../pages/private/Properties/AllProperty";
+import UserProfile from "../pages/private/profile/UserProfile";
 import Users from "../pages/private/users/Users";
-import CookiePolicy from "../pages/public/CookiePolicy/CookiePolicy";
-import PrivacyPolicy from "../pages/public/PrivacyPolicy/PrivacyPolicy";
-import TermsAndConditions from "../pages/public/TermsAndConditions/TermsAndConditions";
-import BlockAdmin from "./BlockAdmin";
+
 import RequireAdmin from "./RequireAdmin";
-import PaymentSuccess from "../pages/Auth/CheckoutForm/PaymentSuccsess";
 import RequireAuth from "./RequireAuth";
+import BlockAdmin from "./BlockAdmin";
+
+import AuthLayout from "../layouts/Auth/AuthLayout";
+import MainLayout from "../layouts/Main/MainLayout";
+
+import TermsAndConditions from "../pages/public/TermsAndConditions/TermsAndConditions";
+import PaymentSuccess from "../pages/Auth/CheckoutForm/PaymentSuccsess";
+import PrivacyPolicy from "../pages/public/PrivacyPolicy/PrivacyPolicy";
+import CookiePolicy from "../pages/public/CookiePolicy/CookiePolicy";
 
 // Pages
 const Home = lazy(() => import("../pages/public/Home/Home"));
+
 const LoginPage = lazy(() => import("../pages/Auth/Login/LoginPage"));
+
 const PropertiesPage = lazy(
   () => import("../pages/public/properties/PropertiesPage"),
 );
+
 const SinglePropertyPage = lazy(
   () => import("../pages/public/properties/SinglePropertyPage"),
 );
+
 const Contact = lazy(() => import("../pages/public/Contact/Contact"));
 const About = lazy(() => import("../pages/public/about/About"));
 const FavouritePage = lazy(
@@ -43,6 +51,7 @@ const CheckoutForm = lazy(
 );
 
 const ErrorPage = lazy(() => import("../pages/err/ErrorPage"));
+
 const stripePromise = loadStripe(
   "pk_test_51RcJiND60jTqpzFUTyaTS0m8gzJ8dJUoCMfzokDmF8UKWIKgzdoguwKoRuB1o1QOhzHKtUiRh7Q4TWURblIAzbtS00UT4FOEQx",
 );

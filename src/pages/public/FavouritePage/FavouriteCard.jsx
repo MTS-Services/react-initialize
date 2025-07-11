@@ -88,7 +88,9 @@ const FavouriteCard = ({ item }) => {
 
                 <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2 py-1.5">
                   <FiMapPin className="text-gray-400" />
-                  <span className="text-xs text-gray-700">{location}</span>
+                  <span className="text-xs text-gray-700">
+                    {location.slice(0, 20)}
+                  </span>
                 </div>
               </div>
 

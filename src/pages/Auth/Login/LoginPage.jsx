@@ -6,8 +6,10 @@ import { loginUser } from "../../../features/auth/authSlice"; // Import loginUse
 
 import Button from "../../../components/ui/Button";
 import { useFavorites } from "../../../context/FavouriteContext/FavouriteProvider";
+import { useLanguage } from "../../../hook/useLanguage";
 
 function LoginPage() {
+  const { t } = useLanguage();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -63,7 +65,7 @@ function LoginPage() {
           {/* Right: Form */}
           <div className="flex w-full flex-col justify-center p-8 md:w-1/2">
             <h2 className="mb-4 text-center text-xl font-extrabold text-[#19398A] md:mb-10 md:text-3xl">
-              Login to your account
+              {t("auth.login.title")}
             </h2>
 
             <form onSubmit={onSubmit} className="space-y-6">
@@ -73,7 +75,7 @@ function LoginPage() {
                   htmlFor="email"
                   className="mb-2 block text-sm font-semibold text-gray-700"
                 >
-                  Email Address
+                  {t("auth.common.email")}
                 </label>
                 <input
                   id="email"
@@ -91,7 +93,7 @@ function LoginPage() {
                   htmlFor="password"
                   className="mb-2 block text-sm font-semibold text-gray-700"
                 >
-                  Password
+                  {t("auth.common.pass")}
                 </label>
                 <input
                   id="password"
@@ -117,19 +119,19 @@ function LoginPage() {
                 {loading ? (
                   <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-blue-400" />
                 ) : (
-                  "Login"
+                  <>{t("header.login")}</>
                 )}
               </Button>
             </form>
 
             {/* Register Link */}
             <p className="mt-6 text-center text-gray-600">
-              Don't have an account?{" "}
+              {t("auth.login.footer")}{" "}
               <Link
                 to="/auth/register"
                 className="font-semibold text-blue-500 hover:underline"
               >
-                Register
+                {t("header.register")}
               </Link>
             </p>
           </div>

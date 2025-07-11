@@ -1,15 +1,14 @@
 // src/features/auth/authAPI.js
 import axios from "axios";
-
-const API_BASE = "http://localhost:3011/api/users";
+import BASE_URL from "../../config/api";
 
 export const loginAPI = async ({ email, password }) => {
-  const res = await axios.post(`${API_BASE}/login`, { email, password });
+  const res = await axios.post(`${BASE_URL}/users/login`, { email, password });
   return res.data;
 };
 
 export const registerAPI = async ({ name, email, password }) => {
-  const response = await axios.post(`${API_BASE}/create`, {
+  const response = await axios.post(`${BASE_URL}/create`, {
     name,
     email,
     password,

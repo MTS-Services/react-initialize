@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import FavouriteIcon from "../FavouriteIcon/FavouriteIcon";
 import Button from "../ui/Button";
 
-// "https://via.placeholder.com/384x256?text=No+Image";
+const ifNotImg = "/image/fallback.jpg";
 
 const PeropertiesCard = ({ item }) => {
   const {
@@ -43,7 +43,9 @@ const PeropertiesCard = ({ item }) => {
         <div className="relative h-48 w-full overflow-hidden rounded-lg sm:h-64 sm:w-96">
           <Link to={`/properties/${id}`}>
             <img
-              src={primaryImage}
+              src={
+                primaryImage === "No image available" ? ifNotImg : primaryImage
+              }
               alt={title}
               className="h-full w-full cursor-pointer object-cover"
             />
@@ -62,7 +64,7 @@ const PeropertiesCard = ({ item }) => {
             {/* Title and time */}
             <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center sm:gap-0">
               <h3 className="text-lg font-semibold text-black capitalize sm:text-xl">
-                {title.slice(9, 40)}...
+                {title}
               </h3>
               <div className="flex items-center gap-1.5 text-sm text-gray-500">
                 <FiClock size={15} />
@@ -104,7 +106,7 @@ const PeropertiesCard = ({ item }) => {
                 </div>
 
                 <h3 className="py-2 text-lg font-bold text-gray-600 capitalize sm:text-xl">
-                  ${priceFloat} {price.split(" ").at(-1)}
+                  € {priceFloat} {price.split(" ").at(-1)}
                 </h3>
               </div>
             </div>

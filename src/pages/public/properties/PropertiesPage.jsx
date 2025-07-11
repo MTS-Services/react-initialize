@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { FiGrid, FiMapPin } from "react-icons/fi";
 import CardSkeleton from "../../../components/common/Card-Skeleton";
@@ -6,9 +5,12 @@ import Pagination from "../../../components/common/Pagination";
 import PropertiesCard from "../../../components/common/PropertiesCard";
 
 import RangeSlider from "../../../components/common/RangeSlider";
-import PropertyNoFound from "../../../components/error/NotFounds";
+import NotFounds from "../../../components/error/NotFounds";
 import { useLanguage } from "../../../hook/useLanguage";
+
 import BASE_URL from "../../../config/api";
+import axios from "../../../utils/axiosInstance";
+import { RiSofaLine } from "react-icons/ri";
 
 const PropertyListPage = () => {
   const [properties, setProperties] = useState([]);
@@ -65,10 +67,7 @@ const PropertyListPage = () => {
         }
       }
 
-      const res = await axios.get(
-        `${BASE_URL}/properties?${params.toString()}`,
-      );
-      // console.log("PR-", `${BASE_URL}/properties?${params.toString()}`);
+      const res = await axios.get(`/properties?${params.toString()}`);
 
       setProperties(res.data.properties);
       setPagination(res.data.pagination);
@@ -90,9 +89,7 @@ const PropertyListPage = () => {
     setIsFetchingSuggestions(true);
 
     try {
-      const res = await axios.get(
-        `${BASE_URL}/properties?location=${query}&limit=5`,
-      );
+      const res = await axios.get(`/properties?location=${query}&limit=5`, {});
 
       const uniqueLocations = [
         ...new Set(res.data.properties.map((p) => p.location)),
@@ -173,7 +170,7 @@ const PropertyListPage = () => {
         ...prev,
         location: "",
       }));
-      fetchData(1); // Re-fetch without location
+      fetchData(1);
     }
   };
 
@@ -185,7 +182,7 @@ const PropertyListPage = () => {
     }));
     setLocationInput(suggestion);
     setShowSuggestions(false);
-    fetchData(1); // Immediately fetch results with selected location
+    fetchData(1);
   };
 
   // Loading animation
@@ -209,7 +206,7 @@ const PropertyListPage = () => {
     setFilters((prev) => ({
       ...prev,
       minBedrooms: value,
-      maxBedrooms: value === "5+" ? "" : value, // Set max for specific values, or empty for 5+
+      maxBedrooms: value === "5+" ? "" : value,
     }));
   };
 
@@ -310,13 +307,13 @@ const PropertyListPage = () => {
 
             <div className="rounded-md p-6 shadow-sm">
               <h4 className="text-md text-gray-500">
-                $ {t("filters.range.title")}
+                € {t("filters.range.title")}
               </h4>
               <hr className="my-2.5 text-gray-200" />
               <div className="mb-8 grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-500">
-                    $ {t("filters.range.min")}
+                    {t("filters.range.min")}
                   </label>
                   <input
                     type="number"
@@ -330,7 +327,7 @@ const PropertyListPage = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-500">
-                    $ {t("filters.range.max")}
+                    {t("filters.range.max")}
                   </label>
                   <input
                     type="number"
@@ -357,8 +354,11 @@ const PropertyListPage = () => {
             </div>
 
             <div className="rounded-md p-5 shadow">
-              <label className="text-md block text-gray-500">
-                ◪ {t("filters.rooms")}
+              <label className="text-md inline-flex items-center gap-2 text-gray-500">
+                <span>
+                  <RiSofaLine className="text-gray-500" />
+                </span>
+                <span>{t("filters.rooms")}</span>
               </label>
               <ul className="grid grid-cols-3 gap-2 pt-4">
                 {["1", "2", "3", "4", "5+"].map((num, index) => (
@@ -379,9 +379,12 @@ const PropertyListPage = () => {
             </div>
 
             <div className="rounded-md p-5 shadow">
-              <h4 className="text-md text-gray-500">
-                {t("filters.suface.title")}
-              </h4>
+              <div className="inline-flex items-center gap-2">
+                <RiSofaLine className="text-gray-500" />
+                <h4 className="text-md text-gray-500">
+                  {t("filters.suface.title")}
+                </h4>
+              </div>
               <hr className="my-2.5 text-gray-200" />
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -421,11 +424,19 @@ const PropertyListPage = () => {
           {isLoading ? (
             renderSkeletonListings()
           ) : isError ? (
-            <div className="py-10 text-center text-lg text-red-600">
-              Error loading properties. Please try again.
-            </div>
+            <NotFounds
+              title="Something Went Wrong"
+              message="Please check your connection or try again later."
+              buttonText="Retry"
+              buttonLink="#"
+              onButtonClick={() => window.location.reload()}
+            />
           ) : properties.length === 0 ? (
-            <PropertyNoFound />
+            <NotFounds
+              title="No Results Found"
+              message="We couldn't find any properties matching your criteria. Try adjusting your filters or search in a different location."
+              buttonLink="/properties"
+            />
           ) : (
             <div className="">
               {properties.map((item) => (

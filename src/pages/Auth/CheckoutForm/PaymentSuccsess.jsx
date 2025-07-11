@@ -5,7 +5,7 @@ const PaymentSuccess = () => {
   const location = useLocation();
   const userData = location.state?.userData;
   const user = userData.data;
-  console.log(location);
+
   return (
     <section>
       <div className="border bg-[#0C205A] p-8" />

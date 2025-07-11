@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
-import MainHeader from "../MainLayout/MainHeader";
-import MainFooter from "../MainLayout/MainFooter";
+import MainHeader from "../Main/MainHeader";
+import MainFooter from "../Main/MainFooter";
 import { getCurrentUser } from "../../features/auth/authUtils";
 import { ScrollToTop } from "../../components/ScrollToTop/ScrollToTop";
 

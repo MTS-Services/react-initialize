@@ -7,7 +7,26 @@
     "login": "Login",
     "register": "Sgin Up",
     "profile": "Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "access": "Access Required"
+  },
+
+  "auth": {
+    "login": {
+      "title": "Login to your account",
+      "footer": "Don't have an account?"
+    },
+    "register": {
+      "title": "Paye & Register",
+      "name": "name",
+      "card": "Card Details",
+      "footer": "You have an account?",
+      "button": "Pay $10"
+    },
+    "common": {
+      "email": "Email",
+      "pass": "Password"
+    }
   },
 
   "footer": {
@@ -340,6 +359,19 @@
       "title": "Min Surface (m2)",
       "max": "Max Surface",
       "min": "Min Surface"
+    }
+  },
+
+  "singleProprty": {
+    "desc": "Description",
+    "feature": {
+      "title": "Contact Agent",
+      "contact": "Contact Now"
+    },
+    "details": "Others Details",
+    "similar": "Similar Properties",
+    "agent": {
+      "title": "Contact Agent"
     }
   }
 }
