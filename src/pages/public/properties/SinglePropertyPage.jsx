@@ -7,9 +7,7 @@ import {
   FiHome,
   FiInfo,
   FiLayers,
-  FiMail,
   FiMapPin,
-  FiPhone,
   FiStar,
   FiTool,
 } from "react-icons/fi";
@@ -27,6 +25,7 @@ import Button from "../../../components/ui/Button";
 
 import NotFounds from "../../../components/error/NotFounds";
 import { useLanguage } from "../../../hook/useLanguage";
+import Modal from "../../../components/ui/Modal";
 
 const ifNotImg = "/image/fallback.jpg";
 
@@ -34,14 +33,14 @@ const SinglePropertyPage = () => {
   const { t } = useLanguage();
   const { id } = useParams();
   const [expanded, setExpanded] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
 
-  const [listing, setListing] = useState(null);
-
-  const [recent, setRecent] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [mainImage, setMainImage] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [listing, setListing] = useState(null);
+  const [recent, setRecent] = useState([]);
 
   const isPaidUser = isPaid();
 
@@ -73,6 +72,12 @@ const SinglePropertyPage = () => {
 
     fetchData();
   }, [id]);
+
+  const handleClick = () => {
+    if (!isPaidUser) {
+      setIsOpen(true); // ✅ opens your existing modal
+    }
+  };
 
   const formatLabel = (key) =>
     key
@@ -201,15 +206,37 @@ const SinglePropertyPage = () => {
 
                     {/* Lock content */}
                     <div className="relative z-10 flex flex-col items-center justify-center">
-                      <Link
+                      {/* <Link
                         to="/auth/register"
                         className="cursor-pointer rounded-full border border-slate-400 p-2 hover:bg-gray-500"
                       >
                         <FaLock size={18} className="text-gray-400" />
-                      </Link>
+                      </Link> */}
+
+                      <span
+                        onClick={handleClick}
+                        className="cursor-pointer rounded-full bg-gray-200 p-2 hover:bg-gray-300"
+                      >
+                        <FaLock size={18} className="text-gray-400" />
+                      </span>
+
                       <p className="mt-2 text-center text-base font-medium text-gray-500">
                         {t("header.access")}
                       </p>
+
+                      <Modal
+                        isOpen={isOpen}
+                        onClose={() => setIsOpen(false)}
+                        onConfirm={() => {
+                          navigate("/auth/login");
+                          setIsOpen(false);
+                        }}
+                        title="Login Required"
+                        confirmText="Login"
+                        cancelText="Cancel"
+                      >
+                        Please log in to add this property to your favorites.
+                      </Modal>
                     </div>
                   </div>
                 ))}
@@ -398,12 +425,12 @@ const SinglePropertyPage = () => {
               <div className="relative flex h-44 w-full flex-col items-center justify-center">
                 {/* Centered lock icon */}
                 <div className="relative z-10 flex flex-col items-center justify-center">
-                  <Link
-                    to="/auth/register"
+                  <span
+                    onClick={handleClick}
                     className="cursor-pointer rounded-full bg-slate-100 p-4 hover:bg-gray-200"
                   >
                     <FaLock size={18} className="text-gray-300" />
-                  </Link>
+                  </span>
                   <p className="text-gray-400">{t("header.access")}</p>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { FiGrid, FiMapPin } from "react-icons/fi";
+import { FiGrid, FiLayers, FiMapPin } from "react-icons/fi";
 import CardSkeleton from "../../../components/common/Card-Skeleton";
 import Pagination from "../../../components/common/Pagination";
 import PropertiesCard from "../../../components/common/PropertiesCard";
@@ -8,9 +8,9 @@ import RangeSlider from "../../../components/common/RangeSlider";
 import NotFounds from "../../../components/error/NotFounds";
 import { useLanguage } from "../../../hook/useLanguage";
 
-import BASE_URL from "../../../config/api";
 import axios from "../../../utils/axiosInstance";
 import { RiSofaLine } from "react-icons/ri";
+import { FaEuroSign } from "react-icons/fa";
 
 const PropertyListPage = () => {
   const [properties, setProperties] = useState([]);
@@ -306,9 +306,12 @@ const PropertyListPage = () => {
             </div>
 
             <div className="rounded-md p-6 shadow-sm">
-              <h4 className="text-md text-gray-500">
-                € {t("filters.range.title")}
-              </h4>
+              <div className="inline-flex items-center gap-1">
+                <span>
+                  <FaEuroSign className="h-3.5 w-3.5 text-gray-400" />
+                </span>
+                <h4 className="text-gray-500">{t("filters.range.title")}</h4>
+              </div>
               <hr className="my-2.5 text-gray-200" />
               <div className="mb-8 grid grid-cols-2 gap-4">
                 <div>
@@ -380,7 +383,7 @@ const PropertyListPage = () => {
 
             <div className="rounded-md p-5 shadow">
               <div className="inline-flex items-center gap-2">
-                <RiSofaLine className="text-gray-500" />
+                <FiLayers className="text-gray-500" />
                 <h4 className="text-md text-gray-500">
                   {t("filters.suface.title")}
                 </h4>
