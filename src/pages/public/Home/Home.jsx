@@ -4,14 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { TfiRulerAlt2 } from "react-icons/tfi";
 import { LiaBedSolid } from "react-icons/lia";
-import { FiDollarSign, FiMapPin, FiSearch } from "react-icons/fi";
+import { FiMapPin, FiSearch } from "react-icons/fi";
 
-import axios from "axios";
+import axios from "../../../utils/axiosInstance";
 
 import Button from "../../../components/ui/Button";
 import { useLanguage } from "../../../hook/useLanguage";
-
-const URL = "https://mts-ecommerce-backend.onrender.com/api/v1";
 
 const properties = [
   {
@@ -125,7 +123,7 @@ function Home() {
 
   useEffect(() => {
     const fetchProperty = async () => {
-      const res = await axios.get(`${URL}/properties`);
+      const res = await axios.get(`/properties`);
 
       setListings(res.data.properties);
     };
@@ -146,6 +144,7 @@ function Home() {
       setSuggestions([]);
       return;
     }
+
     const citySet = [...new Set(listings.map((l) => l.location))];
 
     const matches = citySet.filter((c) =>
