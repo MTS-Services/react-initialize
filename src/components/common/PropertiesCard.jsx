@@ -33,6 +33,14 @@ const PeropertiesCard = ({ item }) => {
     return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
   };
 
+  const DISPLAY_SLICE_LIMIT = 31;
+  const RENT_PREFIX = "Te huur:";
+
+  const isRentTitle = title?.includes(RENT_PREFIX);
+  const displayTitle = isRentTitle
+    ? title.slice(0, DISPLAY_SLICE_LIMIT)
+    : title;
+
   return (
     <div
       key={id}
@@ -64,7 +72,7 @@ const PeropertiesCard = ({ item }) => {
             {/* Title and time */}
             <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center sm:gap-0">
               <h3 className="text-lg font-semibold text-black capitalize sm:text-xl">
-                {title.includes("Te huur:") ? title.slice(9, 31) : title}
+                {displayTitle}
               </h3>
               <div className="flex items-center gap-1.5 text-sm text-gray-500">
                 <FiClock size={15} />
