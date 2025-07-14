@@ -64,7 +64,7 @@ const PeropertiesCard = ({ item }) => {
             {/* Title and time */}
             <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center sm:gap-0">
               <h3 className="text-lg font-semibold text-black capitalize sm:text-xl">
-                {title.slice(9, 40)}
+                {title.includes("Te huur:") ? title.slice(9, 31) : title}
               </h3>
               <div className="flex items-center gap-1.5 text-sm text-gray-500">
                 <FiClock size={15} />
