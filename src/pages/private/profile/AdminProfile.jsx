@@ -9,27 +9,29 @@ const AdminProfile = () => {
     phone: "",
     role: "admin",
   });
-
-  const isAdmin = getCurrentUser();
-  const admin = isAdmin.data;
-
-  const [isEditing, setIsEditing] = useState(false);
   const [password, setPassword] = useState({
     current: "",
     new: "",
     confirm: "",
   });
-
+  console.log(user);
+  const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState({});
+
+  const isAdmin = getCurrentUser();
+  const admin = isAdmin.data;
+
+  const userName = admin?.name?.en;
+  console.log(admin);
 
   useEffect(() => {
     // Load user data from localStorage or API
 
     setUser({
-      name: admin.name || "Admin User",
-      email: admin.email || "admin@example.com",
-      phone: admin.phone || "+1234567890",
-      role: admin.role || "admin",
+      name: userName,
+      email: admin.email,
+      phone: admin.phone || "+880000000000",
+      role: admin.role,
     });
   }, []);
 
@@ -47,6 +49,7 @@ const AdminProfile = () => {
     const newErrors = {};
 
     if (!user.name) newErrors.name = "Name is required";
+
     if (!user.email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(user.email)) {

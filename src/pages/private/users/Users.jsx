@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import {
   FiChevronLeft,
@@ -13,6 +12,7 @@ import {
   FiUsers,
 } from "react-icons/fi";
 import { getCurrentUser } from "../../../features/auth/authUtils";
+import axios from "../../../utils/axiosInstance";
 
 const Users = () => {
   const isAdmin = getCurrentUser();
@@ -47,14 +47,17 @@ const Users = () => {
 
       const token = isAdmin.data.token;
 
-      const response = await axios.get("http://localhost:3011/api/users", {
+      const config = {
         params,
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
+      };
 
-      setUsers(response.data.data.users);
+      const response = await axios.get("/users", config);
+
+      setUsers(response?.data?.data?.users);
+
       setPagination({
         currentPage: response.data.pagination?.currentPage || 1,
         totalPages: response.data.pagination?.totalPages || 1,

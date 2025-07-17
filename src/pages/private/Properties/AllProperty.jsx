@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import {
   FiCalendar,
@@ -12,6 +11,8 @@ import {
   FiSearch,
   FiTrash2,
 } from "react-icons/fi";
+
+import axios from "../../../utils/axiosInstance";
 
 const AllProperty = () => {
   const [properties, setProperties] = useState([]);
@@ -45,7 +46,7 @@ const AllProperty = () => {
       if (filters.status !== "All") params.status = filters.status;
       if (filters.type !== "All") params.type = filters.type;
 
-      const response = await axios.get("http://localhost:3011/api/properties", {
+      const response = await axios.get("/properties", {
         params,
       });
 

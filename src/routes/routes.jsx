@@ -5,7 +5,8 @@ import { createBrowserRouter } from "react-router-dom";
 
 // Layouts
 import { FavoriteProvider } from "../context/FavouriteContext/FavouriteProvider";
-
+const secratKey =
+  "pk_test_51RcJiND60jTqpzFUTyaTS0m8gzJ8dJUoCMfzokDmF8UKWIKgzdoguwKoRuB1o1QOhzHKtUiRh7Q4TWURblIAzbtS00UT4FOEQx";
 import DashboardLayout from "../layouts/Dashboard/DashboardLayout";
 import AddProperty from "../pages/private/Properties/AddProperty";
 import AllProperty from "../pages/private/Properties/AllProperty";
@@ -49,14 +50,11 @@ const Dashboard = lazy(() => import("../pages/private/admin/Dashboard"));
 const CheckoutForm = lazy(
   () => import("../pages/Auth/CheckoutForm/CheckoutForm"),
 );
-
 const ErrorPage = lazy(() => import("../pages/err/ErrorPage"));
 
-const stripePromise = loadStripe(
-  "pk_test_51RcJiND60jTqpzFUTyaTS0m8gzJ8dJUoCMfzokDmF8UKWIKgzdoguwKoRuB1o1QOhzHKtUiRh7Q4TWURblIAzbtS00UT4FOEQx",
-);
+const stripePromise = loadStripe(secratKey);
 
-export const AppRoutes = createBrowserRouter([
+const AppRoutes = createBrowserRouter([
   {
     path: "/",
     element: (
@@ -91,7 +89,6 @@ export const AppRoutes = createBrowserRouter([
         path: "favourite",
         element: <FavouritePage />,
       },
-
       {
         path: "cookie-policy",
         element: <CookiePolicy />,
@@ -159,3 +156,5 @@ export const AppRoutes = createBrowserRouter([
     element: <ErrorPage />,
   },
 ]);
+
+export default AppRoutes;
