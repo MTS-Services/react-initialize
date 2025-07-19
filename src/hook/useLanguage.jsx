@@ -3,7 +3,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
-// Import JSON files
+// Import JSON translations
 import en from "../assets/locales/en.json";
 import nl from "../assets/locales/nl.json";
 
@@ -11,6 +11,8 @@ let i18nInitialized = false;
 
 const initI18n = () => {
   if (i18nInitialized) return;
+
+  const hasLanguageInStorage = localStorage.getItem("i18nextLng");
 
   i18n
     .use(LanguageDetector)
@@ -20,13 +22,19 @@ const initI18n = () => {
         nl: { translation: nl },
         en: { translation: en },
       },
-      fallbackLng: "nl", // set Dutch as fallback
+      lng: hasLanguageInStorage ? undefined : "nl", // Use Dutch if no saved language
+      fallbackLng: "nl", // Always fall back to Dutch
       interpolation: { escapeValue: false },
       detection: {
         order: ["localStorage", "cookie", "navigator", "htmlTag"],
         caches: ["localStorage"],
       },
     });
+
+  // If there's no language saved, set Dutch explicitly
+  if (!hasLanguageInStorage) {
+    i18n.changeLanguage("nl");
+  }
 
   i18nInitialized = true;
 };

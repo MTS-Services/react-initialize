@@ -10,90 +10,48 @@ import axios from "../../../utils/axiosInstance";
 
 import Button from "../../../components/ui/Button";
 import { useLanguage } from "../../../hook/useLanguage";
-
-const properties = [
-  {
-    id: 1,
-    title: "Spacious Family Home",
-    address: "251 SW 6th Ln Florida City. FL",
-    image: "/home/Family.jpg",
-    beds: 4,
-    size: "1200 sq Ft",
-    oldPrice: "€2,800/mo",
-    newPrice: "€1,900/mo",
-  },
-  {
-    id: 2,
-    title: "Modern Loft Apartment",
-    address: "100 Main Street, NY",
-    image: "/home/Family-1.jpg",
-    beds: 2,
-    size: "850 sq Ft",
-    oldPrice: "€1,500/mo",
-    newPrice: "€1,100/mo",
-  },
-  {
-    id: 3,
-    title: "Cozy Suburban House",
-    address: "18 Hillside Rd, TX",
-    image: "/home/Family-2.jpg",
-    beds: 3,
-    size: "960 sq Ft",
-    oldPrice: "€2,000/mo",
-    newPrice: "€1,600/mo",
-  },
-  {
-    id: 4,
-    title: "Downtown Studio",
-    address: "45 Broadway, CA",
-    image: "/home/Family-3.jpg",
-    beds: 1,
-    size: "600 sq Ft",
-    oldPrice: "€1,200/mo",
-    newPrice: "€950/mo",
-  },
-];
+const ifNotImg = "/image/fallback.jpg";
 
 const cities = [
   {
     name: "Amsterdam",
-    props: "801+ Properties",
+    props: "790+ Properties",
     img: "/hero/amsterdam.png",
     location: "Amsterdam",
   },
   {
     name: "Rotterdam",
-    props: "801+ Properties",
+    props: "238+ Properties",
     img: "/hero/rotterdam.png",
     location: "Rotterdam",
   },
   {
     name: "The Hague",
-    props: "801+ Properties",
+    props: "0 Properties",
     img: "/hero/Hague.png",
     location: "The Hague",
   },
   {
     name: "Utrecht",
-    props: "801+ Properties",
+    props: "122+ Properties",
     img: "/hero/eindhoven.png",
     location: "Utrecht",
   },
   {
     name: "Eindhoven",
-    props: "1000+ Properties",
+    props: "84+ Properties",
     img: "/hero/utrech.png",
     location: "Eindhoven",
   },
   {
     name: "Maastricht",
-    props: "801+ Properties",
+    props: "27+ Properties",
     img: "/hero/maastricht.png",
     location: "Maastricht",
   },
   {
     name: "Groningen",
-    props: "801+ Properties",
+    props: "52+ Properties",
     img: "/hero/groningen.png",
     location: "Groningen",
   },
@@ -132,7 +90,7 @@ function Home() {
     minSurfaceArea: "",
     maxSurfaceArea: "",
   });
-
+  const [properties, setProperties] = useState([]);
   const [locationInput, setLocationInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -149,9 +107,11 @@ function Home() {
 
     try {
       const res = await axios.get(`/properties?location=${query}&limit=50`);
+
       const uniqueLocations = [
         ...new Set(res.data.properties.map((p) => p.location)),
       ].filter(Boolean);
+
       setSuggestions(uniqueLocations);
     } catch (error) {
       console.error("Failed to fetch suggestions:", error);
@@ -190,6 +150,18 @@ function Home() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("/properties?limit=4");
+        setProperties(res.data.properties);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, []);
 
   // Handle location input change
@@ -528,7 +500,11 @@ function Home() {
                   >
                     <img
                       className="h-full w-full object-cover"
-                      src={property.image}
+                      src={
+                        property.primaryImage === "No image available"
+                          ? ifNotImg
+                          : property.primaryImage
+                      }
                       alt="Property"
                     />
                   </Link>
@@ -561,7 +537,7 @@ function Home() {
                         <LiaBedSolid />
                       </div>
                       <span className="font-dm-sans text-sm text-neutral-400">
-                        {property.beds} Beds
+                        {property.features.numberOfRoomsFloat} Beds
                       </span>
                     </div>
 
@@ -571,7 +547,7 @@ function Home() {
                         <TfiRulerAlt2 />
                       </div>
                       <span className="font-dm-sans text-sm text-neutral-400">
-                        {property.size}
+                        {property.features.numberOfRoomsFloat}
                       </span>
                     </div>
                   </div>
@@ -580,9 +556,9 @@ function Home() {
                   <div className="border-opacity-40 flex items-center justify-between border-t border-neutral-400 pt-4">
                     <div className="text-left">
                       <div className="text-sm text-neutral-400 line-through">
-                        {property.oldPrice}
+                        {property.price}
                       </div>
-                      <p className="text-cyan-950">{property.newPrice}</p>
+                      <p className="text-cyan-950">{property.price}</p>
                     </div>
 
                     {/* CTA */}

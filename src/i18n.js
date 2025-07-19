@@ -3,13 +3,17 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import HttpApi from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 
+// Check if a language is already stored
+const savedLanguage = localStorage.getItem("i18nextLng");
+
 i18n
   .use(HttpApi)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     supportedLngs: ["en", "nl"],
-    fallbackLng: "en",
+    lng: savedLanguage || "nl", // force Dutch if nothing is saved
+    fallbackLng: "nl",
     debug: false,
 
     backend: {
@@ -18,7 +22,7 @@ i18n
 
     detection: {
       order: ["localStorage", "cookie", "navigator", "htmlTag"],
-      caches: ["localStorage", "cookie"], // ✅ store & read both
+      caches: ["localStorage", "cookie"],
     },
 
     interpolation: {
