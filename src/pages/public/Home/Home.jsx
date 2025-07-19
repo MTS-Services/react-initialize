@@ -1,5 +1,5 @@
 // ✅ Home.jsx (FULL CODE with enhancements)
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { TfiRulerAlt2 } from "react-icons/tfi";
@@ -59,36 +59,43 @@ const cities = [
     name: "Amsterdam",
     props: "801+ Properties",
     img: "/hero/amsterdam.png",
+    location: "Amsterdam",
   },
   {
     name: "Rotterdam",
     props: "801+ Properties",
     img: "/hero/rotterdam.png",
+    location: "Rotterdam",
   },
   {
     name: "The Hague",
     props: "801+ Properties",
     img: "/hero/Hague.png",
+    location: "The Hague",
   },
   {
     name: "Utrecht",
     props: "801+ Properties",
     img: "/hero/eindhoven.png",
+    location: "Utrecht",
   },
   {
     name: "Eindhoven",
     props: "1000+ Properties",
     img: "/hero/utrech.png",
+    location: "Eindhoven",
   },
   {
     name: "Maastricht",
     props: "801+ Properties",
     img: "/hero/maastricht.png",
+    location: "Maastricht",
   },
   {
     name: "Groningen",
     props: "801+ Properties",
     img: "/hero/groningen.png",
+    location: "Groningen",
   },
 ];
 
@@ -113,56 +120,128 @@ const howWorks = [
 
 function Home() {
   const { t } = useLanguage();
-  const [listings, setListings] = useState([]);
-  const [suggestions, setSuggestions] = useState([]);
-  const [query, setQuery] = useState("");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
+  const suggestionsRef = useRef(null);
 
-  useEffect(() => {
-    const fetchProperty = async () => {
-      const res = await axios.get(`/properties`);
+  const [filters, setFilters] = useState({
+    location: "",
+    minPrice: "",
+    maxPrice: "",
+    minBedrooms: "",
+    maxBedrooms: "",
+    minSurfaceArea: "",
+    maxSurfaceArea: "",
+  });
 
-      setListings(res.data.properties);
-    };
+  const [locationInput, setLocationInput] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isFetchingSuggestions, setIsFetchingSuggestions] = useState(false);
 
-    fetchProperty();
-  }, []);
-
-  // HANDLE SEARCH
-  const handleSearch = () => {
-    navigate(`/properties`);
-  };
-
-  // HANDLE LOCATION
-  const handleLocationInput = (value) => {
-    setQuery(value);
-    setShowSuggestions(true);
-    if (value.trim() === "") {
+  // Fetch location suggestions with debounce
+  const fetchSuggestions = async (query) => {
+    if (query.trim().length < 2) {
       setSuggestions([]);
       return;
     }
 
-    const citySet = [...new Set(listings.map((l) => l.location))];
+    setIsFetchingSuggestions(true);
 
-    const matches = citySet.filter((c) =>
-      c.toLowerCase().includes(value.toLowerCase()),
-    );
-    setSuggestions(matches);
+    try {
+      const res = await axios.get(`/properties?location=${query}&limit=50`);
+      const uniqueLocations = [
+        ...new Set(res.data.properties.map((p) => p.location)),
+      ].filter(Boolean);
+      setSuggestions(uniqueLocations);
+    } catch (error) {
+      console.error("Failed to fetch suggestions:", error);
+      setSuggestions([]);
+    } finally {
+      setIsFetchingSuggestions(false);
+    }
   };
 
-  // HANDLE CITY SELECT
-  const handleCitySelect = (location) => {
-    setQuery(location);
-    setSuggestions([]);
+  // Debounce function
+  const debounce = (func, delay) => {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => func.apply(this, args), delay);
+    };
+  };
+
+  const debouncedFetchSuggestions = useCallback(
+    debounce(fetchSuggestions, 300),
+    [],
+  );
+
+  // Handle click outside suggestions
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        suggestionsRef.current &&
+        !suggestionsRef.current.contains(event.target)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Handle location input change
+  const handleLocationChange = (e) => {
+    const value = e.target.value;
+    setLocationInput(value);
+    debouncedFetchSuggestions(value);
+
+    if (value.trim() === "") {
+      setFilters((prev) => ({ ...prev, location: "" }));
+    }
+  };
+
+  // Handle suggestion select
+  const handleSuggestionSelect = (suggestion) => {
+    setFilters((prev) => ({ ...prev, location: suggestion }));
+    setLocationInput(suggestion);
     setShowSuggestions(false);
+  };
+
+  // Handle search submission
+  const handleSearch = () => {
+    const queryParams = new URLSearchParams();
+
+    // Add all filters to query params
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) queryParams.append(key, value);
+    });
+
+    navigate(`/properties?${queryParams.toString()}`);
+  };
+
+  // Handle filter changes
+  const handleFilterChange = (name, value) => {
+    setFilters((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Clear location input
+  const clearLocationInput = () => {
+    setLocationInput("");
+    setFilters((prev) => ({ ...prev, location: "" }));
   };
 
   const eindhoven = cities.find((c) => c.name === "Eindhoven");
   const leftCities = cities.slice(0, 4);
   const rightCities = cities.slice(5);
+
+  const getCitySearchUrl = (cityName) => {
+    const params = new URLSearchParams();
+    params.append("location", cityName);
+    return `/properties?${params.toString()}`;
+  };
 
   return (
     <>
@@ -195,71 +274,106 @@ function Home() {
       </section>
 
       {/* Search Bar */}
-      <section className="relative -top-14 z-20">
+      <section className="relative -top-15 z-20">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center justify-center gap-3 bg-white p-6 md:mx-4 md:flex-row md:rounded-lg md:p-6 md:shadow-lg lg:p-8">
-            <div className="relative w-full">
-              <FiMapPin className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                placeholder={`${t("home.hero.search.place")}`}
-                value={query}
-                onChange={(e) => handleLocationInput(e.target.value)}
-                onFocus={() => setShowSuggestions(true)}
-                onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
-                className="h-16 w-full rounded-lg bg-white py-2 pr-4 pl-10 shadow focus:outline-none"
-              />
+            {/* Location Search */}
+            <div className="relative w-full" ref={suggestionsRef}>
+              <div className="relative">
+                <input
+                  type="text"
+                  aria-label={t("filters.search")}
+                  value={locationInput}
+                  onChange={handleLocationChange}
+                  onFocus={() => setShowSuggestions(true)}
+                  placeholder={t("filters.search")}
+                  className="h-16 w-full rounded-lg border border-gray-200 py-2 pr-4 pl-8 shadow focus:ring-2 focus:ring-blue-200 focus:outline-none"
+                  autoComplete="off"
+                />
+                <FiMapPin className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
+                {locationInput && (
+                  <button
+                    type="button"
+                    aria-label="Clear location input"
+                    className="absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-gray-200 px-1.5 py-0.5 text-sm font-bold text-gray-600 hover:text-red-500 focus:ring-2 focus:ring-red-400 focus:outline-none"
+                    onClick={clearLocationInput}
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
 
-              {showSuggestions && query.trim() !== "" && (
-                <ul className="absolute top-[100%] left-0 z-10 mt-1 max-h-80 w-full overflow-y-auto rounded border border-gray-200 bg-white text-sm shadow">
-                  {suggestions.length > 0 ? (
-                    suggestions.map((s, i) => (
+              {showSuggestions && (
+                <ul className="absolute top-full left-0 z-10 mt-0.5 max-h-60 w-full overflow-y-auto rounded-lg bg-white text-sm shadow">
+                  {isFetchingSuggestions ? (
+                    <li className="p-3 text-center text-gray-500">
+                      Loading...
+                    </li>
+                  ) : suggestions.length > 0 ? (
+                    suggestions.map((suggestion, index) => (
                       <li
-                        key={i}
-                        className="flex cursor-pointer items-center gap-1 px-4 py-2 hover:bg-blue-100"
-                        onClick={() => handleCitySelect(s)}
+                        key={index}
+                        className="flex cursor-pointer items-center gap-2 px-3 py-1 text-gray-600 hover:bg-gray-100"
+                        onClick={() => handleSuggestionSelect(suggestion)}
+                        role="option"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            handleSuggestionSelect(suggestion);
+                          }
+                        }}
                       >
-                        <FiMapPin />
-                        <span>{s}</span>
+                        <FiMapPin size={14} />
+                        {suggestion.slice(8, 100)}
                       </li>
                     ))
-                  ) : (
-                    <li className="px-4 py-2 text-gray-500">
-                      No listings found!
+                  ) : locationInput.trim().length >= 2 ? (
+                    <li className="p-3 text-center text-gray-400">
+                      No matching locations!
                     </li>
-                  )}
+                  ) : null}
                 </ul>
               )}
             </div>
 
+            {/* Min Price */}
             <div className="w-full">
               <input
                 type="number"
+                aria-label={t("home.hero.search.min")}
                 placeholder={`€ ${t("home.hero.search.min")}`}
-                value={minPrice}
-                onChange={(e) => setMinPrice(e.target.value)}
-                className="h-16 w-full rounded-lg bg-white py-2 pr-4 pl-10 shadow focus:outline-none"
+                value={filters.minPrice}
+                onChange={(e) => handleFilterChange("minPrice", e.target.value)}
+                className="h-16 w-full rounded-lg border border-gray-200 py-2 pr-4 pl-4 shadow focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                min={0}
               />
             </div>
 
+            {/* Max Price */}
             <div className="w-full">
               <input
                 type="number"
+                aria-label={t("home.hero.search.max")}
                 placeholder={`€ ${t("home.hero.search.max")}`}
-                value={maxPrice}
-                onChange={(e) => setMaxPrice(e.target.value)}
-                className="h-16 w-full rounded-lg bg-white py-2 pr-4 pl-10 shadow focus:outline-none"
+                value={filters.maxPrice}
+                onChange={(e) => handleFilterChange("maxPrice", e.target.value)}
+                className="h-16 w-full rounded-lg border border-gray-200 py-2 pr-4 pl-4 shadow focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                min={0}
               />
             </div>
 
+            {/* Search Button */}
             <div className="w-full">
               <Button
                 variant="yellowGradient"
                 size="lg"
                 onClick={handleSearch}
-                className="flex w-full items-center justify-center gap-2 py-4.5"
+                className="mt-1 flex h-16 w-full items-center justify-center gap-2"
+                type="button"
               >
-                <FiSearch /> {t("home.hero.search.button")}
+                <FiSearch />
+                {t("home.hero.search.button")}
               </Button>
             </div>
           </div>
@@ -279,59 +393,59 @@ function Home() {
           {/* Left: 2x2 Grid */}
           <div className="grid flex-1 grid-cols-2 gap-4">
             {leftCities.map((city, i) => (
-              <div
-                key={i}
-                className="group relative h-64 overflow-hidden rounded"
-              >
-                <img
-                  className="h-full w-full object-cover"
-                  src={city.img}
-                  alt={city.name}
-                />
-                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-3">
-                  <h3 className="text-white">{city.name}</h3>
-                  <p className="text-sm text-white">{city.props}</p>
+              <Link to={getCitySearchUrl(city.location)} key={i}>
+                <div className="group relative h-64 overflow-hidden rounded">
+                  <img
+                    className="h-full w-full object-cover"
+                    src={city.img}
+                    alt={city.name}
+                  />
+                  <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-3">
+                    <h3 className="text-white">{city.name}</h3>
+                    <p className="text-sm text-white">{city.props}</p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
           {/* Center: Eindhoven */}
           <div className="max-w-full flex-1 md:max-w-7xl">
-            <div className="group relative h-full overflow-hidden rounded">
-              <img
-                src={eindhoven.img}
-                className="md:h-96 md:w-full md:object-cover lg:h-full lg:w-full"
-                alt={eindhoven.name}
-              />
-              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-4">
-                <h3 className="text-xl font-semibold text-white">
-                  {eindhoven.name}
-                </h3>
-                <p className="text-sm text-white">{eindhoven.props}</p>
+            <Link to={getCitySearchUrl(eindhoven.location)}>
+              <div className="group relative h-full overflow-hidden rounded">
+                <img
+                  src={eindhoven.img}
+                  className="md:h-96 md:w-full md:object-cover lg:h-full lg:w-full"
+                  alt={eindhoven.name}
+                />
+                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-4">
+                  <h3 className="text-xl font-semibold text-white">
+                    {eindhoven.name}
+                  </h3>
+                  <p className="text-sm text-white">{eindhoven.props}</p>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
 
           {/* Right: 2 boxes side-by-side, never stacked */}
           <div className="grid max-w-full flex-1 grid-cols-2 gap-4 md:max-w-7xl md:grid-cols-2 lg:grid-cols-1">
             {rightCities.map((city, i) => (
-              <div
-                key={i}
-                className="group relative h-64 w-full overflow-hidden rounded"
-              >
-                <img
-                  src={city.img}
-                  className="h-full w-full object-cover"
-                  alt={city.name}
-                />
-                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-3">
-                  <h3 className="text-lg font-semibold text-white">
-                    {city.name}
-                  </h3>
-                  <p className="text-sm text-white">{city.props}</p>
+              <Link to={getCitySearchUrl(city.location)} key={i}>
+                <div className="group relative h-64 w-full overflow-hidden rounded">
+                  <img
+                    src={city.img}
+                    className="h-full w-full object-cover"
+                    alt={city.name}
+                  />
+                  <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-gray-900 via-gray-900/40 p-3">
+                    <h3 className="text-lg font-semibold text-white">
+                      {city.name}
+                    </h3>
+                    <p className="text-sm text-white">{city.props}</p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

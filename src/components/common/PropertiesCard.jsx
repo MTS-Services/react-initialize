@@ -34,12 +34,15 @@ const PeropertiesCard = ({ item }) => {
   };
 
   const DISPLAY_SLICE_LIMIT = 31;
-  const RENT_PREFIX = "Te huur:";
+  const RENT_PREFIXES = ["Te huur:", "For rent:"];
 
-  const isRentTitle = title?.includes(RENT_PREFIX);
-  const displayTitle = isRentTitle
-    ? title.slice(0, DISPLAY_SLICE_LIMIT)
-    : title;
+  const isRentTitle = RENT_PREFIXES.some((prefix) => title?.includes(prefix));
+
+  const displayTitle = title
+    ? isRentTitle
+      ? title.slice(0, DISPLAY_SLICE_LIMIT)
+      : title
+    : "";
 
   return (
     <div
