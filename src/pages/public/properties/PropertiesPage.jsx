@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from "react";
+import { RiSofaLine } from "react-icons/ri";
+import { FaEuroSign } from "react-icons/fa";
 import { FiGrid, FiLayers, FiMapPin } from "react-icons/fi";
-import CardSkeleton from "../../../components/common/Card-Skeleton";
+
+import NotFounds from "../../../components/error/NotFounds";
 import Pagination from "../../../components/common/Pagination";
+import RangeSlider from "../../../components/common/RangeSlider";
+import CardSkeleton from "../../../components/common/Card-Skeleton";
 import PropertiesCard from "../../../components/common/PropertiesCard";
 
-import RangeSlider from "../../../components/common/RangeSlider";
-import NotFounds from "../../../components/error/NotFounds";
 import { useLanguage } from "../../../hook/useLanguage";
 
 import axios from "../../../utils/axiosInstance";
-import { RiSofaLine } from "react-icons/ri";
-import { FaEuroSign } from "react-icons/fa";
 
 const PropertyListPage = () => {
   const [properties, setProperties] = useState([]);
@@ -89,7 +90,7 @@ const PropertyListPage = () => {
     setIsFetchingSuggestions(true);
 
     try {
-      const res = await axios.get(`/properties?location=${query}&limit=5`, {});
+      const res = await axios.get(`/properties?location=${query}&limit=50`, {});
 
       const uniqueLocations = [
         ...new Set(res.data.properties.map((p) => p.location)),
@@ -281,23 +282,24 @@ const PropertyListPage = () => {
               />
 
               {showSuggestions && (
-                <ul className="absolute top-full left-0 z-10 max-h-60 w-full overflow-y-auto rounded-xl bg-white shadow-lg">
+                <ul className="absolute top-full left-0 z-10 mt-0 max-h-60 w-full overflow-y-auto rounded-lg border border-gray-200 bg-white text-sm shadow-lg">
                   {isFetchingSuggestions ? (
-                    <li className="p-2 text-center text-sm text-gray-500">
+                    <li className="mx-2 my-2 flex h-10 items-center justify-center rounded-xl bg-gray-50 px-2 text-gray-500">
                       Loading...
                     </li>
                   ) : suggestions.length > 0 ? (
                     suggestions.map((suggestion, index) => (
                       <li
                         key={index}
-                        className="mx-2 my-2 flex cursor-pointer items-center gap-2 rounded-xl px-2 text-sm hover:bg-gray-100"
+                        className="flex cursor-pointer items-center gap-2 px-2 py-1 hover:bg-gray-100"
                         onClick={() => handleSuggestionSelect(suggestion)}
                       >
-                        <FiMapPin /> {suggestion}
+                        <FiMapPin size={14} />
+                        {suggestion.slice(8, 100)}
                       </li>
                     ))
                   ) : locationInput.trim().length >= 2 ? (
-                    <li className="border border-gray-100 py-4 text-center text-sm text-gray-400">
+                    <li className="mx-2 my-2 flex h-10 items-center justify-center rounded-xl bg-gray-50 px-2 text-gray-400">
                       No matching locations!
                     </li>
                   ) : null}

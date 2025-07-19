@@ -107,6 +107,13 @@ const SinglePropertyPage = () => {
     );
   }
 
+  const price = listing?.price;
+
+  const cleanedPrice =
+    typeof price === "string"
+      ? price.replace(/(per maand|per month)(?=.*\1)/, "").trim()
+      : "";
+
   return (
     <section>
       <header className="relative h-96 w-full">
@@ -161,7 +168,7 @@ const SinglePropertyPage = () => {
 
         {/* Price */}
         <div className="mb-6 rounded-lg bg-yellow-50 p-4">
-          <h2 className="text-2xl font-bold text-green-800">{listing.price}</h2>
+          <h2 className="text-2xl font-bold text-green-800">{cleanedPrice}</h2>
         </div>
 
         {/* Image Gallery */}
