@@ -7,21 +7,16 @@ const MainFooter = () => {
   const { t } = useLanguage();
   return (
     <>
-      <div
-        className="relative w-full bg-cover bg-center bg-no-repeat py-10 md:py-20"
-        style={{ backgroundImage: "url('/footer-up.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-purple-900/50 backdrop-brightness-75"></div>
+      <section className="relative w-full bg-[url('/image/new/img_9.jpeg')] bg-cover bg-center bg-no-repeat py-10 md:py-20">
+        <div className="absolute inset-0 bg-purple-900/40 backdrop-brightness-75" />
 
         {/* Content */}
         <div className="relative z-10 flex h-full items-center justify-center px-6 md:px-2">
-          <div className="flex max-w-3xl flex-col items-center gap-6 text-center md:gap-8">
+          <div className="flex max-w-3xl flex-col items-center gap-2 text-center md:gap-8">
             <h2 className="text-2xl leading-tight font-bold text-white capitalize md:text-5xl">
               {t("footer.register.title")}
             </h2>
-            <p className="text-zinc-100 md:text-lg">
-              {t("footer.register.desc")}
-            </p>
+            <p className="text-white md:text-lg">{t("footer.register.desc")}</p>
 
             <Link to="/properties">
               <Button
@@ -34,13 +29,17 @@ const MainFooter = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </section>
 
-      <footer className="w-full bg-[#0C205A] px-4 pt-10 md:pt-20">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-4">
+      <footer className="w-full bg-[#082e63] px-4 pt-10 md:pt-20">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:grid-cols-4 md:gap-10">
           {/* Logo & Description */}
           <div className="space-y-4">
-            <img src="/new-logo-white.png" alt="logo" className="w-full" />
+            <img
+              src="/image/logos/Transparent_logo_white.png"
+              alt="logo"
+              className="w-40"
+            />
             <p className="text-white/80">{t("footer.logo")}</p>
           </div>
 
@@ -103,7 +102,7 @@ const MainFooter = () => {
         <div className="">
           <hr className="border-0.5 mt-10 mb-4 border-white/10" />
 
-          <p className="mb-4 text-center text-white/60">
+          <p className="mb-4 text-center text-xs text-white/60">
             {t("footer.copyRight")}
           </p>
         </div>

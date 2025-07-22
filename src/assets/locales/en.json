@@ -31,7 +31,7 @@
 
   "footer": {
     "register": {
-      "title": "Register and view our 20,000+ rental properties",
+      "title": "Register and view our 500+ rental properties",
       "desc": "We have a large collection of affordable rental properties to which new properties are added every day. Don't wait any longer and start searching.",
       "button": "Start Searching"
     },
@@ -57,7 +57,7 @@
   "home": {
     "hero": {
       "subTitle": "IT’S GREAT TO BE HOME!",
-      "title1": "Rent Your Property Easily In",
+      "title1": "Find your Affordable Rental Home In The Netherlands Quickly",
       "title2": "The Netherlands",
       "search": {
         "place": "Search Address...",
@@ -71,10 +71,9 @@
       "desc": "Discover the perfect place to live in the most popular cities of the Netherlands"
     },
     "about": {
-      "subTitle": "About us",
-      "title": "Driven by Trust, Defined by Results",
+      "subTitle": "About Huurscanner",
+      "title": "Driven by Trusted",
       "desc1": "At NL Property, we believe that finding a rental home in the Netherlands should be simple, honest, and stress-free. That’s why we’ve created a platform that’s fully focused on renters—no agents, no complicated steps, no hidden fees.",
-      "desc2": "Whether you're moving for work, study, or just looking for a new place to call home, we’re here to make that journey easier. Our goal is to help you find verified rental listings with clear details, fair pricing, and no surprises. You won’t find fake ads or outdated listings—only real homes that are truly available.",
       "button": "Learn more"
     },
     "recent": {
@@ -89,7 +88,25 @@
     "register": {
       "title": "Register and view our 20,000+ rental properties",
       "desc": "We have a large collection of affordable rental properties to which new properties are added every day. Don't wait any longer and start searching."
-    }
+    },
+    "howworks": [
+      {
+        "title": "Sgin Up",
+        "desc": "Create your account in just a few minutes and start searching right away."
+      },
+      {
+        "title": "Find A Home",
+        "desc": "Discover your dream rental in your favorite city using our handy filters."
+      },
+      {
+        "title": "Stay Updated",
+        "desc": "Still haven’t found what you’re looking for? No worries, you’ll receive daily or weekly updates with new rentals straight to your inbox. Easy as that!"
+      },
+      {
+        "title": "Time To Move",
+        "desc": "Respond, schedule a viewing, and start packing. Your new home is waiting!"
+      }
+    ]
   },
 
   "about": {
@@ -99,18 +116,41 @@
       "desc": "Discover and compare rental options from trusted companies all in one place. Browse listings, choose what suits you best, and book directly. We make it simple, secure, and seamless. A small service fee may apply."
     },
     "whyChoose": {
-      "title": "Why Choose Us",
-      "desc": "Finding the right rental shouldn’t be stressful. That’s why we bring together listings from multiple trusted companies in one simple platform — so you can compare, choose, and book with confidence. With transparent pricing, verified partners, and dedicated support, we make the rental experience smooth, secure, and tailored to your needs.",
+      "title": "Why Choose For HuurScanner",
+      "desc": "At HuurScanner, we believe that finding a rental home should be simple and stress-free, even if you don’t speak Dutch. Our platform is built to make your search fast, easy, and accessible for everyone. Whether you're an expat, international student, or just looking for a new place, HuurScanner helps you find homes that match your budget and location. With smart filters, regular updates, and the ability to contact landlords directly, you're always one step closer to your next home. No hassle, no confusion, just a smooth path to renting.",
       "button": "Explore your home"
     },
+
     "faq": {
-      "title": "FAQ"
+      "title": "FAQ",
+      "item": [
+        {
+          "title": "How does renting work through Huurscanner?",
+          "desc": "With Huurscanner, creating an account is quick and easy. Once you're signed up, you can instantly browse available rental listings, apply filters, and respond to properties. Everything is arranged safely online, without hassle."
+        },
+        {
+          "title": "Is Huurscanner a reliable platform?",
+          "desc": "Absolutely. At Huurscanner, we only work with verified landlords and trusted partners. This ensures a safe and secure rental experience, every time."
+        },
+        {
+          "title": "Can I view a property before renting through Huurscanner?",
+          "desc": "Yes, in most cases you can easily request a viewing. After you respond to a property, the landlord will contact you to schedule an appointment before you make a final decision."
+        },
+        {
+          "title": "How can I find affordable rental homes through Huurscanner?",
+          "desc": "Huurscanner helps you quickly find affordable rentals using smart filters like maximum rent, property type, and location. You’ll instantly see up-to-date listings from trusted landlords, with no hidden fees — making it easy to find a home that fits your budget."
+        },
+        {
+          "title": "Can I find rental properties in Amsterdam, Rotterdam, or Utrecht through Huurscanner?",
+          "desc": "Yes, Huurscanner offers new listings every day in top cities like Amsterdam, Rotterdam, Utrecht, The Hague, and more. Thanks to our advanced search filters, you can instantly view available properties per city — from studios to spacious apartments, all from verified landlords."
+        }
+      ]
     }
   },
 
   "contact": {
     "title": "Let’s Get In Touch",
-    "description": "Or just reach out manually to",
+    "description": "Do you have a question about your subscription, a home, or something else? Feel free to let us know, we're happy to help.",
     "email": "hellonlproperty.com",
 
     "form": {
@@ -347,6 +387,7 @@
   },
 
   "filters": {
+    "top": "Explore Rental Property in the Netherlands",
     "search": "Search Location",
     "placeH": "Enter city",
     "range": {

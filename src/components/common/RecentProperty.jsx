@@ -3,7 +3,7 @@ import { LiaBedSolid } from "react-icons/lia";
 import { TfiRulerAlt2 } from "react-icons/tfi";
 import { useNavigate } from "react-router-dom";
 
-const ifNotImg = "/image/fallback.jpg";
+const ifNotImg = "/image/random/fallback.jpg";
 
 const RecentProperty = ({ item }) => {
   const navigate = useNavigate();

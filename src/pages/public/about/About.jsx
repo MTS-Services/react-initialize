@@ -4,56 +4,16 @@ import { FiPlus, FiX } from "react-icons/fi";
 import Button from "../../../components/ui/Button";
 import { useLanguage } from "../../../hook/useLanguage";
 
-const faqData = [
-  {
-    question: "How often do you search rental websites?",
-    answer:
-      "Every 2 minutes our search bots scour the internet to find your ideal rental.",
-  },
-  {
-    question: "How many websites do you search?",
-    answer:
-      "We search over 100 trusted rental platforms across multiple countries.",
-  },
-  {
-    question: "In which cities do you search?",
-    answer:
-      "We currently cover 50+ major cities including New York, Amsterdam, Berlin, and London.",
-  },
-  {
-    question: "Will there be extra costs if I have found a home?",
-    answer:
-      "No. Once you’ve found a home, you won’t be charged any additional fees.",
-  },
-  {
-    question: "What if I have found a home?",
-    answer:
-      "You can pause or cancel your search anytime through your dashboard.",
-  },
-];
-
-const howworks = [
-  {
-    title: "Aanmelden",
-    desc: "Maak in een paar minuten jouw account aan en start direct met zoeken.",
-  },
-  {
-    title: "Woning zoeken",
-    desc: "Vind jouw droomwoning in je favoriete stad met onze handige zoekfilters.",
-  },
-  {
-    title: "Blijf op de hoogte",
-    desc: "Nog niet gevonden wat je zocht? Je ontvangt dagelijks of wekelijks nieuwe huurwoningen in je inbox.",
-  },
-  {
-    title: "Verhuizen maar",
-    desc: "Reageer, plan een bezichtiging en begin vast met inpakken. Jouw nieuwe woning wacht op je!",
-  },
-];
-
 const About = () => {
   const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState(null);
+
+  const howWorks = t("home.howworks", { returnObjects: true }) || [];
+  const faqData = t("about.faq.item", { returnObjects: true }) || [];
+
+  if (!Array.isArray(howWorks) || !Array.isArray(faqData)) {
+    return null; // or show a proper error/fallback UI
+  }
 
   const toggle = (index) => {
     setOpenIndex(index === openIndex ? null : index);
@@ -62,10 +22,10 @@ const About = () => {
   return (
     <div className="flex w-full flex-col">
       {/* === Background Section === */}
-      <div className="relative h-[611px] w-full">
+      <section className="relative h-[400px] w-full md:h-[600px]">
         {/* Background Image */}
         <img
-          src="/howworks.jpg"
+          src="/image/new/img_10.jpeg"
           alt="House"
           className="absolute inset-0 h-full w-full object-cover"
         />
@@ -75,32 +35,32 @@ const About = () => {
 
         {/* Centered Content */}
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
-          <h1 className="font-lato mb-6 max-w-[676px] text-4xl leading-tight font-semibold text-white capitalize md:text-6xl">
+          <h1 className="font-lato max-w-[676px] text-3xl leading-tight font-semibold text-white capitalize md:mb-6 md:text-6xl">
             {t("about.hero.title1")} <br />
             <span className="text-[#3CAAFA]">{t("about.hero.title2")}</span>
           </h1>
-          <p className="font-inter max-w-[676px] text-base leading-normal font-normal text-white">
+          <p className="font-inter max-w-4xl leading-normal font-normal text-white md:text-xl">
             {t("about.hero.desc")}
           </p>
         </div>
-      </div>
+      </section>
 
       {/* How to Works Section */}
-      <section className="relative w-full overflow-hidden bg-[linear-gradient(90deg,_#FFFEEB,_#E9F6FF)] px-6 py-16">
+      <section className="relative w-full overflow-hidden bg-[linear-gradient(90deg,_#FFFEEB,_#E9F6FF)] px-6 py-10 md:py-16">
         {/* Decorative Rotated Images */}
         <img
           className="absolute top-0 -left-[464px] h-64 w-[928px] rotate-90"
-          src="/png-wing-2.png"
+          src="/image/random/png-wing-2.png"
           alt="decor-top"
         />
         <img
           className="absolute -right-[404px] bottom-0 h-64 w-[928px] -rotate-90"
-          src="/png-wing-2.png"
+          src="/image/random/png-wing-2.png"
           alt="decor-bottom"
         />
         <img
           className="absolute top-0 left-1/2 h-[654px] w-[875px] -translate-x-1/2 object-contain"
-          src="/png-wing-2.png"
+          src="/image/random/png-wing-2.png"
           alt="main-illustration"
         />
 
@@ -108,20 +68,22 @@ const About = () => {
         <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-12">
           {/* Header */}
           <div className="space-y-2 text-center">
-            <h2 className="capitalize">{t("home.work.title")}</h2>
-            <p className="font-inter text-base font-normal text-black">
+            <h2 className="text-2xl capitalize md:text-4xl">
+              {t("home.work.title")}
+            </h2>
+            <p className="text-base font-normal text-black">
               {t("home.work.desc")}
             </p>
           </div>
 
           {/* Steps */}
-          <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {howworks.map((step, idx) => (
+          <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
+            {howWorks.map((step, idx) => (
               <div
                 key={idx}
-                className="flex flex-col items-center gap-4 rounded-lg bg-white px-6 py-16 shadow-sm"
+                className="flex flex-col items-center gap-4 rounded-lg bg-white px-4 py-8 shadow-sm md:px-6 md:py-16"
               >
-                <div className="font-lato flex h-14 w-14 items-center justify-center rounded bg-[#0278d9] text-2xl font-medium text-white">
+                <div className="font-lato flex h-14 w-14 items-center justify-center rounded bg-[#082e63] text-2xl font-medium text-white">
                   {idx + 1}
                 </div>
                 <div className="space-y-2 text-center">
@@ -139,9 +101,18 @@ const About = () => {
       </section>
 
       {/* === Why Choose Us Section === */}
-      <section className="mx-auto mb-0 flex w-full max-w-7xl flex-col items-center justify-between gap-12 py-16 md:px-0 lg:flex-row">
-        <div className="w-full space-y-6 px-4 lg:w-1/2">
-          <h2 className="font-lato text-4xl font-semibold text-gray-900 capitalize">
+      <section className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-4 py-16 md:gap-12 md:px-0 lg:flex-row">
+        {/* Right Image with Custom Clip Path */}
+        <div className="w-full max-w-[589px] px-4">
+          <img
+            src="image/about/Subtract.png"
+            alt="Why Choose Us"
+            className="h-auto w-full object-contain"
+          />
+        </div>
+
+        <div className="w-full space-y-4 px-4 md:space-y-8 lg:w-1/2">
+          <h2 className="font-lato text-2xl font-semibold text-gray-900 capitalize md:text-4xl">
             {t("about.whyChoose.title")}
           </h2>
           <p className="font-inter text-base leading-relaxed font-normal text-gray-700">
@@ -152,21 +123,12 @@ const About = () => {
             {t("about.whyChoose.button")}
           </Button>
         </div>
-
-        {/* Right Image with Custom Clip Path */}
-        <div className="w-full max-w-[589px] px-4">
-          <img
-            src="/works.png"
-            alt="Why Choose Us"
-            className="h-auto w-full object-contain"
-          />
-        </div>
       </section>
 
       {/* === FAQ Section === */}
-      <div className="mb-10 w-full bg-white px-6 md:px-12 lg:px-24 lg:py-26">
-        <h2 className="font-lato mb-8 text-center text-4xl font-semibold text-black">
-          FAQ
+      <div className="w-full bg-slate-50 px-4 py-10 md:px-12 lg:px-24 lg:py-26">
+        <h2 className="font-lato mb-4 text-3xl font-semibold text-gray-600 capitalize md:mb-10 md:text-center md:text-4xl">
+          {t("about.faq.title")}
         </h2>
 
         <div className="mx-auto max-w-4xl divide-y divide-gray-200">
@@ -174,15 +136,16 @@ const About = () => {
             const isOpen = openIndex === index;
 
             return (
-              <div key={index} className="py-4">
+              <div key={index} className="py-2 md:py-4">
                 <button
                   onClick={() => toggle(index)}
                   className="flex w-full cursor-pointer items-center justify-between text-left"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-inter text-lg font-bold text-black">
-                    {item.question}
-                  </span>
+                  <p className="font-bold text-gray-600 md:text-lg lg:text-xl">
+                    {item.title}
+                  </p>
+
                   <span className="text-xl text-black">
                     {isOpen ? <FiX /> : <FiPlus />}
                   </span>
@@ -193,8 +156,8 @@ const About = () => {
                     isOpen ? "mt-4 max-h-40 opacity-100" : "max-h-0 opacity-0"
                   }`}
                 >
-                  <p className="font-inter text-base leading-relaxed text-gray-600">
-                    {item.answer}
+                  <p className="leading-relaxed text-gray-500 lg:text-lg">
+                    {item.desc}
                   </p>
                 </div>
               </div>

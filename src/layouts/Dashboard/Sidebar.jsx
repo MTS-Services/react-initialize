@@ -104,7 +104,11 @@ const Sidebar = () => {
     <div className="hidden h-screen w-64 flex-col border-r border-gray-200 bg-white md:flex">
       {/* Logo/Brand */}
       <div className="flex h-16 items-center border-b border-gray-200 px-6">
-        <img src="/new-logo.png" alt="logo" />
+        <img
+          src="/image/logos/Transparent_logo_black.png"
+          alt="logo"
+          className="w-35"
+        />
       </div>
 
       {/* Navigation */}

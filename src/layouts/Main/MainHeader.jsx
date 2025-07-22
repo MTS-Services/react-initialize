@@ -60,16 +60,16 @@ function MainHeader() {
   return (
     <header
       className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? "bg-[#0C205A]" : "bg-black/10 shadow-md"
+        scrolled ? "bg-[#082e63]" : "bg-black/10 shadow-md"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img
-            src="/new-logo-white.png"
+            src="/image/logos/Transparent_logo_white.png"
             alt="Logo"
-            className="w-60 md:w-64 lg:w-80"
+            className="w-25 md:w-64 lg:w-35"
           />
         </Link>
 
@@ -141,7 +141,7 @@ function MainHeader() {
 
       {/* Mobile Slide Menu */}
       {menuOpen && (
-        <div className="absolute top-[64px] -mt-3 w-full space-y-4 bg-black/90 px-6 py-6 text-white backdrop-blur-sm transition-all duration-300 md:hidden">
+        <div className="absolute top-[63px] -mt-3 w-full space-y-4 bg-black/90 px-4 py-6 text-white backdrop-blur-sm transition-all duration-300 md:hidden">
           <MenuLink to="/" icon={<FiHome />} onClick={() => setMenuOpen(false)}>
             {t("header.home")}
           </MenuLink>
@@ -215,7 +215,7 @@ const MenuLink = ({ to, icon, children, onClick }) => (
   <Link
     to={to}
     onClick={onClick}
-    className="font-secondary flex items-center gap-2 text-lg transition hover:text-[#3CAAFA]"
+    className="flex items-center gap-2 transition hover:text-[#082e63]"
   >
     {icon}
     {children}
@@ -226,7 +226,7 @@ const MenuLink = ({ to, icon, children, onClick }) => (
 const DropdownItem = ({ to, icon, children }) => (
   <Link
     to={to}
-    className="flex items-center gap-2 rounded px-4 py-2 transition hover:rounded-sm hover:bg-[#3CAAFA] hover:text-white"
+    className="flex items-center gap-2 rounded px-4 py-2 transition hover:rounded-sm hover:bg-[#082e63] hover:text-white"
   >
     {icon}
     {children}

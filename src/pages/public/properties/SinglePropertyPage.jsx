@@ -27,7 +27,7 @@ import NotFounds from "../../../components/error/NotFounds";
 import { useLanguage } from "../../../hook/useLanguage";
 import Modal from "../../../components/ui/Modal";
 
-const ifNotImg = "/image/fallback.jpg";
+const ifNotImg = "/image/random/fallback.jpg";
 
 const SinglePropertyPage = () => {
   const { t } = useLanguage();
@@ -116,59 +116,66 @@ const SinglePropertyPage = () => {
 
   return (
     <section>
-      <header className="relative h-96 w-full">
-        {/* Background Image */}
-        <img
-          src="/howworks.jpg"
-          alt="House"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/60" />
+      <header
+        className="relative h-[300px] bg-cover bg-center md:h-[400px]"
+        style={{
+          backgroundImage: `url(${listing.media?.[mainImage]?.url || ifNotImg})`,
+        }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+          <div>
+            <h1 className="text-center text-2xl font-bold text-white drop-shadow-md md:text-4xl">
+              {t("filters.top")}
+            </h1>
+          </div>
+        </div>
       </header>
 
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-0">
         {/* Back button */}
-        <button
-          onClick={() => navigate(-1)}
-          className="mb-6 flex cursor-pointer items-center gap-2 text-yellow-600 hover:underline"
-        >
-          <FiArrowLeft /> Go Back
-        </button>
+        <div className="mb-4 flex items-center justify-between">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex cursor-pointer items-center gap-2 text-yellow-600 hover:underline"
+          >
+            <FiArrowLeft /> Go Back
+          </button>
+
+          <ShareButtons />
+        </div>
 
         {/* Header */}
-        <div className="mb-4 flex items-start justify-between">
+        <div className="flex items-start justify-between md:mb-4">
           <div>
-            <h1 className="mb-2 text-2xl font-bold md:text-3xl">
+            <h1 className="mb-2 text-lg font-bold md:text-3xl">
               {listing.title}
             </h1>
-            <div className="mb-4 flex items-center gap-4">
-              <div className="flex items-center gap-2 text-gray-400">
-                <FiMapPin />
-                <span>{listing.location}</span>
+
+            <div className="mb-4 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-1 text-gray-400">
+                <FiMapPin className="w-5 text-gray-400" />
+                <span className="md:text-md text-xs text-gray-400">
+                  {listing.location}
+                </span>
               </div>
-              <div className="flex items-center gap-4">
-                <span className="flex items-center gap-1 text-sm text-gray-400">
-                  <FiClock />
+
+              <div className="flex items-center gap-1">
+                <span className="">
+                  <FiClock className="w-5 text-gray-400" />
+                </span>
+                <span className="md:text-md text-xs text-gray-400">
                   {new Date(listing.createdAt).toLocaleDateString()}
                 </span>
               </div>
             </div>
           </div>
-
-          <div className="flex gap-2">
-            <button className="cursor-pointer rounded-full bg-gray-100 p-2 hover:bg-gray-200">
-              <FiHeart className="text-gray-400" />
-            </button>
-
-            <ShareButtons />
-          </div>
         </div>
 
         {/* Price */}
-        <div className="mb-6 rounded-lg bg-yellow-50 p-4">
-          <h2 className="text-2xl font-bold text-green-800">{cleanedPrice}</h2>
+        <div className="mb-4 rounded-lg bg-yellow-50 p-2">
+          <h2 className="text-xl font-bold text-green-800 md:text-2xl">
+            {cleanedPrice}
+          </h2>
         </div>
 
         {/* Image Gallery */}
@@ -213,13 +220,6 @@ const SinglePropertyPage = () => {
 
                     {/* Lock content */}
                     <div className="relative z-10 flex flex-col items-center justify-center">
-                      {/* <Link
-                        to="/auth/register"
-                        className="cursor-pointer rounded-full border border-slate-400 p-2 hover:bg-gray-500"
-                      >
-                        <FaLock size={18} className="text-gray-400" />
-                      </Link> */}
-
                       <span
                         onClick={handleClick}
                         className="cursor-pointer rounded-full bg-gray-200 p-2 hover:bg-gray-300"
@@ -385,49 +385,7 @@ const SinglePropertyPage = () => {
             </h3>
             <hr className="mb-4 border border-gray-100" />
             {isPaidUser ? (
-              <div className="space-y-4">
-                {/* <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-                    <span className="font-bold text-yellow-800">
-                      {listing.agent?.name?.charAt(0) || "A"}
-                    </span>
-                  </div>
-                  <div>
-                    <h4>{listing.agent?.name || "Agent Name"}</h4>
-                    <p className="text-sm text-gray-600">Real Estate Agent</p>
-                  </div>
-                </div> */}
-
-                {/* <div className="space-y-2">
-                  <a
-                    href={`tel:${listing.agent?.phone || ""}`}
-                    className="flex items-center gap-2 rounded-lg bg-white p-3 hover:bg-gray-100"
-                  >
-                    <FiPhone className="text-gray-600" />
-                    <span>
-                      {listing.agent?.phone || "Phone number not available"}
-                    </span>
-                  </a>
-
-                  <a
-                    href={`mailto:${listing.agent?.email || ""}`}
-                    className="flex items-center gap-2 rounded-lg bg-white p-3 hover:bg-gray-100"
-                  >
-                    <FiMail className="text-gray-600" />
-                    <span>{listing.agent?.email || "Email not available"}</span>
-                  </a>
-
-                  <a
-                    href={`${listing.url || ""}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-lg bg-white p-3 hover:bg-gray-100"
-                  >
-                    <BiLinkAlt size={20} className="text-gray-600" />
-                    <span> Visit available</span>
-                  </a>
-                </div> */}
-              </div>
+              <div className="space-y-4"></div>
             ) : (
               <div className="relative flex h-44 w-full flex-col items-center justify-center">
                 {/* Centered lock icon */}
@@ -472,12 +430,12 @@ const SinglePropertyPage = () => {
         </div>
 
         {/* Recent Listings */}
-        <div className="py-20">
+        <div className="pt-10 md:py-20">
           <h3 className="mb-6 text-2xl font-bold">
             {t("singleProprty.similar")}
           </h3>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
             {recent.map((item) => (
               <RecentProperty item={item} key={item.id} />
             ))}

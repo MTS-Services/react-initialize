@@ -101,16 +101,16 @@ const CheckoutForm = () => {
 
   return (
     <section>
-      <div className="border bg-[#0C205A] p-8" />
+      <div className="border bg-[#082e63] pt-18" />
       <div
-        className="flex items-center justify-center lg:py-20"
+        className="flex items-center justify-center lg:py-26"
         style={{ fontFamily: "var(--font-secondary)" }}
       >
         <div className="container flex max-w-7xl flex-col overflow-hidden rounded-xl border-1 border-gray-100 bg-white shadow-sm md:flex-row">
           {/* Left Image Section */}
           <div className="hidden items-center justify-center p-8 md:flex md:w-1/2">
             <img
-              src="/register-image.png"
+              src="/image/random/register-image.png"
               alt="Register Visual"
               className="h-auto max-w-full object-contain"
             />
@@ -118,7 +118,7 @@ const CheckoutForm = () => {
 
           {/* Right Form Section */}
           <div className="flex w-full flex-col justify-center p-10 md:w-1/2">
-            <h2 className="mb-10 text-center text-3xl font-extrabold text-[#19398A]">
+            <h2 className="mb-6 text-2xl font-extrabold text-[#19398A] md:mb-10 md:text-center">
               {t("auth.register.title")}
             </h2>
             <form onSubmit={handleSubmit} className="">

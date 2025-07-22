@@ -222,17 +222,11 @@ const PropertyListPage = () => {
 
   return (
     <section className="">
-      <header
-        className="relative h-[300px] bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1599423300746-b62533397364)",
-        }}
-      >
-        <div className="absolute inset-0 flex items-center justify-center bg-black/60">
+      <header className="relative h-[300px] bg-[url('/image/new/img_8.jpeg')] bg-cover bg-top">
+        <div className="absolute inset-0 flex items-center justify-center bg-black/80">
           <div>
-            <h1 className="text-center text-4xl font-bold text-white drop-shadow-md">
-              Explore Rental Property in Netherlands
+            <h1 className="text-center text-3xl font-bold text-white drop-shadow-md md:text-4xl">
+              {t("filters.top")}
             </h1>
           </div>
         </div>
@@ -452,7 +446,7 @@ const PropertyListPage = () => {
 
           {/* PAGINATION */}
           {pagination.totalPages > 1 && (
-            <footer className="flex justify-center py-12">
+            <footer className="flex justify-center">
               <Pagination
                 currentPage={pagination.currentPage}
                 totalPages={pagination.totalPages}
