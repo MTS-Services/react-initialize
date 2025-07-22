@@ -31,8 +31,8 @@
 
   "footer": {
     "register": {
-      "title": "Registreer u en bekijk onze meer dan 20,000+ huurwoningen",
-      "desc": "We hebben een grote collectie betaalbare huurwoningen, waaraan dagelijks nieuwe woningen worden toegevoegd. Wacht niet langer en begin met zoeken.",
+      "title": "Registreer je en vind meer dan 500 betaalbare huurwoningen en kamers.",
+      "desc": "We bieden een uitgebreide collectie betaalbare huurwoningen in heel Nederland, waaronder in steden als Amsterdam, Utrecht, Rotterdam, ’s-Hertogenbosch, Maastricht en meer.",
       "button": "Begin met zoeken"
     },
     "logo": "Ontvang e-mails met huurwoningen die aan jouw wensen voldoen.",
@@ -57,7 +57,7 @@
   "home": {
     "hero": {
       "subTitle": "HET IS FIJN OM THUIS TE ZIJN!",
-      "title1": "Verhuur je woning eenvoudig in",
+      "title1": "Vind snel jouw betaalbare huurwoning",
       "title2": "Nederlands",
       "search": {
         "place": "Zoek adres...",
@@ -71,10 +71,9 @@
       "desc": "Ontdek de perfecte plek om te wonen in de populairste steden van Nederland"
     },
     "about": {
-      "subTitle": "Over ons",
-      "title": "Gedreven door vertrouwen, gedefinieerd door resultaat",
-      "desc1": "Bij NL Property geloven we dat het vinden van een huurwoning in Nederland eenvoudig, eerlijk en stressvrij moet zijn. Daarom hebben we een platform gecreëerd dat volledig gericht is op huurders—geen makelaars, geen ingewikkelde stappen, geen verborgen kosten.",
-      "desc2": "Of je nu verhuist voor werk, studie of gewoon op zoek bent naar een nieuwe plek om thuis te noemen, wij zijn er om die reis gemakkelijker te maken. Ons doel is om jou te helpen bij het vinden van geverifieerde huurwoningen met duidelijke informatie, eerlijke prijzen en zonder verrassingen. Geen nep-advertenties of verouderde listings—alleen echte woningen die echt beschikbaar zijn.",
+      "subTitle": "Over Huurscanner",
+      "title": "Aangedreven door Vertrouwd",
+      "desc1": "Bij Huurscanner maken we het huren van een woning eenvoudig, betaalbaar en transparant. We verzamelen betrouwbaar huuraanbod van verschillende verhuurders op één plek, zodat jij snel kunt vergelijken en huren , zonder gedoe of verborgen kosten. Of je nu zoekt in Amsterdam, Rotterdam of een kleinere stad: Huurscanner helpt je aan een woning die past bij jouw wensen én budget.",
       "button": "Meer informatie"
     },
     "recent": {
@@ -89,25 +88,69 @@
     "register": {
       "title": "Registreer en bekijk onze 20.000+ huurwoningen",
       "desc": "We hebben een grote verzameling betaalbare huurwoningen en voegen elke dag nieuwe toe. Wacht niet langer en begin met zoeken."
-    }
+    },
+    "howworks": [
+      {
+        "title": "Aanmelden",
+        "desc": "Maak in een paar minuten jouw account aan en start direct met zoeken."
+      },
+      {
+        "title": "Woning zoeken",
+        "desc": "Vind jouw droomwoning in je favoriete stad met onze handige zoekfilters."
+      },
+      {
+        "title": "Blijf op de hoogte",
+        "desc": "Nog niet gevonden wat je zocht? Geen probleem, je ontvangt dagelijks of wekelijks nieuwe huurwoningen direct in je inbox. Wel zo makkelijk!"
+      },
+      {
+        "title": "Verhuizen maar",
+        "desc": "Reageer, plan een bezichtiging en begin vast met inpakken. Jouw nieuwe woning wacht op je!"
+      }
+    ]
   },
 
   "about": {
     "hero": {
-      "title1": "Hoe huren werkt op",
-      "title2": "Ons platform",
-      "desc": "Ontdek en vergelijk huuropties van betrouwbare bedrijven, allemaal op één plek. Bekijk het aanbod, kies wat het beste bij u past en boek direct. Wij maken het eenvoudig, veilig en soepel. Er kunnen kleine servicekosten van toepassing zijn."
+      "title1": "Hoe werkt huren via ",
+      "title2": "HuurScanner",
+      "desc": "Huur eenvoudig een woning van betrouwbare aanbieders. Vergelijk het aanbod, kies uw ideale huurwoning en regel alles online, veilig en zonder gedoe."
     },
     "whyChoose": {
-      "title": "Waarom voor ons kiezen",
-      "desc": "Het vinden van de juiste huurwoning hoeft geen stress te zijn. Daarom bundelen we aanbiedingen van meerdere betrouwbare bedrijven op één eenvoudig platform, zodat u vol vertrouwen kunt vergelijken, kiezen en boeken. Met transparante prijzen, geverifieerde partners en toegewijde ondersteuning zorgen we voor een soepele, veilige en op uw behoeften afgestemde huurervaring.",
+      "title": "uren zonder gedoe, dat is waar wij voor staan.",
+      "desc": "Het vinden van een huurwoning hoeft geen gedoe te zijn. Daarom verzamelen wij betrouwbare aanbiedingen van meerdere partners op één overzichtelijk platform. Vergelijk, kies en huur met vertrouwen. Dankzij transparante prijzen, gecontroleerde verhuurders en persoonlijke ondersteuning zorgen wij voor een soepele, veilige en zorgeloze huurervaring.",
       "button": "Ontdek je huis"
+    },
+
+    "faq": {
+      "title": "Veelgestelde vragen",
+
+      "item": [
+        {
+          "title": "Hoe werkt huren via Huurscanner?",
+          "desc": "Via Huurscanner maak je eenvoudig een  account aan. Daarna kun je direct het actuele woningaanbod bekijken, filters instellen en reageren op woningen. Alles regel je veilig online, zonder gedoe."
+        },
+        {
+          "title": "Is Huurscanner betrouwbaar?",
+          "desc": "Ja, bij Huurscanner werken we uitsluitend met gecontroleerde verhuurders en partners. Zo weet je zeker dat je huurt via een veilig en betrouwbaar platform."
+        },
+        {
+          "title": "Kan ik bezichtigen voordat ik via Huurscanner huur?",
+          "desc": "Zeker. Bij de meeste woningen kun je eenvoudig een bezichtiging aanvragen. De verhuurder neemt contact met je op om een afspraak in te plannen voordat je besluit te huren."
+        },
+        {
+          "title": "Hoe vind ik betaalbare huurwoningen via Huurscanner?",
+          "desc": "Huurscanner helpt je snel aan een betaalbare huurwoning door slimme filters zoals maximale huurprijs, woningtype en locatie. Je ziet direct het actuele aanbod van betrouwbare verhuurders, zonder verborgen kosten. Zo vind je eenvoudig een woning die past binnen jouw budget."
+        },
+        {
+          "title": "Kan ik via Huurscanner ook huurwoningen vinden in Amsterdam, Rotterdam of Utrecht?",
+          "desc": "Ja, Huurscanner toont dagelijks nieuwe huurwoningen in populaire steden zoals Amsterdam, Rotterdam, Utrecht, Den Haag en meer. Dankzij onze slimme zoekfilters zie je direct het actuele aanbod per stad, van studio’s tot ruime appartementen, allemaal van betrouwbare verhuurders."
+        }
+      ]
     }
   },
-
   "contact": {
-    "title": "Laten we contact opnemen",
-    "description": "Of neem handmatig contact op via",
+    "title": "Neem contact met ons op",
+    "description": "Vragen over je abonnement, woning of iets anders? Neem gerust contact op, we helpen je graag.",
     "email": "hellonlproperty.com",
 
     "form": {
@@ -344,6 +387,7 @@
   },
 
   "filters": {
+    "top": "Ontdek huurwoningen in Nederland",
     "search": "Zoeklocatie",
     "placeH": "Voer de stad in",
     "range": {

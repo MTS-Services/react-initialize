@@ -47,16 +47,16 @@ function LoginPage() {
 
   return (
     <section>
-      <div className="border bg-[#0C205A] p-8"></div>
+      <div className="border bg-[#082e63] pt-18" />
       <div
-        className="flex items-center justify-center md:px-0 md:py-0 lg:py-20"
+        className="flex items-center justify-center md:px-0 md:py-0 lg:py-26"
         style={{ fontFamily: "var(--font-secondary)" }}
       >
         <div className="container flex max-w-7xl flex-col overflow-hidden border-1 border-gray-100 bg-white shadow md:flex-row md:rounded">
           {/* Left: Image */}
           <div className="hidden p-8 md:block md:w-1/2">
             <img
-              src="/login-image.png"
+              src="/image/random/login-image.png"
               alt="Login Visual"
               className="h-full w-full object-cover"
             />
@@ -64,7 +64,7 @@ function LoginPage() {
 
           {/* Right: Form */}
           <div className="flex w-full flex-col justify-center p-8 md:w-1/2">
-            <h2 className="mb-4 text-center text-xl font-extrabold text-[#19398A] md:mb-10 md:text-3xl">
+            <h2 className="mb-6 text-2xl font-extrabold text-[#19398A] md:mb-10 md:text-center">
               {t("auth.login.title")}
             </h2>
 

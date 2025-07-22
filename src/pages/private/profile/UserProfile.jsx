@@ -70,7 +70,7 @@ const UserProfile = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header with tier-based color */}
-      <div className="bg-[#0C205A] py-8" />
+      <div className="bg-[#0C205A] pt-18" />
 
       {/* Profile header */}
 
@@ -223,7 +223,7 @@ const UserProfile = () => {
                 <div className="flex items-center">
                   <img
                     className="h-14 w-14 rounded-full border-2 border-white object-contain shadow-sm"
-                    src="/profile.jpg"
+                    src="/image/random/profile.jpg"
                     alt="Profile"
                   />
                   <div className="ml-4">

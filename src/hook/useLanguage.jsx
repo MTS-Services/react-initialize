@@ -22,8 +22,8 @@ const initI18n = () => {
         nl: { translation: nl },
         en: { translation: en },
       },
-      lng: hasLanguageInStorage ? undefined : "nl", // Use Dutch if no saved language
-      fallbackLng: "nl", // Always fall back to Dutch
+      lng: hasLanguageInStorage ? undefined : "nl",
+      fallbackLng: "nl",
       interpolation: { escapeValue: false },
       detection: {
         order: ["localStorage", "cookie", "navigator", "htmlTag"],
@@ -48,7 +48,11 @@ export const useLanguage = () => {
 
     const onLanguageChanged = (lng) => {
       setLanguage(lng);
-      setT(() => i18n.t.bind(i18n));
+      setT(
+        () =>
+          (key, options = {}) =>
+            i18n.t(key, options),
+      ); // ✅ Allow options
     };
 
     i18n.on("languageChanged", onLanguageChanged);

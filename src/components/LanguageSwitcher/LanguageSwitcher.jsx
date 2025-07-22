@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const languages = [
-  { code: "en", name: "EN", flag: "/united-states.png" },
-  { code: "nl", name: "NL", flag: "/flags.png" },
+  { code: "en", name: "EN", flag: "/image/lang/flags_us.png" },
+  { code: "nl", name: "NL", flag: "/image/lang/flags_nl.png" },
 ];
 
 const LanguageSwitcher = () => {

@@ -6,10 +6,10 @@ const Contact = () => {
   return (
     <section className="flex w-full flex-col bg-blue-950">
       {/* === Contact Section === */}
-      <div className="mt-16.5 flex min-h-screen w-full flex-col lg:flex-row">
+      <div className="mt-20 flex min-h-screen flex-col lg:flex-row">
         <div className="h-[250px] w-full lg:h-full lg:w-1/2">
           <img
-            src="/contact-image.jpg"
+            src="/image/new/img_12.jpeg"
             alt="contact"
             className="h-screen w-full object-cover"
           />
@@ -19,9 +19,10 @@ const Contact = () => {
         <div className="flex w-full items-center justify-center bg-white px-6 py-12 lg:w-1/2 lg:px-16">
           <form className="w-full max-w-xl space-y-6">
             <div className="">
-              <h2 className="font-lato mb-4 text-center text-4xl font-semibold text-black md:text-4xl">
+              <h2 className="mb-4 text-3xl font-semibold text-black md:text-4xl">
                 {t("contact.title")}
               </h2>
+              <p>{t("contact.description")}</p>
             </div>
 
             <hr className="border-0.5 border-gray-200" />

@@ -1,5 +1,5 @@
 // ✅ Home.jsx (FULL CODE with enhancements)
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { TfiRulerAlt2 } from "react-icons/tfi";
@@ -10,69 +10,53 @@ import axios from "../../../utils/axiosInstance";
 
 import Button from "../../../components/ui/Button";
 import { useLanguage } from "../../../hook/useLanguage";
-const ifNotImg = "/image/fallback.jpg";
+
+const ifNotImg = "/image/random/fallback.jpg";
+
+import decorTop from "/image/random/png-wing-2.png";
 
 const cities = [
   {
     name: "Amsterdam",
     props: "790+ Properties",
-    img: "/hero/amsterdam.png",
+    img: "/image/new/img_2.jpeg",
     location: "Amsterdam",
   },
   {
     name: "Rotterdam",
     props: "238+ Properties",
-    img: "/hero/rotterdam.png",
+    img: "/image/new/img_3.jpeg",
     location: "Rotterdam",
   },
   {
     name: "The Hague",
     props: "0 Properties",
-    img: "/hero/Hague.png",
+    img: "/image/new/img_4.jpeg",
     location: "The Hague",
   },
   {
     name: "Utrecht",
     props: "122+ Properties",
-    img: "/hero/eindhoven.png",
+    img: "/image/new/img_5.jpeg",
     location: "Utrecht",
   },
   {
     name: "Eindhoven",
     props: "84+ Properties",
-    img: "/hero/utrech.png",
+    img: "/image/new/img_6.jpeg",
     location: "Eindhoven",
   },
   {
     name: "Maastricht",
     props: "27+ Properties",
-    img: "/hero/maastricht.png",
+    img: "/image/new/img_7.jpeg",
     location: "Maastricht",
   },
   {
     name: "Groningen",
     props: "52+ Properties",
-    img: "/hero/groningen.png",
+    img: "/image/new/img_8.jpeg",
     location: "Groningen",
-  },
-];
-
-const howWorks = [
-  {
-    title: "Aanmelden",
-    desc: "Maak in een paar minuten jouw account aan en start direct met zoeken.",
-  },
-  {
-    title: "Woning zoeken",
-    desc: "Vind jouw droomwoning in je favoriete stad met onze handige zoekfilters.",
-  },
-  {
-    title: "Blijf op de hoogte",
-    desc: "Nog niet gevonden wat je zocht? Je ontvangt dagelijks of wekelijks nieuwe huurwoningen in je inbox.",
-  },
-  {
-    title: "Verhuizen maar",
-    desc: "Reageer, plan een bezichtiging en begin vast met inpakken. Jouw nieuwe woning wacht op je!",
   },
 ];
 
@@ -95,6 +79,8 @@ function Home() {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isFetchingSuggestions, setIsFetchingSuggestions] = useState(false);
+
+  const howWorks = t("home.howworks", { returnObjects: true }) || [];
 
   // Fetch location suggestions with debounce
   const fetchSuggestions = async (query) => {
@@ -215,38 +201,33 @@ function Home() {
     return `/properties?${params.toString()}`;
   };
 
+  if (!Array.isArray(howWorks)) return null;
+
   return (
-    <>
+    <React.Fragment>
       {/* Hero Section */}
       <section
-        className="relative inset-0 h-96 bg-cover bg-center md:h-[550px]"
+        className="relative inset-0 h-[450px] bg-cover bg-bottom md:h-[750px]"
         style={{
-          backgroundImage: "url(/home/nl-property-hero.jpg)",
+          backgroundImage: "url(/image/new/img_1.jpeg)",
         }}
       >
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 to-black/60"></div>
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-gray-950/60" />
+
         <div className="relative z-20 flex h-full items-center justify-center">
           <div className="mx-auto max-w-7xl px-4">
-            <div className="rounded-lg p-6 shadow-xl">
-              <h3 className="md:text-md text-center text-sm text-white lg:text-xl">
-                {t("home.hero.subTitle")}
-              </h3>
-              <div className="flex flex-col items-center justify-center gap-3 md:flex-row">
-                <h1 className="text-center text-2xl leading-tight text-white/90 md:text-4xl lg:text-6xl">
-                  {t("home.hero.title1")}
-                  <br />
-                  <span className="block text-[#3CAAFA]">
-                    {t("home.hero.title2")}
-                  </span>
-                </h1>
-              </div>
+            <div className="md:px-20">
+              <h1 className="text-center text-3xl leading-tight text-white text-shadow-2xs md:text-4xl lg:text-6xl">
+                {t("home.hero.title1")}
+                <br />
+              </h1>
             </div>
           </div>
         </div>
       </section>
 
       {/* Search Bar */}
-      <section className="relative -top-15 z-20">
+      <section className="relative -top-10 z-10 md:-top-15">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center justify-center gap-3 bg-white p-6 md:mx-4 md:flex-row md:rounded-lg md:p-6 md:shadow-lg lg:p-8">
             {/* Location Search */}
@@ -259,7 +240,7 @@ function Home() {
                   onChange={handleLocationChange}
                   onFocus={() => setShowSuggestions(true)}
                   placeholder={t("filters.search")}
-                  className="h-16 w-full rounded-lg border border-gray-200 py-2 pr-4 pl-8 shadow focus:ring-2 focus:ring-blue-200 focus:outline-none"
+                  className="h-16 w-full rounded-lg py-2 pr-4 pl-8 shadow focus:ring-2 focus:ring-blue-200 focus:outline-none"
                   autoComplete="off"
                 />
                 <FiMapPin className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-400" />
@@ -317,7 +298,7 @@ function Home() {
                 placeholder={`€ ${t("home.hero.search.min")}`}
                 value={filters.minPrice}
                 onChange={(e) => handleFilterChange("minPrice", e.target.value)}
-                className="h-16 w-full rounded-lg border border-gray-200 py-2 pr-4 pl-4 shadow focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="h-16 w-full rounded-lg py-2 pr-4 pl-4 shadow focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 min={0}
               />
             </div>
@@ -330,7 +311,7 @@ function Home() {
                 placeholder={`€ ${t("home.hero.search.max")}`}
                 value={filters.maxPrice}
                 onChange={(e) => handleFilterChange("maxPrice", e.target.value)}
-                className="h-16 w-full rounded-lg border border-gray-200 py-2 pr-4 pl-4 shadow focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                className="h-16 w-full rounded-lg py-2 pr-4 pl-4 shadow focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 min={0}
               />
             </div>
@@ -341,7 +322,7 @@ function Home() {
                 variant="yellowGradient"
                 size="lg"
                 onClick={handleSearch}
-                className="mt-1 flex h-16 w-full items-center justify-center gap-2"
+                className="flex w-full items-center justify-center gap-2 shadow-lg md:h-16"
                 type="button"
               >
                 <FiSearch />
@@ -353,21 +334,22 @@ function Home() {
       </section>
 
       {/* POPOLER SECTION */}
-      <section className="px-4 md:px-6 lg:pt-10">
-        <div className="mb-12">
+      <section className="mx-auto max-w-7xl">
+        <div className="">
           <h2 className="text-center text-2xl md:text-4xl">
             {t("home.PopularCity.title")}
           </h2>
-          <p className="text-center">{t("home.PopularCity.desc")}</p>
+          <p className="mb-10 text-center">{t("home.PopularCity.desc")}</p>
         </div>
 
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 md:flex-wrap lg:flex-row">
+        <div className="mb-10 flex flex-col gap-2 px-2 md:mb-20 md:flex-wrap md:gap-4 lg:flex-row">
           {/* Left: 2x2 Grid */}
-          <div className="grid flex-1 grid-cols-2 gap-4">
+          <div className="grid flex-1 grid-cols-2 gap-2 md:gap-4">
             {leftCities.map((city, i) => (
               <Link to={getCitySearchUrl(city.location)} key={i}>
                 <div className="group relative h-64 overflow-hidden rounded">
                   <img
+                    loading="lazy"
                     className="h-full w-full object-cover"
                     src={city.img}
                     alt={city.name}
@@ -401,7 +383,7 @@ function Home() {
           </div>
 
           {/* Right: 2 boxes side-by-side, never stacked */}
-          <div className="grid max-w-full flex-1 grid-cols-2 gap-4 md:max-w-7xl md:grid-cols-2 lg:grid-cols-1">
+          <div className="grid max-w-full flex-1 grid-cols-2 gap-2 md:max-w-7xl md:grid-cols-2 md:gap-4 lg:grid-cols-1">
             {rightCities.map((city, i) => (
               <Link to={getCitySearchUrl(city.location)} key={i}>
                 <div className="group relative h-64 w-full overflow-hidden rounded">
@@ -419,54 +401,6 @@ function Home() {
                 </div>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ABOUT-US SECTION */}
-      <section className="w-full bg-white px-4 py-10 md:px-6 md:py-12 lg:py-26">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          {/* Text Section */}
-          <div>
-            <h3 className="mb-2 text-[#0278d9]">{t("home.about.subTitle")}</h3>
-            <h2 className="mb-6 text-2xl md:text-4xl">
-              {t("home.about.title")}
-            </h2>
-            <p className="mb-6">
-              {t("home.about.desc1")}
-              <br />
-              <br />
-              {t("home.about.desc2")}
-            </p>
-            <Link to="/about">
-              <Button variant="yellowGradient" size="lg" className="">
-                {t("home.about.button")}
-              </Button>
-            </Link>
-          </div>
-
-          {/* Image Grid */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="">
-              <img
-                src="/about/about-1.jpg"
-                alt="Decor 1"
-                className="h-auto w-full rounded-lg"
-              />
-              <img
-                src="/about/about-2.jpg"
-                alt="Decor 2"
-                className="mt-4 h-auto w-full rounded-lg object-cover"
-              />
-            </div>
-
-            <div>
-              <img
-                src="/about/about-3.jpg"
-                alt="Decor 3"
-                className="h-auto w-full rounded-lg"
-              />
-            </div>
           </div>
         </div>
       </section>
@@ -582,18 +516,20 @@ function Home() {
       <section className="relative w-full overflow-hidden bg-[linear-gradient(90deg,_#FFFEEB,_#E9F6FF)] px-4 py-10 md:px-6 md:py-10 lg:py-26">
         {/* Decorative Rotated Images */}
         <img
-          className="absolute top-0 -left-[464px] h-64 w-[928px] rotate-90"
-          src="/png-wing-2.png"
+          aria-hidden="true"
+          role="presentation"
+          className="absolute top-10 -left-[164px] w-[800px] rotate-90"
+          src={decorTop}
           alt="decor-top"
         />
         <img
-          className="absolute -right-[404px] bottom-0 h-64 w-[928px] -rotate-90"
-          src="/png-wing-2.png"
+          className="absolute top-0 -right-[200px] w-[800px] -rotate-90"
+          src={decorTop}
           alt="decor-bottom"
         />
         <img
           className="absolute top-0 left-1/2 h-[654px] w-[875px] -translate-x-1/2 object-contain"
-          src="/png-wing-2.png"
+          src={decorTop}
           alt="main-illustration"
         />
 
@@ -601,34 +537,79 @@ function Home() {
         <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-12 lg:p-0">
           {/* Header */}
           <div className="space-y-2 text-center">
-            <h2 className="capitalize">{t("home.work.title")}</h2>
+            <h2 className="text-2xl capitalize md:text-4xl">
+              {t("home.work.title")}
+            </h2>
             <p className="font-inter text-base font-normal text-black">
               {t("home.work.desc")}
             </p>
           </div>
 
           {/* Steps */}
-          <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
             {howWorks.map((step, idx) => (
               <div
                 key={idx}
-                className="flex flex-col items-center gap-4 rounded-lg bg-white px-6 py-8 shadow-sm"
+                className="flex flex-col items-center gap-4 rounded-lg bg-white px-4 py-8 shadow-sm md:px-6 md:py-16"
               >
-                <h3 className="rounded bg-[#0278d9] px-4 py-2 text-2xl text-white">
+                <div className="font-lato flex h-14 w-14 items-center justify-center rounded bg-[#082e63] text-2xl font-medium text-white">
                   {idx + 1}
-                </h3>
+                </div>
                 <div className="space-y-2 text-center">
                   <h3 className="font-lato text-xl font-semibold text-black capitalize">
                     {step.title}
                   </h3>
-                  <p className="">{step.desc}</p>
+                  <p className="font-inter font-normal text-black">
+                    {step.desc}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-    </>
+
+      {/* ABOUT-US SECTION  */}
+      <section className="w-full bg-white px-4 py-10 md:px-6 md:py-12 lg:py-26">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <div>
+            <h3 className="mb-2 text-[#0278d9]">{t("home.about.subTitle")}</h3>
+            <h2 className="mb-6 text-2xl md:text-4xl">
+              {t("home.about.title")}
+            </h2>
+            <p className="mb-6">{t("home.about.desc1")}</p>
+            <Link to="/about">
+              <Button variant="yellowGradient" size="lg" className="">
+                {t("home.about.button")}
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="">
+              <img
+                src="/image/about/about-1.jpg"
+                alt="Decor 1"
+                className="h-auto w-full rounded-lg"
+              />
+              <img
+                src="/image/about/about-2.jpg"
+                alt="Decor 2"
+                className="mt-4 h-auto w-full rounded-lg object-cover"
+              />
+            </div>
+
+            <div>
+              <img
+                src="/image/about/about-3.jpg"
+                alt="Decor 3"
+                className="h-auto w-full rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    </React.Fragment>
   );
 }
 

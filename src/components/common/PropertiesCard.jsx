@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import FavouriteIcon from "../FavouriteIcon/FavouriteIcon";
 import Button from "../ui/Button";
 
-const ifNotImg = "/image/fallback.jpg";
+const ifNotImg = "/image/random/fallback.jpg";
 
 const PeropertiesCard = ({ item }) => {
   const {
