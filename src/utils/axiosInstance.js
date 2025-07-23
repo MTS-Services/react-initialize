@@ -3,7 +3,7 @@ import axios from "axios";
 import i18n from "../i18n";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3011/api",
+  baseURL: "https://backend.huurscanner.nl/api",
 });
 
 // Request Interceptor: Attach language and token
