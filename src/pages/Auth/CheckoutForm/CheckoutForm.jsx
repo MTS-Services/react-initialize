@@ -7,6 +7,7 @@ import Button from "../../../components/ui/Button";
 
 import axios from "../../../utils/axiosInstance";
 import { useLanguage } from "../../../hook/useLanguage";
+import { isPaid } from "../../../features/auth/authUtils";
 
 const CheckoutForm = () => {
   const { t } = useLanguage();
@@ -16,16 +17,16 @@ const CheckoutForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const [userData, setUserData] = useState(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const isPaidUsers = isPaid();
+
+  let User = null;
+
+  if (isPaidUsers) {
+    const userInfo = localStorage.getItem("userInfo");
+    const parsedUser = JSON.parse(userInfo);
+    User = parsedUser.data;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,8 +53,7 @@ const CheckoutForm = () => {
           payment_method: {
             card: elements.getElement(CardElement),
             billing_details: {
-              name: formData.name,
-              email: formData.email,
+              email: User.email,
             },
           },
         });
@@ -62,34 +62,39 @@ const CheckoutForm = () => {
         throw new Error(stripeError.message);
       }
 
-      // 3. Verify Payment Status
-      if (paymentIntent.status === "succeeded") {
-        // 4. Create User
-        const response = await axios.post(`/users/create`, {
-          email: formData.email,
-          name: formData.name,
+      // 4. Create User
+      if (paymentIntent) {
+        const response = await axios.patch(`/users/${User.id}`, {
           amount: paymentIntent.amount,
-          password: formData.password,
           paymentId: paymentIntent.id,
         });
 
         const user = response.data;
 
+        console.log(user.data);
+
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({ data: { ...User, ispaid: true } }),
+        );
+
+        // localStorage.setItem("userInfo", JSON.stringify(user.data));
+
+        console.log("check-page: ", user);
+
         if (!user) {
           throw new Error("Payment verification failed on server");
         }
 
-        // ✅ Store in localStorage
-        localStorage.setItem("userInfo", JSON.stringify(user));
+        if (user) {
+          // Update localStorage with the fresh user info
+          // localStorage.setItem("userInfo", JSON.stringify(user.data));
 
-        localStorage.setItem("authToken", user.data.token);
-
-        setUserData(response.data.data.user);
-        setSuccess(true);
-
-        navigate("/auth/payment-success", {
-          state: { userData: user },
-        });
+          setSuccess(true);
+          navigate("/auth/payment-success", {
+            state: { userData: user },
+          });
+        }
       }
     } catch (err) {
       setError(err.message);
@@ -123,60 +128,8 @@ const CheckoutForm = () => {
             </h2>
             <form onSubmit={handleSubmit} className="">
               {/* Name Field */}
-              <div className="mb-4">
-                <label
-                  className="mb-2 block text-sm font-semibold text-gray-700"
-                  htmlFor="name"
-                >
-                  {t("auth.register.name")}
-                </label>
-                <input
-                  className="w-full rounded-xl border border-gray-300 px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none"
-                  type="text"
-                  name="name"
-                  id="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
 
               {/* Email Field */}
-              <div className="mb-4">
-                <label
-                  className="mb-2 block text-sm font-bold text-gray-700"
-                  htmlFor="email"
-                >
-                  {t("auth.common.email")}
-                </label>
-                <input
-                  className="w-full rounded-xl border border-gray-300 px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none"
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label
-                  className="mb-2 block text-sm font-bold text-gray-700"
-                  htmlFor="email"
-                >
-                  {t("auth.common.pass")}
-                </label>
-                <input
-                  className="w-full rounded-xl border border-gray-300 px-5 py-3 text-gray-800 placeholder-gray-400 transition focus:ring-2 focus:ring-[#19398A] focus:outline-none"
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
 
               {/* Card Details */}
               <div className="mb-6">
@@ -230,16 +183,6 @@ const CheckoutForm = () => {
                   <>{t("auth.register.button")}</>
                 )}
               </Button>
-
-              <p className="mt-6 text-center text-gray-600">
-                {t("auth.register.footer")}{" "}
-                <Link
-                  to="/auth/login"
-                  className="font-semibold text-blue-500 hover:underline"
-                >
-                  {t("header.login")}
-                </Link>
-              </p>
             </form>
           </div>
         </div>
