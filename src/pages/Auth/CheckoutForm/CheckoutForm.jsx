@@ -80,8 +80,6 @@ const CheckoutForm = () => {
 
         // localStorage.setItem("userInfo", JSON.stringify(user.data));
 
-        console.log("check-page: ", user);
-
         if (!user) {
           throw new Error("Payment verification failed on server");
         }
@@ -115,7 +113,7 @@ const CheckoutForm = () => {
           {/* Left Image Section */}
           <div className="hidden items-center justify-center p-8 md:flex md:w-1/2">
             <img
-              src="/image/random/register-image.png"
+              src="/image/random/pay.png"
               alt="Register Visual"
               className="h-auto max-w-full object-contain"
             />
@@ -124,7 +122,7 @@ const CheckoutForm = () => {
           {/* Right Form Section */}
           <div className="flex w-full flex-col justify-center p-10 md:w-1/2">
             <h2 className="mb-6 text-2xl font-extrabold text-[#19398A] md:mb-10 md:text-center">
-              {t("auth.register.title")}
+              {t("auth.payment")}
             </h2>
             <form onSubmit={handleSubmit} className="">
               {/* Name Field */}

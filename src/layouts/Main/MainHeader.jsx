@@ -215,7 +215,7 @@ const MenuLink = ({ to, icon, children, onClick }) => (
   <Link
     to={to}
     onClick={onClick}
-    className="flex items-center gap-2 transition hover:text-[#082e63]"
+    className="flex items-center gap-2 transition hover:text-[#39547a]"
   >
     {icon}
     {children}
