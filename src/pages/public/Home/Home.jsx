@@ -456,7 +456,7 @@ function Home() {
                 <div className="bg-white p-6">
                   <div className="mb-4">
                     <h3 className="font-dm-sans mb-1 text-sm font-semibold text-cyan-950">
-                      {property.title}
+                      {property.title.slice(0, 30)}
                     </h3>
                     <p className="font-dm-sans text-sm text-neutral-400">
                       {property.address}
@@ -490,9 +490,11 @@ function Home() {
                   <div className="border-opacity-40 flex items-center justify-between border-t border-neutral-400 pt-4">
                     <div className="text-left">
                       <div className="text-sm text-neutral-400 line-through">
-                        {property.price}
+                        {property.price.slice(0, 5)}
                       </div>
-                      <p className="text-cyan-950">{property.price}</p>
+                      <p className="text-cyan-950">
+                        {property.price.slice(0, 5)}
+                      </p>
                     </div>
 
                     {/* CTA */}

@@ -1,6 +1,6 @@
 // src/features/auth/authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { loginAPI } from "./authAPI"; // Import the loginAPI function
+import { loginAPI } from "./authAPI";
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser", // The name of the action
@@ -10,7 +10,6 @@ export const loginUser = createAsyncThunk(
       const data = await loginAPI({ email, password });
       // Save user info to localStorage
       localStorage.setItem("userInfo", JSON.stringify(data));
-
       return data;
     } catch (err) {
       // If there's an error, return the error message as the rejected value

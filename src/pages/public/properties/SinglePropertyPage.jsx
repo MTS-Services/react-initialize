@@ -42,7 +42,13 @@ const SinglePropertyPage = () => {
   const [listing, setListing] = useState(null);
   const [recent, setRecent] = useState([]);
 
-  const isPaidUser = isPaid();
+  const isPaidUsers = isPaid();
+  let isPaidUser = null;
+  if (isPaidUsers) {
+    const userInfo = localStorage.getItem("userInfo");
+    const parsedUser = JSON.parse(userInfo);
+    isPaidUser = parsedUser.data.ispaid;
+  }
 
   const details = { ...listing?.transferDetails, ...listing?.otherDetails };
 
@@ -96,7 +102,7 @@ const SinglePropertyPage = () => {
   if (!listing) {
     return (
       <div className="">
-        <div className="bg-red-400 py-7.5" />
+        <div className="bg-red-400 py-9" />
         <div className="h-[95vh] pt-54">
           <NotFounds
             message="We couldn't find any properties matching your criteria."
@@ -235,14 +241,14 @@ const SinglePropertyPage = () => {
                         isOpen={isOpen}
                         onClose={() => setIsOpen(false)}
                         onConfirm={() => {
-                          navigate("/auth/login");
+                          navigate("/auth/payment");
                           setIsOpen(false);
                         }}
-                        title="Login Required"
-                        confirmText="Login"
+                        title="Payement first"
+                        confirmText="Pay Now"
                         cancelText="Cancel"
                       >
-                        Please log in to add this property to your favorites.
+                        Please Pay first
                       </Modal>
                     </div>
                   </div>

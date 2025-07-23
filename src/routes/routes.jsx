@@ -24,6 +24,7 @@ import TermsAndConditions from "../pages/public/TermsAndConditions/TermsAndCondi
 import PaymentSuccess from "../pages/Auth/CheckoutForm/PaymentSuccsess";
 import PrivacyPolicy from "../pages/public/PrivacyPolicy/PrivacyPolicy";
 import CookiePolicy from "../pages/public/CookiePolicy/CookiePolicy";
+import RegisterPage from "../pages/Auth/register/Register";
 
 // Pages
 const Home = lazy(() => import("../pages/public/Home/Home"));
@@ -124,8 +125,9 @@ const AppRoutes = createBrowserRouter([
     children: [
       { path: "login", element: <LoginPage /> },
       { path: "payment-success", element: <PaymentSuccess /> },
+      { path: "register", element: <RegisterPage /> },
       {
-        path: "register",
+        path: "payment",
         element: (
           <Elements stripe={stripePromise}>
             <CheckoutForm />
