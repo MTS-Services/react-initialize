@@ -26,7 +26,8 @@
     "common": {
       "email": "E-mailadres",
       "pass": "Wachtwoord"
-    }
+    },
+    "payment": "Nu betalen"
   },
 
   "footer": {

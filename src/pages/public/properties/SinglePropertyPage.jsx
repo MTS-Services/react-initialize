@@ -237,19 +237,36 @@ const SinglePropertyPage = () => {
                         {t("header.access")}
                       </p>
 
-                      <Modal
-                        isOpen={isOpen}
-                        onClose={() => setIsOpen(false)}
-                        onConfirm={() => {
-                          navigate("/auth/payment");
-                          setIsOpen(false);
-                        }}
-                        title="Payement first"
-                        confirmText="Pay Now"
-                        cancelText="Cancel"
-                      >
-                        Please Pay first
-                      </Modal>
+                      {!isPaidUser ? (
+                        <Modal
+                          isOpen={isOpen}
+                          onClose={() => setIsOpen(false)}
+                          onConfirm={() => {
+                            navigate("/auth/payment");
+                            setIsOpen(false);
+                          }}
+                          title="Payment Required"
+                          confirmText="Proceed to Payment"
+                          cancelText="Cancel"
+                        >
+                          To continue, please complete your payment.
+                        </Modal>
+                      ) : (
+                        <Modal
+                          isOpen={isOpen}
+                          onClose={() => setIsOpen(false)}
+                          onConfirm={() => {
+                            navigate("/auth/login");
+                            setIsOpen(false);
+                          }}
+                          title="Login Required"
+                          confirmText="Login"
+                          cancelText="Cancel"
+                        >
+                          Please log in to your account before proceeding with
+                          the payment.
+                        </Modal>
+                      )}
                     </div>
                   </div>
                 ))}

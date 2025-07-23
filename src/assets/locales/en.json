@@ -17,7 +17,7 @@
       "footer": "Don't have an account?"
     },
     "register": {
-      "title": "Pay & Register",
+      "title": "Registration",
       "name": "name",
       "card": "Card Details",
       "footer": "You have an account?",
@@ -26,7 +26,8 @@
     "common": {
       "email": "Email",
       "pass": "Password"
-    }
+    },
+    "payment": "Payment Now"
   },
 
   "footer": {
