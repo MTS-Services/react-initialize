@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="bg-gray-100 shadow-sm">
-      <div className="px-4 sm:px-6 lg:px-8">
+    <div className="border-b border-gray-200 bg-white shadow-sm">
+      <div className="px-4 md:px-6">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <div className="hidden lg:block">

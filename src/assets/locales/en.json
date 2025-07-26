@@ -21,7 +21,7 @@
       "name": "name",
       "card": "Card Details",
       "footer": "You have an account?",
-      "button": "Pay $10"
+      "button": "Submit"
     },
     "common": {
       "email": "Email",
@@ -52,7 +52,7 @@
     "subscribed": "Receive emails with rentals that meet your requirements.",
     "inputPlaceH": "Enter your email",
     "button": "Subscribe",
-    "copyRight": "© 2025 NL Property. All rights reserved."
+    "copyRight": "© 2025 Huurscanner Property. All Rights Reserved."
   },
 
   "home": {

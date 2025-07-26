@@ -198,12 +198,7 @@ const AllProperty = () => {
                     >
                       Price
                     </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
-                    >
-                      Status
-                    </th>
+
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase"
@@ -289,17 +284,7 @@ const AllProperty = () => {
                             </div>
                           )}
                         </td>
-                        <td className="px-6 py-4">
-                          <span
-                            className={`inline-flex rounded-full px-2 py-1 text-xs leading-5 font-semibold ${
-                              property.otherDetails?.status === "Beschikbaar"
-                                ? "bg-green-100 text-green-800"
-                                : "bg-gray-100 text-gray-800"
-                            }`}
-                          >
-                            {property.otherDetails?.status || "Unknown"}
-                          </span>
-                        </td>
+
                         <td className="px-6 py-4 text-sm font-medium">
                           <div className="flex space-x-2">
                             <button

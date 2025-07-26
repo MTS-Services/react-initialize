@@ -43,11 +43,9 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        console.log("User logged in:", currentUser); // Log user details
         setUser(currentUser);
         setIsLoading(false);
       } else {
-        console.log("No user logged in");
         setUser(null);
         setRole(null);
         Cookies.remove("userInfo");

@@ -69,7 +69,7 @@ function MainHeader() {
           <img
             src="/image/logos/Transparent_logo_white.png"
             alt="Logo"
-            className="w-25 md:w-64 lg:w-35"
+            className="w-25 md:w-30 lg:w-35"
           />
         </Link>
 

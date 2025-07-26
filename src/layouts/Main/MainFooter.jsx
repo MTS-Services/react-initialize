@@ -102,7 +102,7 @@ const MainFooter = () => {
         <div className="">
           <hr className="border-0.5 mt-10 mb-4 border-white/10" />
 
-          <p className="mb-4 text-center text-xs text-white/60">
+          <p className="mb-4 text-center text-xs text-white/60 md:text-sm">
             {t("footer.copyRight")}
           </p>
         </div>

@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-
 import Button from "../../../components/ui/Button";
 
 import axios from "../../../utils/axiosInstance";
@@ -11,8 +9,7 @@ import { toast } from "react-toastify";
 
 const RegisterPage = () => {
   const { t } = useLanguage();
-  const stripe = useStripe();
-  const elements = useElements();
+
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

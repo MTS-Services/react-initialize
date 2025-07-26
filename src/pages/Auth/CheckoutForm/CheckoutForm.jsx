@@ -27,7 +27,7 @@ const CheckoutForm = () => {
     const parsedUser = JSON.parse(userInfo);
     User = parsedUser.data;
   }
-
+  console.log(User);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -61,7 +61,7 @@ const CheckoutForm = () => {
       if (stripeError) {
         throw new Error(stripeError.message);
       }
-
+      console.log(paymentIntent);
       // 4. Create User
       if (paymentIntent) {
         const response = await axios.patch(`/users/${User.id}`, {

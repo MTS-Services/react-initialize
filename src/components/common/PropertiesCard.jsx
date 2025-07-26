@@ -18,7 +18,7 @@ const PeropertiesCard = ({ item }) => {
     location,
     price,
   } = item;
-
+  // console.log(surfaceAreaFloat);
   const formatRelativeTime = (dateString) => {
     const date = new Date(dateString);
     const now = new Date();

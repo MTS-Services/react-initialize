@@ -21,7 +21,7 @@
       "name": "naame",
       "card": "Kaartgegevens",
       "footer": "Heeft u al een account?",
-      "button": "Betaal $10"
+      "button": "Indienen"
     },
     "common": {
       "email": "E-mailadres",
@@ -52,7 +52,7 @@
     "subscribed": "Ontvang e-mails met huurwoningen die aan jouw wensen voldoen.",
     "inputPlaceH": "Voer uw e-mailadres in",
     "button": "Abonneren",
-    "copyRight": "© 2025 NL Property. Alle rechten voorbehouden."
+    "copyRight": "© 2025 Huurscanner Eigendom. Alle Rechten Voorbehouden."
   },
 
   "home": {
@@ -149,6 +149,7 @@
       ]
     }
   },
+
   "contact": {
     "title": "Neem contact met ons op",
     "description": "Vragen over je abonnement, woning of iets anders? Neem gerust contact op, we helpen je graag.",
